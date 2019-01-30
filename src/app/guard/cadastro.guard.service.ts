@@ -12,6 +12,7 @@ import { CursoGuardService } from './cadastro/curso/curso.guard.service';
 import { EquipeGuardService } from './cadastro/equipe/equipe.guard.service';
 import { ExameGuardService } from './cadastro/exame/exame.guard.service';
 import { PerfilGuardService } from './cadastro/perfil/perfil.guard.service';
+import { RiscoGheGuardService } from './cadastro/risco-ghe/risco-ghe.guard.service';
 
 @Injectable()
 export class CadastroGuardService implements GenericGuardService {
@@ -26,7 +27,8 @@ export class CadastroGuardService implements GenericGuardService {
         private curso: CursoGuardService,
         private equipe: EquipeGuardService,
         private exame: ExameGuardService,
-        private perfil: PerfilGuardService) {
+        private perfil: PerfilGuardService,
+        private riscoGhe: RiscoGheGuardService) {
 
             this.helper = new Helper();
     }
@@ -65,6 +67,10 @@ export class CadastroGuardService implements GenericGuardService {
             }
             case 'PERFIL': {
                 guardService = this.perfil;
+                break;
+            }
+            case 'RISCO-GHE': {
+                guardService = this.riscoGhe;
                 break;
             }
         }

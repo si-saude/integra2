@@ -13,6 +13,7 @@ import { CursoGuardModule } from './cadastro/curso/curso.guard.module';
 import { EquipeGuardModule } from './cadastro/equipe/equipe.guard.module';
 import { ExameGuardModule } from './cadastro/exame/exame.guard.module';
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
+import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
         CursoGuardModule,
         EquipeGuardModule,
         ExameGuardModule,
-        PerfilGuardModule
+        PerfilGuardModule,
+        RiscoGheGuardModule
     ]
 })
 export class GuardModule { }

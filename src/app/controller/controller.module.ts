@@ -8,6 +8,7 @@ import { CursoComponentModule } from './cadastro/curso/curso.component.module';
 import { EquipeComponentModule } from './cadastro/equipe/equipe.component.module';
 import { ExameComponentModule } from './cadastro/exame/exame.component.module';
 import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module';
+import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.component.module';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module
         CursoComponentModule,
         EquipeComponentModule,
         ExameComponentModule,
-        PerfilComponentModule
+        PerfilComponentModule,
+        RiscoGheComponentModule
     ]
 })
 

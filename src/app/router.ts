@@ -16,6 +16,7 @@ import * as cursoGuard from './guard/cadastro/curso/curso.guard';
 import * as equipeGuard from './guard/cadastro/equipe/equipe.guard';
 import * as exameGuard from './guard/cadastro/exame/exame.guard';
 import * as perfilGuard from './guard/cadastro/perfil/perfil.guard';
+import * as riscoGheGuard from './guard/cadastro/risco-ghe/risco-ghe.guard';
 
 export const appRoutes: Routes = [
     { path : 'home', component : HomeComponent, canActivate: [AuthGuard]},
@@ -31,5 +32,6 @@ export const appRoutes: Routes = [
     equipeGuard.Routing.route(HomeComponent),
     exameGuard.Routing.route(HomeComponent),
     perfilGuard.Routing.route(HomeComponent),
+    riscoGheGuard.Routing.route(HomeComponent),
     { path : '', redirectTo: '/home', pathMatch: 'full'}
 ];
