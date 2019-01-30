@@ -1,0 +1,53 @@
+<nav>
+    <div class="nav-wrapper #009688 teal"> 
+        <a href="/home" class="brand-logo center">
+        <i class="material-icons">cloud</i>INTEGRA Saúde</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li>
+                <div class="menu-icon" (click)="toggleSidebar()">
+                    <span class="menu-icon-item"></span>
+                    <span class="menu-icon-item"></span>
+                    <span class="menu-icon-item"></span>
+                </div>
+                <div class="router-name"> <h5>{{ router.routerState.snapshot.url }}</h5> </div>
+            </li>
+        </ul>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+                <a (click)="logout()">Sair</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div id="sidebar" class="sidebar">
+    <div id="principal">
+        <ul><li><a class="menuoption" (click)="goToCadastro()">Cadastro</a></li></ul>
+        <ul><li><a class="menuoption" (click)="goToProcesso()">Processo</a></li></ul>
+        <ul><li><a class="menuoption" (click)="goToRelatorio()">Relatório</a></li></ul>
+    </div>
+    <div id="cadastro" style="display: none">
+        <ul><li><a class="menuoption" (click)="goToPrincipal()"><i class="material-icons">chevron_left</i></a></li></ul>
+        <app-menu-option [label]="'Base'" [routerLink]="'/base'" [funcionalidade]="'BASE_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <app-menu-option [label]="'Cargo'" [routerLink]="'/cargo'" [funcionalidade]="'CARGO_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <app-menu-option [label]="'Cidade'" [routerLink]="'/cidade'" [funcionalidade]="'CIDADE_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <app-menu-option [label]="'Critério'" [routerLink]="'/criterio'" [funcionalidade]="'CRITERIO_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <app-menu-option [label]="'Curso'" [routerLink]="'/curso'" [funcionalidade]="'CURSO_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <app-menu-option [label]="'Equipe'" [routerLink]="'/equipe'" [funcionalidade]="'EQUIPE_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <app-menu-option [label]="'Exame'" [routerLink]="'/exame'" [funcionalidade]="'EXAME_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <app-menu-option [label]="'Perfil'" [routerLink]="'/perfil'" [funcionalidade]="'PERFIL_LISTAR'" [homeComponent]="this"></app-menu-option>
+    </div>
+    <div id="processo" style="display: none">
+        <ul><li><a class="menuoption" (click)="goToPrincipal()"><i class="material-icons">chevron_left</i></a></li></ul>
+    </div>
+    <div id="relatorio" style="display: none">
+        <ul><li><a class="menuoption" (click)="goToPrincipal()"><i class="material-icons">chevron_left</i></a></li></ul>
+    </div>
+</div>
+<div class="card-content container">
+    <div class="row" style="width:93%">
+        <br>
+        <router-outlet></router-outlet>
+        <br>
+    </div>
+    <br>
+</div>

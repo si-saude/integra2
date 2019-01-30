@@ -1,0 +1,10 @@
+<select name="{{name}}" class="browser-default text-area" [(ngModel)]="object"
+  *ngIf="!component._detailMode" (change)="dirtyForm(); change();">
+  <option [ngValue]='undefined'>Selecione uma opção</option>
+  <option *ngFor="let a of array" [ngValue]='a'>{{ property ? helper.getProperty(a,property) : a}}</option>
+</select>
+<input *ngIf="component._detailMode" type="text" [disabled]="true" value="
+{{ component._detailMode ?
+    (property && object ? helper.getProperty(object,property) : object) :
+    ''
+}}">

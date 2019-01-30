@@ -1,0 +1,35 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'5'">Nome
+        <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome"
+        (ngModelChange)="t.nome=$event.toUpperCase()" maxlength="256" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+      </app-generic-label>
+      <app-generic-label [width]="'4'">Tipo
+        <app-generic-select [object]="t.tipo" [component]="this" [name]="'tipo'" [array]="util.tipos"
+          (changeValue)="t.tipo = $event">
+        </app-generic-select>
+      </app-generic-label>
+    </div>
+    <div class="row">
+      <app-generic-label [width]="'2'">Operador
+        <app-generic-select [object]="t.operador" [component]="this" [name]="'operador'" [array]="util.operadores"
+          (changeValue)="t.operador = $event">
+        </app-generic-select>
+      </app-generic-label>
+    </div>
+    <div class="row">
+      <app-generic-label *ngIf="t.tipo === 'IDADE'" [width]="'2'">Idade
+        <input class="validate" type="text" name="valor" #valor="ngModel" [(ngModel)]="t.valor"
+          maxlength="3" [disabled]="_detailMode" integerValidator>
+        <span *ngIf="!valor.valid && !_detailMode" class="input-error">Número inválido.</span>
+      </app-generic-label>
+      <app-generic-label *ngIf="t.tipo === 'SEXO'" [width]="'3'">Sexo
+        <app-generic-select [object]="t.valor" [component]="this" [name]="'valor'" [array]="util.sexos"
+          (changeValue)="t.valor = $event">
+        </app-generic-select>
+      </app-generic-label>
+    </div>
+  </app-form-component>
+</form>

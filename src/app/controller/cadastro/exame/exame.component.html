@@ -1,0 +1,57 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],[camposTab,'CAMPOS']]">
+        <div #dadosGeraisTab>
+          <div class="row">
+            <app-generic-label [width]="'2'">Código
+              <input class="validate" type="text" name="codigo" #codigo="ngModel" [ngModel]="t.codigo"
+                (ngModelChange)="t.codigo=$event.toUpperCase()" maxlength="10" [disabled]="_detailMode" required>
+              <span class="helper-text" [attr.data-error]="showErrorMessage(codigo.errors)"></span>
+            </app-generic-label>
+          </div>
+          <div class="row">
+            <app-generic-label [width]="'7'">Descrição
+              <input class="validate" type="text" name="descricao" #descricao="ngModel" [(ngModel)]="t.descricao"
+                maxlength="150" [disabled]="_detailMode" required>
+              <span class="helper-text" [attr.data-error]="showErrorMessage(descricao.errors)"></span>
+            </app-generic-label>
+            <app-generic-label [width]="'1'">Ordem
+              <input class="validate" type="text" name="ordem" #ordem="ngModel" [(ngModel)]="t.ordem"
+                maxlength="3" [disabled]="_detailMode" integerValidator>
+              <span *ngIf="!ordem.valid && !_detailMode" class="input-error">Número inválido.</span>
+            </app-generic-label>
+          </div>
+        </div>
+        <div #camposTab>
+          <div class="row">
+            <app-generic-form-modal #modalCampos [title]="'Campo do Exame'" [service]="servico" [component]="this"
+              [initializeMethod]="'initializeCampoExame'" (confirm)="gridCampos.add($event)"
+              [validator]="servico.getCampoExameValidator()">
+              <div class="row">
+                <app-generic-label [width]="'5'">Título
+                  <input type="text" name="campoTitulo" #campoTitulo="ngModel" 
+                    [(ngModel)]="modalCampos.t.titulo" maxlength="150">
+                </app-generic-label>
+              </div>
+              <div class="row">
+                <app-generic-label [width]="'2'">Código
+                  <input class="validate" type="text" name="campoCodigo" #campoCodigo="ngModel" 
+                    [(ngModel)]="modalCampos.t.codigo" maxlength="3">
+                </app-generic-label>
+                <app-generic-label [width]="'2'">Nº Linhas
+                  <input class="validate" type="text" name="campoNumeroLinhas" #campoNumeroLinhas="ngModel" 
+                    [(ngModel)]="modalCampos.t.numeroLinhas" maxlength="3">
+                </app-generic-label>
+              </div>
+            </app-generic-form-modal>
+          </div>
+          <div class="row">
+            <app-generic-grid #gridCampos
+              [id]="'campos'" [component]="this" [array]="t.campoExames" [height]="'350px'" [delete]="true"
+              [def]="[['Código','codigo','',''], ['Título','titulo','',''], ['Nº Linhas','numeroLinhas','','']]">
+            </app-generic-grid>
+          </div>
+        </div>
+    </app-generic-tab>
+  </app-form-component>
+</form>

@@ -1,0 +1,31 @@
+<div class="generic-grid" [ngStyle]="{'height':height}">
+  <thead>
+    <tr>
+      <th *ngFor="let d of def">
+        {{d[0]}}
+        <label *ngIf="d[2]==='checkbox'">
+          <input type="checkbox" (change)="dirtyForm();selectAll(d[1],$event)"
+            [disabled]="!d[3] || component._detailMode" />
+          <span></span>
+        </label>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of proxy; let i = index">
+      <td [ngClass]="d[2]==='checkbox' ? 'right' : ''" *ngFor="let d of def; let j = index">
+        {{ d[2]==='' ? models[i][j][0][models[i][j][1]] : '' }}
+        <label *ngIf="d[2]==='checkbox'">
+          <input type="checkbox" [(ngModel)]="models[i][j][0][models[i][j][1]]" 
+            [disabled]="!d[3] || component._detailMode" (click)="dirtyForm()" />
+          <span></span>
+        </label>
+      </td>
+      <td class="center">
+          <i class="material-icons" *ngIf="delete && !component._detailMode"  
+            (click)="remove(i)">delete</i>
+      </td>
+    </tr>
+  </tbody>
+</div>

@@ -1,0 +1,23 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'4'">Nome
+        <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome"
+        (ngModelChange)="t.nome=$event.toUpperCase()" maxlength="50" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+      </app-generic-label>
+    </div>
+    <div class="row">
+      <app-generic-label [width]="'2'">Abreviação
+        <input class="validate" type="text" name="abreviacao" #abreviacao="ngModel" [ngModel]="t.abreviacao"
+        (ngModelChange)="t.abreviacao=$event.toUpperCase()" maxlength="3" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(abreviacao.errors)"></span>
+      </app-generic-label>
+      <app-generic-label [width]="'2'">Prioridade na SAST
+        <input class="validate" type="text" name="prioridadeSast" #prioridadeSast="ngModel" [(ngModel)]="t.prioridadeSast"
+        maxlength="3" [disabled]="_detailMode" integerValidator>
+        <span *ngIf="!prioridadeSast.valid && !_detailMode" class="input-error">Número inválido.</span>
+      </app-generic-label>
+    </div>
+  </app-form-component>
+</form>
