@@ -19,8 +19,20 @@ export class Ghe {
         return this.nome;
     }
 
-    public get $uf(): string {
-        return this.uf;
+    public get $codigo(): string {
+        return this.codigo;
+    }
+
+    public get $descricao(): string {
+        return this.descricao;
+    }
+
+    public get $descricaoAmbiente(): string {
+        return this.descricaoAmbiente;
+    }
+
+    public get $descricaoTarefas(): string {
+        return this.descricaoTarefas;
     }
 
     public get $version(): number {
@@ -35,11 +47,40 @@ export class Ghe {
         this.nome = value;
     }
 
-    public set $uf(value: string) {
-        this.uf = value;
+    public set $codigo(value: string) {
+        this.codigo = value;
+    }
+
+    public set $descricao(value: string) {
+        this.descricao = value;
+    }
+
+    public set $descricaoAmbiente(value: string) {
+        this.descricaoAmbiente = value;
+    }
+
+    public set $descricaoTarefas(value: string) {
+        this.descricaoTarefas = value;
     }
 
     public set $version(value: number) {
         this.version = value;
     }
+
+	public get $duracaoJornada(): number {
+		return this.duracaoJornada;
+	}
+
+	public get $risco(): RiscoGhe {
+		return this.risco;
+	}
+
+	public set $duracaoJornada(value: number) {
+		this.duracaoJornada = value;
+	}
+
+	public set $risco(value: RiscoGhe) {
+		this.risco = value;
+	}
+
 }
