@@ -3,7 +3,6 @@ import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Helper } from './../../../generic/helper';
 import { GenericFilter } from './../../../generic/generic-filter';
 import { GenericComponent } from './../../../generic/generic-component';
-import { GenericService } from './../../../generic/generic-service';
 
 @Component({
   selector: 'app-generic-grid',

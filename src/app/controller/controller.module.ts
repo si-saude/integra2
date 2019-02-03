@@ -7,6 +7,7 @@ import { CriterioComponentModule } from './cadastro/criterio/criterio.component.
 import { CursoComponentModule } from './cadastro/curso/curso.component.module';
 import { EquipeComponentModule } from './cadastro/equipe/equipe.component.module';
 import { ExameComponentModule } from './cadastro/exame/exame.component.module';
+import { GheComponentModule } from './cadastro/ghe/ghe.component.module';
 import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module';
 import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.component.module';
 
@@ -19,6 +20,7 @@ import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.componen
         CursoComponentModule,
         EquipeComponentModule,
         ExameComponentModule,
+        GheComponentModule,
         PerfilComponentModule,
         RiscoGheComponentModule
     ]

@@ -2,7 +2,6 @@ import { Route } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 import { GenericGuardService } from './../generic/generic-guard.service';
-import { GenericGuard } from './../generic/generic-guard';
 import { CadastroGuardService } from './cadastro.guard.service';
 
 @Injectable()

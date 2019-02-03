@@ -12,6 +12,7 @@ import { CriterioGuardModule } from './cadastro/criterio/criterio.guard.module';
 import { CursoGuardModule } from './cadastro/curso/curso.guard.module';
 import { EquipeGuardModule } from './cadastro/equipe/equipe.guard.module';
 import { ExameGuardModule } from './cadastro/exame/exame.guard.module';
+import { GheGuardModule } from './cadastro/ghe/ghe.guard.module';
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
 import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
 
@@ -31,6 +32,7 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
         CursoGuardModule,
         EquipeGuardModule,
         ExameGuardModule,
+        GheGuardModule,
         PerfilGuardModule,
         RiscoGheGuardModule
     ]

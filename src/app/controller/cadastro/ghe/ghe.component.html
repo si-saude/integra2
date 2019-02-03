@@ -1,15 +1,51 @@
 <form class="col s12" #form="ngForm">
   <app-form-component [component]="this">
     <div class="row">
-      <app-generic-label [width]="'4'">Nome
+      <app-generic-label [width]="'2'">Código
+        <input class="validate" type="text" name="codigo" #codigo="ngModel" [(ngModel)]="t.codigo"
+        maxlength="64" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(codigo.errors)"></span>
+      </app-generic-label>
+      <app-generic-label [width]="'5'">Nome
         <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome"
         (ngModelChange)="t.nome=$event.toUpperCase()" maxlength="64" [disabled]="_detailMode" required>
         <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
       </app-generic-label>
-      <app-generic-label [width]="'2'">UF
-          <app-generic-select [object]="t.uf" [component]="this" [name]="'uf'" [array]="util.ufs"
-            (changeValue)="t.uf = $event">
-          </app-generic-select>
+    </div>
+    <div class="row">
+      <app-generic-label [width]="'4'">Risco
+        <app-generic-select [component]="this" [name]="'risco'" [object]="t.risco" [property]="'titulo'" [array]="util.riscos"
+            (changeValue)="t.risco = $event">
+        </app-generic-select>
+      </app-generic-label>
+      <app-generic-label [width]="'2'">Duração da Jornada
+          <input class="validate" type="text" name="duracaoJornada" #duracaoJornada="ngModel" [(ngModel)]="t.duracaoJornada"
+            maxlength="3" [disabled]="_detailMode" integerValidator>
+          <span *ngIf="!duracaoJornada.valid && !_detailMode" class="input-error">Número inválido.</span>
+        </app-generic-label>
+    </div>
+    <div class="row">
+      <app-generic-label [width]="'8'">Descrição
+        <textarea class="validate text-area" name="descricao" #descricao="ngModel" [(ngModel)]="t.descricao"
+          maxlength="1024" [disabled]="_detailMode">
+        </textarea>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(descricao.errors)"></span>
+      </app-generic-label>
+    </div>
+    <div class="row">
+      <app-generic-label [width]="'8'">Descrição do Ambiente
+        <textarea class="validate text-area" name="descricaoAmbiente" #descricaoAmbiente="ngModel" [(ngModel)]="t.descricaoAmbiente"
+          maxlength="1024" [disabled]="_detailMode">
+        </textarea>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(descricaoAmbiente.errors)"></span>
+      </app-generic-label>
+    </div>
+    <div class="row">
+      <app-generic-label [width]="'8'">Descrição das Tarefas
+        <textarea class="validate text-area" name="descricaoTarefas" #descricaoTarefas="ngModel" [(ngModel)]="t.descricaoTarefas"
+          maxlength="1024" [disabled]="_detailMode">
+        </textarea>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(descricaoTarefas.errors)"></span>
       </app-generic-label>
     </div>
   </app-form-component>

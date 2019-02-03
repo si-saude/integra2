@@ -10,12 +10,14 @@
 <app-generic-modal [title]="'Filtrar'" [component]="this">
     <div class="row">
         <app-generic-label [width]="'2'">Código
-            <input type="text" name="codigo" [(ngModel)]="filter.codigo" maxlength="10">
+            <input type="text" name="codigo" [(ngModel)]="filter.codigo" maxlength="10" modalConfirm
+            (changeValue)="filter.codigo = $event">
         </app-generic-label>
     </div>
     <div class="row">
         <app-generic-label [width]="'7'">Descrição
-            <input type="text" name="descricao" [(ngModel)]="filter.descricao" maxlength="150">
+            <input type="text" name="descricao" [(ngModel)]="filter.descricao" maxlength="150" modalConfirm
+            (changeValue)="filter.descricao = $event">
         </app-generic-label>
     </div>
 </app-generic-modal>

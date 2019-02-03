@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { IntegerValidatorDirective } from './../directive/integer-validator.directive';
+import { ModalConfirmDirective } from './../directive/modal-confirm.directive';
 
 import { appRoutes } from './../router';
 import { GenericGridComponent } from '../include/generic/generic-grid/generic-grid.component';
@@ -28,7 +29,8 @@ import { GenericFormModalComponent } from '../include/generic/generic-form-modal
         GenericLabelComponent,
         GenericSelectComponent,
         GenericFormModalComponent,
-        IntegerValidatorDirective
+        IntegerValidatorDirective,
+        ModalConfirmDirective
     ],
     exports: [
         CommonModule,
@@ -42,7 +44,8 @@ import { GenericFormModalComponent } from '../include/generic/generic-form-modal
         GenericLabelComponent,
         GenericSelectComponent,
         GenericFormModalComponent,
-        IntegerValidatorDirective
+        IntegerValidatorDirective,
+        ModalConfirmDirective
     ],
     imports: [
         CommonModule,

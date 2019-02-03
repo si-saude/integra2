@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../shared.module';
-import * as base from './base.component';
+import * as ghe from './ghe.component';
 
 @NgModule({
     declarations: [
-        base.BaseListarComponent,
-        base.BaseAdicionarComponent,
-        base.BaseEditarComponent,
-        base.BaseDetalharComponent
+        ghe.GheListarComponent,
+        ghe.GheAdicionarComponent,
+        ghe.GheEditarComponent,
+        ghe.GheDetalharComponent
     ],
 imports: [
     SharedModule
 ]})
-export class BaseComponentModule { }
+export class GheComponentModule { }

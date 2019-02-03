@@ -42,4 +42,8 @@ export class GheService extends GenericService<Ghe, GheFilter> {
 
         return ghe;
     }
+
+    getRiscoGheService() {
+        return this.riscoGheService;
+    }
 }

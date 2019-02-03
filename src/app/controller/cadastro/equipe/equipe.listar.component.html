@@ -10,10 +10,12 @@
 <app-generic-modal [title]="'Filtrar'" [component]="this">
     <div class="row">
         <app-generic-label [width]="'4'">Nome
-            <input type="text" name="nome" [(ngModel)]="filter.nome" maxlength="50">
+            <input type="text" name="nome" [(ngModel)]="filter.nome" maxlength="50" modalConfirm
+            (changeValue)="filter.nome = $event">
         </app-generic-label>
         <app-generic-label [width]="'2'">Abreviação
-            <input type="text" name="abreviacao" [(ngModel)]="filter.abreviacao" maxlength="3">
+            <input type="text" name="abreviacao" [(ngModel)]="filter.abreviacao" maxlength="3" modalConfirm
+            (changeValue)="filter.abreviacao = $event">
         </app-generic-label>
     </div>
 </app-generic-modal>

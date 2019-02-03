@@ -10,7 +10,8 @@
 <app-generic-modal [title]="'Filtrar'" [component]="this">
     <div class="row">
         <app-generic-label [width]="'4'">Nome
-            <input type="text" name="nome" [(ngModel)]="filter.nome" maxlength="64">
+            <input type="text" name="nome" [(ngModel)]="filter.nome" maxlength="64" modalConfirm
+                (changeValue)="filter.nome = $event">
         </app-generic-label>
         <app-generic-label [width]="'2'">UF
             <app-generic-select [component]="this" [name]="'uf'" [array]="util.ufs"

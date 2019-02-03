@@ -1,20 +1,27 @@
 <app-list-component 
     [component]="this"
-    [adicionar]="'BASE_ADICIONAR'"
-    [editar]="'BASE_EDITAR'"
-    [detalhar]="'BASE_DETALHAR'"
-    [remover]="'BASE_REMOVER'"
+    [adicionar]="'GHE_ADICIONAR'"
+    [editar]="'GHE_EDITAR'"
+    [detalhar]="'GHE_DETALHAR'"
+    [remover]="'GHE_REMOVER'"
     >
 </app-list-component>
 
 <app-generic-modal [title]="'Filtrar'" [component]="this">
     <div class="row">
-        <app-generic-label [width]="'4'">Nome
-            <input type="text" name="nome" [(ngModel)]="filter.nome" maxlength="64">
+        <app-generic-label [width]="'2'">Código
+            <input type="text" name="codigo" [(ngModel)]="filter.codigo" maxlength="64" modalConfirm
+            (changeValue)="filter.codigo = $event">
         </app-generic-label>
-        <app-generic-label [width]="'2'">UF
-            <app-generic-select [component]="this" [name]="'uf'" [array]="util.ufs"
-                (changeValue)="filter.uf = $event">
+        <app-generic-label [width]="'5'">Nome
+            <input type="text" name="nome" [(ngModel)]="filter.nome" maxlength="64" modalConfirm
+            (changeValue)="filter.nome = $event">
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'4'">Risco
+            <app-generic-select [component]="this" [name]="'risco'" [object]="filter.risco" [property]="'titulo'" [array]="util.riscos"
+                (changeValue)="filter.risco = $event">
             </app-generic-select>
         </app-generic-label>
     </div>

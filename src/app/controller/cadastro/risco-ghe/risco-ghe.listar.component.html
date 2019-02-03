@@ -10,7 +10,8 @@
 <app-generic-modal [title]="'Filtrar'" [component]="this">
     <div class="row">
         <app-generic-label [width]="'4'">Título
-            <input type="text" name="titulo" [(ngModel)]="filter.titulo" maxlength="128">
+            <input type="text" name="titulo" [(ngModel)]="filter.titulo" maxlength="128" modalConfirm
+            (changeValue)="filter.titulo = $event">
         </app-generic-label>
     </div>
 </app-generic-modal>
