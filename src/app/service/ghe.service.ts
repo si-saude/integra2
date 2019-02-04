@@ -26,7 +26,7 @@ export class GheService extends GenericService<Ghe, GheFilter> {
     }
 
     toObject(obj: any): Ghe {
-        const ghe: Ghe = new Ghe();
+        let ghe: Ghe = new Ghe();
         ghe.$id = obj['id'];
         ghe.$nome = obj['nome'];
         ghe.$codigo = obj['codigo'];
@@ -35,6 +35,8 @@ export class GheService extends GenericService<Ghe, GheFilter> {
         ghe.$descricaoTarefas = obj['descricaoTarefas'];
         ghe.$duracaoJornada = obj['duracaoJornada'];
         ghe.$version = obj['version'];
+        
+        ghe = this.transformDate(ghe, 'dataCriacao');
 
         if (obj['risco']) {
             ghe.$risco = this.riscoGheService.toObject(obj['risco']);

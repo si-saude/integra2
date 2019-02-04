@@ -108,4 +108,17 @@ export abstract class GenericService<T, F extends GenericFilter> {
     getPath() {
         return this.path;
     }
+
+    transformDate(t: T, property: string): T {
+        if (t[property + 'Front'] && t[property + 'Front'] != '') {
+            let fullDateArray = t[property + 'Front'].split(' ');
+            let dateArray = fullDateArray[0].split('/');
+            // CRlAR UMA DATA A PARTlR DAS POSlÇÕES DO VETOR E CONVERTER PARA MlLlSEGUNDOS
+            // SETAR O VALOR NA PROPRlEDADE NUMBER DO OBJETO
+        } else if (t[property] > 0) {
+            // CRlAR UMA DATA A PARTR DO VALOR EM MlLlSEGUNDOS
+            // MONTAR A DATA EM STRlNG E SETAR NA PROPRlEDADE STRlNG DO OBJETO
+        }
+        return t;
+    }
 }

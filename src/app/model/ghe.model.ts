@@ -11,6 +11,9 @@ export class Ghe {
     private risco: RiscoGhe;
     private version: number;
 
+    private dataCriacao: number;
+    private dataCriacaoFront: string;
+
     public get $id(): number {
         return this.id;
     }
@@ -83,4 +86,19 @@ export class Ghe {
 		this.risco = value;
 	}
 
+	public get $dataCriacao(): number {
+		return this.dataCriacao;
+	}
+
+	public get $dataCriacaoFront(): string {
+		return this.dataCriacaoFront;
+	}
+
+	public set $dataCriacao(value: number) {
+		this.dataCriacao = value;
+	}
+
+	public set $dataCriacaoFront(value: string) {
+		this.dataCriacaoFront = value;
+	}
 }
