@@ -78,4 +78,27 @@ export class Helper {
     getOnlyNumber(str: string) {
       return str.replace( /\D/g, '' );
     }
+
+    addLeftZero(s: string) {
+      if (s && s.length < 2) {
+        s = '0' + s;
+      }
+      return s;
+    }
+
+    createDateFromString(stringDate: string): Date {
+      const fullDateArray = stringDate.split(' ');
+      const dateArray = fullDateArray[0].split('/');
+      let timeArray = new Array<any>();
+      if (fullDateArray[1]) {
+          timeArray = fullDateArray[1].split(':');
+      } else {
+          timeArray = [0, 0];
+      }
+      // 04/02/2019 14:18
+      // CRlAR UMA DATA A PARTlR DAS POSlÇÕES DO VETOR E CONVERTER PARA MlLlSEGUNDOS
+      const date = new Date(Number(dateArray[2]), Number(dateArray[1]) - 1, Number(dateArray[0]),
+          Number(timeArray[0]) - (new Date().getTimezoneOffset() / 60), Number(timeArray[1]), 0, 0);
+      return date;
+    }
 }

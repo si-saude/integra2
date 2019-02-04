@@ -71,6 +71,10 @@ export class GheEditarComponent extends GenericComponent<Ghe> implements OnInit 
     this.util = new GheUtil(this.servico);
     this.util.onInit();
   }
+
+  teste(event) {
+    console.log('event', event);
+  }
 }
 
 @Component({
@@ -98,7 +102,7 @@ export class GheUtil {
 
   riscos: Array<RiscoGhe>;
   riscoFilter: RiscoGheFilter;
-  
+
   constructor(private servico: GheService) {
     this.riscoFilter = new RiscoGheFilter();
     this.riscoFilter.$pageSize = 100000;

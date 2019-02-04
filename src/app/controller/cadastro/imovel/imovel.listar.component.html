@@ -1,0 +1,22 @@
+<app-list-component 
+    [component]="this"
+    [adicionar]="'IMOVEL_ADICIONAR'"
+    [editar]="'IMOVEL_EDITAR'"
+    [detalhar]="'IMOVEL_DETALHAR'"
+    [remover]="'IMOVEL_REMOVER'"
+    >
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'4'">Nome
+            <input type="text" name="nome" [(ngModel)]="filter.nome" maxlength="64" modalConfirm
+                (changeValue)="filter.nome = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'4'">Base
+            <app-generic-select [component]="this" [name]="'base'" [object]="filter.base" [property]="'nome'" [array]="util.bases"
+                (changeValue)="filter.base = $event">
+            </app-generic-select>
+        </app-generic-label>
+    </div>
+</app-generic-modal>

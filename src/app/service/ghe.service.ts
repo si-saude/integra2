@@ -35,8 +35,7 @@ export class GheService extends GenericService<Ghe, GheFilter> {
         ghe.$descricaoTarefas = obj['descricaoTarefas'];
         ghe.$duracaoJornada = obj['duracaoJornada'];
         ghe.$version = obj['version'];
-        
-        ghe = this.transformDate(ghe, 'dataCriacao');
+        ghe = this.transformDate(obj, 'dataCriacao');
 
         if (obj['risco']) {
             ghe.$risco = this.riscoGheService.toObject(obj['risco']);

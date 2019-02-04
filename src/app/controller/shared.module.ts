@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { DateFormatDirective } from './../directive/date-format.directive';
 import { IntegerValidatorDirective } from './../directive/integer-validator.directive';
 import { ModalConfirmDirective } from './../directive/modal-confirm.directive';
 
@@ -30,6 +31,7 @@ import { GenericFormModalComponent } from '../include/generic/generic-form-modal
         GenericSelectComponent,
         GenericFormModalComponent,
         IntegerValidatorDirective,
+        DateFormatDirective,
         ModalConfirmDirective
     ],
     exports: [
@@ -45,6 +47,7 @@ import { GenericFormModalComponent } from '../include/generic/generic-form-modal
         GenericSelectComponent,
         GenericFormModalComponent,
         IntegerValidatorDirective,
+        DateFormatDirective,
         ModalConfirmDirective
     ],
     imports: [

@@ -13,6 +13,13 @@
       </app-generic-label>
     </div>
     <div class="row">
+      <app-generic-label [width]="'2'">Data de Criação
+        <input class="validate" type="text" name="dataCriacaoFront" #dataCriacaoFront="ngModel" [ngModel]="t.dataCriacaoFront"
+          maxlength="10" [disabled]="_detailMode" (changeValue)="teste($event)" dateFormat>
+          <span class="helper-text" [attr.data-error]="showErrorMessage(dataCriacaoFront.errors)"></span>
+      </app-generic-label>
+    </div>
+    <div class="row">
       <app-generic-label [width]="'4'">Risco
         <app-generic-select [component]="this" [name]="'risco'" [object]="t.risco" [property]="'titulo'" [array]="util.riscos"
             (changeValue)="t.risco = $event">

@@ -8,6 +8,7 @@ import { CursoService } from './curso.service';
 import { EquipeService } from './equipe.service';
 import { ExameService } from './exame.service';
 import { GheService } from './ghe.service';
+import { ImovelService } from './imovel.service';
 import { PerfilService } from './perfil.service';
 import { RiscoGheService } from './risco-ghe.service';
 import { UsuarioService } from './usuario.service';
@@ -25,6 +26,7 @@ import { UtilService } from './util.service';
         GheService,
         PerfilService,
         RiscoGheService,
+        ImovelService,
         UsuarioService,
         UtilService
     ]

@@ -9,7 +9,7 @@ import { GenericFilter } from './generic-filter';
 
 export abstract class GenericService<T, F extends GenericFilter> {
 
-    readonly rootUrl = 'http://localhost:5080/IntegraApi2/rest/';
+    readonly rootUrl = 'http://localhost:3080/IntegraApi2/rest/';
 
     protected helper: Helper;
 
@@ -110,14 +110,26 @@ export abstract class GenericService<T, F extends GenericFilter> {
     }
 
     transformDate(t: T, property: string): T {
-        if (t[property + 'Front'] && t[property + 'Front'] != '') {
-            let fullDateArray = t[property + 'Front'].split(' ');
-            let dateArray = fullDateArray[0].split('/');
-            // CRlAR UMA DATA A PARTlR DAS POSlÇÕES DO VETOR E CONVERTER PARA MlLlSEGUNDOS
-            // SETAR O VALOR NA PROPRlEDADE NUMBER DO OBJETO
+        if (t[property + 'Front'] && t[property + 'Front'] !== '') {
+            const date = this.helper.createDateFromString(t[property + 'Front']);
+            t[property] = date.getTime();
         } else if (t[property] > 0) {
             // CRlAR UMA DATA A PARTR DO VALOR EM MlLlSEGUNDOS
+            let date = new Date(t[property]);
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                date.getHours() + (new Date().getTimezoneOffset() / 60), date.getMinutes(), 0, 0 );
             // MONTAR A DATA EM STRlNG E SETAR NA PROPRlEDADE STRlNG DO OBJETO
+            let dateString = '';
+            dateString += this.helper.addLeftZero(date.getDate().toString());
+            dateString += '/';
+            dateString += this.helper.addLeftZero((date.getMonth() + 1).toString());
+            dateString += '/';
+            dateString += this.helper.addLeftZero(date.getFullYear().toString());
+            /*dateString += ' ';
+            dateString += this.helper.addLeftZero(date.getHours().toString());
+            dateString += ':';
+            dateString += this.helper.addLeftZero(date.getMinutes().toString());*/
+            t[property + 'Front'] = dateString;
         }
         return t;
     }
