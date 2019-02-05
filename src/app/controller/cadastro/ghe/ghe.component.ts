@@ -71,10 +71,6 @@ export class GheEditarComponent extends GenericComponent<Ghe> implements OnInit 
     this.util = new GheUtil(this.servico);
     this.util.onInit();
   }
-
-  teste(event) {
-    console.log('event', event);
-  }
 }
 
 @Component({

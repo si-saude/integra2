@@ -1,5 +1,6 @@
-import { Directive, HostListener, EventEmitter, Output, OnInit, ElementRef } from '@angular/core';
+import { Directive, HostListener, EventEmitter, Output, ElementRef, SimpleChanges, OnChanges, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Helper } from './../generic/helper';
 
 @Directive( {
     selector: '[dateFormat]',
@@ -10,18 +11,35 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
     }]
 } )
 
-export class DateFormatDirective implements ControlValueAccessor {
+export class DateFormatDirective implements ControlValueAccessor, OnChanges {
+    private helper: Helper;
+    private loaded = false;
+    private detailModeLoaded = false;
     onChange: any;
     onTouched: any;
 
+    @Input() ngModel;
+    @Input() component;
     @Output() changeValue = new EventEmitter();
 
     constructor( private el: ElementRef ) {
-
+        this.helper = new Helper();
     }
 
     ngOnInit() {
 
+    }
+
+    ngOnChanges( changes: SimpleChanges ) { 
+        if (changes['ngModel'] && changes['ngModel']['currentValue'] && !this.loaded) {
+            this.loaded = true;
+            this.input(changes['ngModel']['currentValue']);
+        }
+
+        if (changes['component'] && changes['component']['currentValue'] && !this.detailModeLoaded) {
+            this.detailModeLoaded = true;
+            this.el.nativeElement.disabled = changes['component']['currentValue']['_detailMode'];
+        }
     }
 
     writeValue( value: any ): void {
@@ -39,16 +57,48 @@ export class DateFormatDirective implements ControlValueAccessor {
     @HostListener( 'input', ['$event'] )
     onInput( $event: any ) {
         if ( $event.target.value ) {
-            let value = $event.target.value;
-            value = value.replace(/\D/g, '')
+            this.input($event.target.value);
+            this.dirtyForm();
+        }
+    }
+
+    dirtyForm() {
+        if ( this.component ) {
+            this.helper.dirtyForm(this.component);
+        }
+    }
+
+    input(value) {
+        if (value.length > 10) {
+            value = value.substring(0,10);
+        }
+        value = value.replace(/\D/g, '')
             .replace(/^(\d{2})(\d{2})?(\d{4})?/, '$1/$2/$3');
-            $event.target.value = value;
-            this.changeValue.emit( value );
+        const c = this;
+        setTimeout(function() { 
+            c.el.nativeElement.value = value;
+            c.changeValue.emit( value );
+        }, 25);
+    }
+
+    @HostListener( 'keydown', ['$event'] )
+    onKeydown( $event: any ) {
+        if ($event.key === 'Backspace') {
+            $event.target.value = '';
+            this.changeValue.emit( '' );
+            this.dirtyForm();
         }
     }
 
     @HostListener( 'blur', ['$event'] )
     onBlur( $event: any ) {
-        console.log('entrou na validação da data');
+        const value = $event.target.value;
+        if (value && value.length === 10) {
+            if (this.helper.validateDate($event.target.value)) {
+                return;
+            }
+        }
+        $event.target.value = '';
+        this.changeValue.emit( '' );
     }
 }

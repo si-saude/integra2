@@ -9,7 +9,7 @@ import { GenericFilter } from './generic-filter';
 
 export abstract class GenericService<T, F extends GenericFilter> {
 
-    readonly rootUrl = 'http://localhost:3080/IntegraApi2/rest/';
+    readonly rootUrl = 'http://localhost:5080/IntegraApi2/rest/';
 
     protected helper: Helper;
 
@@ -113,11 +113,11 @@ export abstract class GenericService<T, F extends GenericFilter> {
         if (t[property + 'Front'] && t[property + 'Front'] !== '') {
             const date = this.helper.createDateFromString(t[property + 'Front']);
             t[property] = date.getTime();
-        } else if (t[property] > 0) {
+        } else if (t[property] !== 0) {
             // CRlAR UMA DATA A PARTR DO VALOR EM MlLlSEGUNDOS
             let date = new Date(t[property]);
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-                date.getHours() + (new Date().getTimezoneOffset() / 60), date.getMinutes(), 0, 0 );
+                date.getHours() + this.helper.getTimeZoneNumber(), date.getMinutes(), 0, 0 );
             // MONTAR A DATA EM STRlNG E SETAR NA PROPRlEDADE STRlNG DO OBJETO
             let dateString = '';
             dateString += this.helper.addLeftZero(date.getDate().toString());
@@ -125,12 +125,13 @@ export abstract class GenericService<T, F extends GenericFilter> {
             dateString += this.helper.addLeftZero((date.getMonth() + 1).toString());
             dateString += '/';
             dateString += this.helper.addLeftZero(date.getFullYear().toString());
-            /*dateString += ' ';
+            dateString += ' ';
             dateString += this.helper.addLeftZero(date.getHours().toString());
             dateString += ':';
-            dateString += this.helper.addLeftZero(date.getMinutes().toString());*/
+            dateString += this.helper.addLeftZero(date.getMinutes().toString());
             t[property + 'Front'] = dateString;
-        }
+            t[property] = 0;
+        } 
         return t;
     }
 }

@@ -14,6 +14,9 @@ export class Ghe {
     private dataCriacao: number;
     private dataCriacaoFront: string;
 
+    private dataDesativacao: number;
+    private dataDesativacaoFront: string;
+
     public get $id(): number {
         return this.id;
     }
@@ -100,5 +103,13 @@ export class Ghe {
 
 	public set $dataCriacaoFront(value: string) {
 		this.dataCriacaoFront = value;
+    }
+    
+    public set $dataDesativacao(value: number) {
+		this.dataDesativacao = value;
+	}
+
+	public set $dataDesativacaoFront(value: string) {
+		this.dataDesativacaoFront = value;
 	}
 }

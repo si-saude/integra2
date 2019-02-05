@@ -95,10 +95,24 @@ export class Helper {
       } else {
           timeArray = [0, 0];
       }
-      // 04/02/2019 14:18
       // CRlAR UMA DATA A PARTlR DAS POSlÇÕES DO VETOR E CONVERTER PARA MlLlSEGUNDOS
       const date = new Date(Number(dateArray[2]), Number(dateArray[1]) - 1, Number(dateArray[0]),
-          Number(timeArray[0]) - (new Date().getTimezoneOffset() / 60), Number(timeArray[1]), 0, 0);
+          Number(timeArray[0]) - this.getTimeZoneNumber(), Number(timeArray[1]), 0, 0);
       return date;
+    }
+
+    validateDate(stringDate: string): boolean {
+      const fullDateArray = stringDate.split(' ');
+      const dateArray = fullDateArray[0].split('/');
+      const date = this.createDateFromString(stringDate);
+      if (date.getFullYear() === Number(dateArray[2]) && date.getMonth() ===  Number(dateArray[1]) - 1
+          && date.getDate() === Number(dateArray[0])) {
+            return true;
+      }
+      return false;
+    }
+
+    getTimeZoneNumber() {
+      return new Date(2000,1,1).getHours();
     }
 }
