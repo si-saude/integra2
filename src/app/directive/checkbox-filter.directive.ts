@@ -38,13 +38,12 @@ export class CheckboxFilterDirective implements ControlValueAccessor {
     @HostListener( 'input', ['$event'] )
     onInput( $event: any ) {
         let valor = this.value;
-        if (!this.el.nativeElement.checked) {
-            valor++;
-        }
-        if (valor % 2 === 0) {
+        if (valor === 2) {
             this.el.nativeElement.indeterminate = true;
             this.el.nativeElement.checked = true;
             valor = 0;
+        } else {
+            valor++;
         }
         this.changeValue.emit(valor);
     }

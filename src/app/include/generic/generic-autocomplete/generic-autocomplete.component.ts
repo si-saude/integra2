@@ -92,6 +92,7 @@ export class GenericAutocompleteComponent<T, F extends GenericFilter> implements
         this.initializeObject();
         this.updateObjectAux();
         this.array = new Array<T>();
+        this.helper.dirtyForm(this.component);
         this.responseChange.emit(this.object);
       }
     }, 200);
