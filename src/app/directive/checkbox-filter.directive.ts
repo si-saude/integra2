@@ -19,6 +19,8 @@ export class CheckboxFilterDirective implements ControlValueAccessor {
     @Output() changeValue = new EventEmitter();
 
     constructor( private el: ElementRef ) {
+        this.el.nativeElement.indeterminate = true;
+        this.el.nativeElement.checked = true;
     }
 
     writeValue( value: any ): void {
@@ -35,17 +37,15 @@ export class CheckboxFilterDirective implements ControlValueAccessor {
 
     @HostListener( 'input', ['$event'] )
     onInput( $event: any ) {
-        console.log(this.value);
         let valor = this.value;
         if (!this.el.nativeElement.checked) {
             valor++;
         }
-        if (this.value % 2 === 0) {
+        if (valor % 2 === 0) {
             this.el.nativeElement.indeterminate = true;
             this.el.nativeElement.checked = true;
             valor = 0;
         }
         this.changeValue.emit(valor);
-        console.log(valor);
     }
 }
