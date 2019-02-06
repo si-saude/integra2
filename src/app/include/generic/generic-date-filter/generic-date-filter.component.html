@@ -1,0 +1,13 @@
+<app-generic-label [width]="'2'">{{label}}
+    <input type="text" name="{{property}}Inicio" [ngModel]="dateFilter.inicioFront"
+        (changeValue)="dateFilter.inicioFront=$event; changeValue.emit(dateFilter);" [component]="this" dateFormat>
+</app-generic-label>
+<app-generic-label [width]="'2'">&nbsp;
+    <input type="text" name="{{property}}Fim" [ngModel]="dateFilter.fimFront"
+        (changeValue)="dateFilter.fimFront=$event; changeValue.emit(dateFilter);" [component]="this" dateFormat>
+</app-generic-label>
+<app-generic-label [width]="'3'">Tipo
+    <app-generic-select [component]="this" [name]="property + 'typeFilter'" [array]="types"
+        (changeValue)="dateFilter.typeFilter=$event; changeValue.emit(dateFilter);">
+    </app-generic-select>
+</app-generic-label>

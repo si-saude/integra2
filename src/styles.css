@@ -83,6 +83,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: #424242;
     left: -18%;
     transition: all 400ms linear;
+    overflow:scroll;
 }
 
 .menu-icon-item{

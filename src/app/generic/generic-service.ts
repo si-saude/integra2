@@ -9,7 +9,7 @@ import { GenericFilter } from './generic-filter';
 
 export abstract class GenericService<T, F extends GenericFilter> {
 
-    readonly rootUrl = 'http://localhost:5080/IntegraApi2/rest/';
+    readonly rootUrl = 'http://localhost:3080/IntegraApi2/rest/';
 
     protected helper: Helper;
 
@@ -37,6 +37,10 @@ export abstract class GenericService<T, F extends GenericFilter> {
             array.push(this.toObject(objs[x]));
         }
         return array;
+    }
+
+    transformFilter(f: F): F {
+        return f;
     }
 
     showSpinner() {
@@ -131,7 +135,20 @@ export abstract class GenericService<T, F extends GenericFilter> {
             dateString += this.helper.addLeftZero(date.getMinutes().toString());
             t[property + 'Front'] = dateString;
             t[property] = 0;
-        } 
+        }
         return t;
+    }
+
+    transformDateFilter(f: F, property: string): F {
+        f = this.transformDateFilterProperty(f, property, 'inicio');
+        f = this.transformDateFilterProperty(f, property, 'fim');
+        return f;
+    }
+
+    private transformDateFilterProperty(f: F, mainProperty: string, property: string): F {
+        if (f[mainProperty] && f[mainProperty][property + 'Front'] && f[mainProperty][property + 'Front'] !== '') {
+            f[mainProperty][property] = this.helper.createDateFromString(f[mainProperty][property + 'Front']).getTime();
+        }
+        return f;
     }
 }

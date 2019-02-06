@@ -19,6 +19,16 @@
         </app-generic-label>
     </div>
     <div class="row">
+        <app-generic-date-filter [label]="'Data de Criação'" [property]="'dataCriacao'"
+            [dateFilter]="filter.dataCriacao" (changeValue)="filter.dataCriacao=$event">
+        </app-generic-date-filter>
+    </div>
+    <div class="row">
+        <app-generic-date-filter [label]="'Data de Desativação'" [property]="'dataDesativacao'"
+            [dateFilter]="filter.dataDesativacao" (changeValue)="filter.dataDesativacao=$event">
+        </app-generic-date-filter>
+    </div>
+    <div class="row">
         <app-generic-label [width]="'4'">Risco
             <app-generic-select [component]="this" [name]="'risco'" [object]="filter.risco" [property]="'titulo'" [array]="util.riscos"
                 (changeValue)="filter.risco = $event">

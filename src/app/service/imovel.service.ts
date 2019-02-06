@@ -31,7 +31,7 @@ export class ImovelService extends GenericService<Imovel, ImovelFilter> {
         imovel.$nome = obj['nome'];
         imovel.$version = obj['version'];
 
-        if (obj['base']) {
+        if (this.helper.isNotNull(obj['base'])) {
             imovel.$base = this.baseService.toObject(obj['base']);
         }
 

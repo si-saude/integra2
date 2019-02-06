@@ -15,12 +15,12 @@
     <div class="row">
       <app-generic-label [width]="'2'">Data de Criação
         <input class="validate" type="text" name="dataCriacaoFront" #dataCriacaoFront="ngModel" [ngModel]="t.dataCriacaoFront"
-          maxlength="10" (changeValue)="t.dataCriacaoFront=$event" [component]="this" dateFormat>
+          (changeValue)="t.dataCriacaoFront=$event" [component]="this" dateFormat>
           <span class="helper-text" [attr.data-error]="showErrorMessage(dataCriacaoFront.errors)"></span>
       </app-generic-label>
-      <app-generic-label [width]="'2'">Data de Criação
+      <app-generic-label [width]="'2'">Data de Desativação
           <input class="validate" type="text" name="dataDesativacaoFront" #dataDesativacaoFront="ngModel" [ngModel]="t.dataDesativacaoFront"
-            maxlength="10" (changeValue)="t.dataDesativacaoFront=$event" [component]="this" dateFormat>
+            (changeValue)="t.dataDesativacaoFront=$event" [component]="this" dateFormat>
             <span class="helper-text" [attr.data-error]="showErrorMessage(dataDesativacaoFront.errors)"></span>
         </app-generic-label>
     </div>

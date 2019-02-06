@@ -112,7 +112,30 @@ export class Helper {
       return false;
     }
 
+    validateDateTime(stringDate: string): boolean {
+      const fullDateArray = stringDate.split(' ');
+      const dateArray = fullDateArray[0].split('/');
+      let timeArray = new Array<any>();
+      if (fullDateArray[1]) {
+          timeArray = fullDateArray[1].split(':');
+      } else {
+          timeArray = [0, 0];
+      }
+      const date = this.createDateFromString(stringDate);
+      if (date.getFullYear() === Number(dateArray[2]) && date.getMonth() ===  Number(dateArray[1]) - 1
+          && date.getDate() === Number(dateArray[0])
+          && date.getHours() === Number(timeArray[0]) - this.getTimeZoneNumber()
+          && date.getMinutes() === Number(timeArray[1])) {
+            return true;
+      }
+      return false;
+    }
+
     getTimeZoneNumber() {
-      return new Date(2000,1,1).getHours();
+      return new Date(2000, 1, 1).getHours();
+    }
+
+    isNotNull(obj) {
+      return obj && Object.keys(obj).length > 0;
     }
 }

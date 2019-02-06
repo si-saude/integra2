@@ -8,8 +8,10 @@ import { CadastroGuardService } from './cadastro.guard.service';
 import { BaseGuardModule } from './cadastro/base/base.guard.module';
 import { CargoGuardModule } from './cadastro/cargo/cargo.guard.module';
 import { CidadeGuardModule } from './cadastro/cidade/cidade.guard.module';
+import { ClinicaGuardModule } from './cadastro/clinica/clinica.guard.module';
 import { CriterioGuardModule } from './cadastro/criterio/criterio.guard.module';
 import { CursoGuardModule } from './cadastro/curso/curso.guard.module';
+import { EixoGuardModule } from './cadastro/eixo/eixo.guard.module';
 import { EquipeGuardModule } from './cadastro/equipe/equipe.guard.module';
 import { ExameGuardModule } from './cadastro/exame/exame.guard.module';
 import { GheGuardModule } from './cadastro/ghe/ghe.guard.module';
@@ -29,8 +31,10 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
         BaseGuardModule,
         CargoGuardModule,
         CidadeGuardModule,
+        ClinicaGuardModule,
         CriterioGuardModule,
         CursoGuardModule,
+        EixoGuardModule,
         EquipeGuardModule,
         ExameGuardModule,
         GheGuardModule,

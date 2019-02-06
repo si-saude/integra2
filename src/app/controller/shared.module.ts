@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { DateFormatDirective } from './../directive/date-format.directive';
+import { DateTimeFormatDirective } from './../directive/date-time-format.directive';
 import { IntegerValidatorDirective } from './../directive/integer-validator.directive';
 import { ModalConfirmDirective } from './../directive/modal-confirm.directive';
 
@@ -18,6 +19,8 @@ import { SelectToGridComponent } from '../include/generic/select-to-grid/select-
 import { GenericLabelComponent } from '../include/generic/generic-label/generic-label.component';
 import { GenericSelectComponent } from '../include/generic/generic-select/generic-select.component';
 import { GenericFormModalComponent } from '../include/generic/generic-form-modal/generic-form-modal.component';
+import { GenericDateFilterComponent } from '../include/generic/generic-date-filter/generic-date-filter.component';
+import { GenericAutocompleteComponent } from '../include/generic/generic-autocomplete/generic-autocomplete.component';
 
 @NgModule({
     declarations: [
@@ -30,8 +33,11 @@ import { GenericFormModalComponent } from '../include/generic/generic-form-modal
         GenericLabelComponent,
         GenericSelectComponent,
         GenericFormModalComponent,
+        GenericDateFilterComponent,
+        GenericAutocompleteComponent,
         IntegerValidatorDirective,
         DateFormatDirective,
+        DateTimeFormatDirective,
         ModalConfirmDirective
     ],
     exports: [
@@ -46,8 +52,11 @@ import { GenericFormModalComponent } from '../include/generic/generic-form-modal
         GenericLabelComponent,
         GenericSelectComponent,
         GenericFormModalComponent,
+        GenericDateFilterComponent,
+        GenericAutocompleteComponent,
         IntegerValidatorDirective,
         DateFormatDirective,
+        DateTimeFormatDirective,
         ModalConfirmDirective
     ],
     imports: [

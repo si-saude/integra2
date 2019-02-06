@@ -1,0 +1,47 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+
+    <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],[examesTab,'EXAMES']]">
+        <div #dadosGeraisTab>
+          <div class="row">
+            <app-generic-label [width]="'4'">Nome
+              <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome"
+                (ngModelChange)="t.nome=$event.toUpperCase()" maxlength="128" [disabled]="_detailMode" required>
+              <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+            </app-generic-label>
+            <app-generic-label [width]="'2'">UF
+              <app-generic-select [object]="t.uf" [component]="this" [name]="'uf'" [array]="util.ufs"
+                (changeValue)="t.uf = $event">
+              </app-generic-select>
+            </app-generic-label>
+          </div>
+          <div class="row">
+            <app-generic-label [width]="'8'">Endereço
+              <input class="validate" type="text" name="endereco" #endereco="ngModel" [(ngModel)]="t.endereco"
+                maxlength="512" [disabled]="_detailMode">
+              <span class="helper-text" [attr.data-error]="showErrorMessage(endereco.errors)"></span>
+            </app-generic-label>
+          </div>
+          <div class="row">
+            <app-generic-label [width]="'7'">Telefones
+              <input class="validate" type="text" name="telefones" #telefones="ngModel" [(ngModel)]="t.telefones"
+                maxlength="128" [disabled]="_detailMode">
+              <span class="helper-text" [attr.data-error]="showErrorMessage(telefones.errors)"></span>
+            </app-generic-label>
+          </div>
+        </div>
+        <div #examesTab>
+          <app-generic-autocomplete #autocompleteExame
+            [name]="'exame'" [property]="'descricao'" [component]="this" [maxLength]="150" [width]="'5'"
+            [service]="servico.getExameService()" [showAdd]="true" (responseAdd)="gridExames.add($event)">
+          </app-generic-autocomplete>
+          <div class="row">
+            <app-generic-grid #gridExames
+              [id]="'exames'" [component]="this" [array]="t.exames" [height]="'350px'" [delete]="true"
+              [def]="[['Código','codigo','',''],['Descrição','descricao','','']]">
+            </app-generic-grid>
+          </div>
+        </div>
+    </app-generic-tab>
+  </app-form-component>
+</form>

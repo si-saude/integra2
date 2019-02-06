@@ -31,6 +31,10 @@ export class GheListarComponent extends GenericListComponent<Ghe, GheFilter> imp
     this.util.onInit();
     this.page(1);
   }
+
+  getFilter(pageNumber) {
+    return super.getFilter(pageNumber);
+  }
 }
 
 @Component({

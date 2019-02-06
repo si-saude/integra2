@@ -22,6 +22,7 @@ export abstract class GenericListComponent<T, F extends GenericFilter> implement
 
     getFilter(pageNumber) {
       this.filter.$pageNumber = pageNumber;
+      this.filter = this.service.transformFilter(this.filter);
       return this.filter;
     }
 

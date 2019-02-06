@@ -3,15 +3,15 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Helper } from './../generic/helper';
 
 @Directive( {
-    selector: '[dateFormat]',
+    selector: '[dateTimeFormat]',
     providers: [{
         provide: NG_VALUE_ACCESSOR,
-        useExisting: DateFormatDirective,
+        useExisting: DateTimeFormatDirective,
         multi: true
     }]
 } )
 
-export class DateFormatDirective implements ControlValueAccessor, OnChanges {
+export class DateTimeFormatDirective implements ControlValueAccessor, OnChanges {
     private helper: Helper;
     private loaded = false;
     private detailModeLoaded = false;
@@ -69,13 +69,10 @@ export class DateFormatDirective implements ControlValueAccessor, OnChanges {
     }
 
     input(value) {
-        if (value.length > 10) {
-            value = value.substring(0,10);
-        }
         value = value.replace(/\D/g, '')
-            .replace(/^(\d{2})(\d{2})?(\d{4})?/, '$1/$2/$3');
+            .replace(/^(\d{2})(\d{2})?(\d{4})?(\d{2})?(\d{2})?/, '$1/$2/$3 $4:$5');
         const c = this;
-        setTimeout(function() { 
+        setTimeout(function() {
             c.el.nativeElement.value = value;
             c.changeValue.emit( value );
         }, 25);
@@ -93,8 +90,8 @@ export class DateFormatDirective implements ControlValueAccessor, OnChanges {
     @HostListener( 'blur', ['$event'] )
     onBlur( $event: any ) {
         const value = $event.target.value;
-        if (value && value.length === 10) {
-            if (this.helper.validateDate($event.target.value)) {
+        if (value && value.length === 16) {
+            if (this.helper.validateDateTime($event.target.value)) {
                 return;
             }
         }

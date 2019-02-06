@@ -7,8 +7,10 @@ import { GenericGuardService } from './../generic/generic-guard.service';
 import { BaseGuardService } from './cadastro/base/base.guard.service';
 import { CargoGuardService } from './cadastro/cargo/cargo.guard.service';
 import { CidadeGuardService } from './cadastro/cidade/cidade.guard.service';
+import { ClinicaGuardService } from './cadastro/clinica/clinica.guard.service';
 import { CriterioGuardService } from './cadastro/criterio/criterio.guard.service';
 import { CursoGuardService } from './cadastro/curso/curso.guard.service';
+import { EixoGuardService } from './cadastro/eixo/eixo.guard.service';
 import { EquipeGuardService } from './cadastro/equipe/equipe.guard.service';
 import { ExameGuardService } from './cadastro/exame/exame.guard.service';
 import { GheGuardService } from './cadastro/ghe/ghe.guard.service';
@@ -25,8 +27,10 @@ export class CadastroGuardService implements GenericGuardService {
         private base: BaseGuardService,
         private cargo: CargoGuardService,
         private cidade: CidadeGuardService,
+        private clinica: ClinicaGuardService,
         private criterio: CriterioGuardService,
         private curso: CursoGuardService,
+        private eixo: EixoGuardService,
         private equipe: EquipeGuardService,
         private exame: ExameGuardService,
         private ghe: GheGuardService,
@@ -53,12 +57,20 @@ export class CadastroGuardService implements GenericGuardService {
                 guardService = this.cidade;
                 break;
             }
+            case 'CLINICA': {
+                guardService = this.clinica;
+                break;
+            }
             case 'CRITERIO': {
                 guardService = this.criterio;
                 break;
             }
             case 'CURSO': {
                 guardService = this.curso;
+                break;
+            }
+            case 'EIXO': {
+                guardService = this.eixo;
                 break;
             }
             case 'EQUIPE': {

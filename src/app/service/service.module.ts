@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { BaseService } from './base.service';
 import { CargoService } from './cargo.service';
 import { CidadeService } from './cidade.service';
+import { ClinicaService } from './clinica.service';
 import { CriterioService } from './criterio.service';
 import { CursoService } from './curso.service';
+import { EixoService } from './eixo.service';
 import { EquipeService } from './equipe.service';
 import { ExameService } from './exame.service';
 import { GheService } from './ghe.service';
@@ -19,8 +21,10 @@ import { UtilService } from './util.service';
         BaseService,
         CargoService,
         CidadeService,
+        ClinicaService,
         CriterioService,
         CursoService,
+        EixoService,
         EquipeService,
         ExameService,
         GheService,
