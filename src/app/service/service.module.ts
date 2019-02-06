@@ -6,6 +6,7 @@ import { CidadeService } from './cidade.service';
 import { ClinicaService } from './clinica.service';
 import { CriterioService } from './criterio.service';
 import { CursoService } from './curso.service';
+import { DiagnosticoService } from './diagnostico.service';
 import { EixoService } from './eixo.service';
 import { EquipeService } from './equipe.service';
 import { ExameService } from './exame.service';
@@ -24,6 +25,7 @@ import { UtilService } from './util.service';
         ClinicaService,
         CriterioService,
         CursoService,
+        DiagnosticoService,
         EixoService,
         EquipeService,
         ExameService,

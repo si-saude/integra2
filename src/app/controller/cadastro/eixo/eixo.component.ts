@@ -17,8 +17,6 @@ import { EixoService } from './../../../service/eixo.service';
 })
 export class EixoListarComponent extends GenericListComponent<Eixo, EixoFilter> implements OnInit {
 
-  private util: EixoUtil;
-
   constructor(private servico: EixoService, private router: Router) {
     super(servico, router, 'Eixo Clínico',
       [
@@ -27,8 +25,6 @@ export class EixoListarComponent extends GenericListComponent<Eixo, EixoFilter> 
   }
 
   ngOnInit() {
-    this.util = new EixoUtil(this.servico);
-    this.util.onInit();
     this.page(1);
   }
 
@@ -44,15 +40,11 @@ export class EixoListarComponent extends GenericListComponent<Eixo, EixoFilter> 
 })
 export class EixoAdicionarComponent extends GenericComponent<Eixo> implements OnInit {
 
-  private util: EixoUtil;
-
   constructor(private servico: EixoService, router: Router, route: ActivatedRoute) {
     super(servico, router, route, 'Eixo Clínico - Adicionar');
   }
 
   ngOnInit() {
-    this.util = new EixoUtil(this.servico);
-    this.util.onInit();
   }
 }
 
@@ -63,8 +55,6 @@ export class EixoAdicionarComponent extends GenericComponent<Eixo> implements On
 })
 export class EixoEditarComponent extends GenericComponent<Eixo> implements OnInit {
 
-  private util: EixoUtil;
-
   constructor(private servico: EixoService, router: Router, route: ActivatedRoute) {
     super(servico, router, route, 'Eixo Clínico - Editar');
   }
@@ -72,8 +62,6 @@ export class EixoEditarComponent extends GenericComponent<Eixo> implements OnIni
   ngOnInit() {
     this.init(function(obj){
     });
-    this.util = new EixoUtil(this.servico);
-    this.util.onInit();
   }
 }
 
@@ -84,34 +72,13 @@ export class EixoEditarComponent extends GenericComponent<Eixo> implements OnIni
 })
 export class EixoDetalharComponent extends GenericComponent<Eixo> implements OnInit {
 
-  private util: EixoUtil;
-
   constructor(private servico: EixoService, router: Router, route: ActivatedRoute) {
     super(servico, router, route, 'Eixo Clínico - Detalhar');
     this.detailMode();
   }
 
   ngOnInit() {
-    this.util = new EixoUtil(this.servico);
     this.init(function(obj){
     });
-  }
-}
-
-export class EixoUtil {
-
-  equipes: Array<Equipe>;
-  equipeFilter: EquipeFilter;
-
-  constructor(private servico: EixoService) {
-    this.equipeFilter = new EquipeFilter();
-    this.equipeFilter.$pageSize = 100000;
-  }
-
-  onInit() {
-    const component = this;
-    this.servico.getEquipeService().list(this.equipeFilter, function(res) {
-      component.equipes = component.servico.getEquipeService().toList(res.json().list);
-    }, undefined);
   }
 }

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { CheckboxFilterDirective } from './../directive/checkbox-filter.directive';
 import { DateFormatDirective } from './../directive/date-format.directive';
 import { DateTimeFormatDirective } from './../directive/date-time-format.directive';
 import { IntegerValidatorDirective } from './../directive/integer-validator.directive';
@@ -35,9 +36,10 @@ import { GenericAutocompleteComponent } from '../include/generic/generic-autocom
         GenericFormModalComponent,
         GenericDateFilterComponent,
         GenericAutocompleteComponent,
-        IntegerValidatorDirective,
+        CheckboxFilterDirective,
         DateFormatDirective,
         DateTimeFormatDirective,
+        IntegerValidatorDirective,
         ModalConfirmDirective
     ],
     exports: [
@@ -54,9 +56,10 @@ import { GenericAutocompleteComponent } from '../include/generic/generic-autocom
         GenericFormModalComponent,
         GenericDateFilterComponent,
         GenericAutocompleteComponent,
-        IntegerValidatorDirective,
+        CheckboxFilterDirective,
         DateFormatDirective,
         DateTimeFormatDirective,
+        IntegerValidatorDirective,
         ModalConfirmDirective
     ],
     imports: [

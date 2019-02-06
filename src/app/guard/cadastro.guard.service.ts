@@ -10,6 +10,7 @@ import { CidadeGuardService } from './cadastro/cidade/cidade.guard.service';
 import { ClinicaGuardService } from './cadastro/clinica/clinica.guard.service';
 import { CriterioGuardService } from './cadastro/criterio/criterio.guard.service';
 import { CursoGuardService } from './cadastro/curso/curso.guard.service';
+import { DiagnosticoGuardService } from './cadastro/diagnostico/diagnostico.guard.service';
 import { EixoGuardService } from './cadastro/eixo/eixo.guard.service';
 import { EquipeGuardService } from './cadastro/equipe/equipe.guard.service';
 import { ExameGuardService } from './cadastro/exame/exame.guard.service';
@@ -30,6 +31,7 @@ export class CadastroGuardService implements GenericGuardService {
         private clinica: ClinicaGuardService,
         private criterio: CriterioGuardService,
         private curso: CursoGuardService,
+        private diagnostico: DiagnosticoGuardService,
         private eixo: EixoGuardService,
         private equipe: EquipeGuardService,
         private exame: ExameGuardService,
@@ -67,6 +69,10 @@ export class CadastroGuardService implements GenericGuardService {
             }
             case 'CURSO': {
                 guardService = this.curso;
+                break;
+            }
+            case 'DIAGNOSTICO': {
+                guardService = this.diagnostico;
                 break;
             }
             case 'EIXO': {

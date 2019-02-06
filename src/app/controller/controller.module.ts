@@ -6,6 +6,7 @@ import { CidadeComponentModule } from './cadastro/cidade/cidade.component.module
 import { ClinicaComponentModule } from './cadastro/clinica/clinica.component.module';
 import { CriterioComponentModule } from './cadastro/criterio/criterio.component.module';
 import { CursoComponentModule } from './cadastro/curso/curso.component.module';
+import { DiagnosticoComponentModule } from './cadastro/diagnostico/diagnostico.component.module';
 import { EixoComponentModule } from './cadastro/eixo/eixo.component.module';
 import { EquipeComponentModule } from './cadastro/equipe/equipe.component.module';
 import { ExameComponentModule } from './cadastro/exame/exame.component.module';
@@ -22,6 +23,7 @@ import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.componen
         ClinicaComponentModule,
         CriterioComponentModule,
         CursoComponentModule,
+        DiagnosticoComponentModule,
         EixoComponentModule,
         EquipeComponentModule,
         ExameComponentModule,

@@ -1,0 +1,34 @@
+<app-list-component 
+    [component]="this"
+    [adicionar]="'DIAGNOSTICO_ADICIONAR'"
+    [editar]="'DIAGNOSTICO_EDITAR'"
+    [detalhar]="'DIAGNOSTICO_DETALHAR'"
+    [remover]="'DIAGNOSTICO_REMOVER'"
+    >
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'3'">Código
+            <input type="text" name="codigo" [(ngModel)]="filter.codigo" maxlength="16" modalConfirm
+            (changeValue)="filter.codigo = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'1'">Inativo
+            <input type="checkbox" name="inativo" [value]="filter.inativo.value" checkboxFilter
+                (changeValue)="filter.inativo.value = $event" />
+            <span></span>
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'8'">Descrição
+            <input type="text" name="descricao" [(ngModel)]="filter.descricao" maxlength="300" modalConfirm
+            (changeValue)="filter.descricao = $event">
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'5'">Eixo
+            <input type="text" name="eixo" [(ngModel)]="filter.eixo.titulo" maxlength="256" modalConfirm
+            (changeValue)="filter.eixo.titulo = $event">
+        </app-generic-label>
+    </div>
+</app-generic-modal>

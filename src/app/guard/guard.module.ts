@@ -11,6 +11,7 @@ import { CidadeGuardModule } from './cadastro/cidade/cidade.guard.module';
 import { ClinicaGuardModule } from './cadastro/clinica/clinica.guard.module';
 import { CriterioGuardModule } from './cadastro/criterio/criterio.guard.module';
 import { CursoGuardModule } from './cadastro/curso/curso.guard.module';
+import { DiagnosticoGuardModule } from './cadastro/diagnostico/diagnostico.guard.module';
 import { EixoGuardModule } from './cadastro/eixo/eixo.guard.module';
 import { EquipeGuardModule } from './cadastro/equipe/equipe.guard.module';
 import { ExameGuardModule } from './cadastro/exame/exame.guard.module';
@@ -34,6 +35,7 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
         ClinicaGuardModule,
         CriterioGuardModule,
         CursoGuardModule,
+        DiagnosticoGuardModule,
         EixoGuardModule,
         EquipeGuardModule,
         ExameGuardModule,

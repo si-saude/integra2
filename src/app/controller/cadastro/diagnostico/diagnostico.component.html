@@ -1,0 +1,28 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'3'">Código
+        <input class="validate" type="text" name="codigo" #codigo="ngModel" [(ngModel)]="t.codigo"
+        maxlength="64" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(codigo.errors)"></span>
+      </app-generic-label>
+      <app-generic-label [width]="'1'">Inativo
+        <input type="checkbox" name="inativo" #inativo="ngModel" [(ngModel)]="t.inativo"  />
+        <span></span>
+      </app-generic-label>
+    </div>
+    <div class="row">
+      <app-generic-label [width]="'8'">Descrição
+        <textarea class="validate text-area" name="descricao" #descricao="ngModel" [(ngModel)]="t.descricao"
+          maxlength="300" [disabled]="_detailMode" required>
+        </textarea>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(descricao.errors)"></span>
+      </app-generic-label>
+    </div>
+    <app-generic-autocomplete #autocompleteEixo
+      [name]="'eixo'" [property]="'titulo'" [component]="this" [maxLength]="256"
+      [service]="servico.getEixoService()" (responseChange)="t.eixo = $event"
+      [object]="t.eixo" [width]="'4'" [label]="'Eixo'">
+    </app-generic-autocomplete>
+  </app-form-component>
+</form>
