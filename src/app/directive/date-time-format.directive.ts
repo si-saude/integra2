@@ -20,6 +20,7 @@ export class DateTimeFormatDirective implements ControlValueAccessor, OnChanges 
 
     @Input() ngModel;
     @Input() component;
+    @Input() disabled = false;
     @Output() changeValue = new EventEmitter();
 
     constructor( private el: ElementRef ) {
@@ -39,6 +40,10 @@ export class DateTimeFormatDirective implements ControlValueAccessor, OnChanges 
         if (changes['component'] && changes['component']['currentValue'] && !this.detailModeLoaded) {
             this.detailModeLoaded = true;
             this.el.nativeElement.disabled = changes['component']['currentValue']['_detailMode'];
+        }
+
+        if (changes['disabled'] && changes['disabled']['currentValue']) {
+            this.el.nativeElement.disabled = this.disabled;
         }
     }
 
