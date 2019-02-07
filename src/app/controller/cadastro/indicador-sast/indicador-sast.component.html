@@ -1,0 +1,110 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],
+    [indicesTab,'ÍNDICES'],
+    [indicadoresAssociadosTab,'INDICADORES ASSOCIADOS']]">
+      <div #dadosGeraisTab>
+        <div class="row">
+          <app-generic-label [width]="'8'">Nome
+            <input class="validate" type="text" name="nome" #nome="ngModel" [(ngModel)]="t.nome"
+              maxlength="128" [disabled]="_detailMode" required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+          </app-generic-label>
+        </div>
+        <app-generic-autocomplete #autocompleteEquipe
+          [name]="'equipe'" [property]="'nome'" [component]="this" [maxLength]="150"
+          [service]="servico.getEquipeService()" (responseChange)="t.equipe = $event"
+          [object]="t.equipe" [width]="'4'" [label]="'Equipe'">
+
+          <app-generic-label [width]="'1'">Código
+              <input class="validate" type="text" name="codigo" #codigo="ngModel" [ngModel]="t.codigo"
+                (ngModelChange)="t.codigo=$event.toUpperCase()" minlength="3" maxlength="3" [disabled]="_detailMode" required>
+              <span *ngIf="!codigo.valid && !_detailMode" class="input-error">{{showErrorMessage(codigo.errors)}}</span>
+            </app-generic-label>
+            <app-generic-label [width]="'2'">Código Excludente
+              <input class="validate" type="text" name="codigoExcludente" #codigoExcludente="ngModel" [ngModel]="t.codigoExcludente"
+                (ngModelChange)="t.codigoExcludente=$event.toUpperCase()" minlength="3" maxlength="3" [disabled]="_detailMode">
+                <span *ngIf="!codigoExcludente.valid && !_detailMode" class="input-error">{{showErrorMessage(codigoExcludente.errors)}}</span>
+            </app-generic-label>
+
+        </app-generic-autocomplete>
+        <div class="row">
+          <app-generic-label [width]="'1'">Crítico
+            <input class="validate" type="text" name="critico" #critico="ngModel" [(ngModel)]="t.critico"
+              maxlength="2" [disabled]="_detailMode" integerValidator>
+            <span *ngIf="!critico.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+          <app-generic-label [width]="'1'">Obrigatório
+            <input type="checkbox" name="obrigatorio" #obrigatorio="ngModel" [(ngModel)]="t.obrigatorio" [disabled]="_detailMode"  />
+            <span></span>
+          </app-generic-label>
+          <app-generic-label [width]="'2'">Ausente do Cálculo Interdisciplinar
+            <input type="checkbox" name="ausenteCalculoInterdisciplinar" #ausenteCalculoInterdisciplinar="ngModel" 
+              [(ngModel)]="t.ausenteCalculoInterdisciplinar" [disabled]="_detailMode"  />
+            <span></span>
+          </app-generic-label>
+          <app-generic-label [width]="'1'">Inativo
+            <input type="checkbox" name="inativo" #inativo="ngModel" [(ngModel)]="t.inativo" [disabled]="_detailMode"  />
+            <span></span>
+          </app-generic-label>
+        </div>
+      </div>
+      <div #indicesTab>
+        <div class="row">
+          <app-generic-label [width]="'8'">Índice 0
+            <textarea class="validate text-area" name="indice0" #indice0="ngModel" [(ngModel)]="t.indice0"
+              maxlength="1024" [disabled]="_detailMode" required>
+            </textarea>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(indice0.errors)"></span>
+          </app-generic-label>
+        </div>
+        <div class="row">
+          <app-generic-label [width]="'8'">Índice 1
+            <textarea class="validate text-area" name="indice1" #indice1="ngModel" [(ngModel)]="t.indice1"
+              maxlength="1024" [disabled]="_detailMode" required>
+            </textarea>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(indice1.errors)"></span>
+          </app-generic-label>
+        </div>
+        <div class="row">
+          <app-generic-label [width]="'8'">Índice 2
+            <textarea class="validate text-area" name="indice2" #indice2="ngModel" [(ngModel)]="t.indice2"
+              maxlength="1024" [disabled]="_detailMode" required>
+            </textarea>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(indice2.errors)"></span>
+          </app-generic-label>
+        </div>
+        <div class="row">
+          <app-generic-label [width]="'8'">Índice 3
+            <textarea class="validate text-area" name="indice3" #indice3="ngModel" [(ngModel)]="t.indice3"
+              maxlength="1024" [disabled]="_detailMode" required>
+            </textarea>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(indice3.errors)"></span>
+          </app-generic-label>
+        </div>
+        <div class="row">
+          <app-generic-label [width]="'8'">Índice 4
+            <textarea class="validate text-area" name="indice4" #indice4="ngModel" [(ngModel)]="t.indice4"
+              maxlength="1024" [disabled]="_detailMode" required>
+            </textarea>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(indice4.errors)"></span>
+          </app-generic-label>
+        </div>
+      </div>
+      <div #indicadoresAssociadosTab>
+        <app-text-input-to-grid #textInputIndicadorAssociado
+          [name]="'indicadorAssociado'" [property]="'codigo'" [component]="this" [maxLength]="3" [width]="'2'"
+          [service]="servico" [method]="'toIndicadorAssociadoSast'"
+          [showAdd]="true" (responseAdd)="gridIndicadoresAssociados.add($event)">
+        </app-text-input-to-grid>
+        <div class="row">
+          <app-generic-grid #gridIndicadoresAssociados
+            [component]="this" [array]="t.indicadorAssociadoSasts" [height]="'350px'"
+            [id]="'indicadoresAssociados'" [def]="[['Código','codigo','','']]" [delete]="true"
+            [textInput]="textInputIndicadorAssociado">
+          </app-generic-grid>
+        </div>
+      </div>
+    </app-generic-tab>
+  </app-form-component>
+</form>

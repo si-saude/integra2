@@ -1,3 +1,5 @@
+import { Helper } from './../generic/helper';
+
 export class Curso {
     private id: number;
     private nome: string;
@@ -38,7 +40,7 @@ export class Curso {
     }
 
     public set $validade(value: number) {
-        this.validade = value;
+        this.validade = Helper.validateNumber(value);
     }
 
     public set $version(value: number) {

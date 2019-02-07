@@ -12,6 +12,7 @@ import { EquipeService } from './equipe.service';
 import { ExameService } from './exame.service';
 import { GheService } from './ghe.service';
 import { ImovelService } from './imovel.service';
+import { IndicadorSastService } from './indicador-sast.service';
 import { IntervencaoService } from './intervencao.service';
 import { PerfilService } from './perfil.service';
 import { RiscoGheService } from './risco-ghe.service';
@@ -32,6 +33,7 @@ import { UtilService } from './util.service';
         ExameService,
         GheService,
         ImovelService,
+        IndicadorSastService,
         IntervencaoService,
         PerfilService,
         RiscoGheService,

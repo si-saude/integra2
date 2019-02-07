@@ -12,6 +12,7 @@ import { EquipeComponentModule } from './cadastro/equipe/equipe.component.module
 import { ExameComponentModule } from './cadastro/exame/exame.component.module';
 import { GheComponentModule } from './cadastro/ghe/ghe.component.module';
 import { ImovelComponentModule } from './cadastro/imovel/imovel.component.module';
+import { IndicadorSastComponentModule } from './cadastro/indicador-sast/indicador-sast.component.module';
 import { IntervencaoComponentModule } from './cadastro/intervencao/intervencao.component.module';
 import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module';
 import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.component.module';
@@ -30,6 +31,7 @@ import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.componen
         ExameComponentModule,
         GheComponentModule,
         ImovelComponentModule,
+        IndicadorSastComponentModule,
         IntervencaoComponentModule,
         PerfilComponentModule,
         RiscoGheComponentModule

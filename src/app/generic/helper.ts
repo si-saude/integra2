@@ -1,5 +1,9 @@
 
 export class Helper {
+    static validateNumber(value) {
+      return value !== '' ? value : undefined;
+    }
+
     constructor() {
     }
 

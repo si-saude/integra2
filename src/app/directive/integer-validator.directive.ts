@@ -10,7 +10,13 @@ export class IntegerValidatorDirective implements Validator {
     constructor() {}
 
     validate(c: AbstractControl): { [key: string]: any } {
-        if (c.value && c.value.toString().replace( /\D/g, '' ) !== c.value.toString()) {
+        if (c.value &&
+                (c.value.toString().replace( /\D/g, '' ) !== c.value.toString() &&
+                    !(c.value.toString().substring(0, 1) === '-' &&
+                    c.value.toString().replace( /\D/g, '' ) === c.value.toString().substring(1) &&
+                    c.value.toString().length > 1)
+                )
+            ) {
             return {
                 integerValidate: false
             };

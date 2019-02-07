@@ -1,0 +1,44 @@
+<app-list-component 
+    [component]="this"
+    [adicionar]="'INDICADOR-SAST_ADICIONAR'"
+    [editar]="'INDICADOR-SAST_EDITAR'"
+    [detalhar]="'INDICADOR-SAST_DETALHAR'"
+    [remover]="'INDICADOR-SAST_REMOVER'"
+    >
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'8'">Nome
+            <input type="text" name="nome" [(ngModel)]="filter.nome" maxlength="128" modalConfirm
+            (changeValue)="filter.nome = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'1'">Código
+            <input type="text" name="codigo" [(ngModel)]="filter.codigo" maxlength="3" modalConfirm
+            (changeValue)="filter.codigo = $event">
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'6'">Equipe
+            <input type="text" name="equipe" [(ngModel)]="filter.equipe.nome" maxlength="50" modalConfirm
+            (changeValue)="filter.equipe.nome = $event">
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'1'">Obrigatório
+            <input type="checkbox" name="obrigatorio" [value]="filter.obrigatorio.value" checkboxFilter
+                (changeValue)="filter.obrigatorio.value = $event" />
+            <span></span>
+        </app-generic-label>
+        <app-generic-label [width]="'3'">Ausente do Cálculo Interdisciplinar
+            <input type="checkbox" name="ausenteCalculoInterdisciplinar" [value]="filter.ausenteCalculoInterdisciplinar.value" checkboxFilter
+                (changeValue)="filter.ausenteCalculoInterdisciplinar.value = $event" />
+            <span></span>
+        </app-generic-label>
+        <app-generic-label [width]="'1'">Inativo
+            <input type="checkbox" name="inativo" [value]="filter.inativo.value" checkboxFilter
+                (changeValue)="filter.inativo.value = $event" />
+            <span></span>
+        </app-generic-label>
+    </div>
+</app-generic-modal>

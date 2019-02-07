@@ -22,6 +22,7 @@ import { GenericSelectComponent } from '../include/generic/generic-select/generi
 import { GenericFormModalComponent } from '../include/generic/generic-form-modal/generic-form-modal.component';
 import { GenericDateFilterComponent } from '../include/generic/generic-date-filter/generic-date-filter.component';
 import { GenericAutocompleteComponent } from '../include/generic/generic-autocomplete/generic-autocomplete.component';
+import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/text-input-to-grid.component';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { GenericAutocompleteComponent } from '../include/generic/generic-autocom
         GenericFormModalComponent,
         GenericDateFilterComponent,
         GenericAutocompleteComponent,
+        TextInputToGridComponent,
         CheckboxFilterDirective,
         DateFormatDirective,
         DateTimeFormatDirective,
@@ -56,6 +58,7 @@ import { GenericAutocompleteComponent } from '../include/generic/generic-autocom
         GenericFormModalComponent,
         GenericDateFilterComponent,
         GenericAutocompleteComponent,
+        TextInputToGridComponent,
         CheckboxFilterDirective,
         DateFormatDirective,
         DateTimeFormatDirective,

@@ -17,6 +17,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   @Input() component: GenericComponent<T>;
   @Input() delete = false;
   @Input() height = '300px';
+  @Input() textInput: any;
 
   private helper: Helper;
   private models: Array<Array<any>>;
@@ -34,11 +35,30 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   }
 
   add(obj: G) {
+    let showErrorMessage = false;
+
     if (obj['id'] > 0) {
       if (this.array.find(a => a['id'] === obj['id'])) {
-        this.component.getService().showMessage('O registro já foi adicionado.');
-        return;
+        showErrorMessage = true;
       }
+    } else if (this.textInput) {
+      const aux = this.array.find(a => {
+        const ar1 = this.getObjectAndProperty(a, this.textInput.property);
+        const ar2 = this.getObjectAndProperty(this.textInput.object, this.textInput.property);
+        if ( ar1[0][ar1[1]] === ar2[0][ar2[1]] ) {
+          return a;
+        }
+        return undefined;
+      });
+
+      if (aux) {
+        showErrorMessage = true;
+      }
+    }
+
+    if (showErrorMessage) {
+      this.component.getService().showMessage('O registro já foi adicionado.');
+      return;
     }
 
     this.array.push(obj);

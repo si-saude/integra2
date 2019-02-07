@@ -20,6 +20,7 @@ import * as equipeGuard from './guard/cadastro/equipe/equipe.guard';
 import * as exameGuard from './guard/cadastro/exame/exame.guard';
 import * as gheGuard from './guard/cadastro/ghe/ghe.guard';
 import * as imovelGuard from './guard/cadastro/imovel/imovel.guard';
+import * as indicadorGuard from './guard/cadastro/indicador-sast/indicador-sast.guard';
 import * as intervencaoGuard from './guard/cadastro/intervencao/intervencao.guard';
 import * as perfilGuard from './guard/cadastro/perfil/perfil.guard';
 import * as riscoGheGuard from './guard/cadastro/risco-ghe/risco-ghe.guard';
@@ -42,6 +43,7 @@ export const appRoutes: Routes = [
     exameGuard.Routing.route(HomeComponent),
     gheGuard.Routing.route(HomeComponent),
     imovelGuard.Routing.route(HomeComponent),
+    indicadorGuard.Routing.route(HomeComponent),
     intervencaoGuard.Routing.route(HomeComponent),
     perfilGuard.Routing.route(HomeComponent),
     riscoGheGuard.Routing.route(HomeComponent),
