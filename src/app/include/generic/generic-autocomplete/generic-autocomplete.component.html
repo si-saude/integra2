@@ -7,9 +7,10 @@
   </div>
   <app-generic-label [width]="width">{{label}}
     <input type="text" name="{{name}}" [ngModel]="objectAux[lastProperty]"
-      maxlength="{{maxLength}}" [disabled]="_detailMode" (ngModelChange)="refresh($event);" (blur)="validate()"
-      placeholder="Digite a informação para a busca" *ngIf="!component._detailMode">
+      maxlength="{{maxLength}}" [disabled]="component._detailMode" (ngModelChange)="refresh($event);" (blur)="validate()"
+      [placeholder]="!component._detailMode ? 'Digite a informação para a busca' : ''">
   </app-generic-label>
+  <ng-content></ng-content>
 </div>
 <div class="row">
   <ul class='search-drop-down' [ngStyle]="{'left': !component._detailMode && showAdd ? '12%' : '' }">

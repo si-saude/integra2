@@ -7,7 +7,7 @@
         <span class="helper-text" [attr.data-error]="showErrorMessage(codigo.errors)"></span>
       </app-generic-label>
       <app-generic-label [width]="'1'">Inativo
-        <input type="checkbox" name="inativo" #inativo="ngModel" [(ngModel)]="t.inativo"  />
+        <input type="checkbox" name="inativo" #inativo="ngModel" [(ngModel)]="t.inativo" [disabled]="_detailMode"  />
         <span></span>
       </app-generic-label>
     </div>

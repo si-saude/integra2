@@ -1,0 +1,28 @@
+<app-list-component 
+    [component]="this"
+    [adicionar]="'INTERVENCAO_ADICIONAR'"
+    [editar]="'INTERVENCAO_EDITAR'"
+    [detalhar]="'INTERVENCAO_DETALHAR'"
+    [remover]="'INTERVENCAO_REMOVER'"
+    >
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'10'">Descrição
+            <input type="text" name="descricao" [(ngModel)]="filter.descricao" maxlength="2048" modalConfirm
+            (changeValue)="filter.descricao = $event">
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'4'">Equipe
+            <input type="text" name="equipe" [(ngModel)]="filter.equipe.nome" maxlength="50" modalConfirm
+            (changeValue)="filter.equipe.nome = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'1'">Inativo
+            <input type="checkbox" name="inativo" [value]="filter.inativo.value" checkboxFilter
+                (changeValue)="filter.inativo.value = $event" />
+            <span></span>
+        </app-generic-label>
+    </div>
+</app-generic-modal>

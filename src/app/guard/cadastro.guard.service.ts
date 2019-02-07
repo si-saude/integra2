@@ -16,6 +16,7 @@ import { EquipeGuardService } from './cadastro/equipe/equipe.guard.service';
 import { ExameGuardService } from './cadastro/exame/exame.guard.service';
 import { GheGuardService } from './cadastro/ghe/ghe.guard.service';
 import { ImovelGuardService } from './cadastro/imovel/imovel.guard.service';
+import { IntervencaoGuardService } from './cadastro/intervencao/intervencao.guard.service';
 import { PerfilGuardService } from './cadastro/perfil/perfil.guard.service';
 import { RiscoGheGuardService } from './cadastro/risco-ghe/risco-ghe.guard.service';
 
@@ -37,6 +38,7 @@ export class CadastroGuardService implements GenericGuardService {
         private exame: ExameGuardService,
         private ghe: GheGuardService,
         private imovel: ImovelGuardService,
+        private intervencao: IntervencaoGuardService,
         private perfil: PerfilGuardService,
         private riscoGhe: RiscoGheGuardService) {
 
@@ -93,6 +95,10 @@ export class CadastroGuardService implements GenericGuardService {
             }
             case 'IMOVEL': {
                 guardService = this.imovel;
+                break;
+            }
+            case 'INTERVENCAO': {
+                guardService = this.intervencao;
                 break;
             }
             case 'PERFIL': {

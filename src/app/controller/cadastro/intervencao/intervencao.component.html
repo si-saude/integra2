@@ -1,0 +1,21 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'10'">Descrição
+        <textarea class="validate text-area" name="descricao" #descricao="ngModel" [(ngModel)]="t.descricao"
+          maxlength="2048" [disabled]="_detailMode" required>
+        </textarea>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(descricao.errors)"></span>
+      </app-generic-label>
+    </div>
+    <app-generic-autocomplete #autocompleteEquipe
+      [name]="'equipe'" [property]="'nome'" [component]="this" [maxLength]="50"
+      [service]="servico.getEquipeService()" (responseChange)="t.equipe = $event"
+      [object]="t.equipe" [width]="'5'" [label]="'Equipe'">
+          <app-generic-label [width]="'1'">Inativo
+            <input type="checkbox" name="inativo" #inativo="ngModel" [(ngModel)]="t.inativo" [disabled]="_detailMode"  />
+            <span></span>
+          </app-generic-label>
+    </app-generic-autocomplete>
+  </app-form-component>
+</form>
