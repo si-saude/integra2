@@ -21,6 +21,8 @@
             [disabled]="!d[3] || component._detailMode" (click)="dirtyForm()" />
           <span></span>
         </label>
+        <input *ngIf="d[2]==='text'" type="text" maxlength="{{d[4]}}" [(ngModel)]="models[i][j][0][models[i][j][1]]" 
+            [disabled]="!d[3] || component._detailMode" (change)="dirtyForm()" />
       </td>
       <td class="center">
           <i class="material-icons" *ngIf="delete && !component._detailMode"  
