@@ -20,7 +20,7 @@ export class DiagnosticoListarComponent extends GenericListComponent<Diagnostico
   constructor(private servico: DiagnosticoService, private router: Router) {
     super(servico, router, 'Diagnóstico',
       [
-        ['Código', 'codigo']
+        ['Código', 'codigo'], ['Descrição', 'descricao']
       ]);
   }
 

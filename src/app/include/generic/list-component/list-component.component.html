@@ -7,7 +7,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let a of component.array">
-            <td *ngFor="let ar of component.tableDef">{{ getProperty(a,ar[1]) }}</td>
+            <td *ngFor="let ar of component.tableDef">{{ getProperty(a,ar[1]) | limitCharacter:128 }}</td>
             <td class="center">
                 <i class="material-icons" routerLink="{{'./detalhar/' + a.id }}" *ngIf="canDetalhar">details</i>
                 <i class="material-icons" routerLink="{{'./editar/' + a.id }}" *ngIf="canEditar">mode_edit</i>

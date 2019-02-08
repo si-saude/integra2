@@ -7,8 +7,12 @@ import { RouterModule } from '@angular/router';
 import { CheckboxFilterDirective } from './../directive/checkbox-filter.directive';
 import { DateFormatDirective } from './../directive/date-format.directive';
 import { DateTimeFormatDirective } from './../directive/date-time-format.directive';
+import { IntegerFormatDirective } from './../directive/integer-format.directive';
 import { IntegerValidatorDirective } from './../directive/integer-validator.directive';
 import { ModalConfirmDirective } from './../directive/modal-confirm.directive';
+
+import { GridFilterPipe } from './../pipe/grid-filter.pipe';
+import { LimitCharacterPipe } from './../pipe/limit-character.pipe';
 
 import { appRoutes } from './../router';
 import { GenericGridComponent } from '../include/generic/generic-grid/generic-grid.component';
@@ -41,8 +45,11 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         CheckboxFilterDirective,
         DateFormatDirective,
         DateTimeFormatDirective,
+        IntegerFormatDirective,
         IntegerValidatorDirective,
-        ModalConfirmDirective
+        ModalConfirmDirective,
+        GridFilterPipe,
+        LimitCharacterPipe
     ],
     exports: [
         CommonModule,
@@ -62,8 +69,11 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         CheckboxFilterDirective,
         DateFormatDirective,
         DateTimeFormatDirective,
+        IntegerFormatDirective,
         IntegerValidatorDirective,
-        ModalConfirmDirective
+        ModalConfirmDirective,
+        GridFilterPipe,
+        LimitCharacterPipe
     ],
     imports: [
         CommonModule,

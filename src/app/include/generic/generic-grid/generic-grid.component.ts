@@ -21,10 +21,12 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
 
   private helper: Helper;
   private models: Array<Array<any>>;
-  private proxy: Array<any>;
+  private filter;
+  private filterBuilded = false;
 
   constructor() {
     this.helper = new Helper();
+    this.filter = {};
   }
 
   ngOnInit() {
@@ -69,14 +71,21 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   load() {
     this.models = new Array<Array<any>>();
     if (this.array && this.def) {
-      this.proxy = new Array<any>();
       for (let a of this.array) {
         let ar = new Array<any>();
+        let x = 0;
         for (let d of this.def) {
           ar.push(this.getObjectAndProperty(a, d[1]));
+          if (!this.filterBuilded) {
+            if (!this.filter) {
+              this.filter = {};
+            }
+            this.filter[d[1]] = '';
+          }
+          x++;
         }
+        this.filterBuilded = true;
         this.models.push(ar);
-        this.proxy.push(a);
       }
     }
   }
@@ -101,5 +110,13 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
 
   dirtyForm() {
     this.helper.dirtyForm(this.component);
+  }
+
+  changeFilter(property) {
+    const filter = {};
+    for (let key of Object.keys(this.filter)) {
+      filter[key] = this.filter[key];
+    }
+    this.filter = filter;
   }
 }

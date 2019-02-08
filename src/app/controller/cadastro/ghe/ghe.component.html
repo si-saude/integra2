@@ -15,7 +15,7 @@
     <div class="row">
       <app-generic-label [width]="'2'">Data de Criação
         <input class="validate" type="text" name="dataCriacaoFront" #dataCriacaoFront="ngModel" [ngModel]="t.dataCriacaoFront"
-          (changeValue)="t.dataCriacaoFront=$event" [component]="this" [disabled]="true" dateTimeFormat>
+          (changeValue)="t.dataCriacaoFront=$event" [component]="this" [disabled]="true" dateFormat>
           <span class="helper-text" [attr.data-error]="showErrorMessage(dataCriacaoFront.errors)"></span>
       </app-generic-label>
       <app-generic-label [width]="'2'">Data de Desativação
