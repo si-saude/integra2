@@ -11,20 +11,20 @@ export class GridFilterPipe implements PipeTransform {
         this.helper = new Helper();
     }
 
-    transform(array: any[], filter) {
+    transform(array: any[], filter, component) {
         array = array ? array.filter(a => {
             let index = 0;
             for (let key of Object.keys(filter)) {
-                if (filter[key] && filter[key] !== '') {
-                    if (!a[index][0][a[index][1]].toLowerCase().includes(filter[key].toLowerCase())) {
+                if (filter[key] !== undefined && filter[key] !== null && filter[key] !== '') {
+                    if (!a[index][0][a[index][1]].toString().toLowerCase().includes(filter[key].toString().toLowerCase())) {
                         return false;
                     }
-                    index++;
                 }
+                index++;
             }
             return true;
         }) : array;
-        console.log(array);
+        component.filterArray = array;
         return array;
     }
 }

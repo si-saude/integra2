@@ -23,6 +23,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   private models: Array<Array<any>>;
   private filter;
   private filterBuilded = false;
+  private filterArray: Array<any>;
 
   constructor() {
     this.helper = new Helper();
@@ -73,7 +74,6 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     if (this.array && this.def) {
       for (let a of this.array) {
         let ar = new Array<any>();
-        let x = 0;
         for (let d of this.def) {
           ar.push(this.getObjectAndProperty(a, d[1]));
           if (!this.filterBuilded) {
@@ -82,7 +82,6 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
             }
             this.filter[d[1]] = '';
           }
-          x++;
         }
         this.filterBuilded = true;
         this.models.push(ar);
@@ -94,15 +93,15 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     return this.helper.getObjectAndProperty(obj, properties);
   }
 
-  remove(i) {
-    this.array.splice(i, 1);
+  remove(a) {
+    this.array.splice(this.array.indexOf(a[0][0]), 1);
     this.load();
     this.dirtyForm();
   }
 
   selectAll(property, event) {
-    for (let a of this.array) {
-      const ar = this.getObjectAndProperty(a, property);
+    for (let a of this.filterArray) {
+      const ar = this.getObjectAndProperty(this.array[this.array.indexOf(a[0][0])], property);
       ar[0][ar[1]] = event.target.checked;
     }
     this.load();
@@ -112,10 +111,26 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     this.helper.dirtyForm(this.component);
   }
 
-  changeFilter(property) {
+  changeFilter() {
     const filter = {};
     for (let key of Object.keys(this.filter)) {
       filter[key] = this.filter[key];
+    }
+    this.filter = filter;
+  }
+
+  changeBooleanFilter(property) {
+    const filter = {};
+    for (let key of Object.keys(this.filter)) {
+      if (key === property) {
+        if (this.filter[key] === 1) {
+          filter[key] = false;
+        } else if (this.filter[key] === 2) {
+          filter[key] = true;
+        }
+      } else {
+        filter[key] = this.filter[key];
+      }
     }
     this.filter = filter;
   }
