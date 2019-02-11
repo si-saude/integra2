@@ -1,0 +1,24 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'2'">Código
+        <input class="validate" type="text" name="codigo" #codigo="ngModel" [ngModel]="t.codigo"
+        (ngModelChange)="t.codigo=$event.toUpperCase()" maxlength="10" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(codigo.errors)"></span>
+      </app-generic-label>
+    </div>
+    <div class="row">
+      <app-generic-label [width]="'8'">Descrição
+        <input class="validate" type="text" name="descricao" #descricao="ngModel" [(ngModel)]="t.descricao"
+        maxlength="200" [disabled]="_detailMode">
+        <span class="helper-text" [attr.data-error]="showErrorMessage(descricao.errors)"></span>
+      </app-generic-label>
+    </div>
+    <app-generic-autocomplete #autocompleteGerencia
+      [name]="'gerencia'" [property]="'codigoCompleto'" [component]="this" [maxLength]="256"
+      [service]="servico" (responseChange)="t.gerencia = $event"
+      [object]="t.gerencia" [id]="t.id" [width]="'6'" [label]="'Gerência'">
+    </app-generic-autocomplete>
+    
+  </app-form-component>
+</form>

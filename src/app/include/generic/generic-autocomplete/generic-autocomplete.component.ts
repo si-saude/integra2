@@ -21,6 +21,7 @@ export class GenericAutocompleteComponent<T, F extends GenericFilter> implements
   @Input() maxLength = 1;
   @Input() object: T;
   @Input() label: string;
+  @Input() id = 0;
 
   @Output() responseAdd = new EventEmitter();
   @Output() responseChange = new EventEmitter();
@@ -73,7 +74,11 @@ export class GenericAutocompleteComponent<T, F extends GenericFilter> implements
     const f = this.helper.getObjectAndProperty(this.filter, this.property);
     f[0][f[1]] = event;
     this.objectAux[this.lastProperty] = event;
-    this.filter.$pageSize = 5;
+    this.filter.$pageSize = 6;
+    if (this.id > 0) {
+      this.filter.$id = this.id;
+      this.filter.$idNotEq = true;
+    }
     this.service.list(this.filter, (res) => {
       this.array = this.service.toList(res.json().list);
     }, undefined);
@@ -95,6 +100,6 @@ export class GenericAutocompleteComponent<T, F extends GenericFilter> implements
         this.helper.dirtyForm(this.component);
         this.responseChange.emit(this.object);
       }
-    }, 200);
+    }, 250);
   }
 }

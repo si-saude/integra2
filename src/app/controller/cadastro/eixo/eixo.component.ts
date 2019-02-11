@@ -27,10 +27,6 @@ export class EixoListarComponent extends GenericListComponent<Eixo, EixoFilter> 
   ngOnInit() {
     this.page(1);
   }
-
-  getFilter(pageNumber) {
-    return super.getFilter(pageNumber);
-  }
 }
 
 @Component({

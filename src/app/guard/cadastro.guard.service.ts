@@ -14,12 +14,14 @@ import { DiagnosticoGuardService } from './cadastro/diagnostico/diagnostico.guar
 import { EixoGuardService } from './cadastro/eixo/eixo.guard.service';
 import { EquipeGuardService } from './cadastro/equipe/equipe.guard.service';
 import { ExameGuardService } from './cadastro/exame/exame.guard.service';
+import { GerenciaGuardService } from './cadastro/gerencia/gerencia.guard.service';
 import { GheGuardService } from './cadastro/ghe/ghe.guard.service';
 import { ImovelGuardService } from './cadastro/imovel/imovel.guard.service';
 import { IndicadorSastGuardService } from './cadastro/indicador-sast/indicador-sast.guard.service';
 import { IntervencaoGuardService } from './cadastro/intervencao/intervencao.guard.service';
 import { PerfilGuardService } from './cadastro/perfil/perfil.guard.service';
 import { RiscoGheGuardService } from './cadastro/risco-ghe/risco-ghe.guard.service';
+import { TipoPerguntaFichaColetaGuardService } from './cadastro/tipo-pergunta-ficha-coleta/tipo-pergunta-ficha-coleta.guard.service';
 
 @Injectable()
 export class CadastroGuardService implements GenericGuardService {
@@ -37,12 +39,14 @@ export class CadastroGuardService implements GenericGuardService {
         private eixo: EixoGuardService,
         private equipe: EquipeGuardService,
         private exame: ExameGuardService,
+        private gerencia: GerenciaGuardService,
         private ghe: GheGuardService,
         private imovel: ImovelGuardService,
         private indicadorSast: IndicadorSastGuardService,
         private intervencao: IntervencaoGuardService,
         private perfil: PerfilGuardService,
-        private riscoGhe: RiscoGheGuardService) {
+        private riscoGhe: RiscoGheGuardService,
+        private tipoPerguntaFichaColeta: TipoPerguntaFichaColetaGuardService) {
 
             this.helper = new Helper();
     }
@@ -91,6 +95,10 @@ export class CadastroGuardService implements GenericGuardService {
                 guardService = this.exame;
                 break;
             }
+            case 'GERENCIA': {
+                guardService = this.gerencia;
+                break;
+            }
             case 'GHE': {
                 guardService = this.ghe;
                 break;
@@ -113,6 +121,10 @@ export class CadastroGuardService implements GenericGuardService {
             }
             case 'RISCO-GHE': {
                 guardService = this.riscoGhe;
+                break;
+            }
+            case 'TIPO-PERGUNTA-FICHA-COLETA': {
+                guardService = this.tipoPerguntaFichaColeta;
                 break;
             }
         }

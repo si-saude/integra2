@@ -18,12 +18,14 @@ import * as diagnosticoGuard from './guard/cadastro/diagnostico/diagnostico.guar
 import * as eixoGuard from './guard/cadastro/eixo/eixo.guard';
 import * as equipeGuard from './guard/cadastro/equipe/equipe.guard';
 import * as exameGuard from './guard/cadastro/exame/exame.guard';
+import * as gerenciaGuard from './guard/cadastro/gerencia/gerencia.guard';
 import * as gheGuard from './guard/cadastro/ghe/ghe.guard';
 import * as imovelGuard from './guard/cadastro/imovel/imovel.guard';
 import * as indicadorGuard from './guard/cadastro/indicador-sast/indicador-sast.guard';
 import * as intervencaoGuard from './guard/cadastro/intervencao/intervencao.guard';
 import * as perfilGuard from './guard/cadastro/perfil/perfil.guard';
 import * as riscoGheGuard from './guard/cadastro/risco-ghe/risco-ghe.guard';
+import * as tipoPerguntaFichaColetaGuard from './guard/cadastro/tipo-pergunta-ficha-coleta/tipo-pergunta-ficha-coleta.guard';
 
 export const appRoutes: Routes = [
     { path : 'home', component : HomeComponent, canActivate: [AuthGuard]},
@@ -41,11 +43,13 @@ export const appRoutes: Routes = [
     eixoGuard.Routing.route(HomeComponent),
     equipeGuard.Routing.route(HomeComponent),
     exameGuard.Routing.route(HomeComponent),
+    gerenciaGuard.Routing.route(HomeComponent),
     gheGuard.Routing.route(HomeComponent),
     imovelGuard.Routing.route(HomeComponent),
     indicadorGuard.Routing.route(HomeComponent),
     intervencaoGuard.Routing.route(HomeComponent),
     perfilGuard.Routing.route(HomeComponent),
     riscoGheGuard.Routing.route(HomeComponent),
+    tipoPerguntaFichaColetaGuard.Routing.route(HomeComponent),
     { path : '', redirectTo: '/home', pathMatch: 'full'}
 ];

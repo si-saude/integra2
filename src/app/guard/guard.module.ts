@@ -15,12 +15,14 @@ import { DiagnosticoGuardModule } from './cadastro/diagnostico/diagnostico.guard
 import { EixoGuardModule } from './cadastro/eixo/eixo.guard.module';
 import { EquipeGuardModule } from './cadastro/equipe/equipe.guard.module';
 import { ExameGuardModule } from './cadastro/exame/exame.guard.module';
+import { GerenciaGuardModule } from './cadastro/gerencia/gerencia.guard.module';
 import { GheGuardModule } from './cadastro/ghe/ghe.guard.module';
 import { ImovelGuardModule } from './cadastro/imovel/imovel.guard.module';
 import { IndicadorSastGuardModule } from './cadastro/indicador-sast/indicador-sast.guard.module';
 import { IntervencaoGuardModule } from './cadastro/intervencao/intervencao.guard.module';
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
 import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
+import { TipoPerguntaFichaColetaGuardModule } from './cadastro/tipo-pergunta-ficha-coleta/tipo-pergunta-ficha-coleta.guard.module';
 
 
 @NgModule({
@@ -41,12 +43,14 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
         EixoGuardModule,
         EquipeGuardModule,
         ExameGuardModule,
+        GerenciaGuardModule,
         GheGuardModule,
         ImovelGuardModule,
         IndicadorSastGuardModule,
         IntervencaoGuardModule,
         PerfilGuardModule,
-        RiscoGheGuardModule
+        RiscoGheGuardModule,
+        TipoPerguntaFichaColetaGuardModule
     ]
 })
 export class GuardModule { }

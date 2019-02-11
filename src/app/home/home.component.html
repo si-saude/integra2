@@ -1,5 +1,5 @@
 <nav>
-    <div class="nav-wrapper #009688 teal"> 
+    <div class="nav-wrapper #009688 teal">
         <a href="/home" class="brand-logo center">
         <i class="material-icons">cloud</i>INTEGRA Saúde</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
@@ -9,7 +9,7 @@
                     <span class="menu-icon-item"></span>
                     <span class="menu-icon-item"></span>
                 </div>
-                <div class="router-name"> <h5>{{ router.routerState.snapshot.url }}</h5> </div>
+                <div class="router-name"> <h6>{{ router.routerState.snapshot.url }}</h6> </div>
             </li>
         </ul>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -37,12 +37,16 @@
         <app-menu-option [label]="'Eixo Clínico'" [routerLink]="'/eixo'" [funcionalidade]="'EIXO_LISTAR'" [homeComponent]="this"></app-menu-option>
         <app-menu-option [label]="'Equipe'" [routerLink]="'/equipe'" [funcionalidade]="'EQUIPE_LISTAR'" [homeComponent]="this"></app-menu-option>
         <app-menu-option [label]="'Exame'" [routerLink]="'/exame'" [funcionalidade]="'EXAME_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <app-menu-option [label]="'Gerência'" [routerLink]="'/gerencia'" [funcionalidade]="'GERENCIA_LISTAR'" [homeComponent]="this"></app-menu-option>
         <app-menu-option [label]="'GHE'" [routerLink]="'/ghe'" [funcionalidade]="'GHE_LISTAR'" [homeComponent]="this"></app-menu-option>
         <app-menu-option [label]="'Imóvel'" [routerLink]="'/imovel'" [funcionalidade]="'IMOVEL_LISTAR'" [homeComponent]="this"></app-menu-option>
         <app-menu-option [label]="'Indicador da SAST'" [routerLink]="'/indicador-sast'" [funcionalidade]="'INDICADOR-SAST_LISTAR'" [homeComponent]="this"></app-menu-option>
         <app-menu-option [label]="'Intervenção'" [routerLink]="'/intervencao'" [funcionalidade]="'INTERVENCAO_LISTAR'" [homeComponent]="this"></app-menu-option>
         <app-menu-option [label]="'Perfil'" [routerLink]="'/perfil'" [funcionalidade]="'PERFIL_LISTAR'" [homeComponent]="this"></app-menu-option>
         <app-menu-option [label]="'Risco de GHE'" [routerLink]="'/risco-ghe'" [funcionalidade]="'RISCO-GHE_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <app-menu-option [label]="'Tipo de Pergunta da Ficha de Coleta'" [routerLink]="'/tipo-pergunta-ficha-coleta'" [funcionalidade]="'TIPO-PERGUNTA-FICHA-COLETA_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <br>
+        <br>
     </div>
     <div id="processo" style="display: none">
         <ul><li><a class="menuoption" (click)="goToPrincipal()"><i class="material-icons">chevron_left</i></a></li></ul>

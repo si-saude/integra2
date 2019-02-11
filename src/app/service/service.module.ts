@@ -10,12 +10,14 @@ import { DiagnosticoService } from './diagnostico.service';
 import { EixoService } from './eixo.service';
 import { EquipeService } from './equipe.service';
 import { ExameService } from './exame.service';
+import { GerenciaService } from './gerencia.service';
 import { GheService } from './ghe.service';
 import { ImovelService } from './imovel.service';
 import { IndicadorSastService } from './indicador-sast.service';
 import { IntervencaoService } from './intervencao.service';
 import { PerfilService } from './perfil.service';
 import { RiscoGheService } from './risco-ghe.service';
+import { TipoPerguntaFichaColetaService } from './tipo-pergunta-ficha-coleta.service';
 import { UsuarioService } from './usuario.service';
 import { UtilService } from './util.service';
 
@@ -31,12 +33,14 @@ import { UtilService } from './util.service';
         EixoService,
         EquipeService,
         ExameService,
+        GerenciaService,
         GheService,
         ImovelService,
         IndicadorSastService,
         IntervencaoService,
         PerfilService,
         RiscoGheService,
+        TipoPerguntaFichaColetaService,
         UsuarioService,
         UtilService
     ]
