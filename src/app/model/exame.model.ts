@@ -1,3 +1,5 @@
+import { Helper } from './../generic/helper';
+
 import { CampoExame } from './campo-exame.model';
 
 export class Exame {
@@ -45,7 +47,7 @@ export class Exame {
     }
 
     public set $ordem(value: number) {
-        this.ordem = value;
+        this.ordem = Helper.validateNumber(value);
     }
 
     public set $campoExames(value: Array<CampoExame>) {

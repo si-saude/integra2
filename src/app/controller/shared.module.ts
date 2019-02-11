@@ -10,6 +10,7 @@ import { DateTimeFormatDirective } from './../directive/date-time-format.directi
 import { IntegerFormatDirective } from './../directive/integer-format.directive';
 import { IntegerValidatorDirective } from './../directive/integer-validator.directive';
 import { ModalConfirmDirective } from './../directive/modal-confirm.directive';
+import { NumberFormatDirective } from './../directive/number-format.directive';
 
 import { GridFilterPipe } from './../pipe/grid-filter.pipe';
 import { LimitCharacterPipe } from './../pipe/limit-character.pipe';
@@ -48,6 +49,7 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         IntegerFormatDirective,
         IntegerValidatorDirective,
         ModalConfirmDirective,
+        NumberFormatDirective,
         GridFilterPipe,
         LimitCharacterPipe
     ],
@@ -72,6 +74,7 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         IntegerFormatDirective,
         IntegerValidatorDirective,
         ModalConfirmDirective,
+        NumberFormatDirective,
         GridFilterPipe,
         LimitCharacterPipe
     ],

@@ -1,3 +1,5 @@
+import { Helper } from './../generic/helper';
+
 export class GrupoPerguntaFichaColeta {
     private id: number;
     private nome: string;
@@ -29,7 +31,7 @@ export class GrupoPerguntaFichaColeta {
     }
 
     public set $ordem(value: number) {
-        this.ordem = value;
+        this.ordem = Helper.validateNumber(value);
     }
 
     public set $version(value: number) {

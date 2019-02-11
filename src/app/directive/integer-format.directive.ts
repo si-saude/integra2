@@ -32,7 +32,7 @@ export class IntegerFormatDirective implements ControlValueAccessor, OnChanges {
     }
 
     ngOnChanges( changes: SimpleChanges ) {
-        if (changes['ngModel'] && changes['ngModel']['currentValue'] && !this.loaded) {
+        if (changes['ngModel'] && changes['ngModel']['currentValue'] !== undefined && !this.loaded) {
             this.loaded = true;
             this.input(changes['ngModel']['currentValue']);
         }
@@ -74,7 +74,7 @@ export class IntegerFormatDirective implements ControlValueAccessor, OnChanges {
     }
 
     input(value) {
-        if (value && value.toString().replace( /\D/g, '' ) !== value.toString()) {
+        if (value !== undefined && value.toString().replace( /\D/g, '' ) !== value.toString()) {
             if (value.toString().substring(0, 1) === '-') {
                 value = value.toString().substring(1);
             }
