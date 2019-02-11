@@ -1,6 +1,7 @@
-export class TipoPerguntaFichaColeta {
+export class GrupoPerguntaFichaColeta {
     private id: number;
     private nome: string;
+    private ordem: number;
     private version: number;
 
     public get $id(): number {
@@ -9,6 +10,10 @@ export class TipoPerguntaFichaColeta {
 
     public get $nome(): string {
         return this.nome;
+    }
+
+    public get $ordem(): number {
+        return this.ordem;
     }
 
     public get $version(): number {
@@ -21,6 +26,10 @@ export class TipoPerguntaFichaColeta {
 
     public set $nome(value: string) {
         this.nome = value;
+    }
+
+    public set $ordem(value: number) {
+        this.ordem = value;
     }
 
     public set $version(value: number) {

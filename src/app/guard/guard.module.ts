@@ -17,12 +17,13 @@ import { EquipeGuardModule } from './cadastro/equipe/equipe.guard.module';
 import { ExameGuardModule } from './cadastro/exame/exame.guard.module';
 import { GerenciaGuardModule } from './cadastro/gerencia/gerencia.guard.module';
 import { GheGuardModule } from './cadastro/ghe/ghe.guard.module';
+import { GrupoPerguntaFichaColetaGuardModule } from './cadastro/grupo-pergunta-ficha-coleta/grupo-pergunta-ficha-coleta.guard.module';
 import { ImovelGuardModule } from './cadastro/imovel/imovel.guard.module';
 import { IndicadorSastGuardModule } from './cadastro/indicador-sast/indicador-sast.guard.module';
 import { IntervencaoGuardModule } from './cadastro/intervencao/intervencao.guard.module';
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
+import { PerguntaFichaColetaGuardModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.module';
 import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
-import { TipoPerguntaFichaColetaGuardModule } from './cadastro/tipo-pergunta-ficha-coleta/tipo-pergunta-ficha-coleta.guard.module';
 
 
 @NgModule({
@@ -45,12 +46,13 @@ import { TipoPerguntaFichaColetaGuardModule } from './cadastro/tipo-pergunta-fic
         ExameGuardModule,
         GerenciaGuardModule,
         GheGuardModule,
+        GrupoPerguntaFichaColetaGuardModule,
         ImovelGuardModule,
         IndicadorSastGuardModule,
         IntervencaoGuardModule,
         PerfilGuardModule,
-        RiscoGheGuardModule,
-        TipoPerguntaFichaColetaGuardModule
+        PerguntaFichaColetaGuardModule,
+        RiscoGheGuardModule
     ]
 })
 export class GuardModule { }

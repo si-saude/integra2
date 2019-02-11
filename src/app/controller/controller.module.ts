@@ -16,8 +16,9 @@ import { ImovelComponentModule } from './cadastro/imovel/imovel.component.module
 import { IndicadorSastComponentModule } from './cadastro/indicador-sast/indicador-sast.component.module';
 import { IntervencaoComponentModule } from './cadastro/intervencao/intervencao.component.module';
 import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module';
+import { PerguntaFichaColetaComponentModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.component.module';
 import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.component.module';
-import { TipoPerguntaFichaColetaComponentModule } from './cadastro/tipo-pergunta-ficha-coleta/tipo-pergunta-ficha-coleta.component.module';
+import { GrupoPerguntaFichaColetaComponentModule } from './cadastro/grupo-pergunta-ficha-coleta/grupo-pergunta-ficha-coleta.component.module';
 
 @NgModule({
     imports: [
@@ -33,12 +34,13 @@ import { TipoPerguntaFichaColetaComponentModule } from './cadastro/tipo-pergunta
         ExameComponentModule,
         GerenciaComponentModule,
         GheComponentModule,
+        GrupoPerguntaFichaColetaComponentModule,
         ImovelComponentModule,
         IndicadorSastComponentModule,
         IntervencaoComponentModule,
         PerfilComponentModule,
-        RiscoGheComponentModule,
-        TipoPerguntaFichaColetaComponentModule
+        PerguntaFichaColetaComponentModule,
+        RiscoGheComponentModule
     ]
 })
 

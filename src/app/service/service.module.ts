@@ -16,8 +16,9 @@ import { ImovelService } from './imovel.service';
 import { IndicadorSastService } from './indicador-sast.service';
 import { IntervencaoService } from './intervencao.service';
 import { PerfilService } from './perfil.service';
+import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
 import { RiscoGheService } from './risco-ghe.service';
-import { TipoPerguntaFichaColetaService } from './tipo-pergunta-ficha-coleta.service';
+import { GrupoPerguntaFichaColetaService } from './grupo-pergunta-ficha-coleta.service';
 import { UsuarioService } from './usuario.service';
 import { UtilService } from './util.service';
 
@@ -35,12 +36,13 @@ import { UtilService } from './util.service';
         ExameService,
         GerenciaService,
         GheService,
+        GrupoPerguntaFichaColetaService,
         ImovelService,
         IndicadorSastService,
         IntervencaoService,
         PerfilService,
+        PerguntaFichaColetaService,
         RiscoGheService,
-        TipoPerguntaFichaColetaService,
         UsuarioService,
         UtilService
     ]

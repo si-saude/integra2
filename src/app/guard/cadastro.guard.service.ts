@@ -16,12 +16,13 @@ import { EquipeGuardService } from './cadastro/equipe/equipe.guard.service';
 import { ExameGuardService } from './cadastro/exame/exame.guard.service';
 import { GerenciaGuardService } from './cadastro/gerencia/gerencia.guard.service';
 import { GheGuardService } from './cadastro/ghe/ghe.guard.service';
+import { GrupoPerguntaFichaColetaGuardService } from './cadastro/grupo-pergunta-ficha-coleta/grupo-pergunta-ficha-coleta.guard.service';
 import { ImovelGuardService } from './cadastro/imovel/imovel.guard.service';
 import { IndicadorSastGuardService } from './cadastro/indicador-sast/indicador-sast.guard.service';
 import { IntervencaoGuardService } from './cadastro/intervencao/intervencao.guard.service';
 import { PerfilGuardService } from './cadastro/perfil/perfil.guard.service';
+import { PerguntaFichaColetaGuardService } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.service';
 import { RiscoGheGuardService } from './cadastro/risco-ghe/risco-ghe.guard.service';
-import { TipoPerguntaFichaColetaGuardService } from './cadastro/tipo-pergunta-ficha-coleta/tipo-pergunta-ficha-coleta.guard.service';
 
 @Injectable()
 export class CadastroGuardService implements GenericGuardService {
@@ -45,8 +46,9 @@ export class CadastroGuardService implements GenericGuardService {
         private indicadorSast: IndicadorSastGuardService,
         private intervencao: IntervencaoGuardService,
         private perfil: PerfilGuardService,
+        private perguntaFichaColeta: PerguntaFichaColetaGuardService,
         private riscoGhe: RiscoGheGuardService,
-        private tipoPerguntaFichaColeta: TipoPerguntaFichaColetaGuardService) {
+        private grupoPerguntaFichaColeta: GrupoPerguntaFichaColetaGuardService) {
 
             this.helper = new Helper();
     }
@@ -119,12 +121,16 @@ export class CadastroGuardService implements GenericGuardService {
                 guardService = this.perfil;
                 break;
             }
+            case 'PERGUNTA-FICHA-COLETA': {
+                guardService = this.perguntaFichaColeta;
+                break;
+            }
             case 'RISCO-GHE': {
                 guardService = this.riscoGhe;
                 break;
             }
-            case 'TIPO-PERGUNTA-FICHA-COLETA': {
-                guardService = this.tipoPerguntaFichaColeta;
+            case 'GRUPO-PERGUNTA-FICHA-COLETA': {
+                guardService = this.grupoPerguntaFichaColeta;
                 break;
             }
         }

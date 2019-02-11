@@ -1,0 +1,37 @@
+<app-list-component 
+    [component]="this"
+    [adicionar]="'PERGUNTA-FICHA-COLETA_ADICIONAR'"
+    [editar]="'PERGUNTA-FICHA-COLETA_EDITAR'"
+    [detalhar]="'PERGUNTA-FICHA-COLETA_DETALHAR'"
+    [remover]="'PERGUNTA-FICHA-COLETA_REMOVER'"
+    >
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'2'">Código
+            <input type="text" name="codigo" [(ngModel)]="filter.codigo" maxlength="4" modalConfirm
+            (changeValue)="filter.codigo = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'5'">Grupo
+            <input type="text" name="grupo" [(ngModel)]="filter.grupo.nome" maxlength="64" modalConfirm
+            (changeValue)="filter.grupo.nome = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'1'">Inativo
+            <input type="checkbox" name="inativo" [value]="filter.inativo.value" checkboxFilter
+                (changeValue)="filter.inativo.value = $event" />
+            <span></span>
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'4'">Tipo
+            <app-generic-select [component]="this" [name]="'tipo'" [array]="util.tipos"
+                (changeValue)="filter.tipo = $event">
+            </app-generic-select>
+        </app-generic-label>
+        <app-generic-label [width]="'4'">Path
+            <input type="text" name="path" [(ngModel)]="filter.path" maxlength="128" modalConfirm
+            (changeValue)="filter.path   = $event">
+        </app-generic-label>
+    </div>
+</app-generic-modal>

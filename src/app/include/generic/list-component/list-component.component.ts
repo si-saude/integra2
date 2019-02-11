@@ -44,7 +44,15 @@ export class ListComponentComponent<T, F extends GenericFilter> implements OnIni
     }, undefined, undefined);
   }
 
-  getProperty(obj: any, properties: string) {
-    return this.helper.getProperty(obj, properties);
+  getProperty(obj: any, properties: string, type: string) {
+    let value = this.helper.getProperty(obj, properties);
+    if (type === 'checkbox') {
+      if (value.toString() === 'true') {
+        value = 'SIM';
+      } else if (value.toString() === 'false') {
+        value = 'NÃO';
+      }
+    }
+    return value;
   }
 }

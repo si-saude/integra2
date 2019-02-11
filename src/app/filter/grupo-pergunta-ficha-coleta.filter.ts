@@ -1,6 +1,6 @@
 import { GenericFilter } from './../generic/generic-filter';
 
-export class TipoPerguntaFichaColetaFilter extends GenericFilter {
+export class GrupoPerguntaFichaColetaFilter extends GenericFilter {
     private nome: string;
 
     public get $nome(): string {

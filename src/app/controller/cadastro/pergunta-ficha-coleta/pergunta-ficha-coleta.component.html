@@ -1,0 +1,75 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+
+    <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],[equipesTab,'EQUIPES'],[itensTab,'ITENS']]">
+        <div #dadosGeraisTab>
+          <div class="row">
+            <app-generic-label [width]="'2'">Código
+              <input class="validate" type="text" name="codigo" #codigo="ngModel" [(ngModel)]="t.codigo"
+                maxlength="4" [disabled]="_detailMode" required>
+              <span class="helper-text" [attr.data-error]="showErrorMessage(codigo.errors)"></span>
+            </app-generic-label>
+            <app-generic-label [width]="'1'">Inativo
+              <input type="checkbox" name="inativo" #inativo="ngModel" [(ngModel)]="t.inativo" [disabled]="_detailMode"  />
+              <span></span>
+            </app-generic-label>
+          </div>
+          <div class="row">
+            <app-generic-label [width]="'8'">Descrição
+              <textarea class="validate text-area" name="descricao" #descricao="ngModel" [(ngModel)]="t.descricao"
+                maxlength="1024" [disabled]="_detailMode" required>
+              </textarea>
+              <span class="helper-text" [attr.data-error]="showErrorMessage(descricao.errors)"></span>
+            </app-generic-label>
+          </div>
+          <div class="row">
+            <app-generic-autocomplete #autocompleteGrupo
+              [name]="'grupo'" [property]="'nome'" [component]="this" [maxLength]="64"
+              [service]="servico.getGrupoPerguntaFichaColetaService()" 
+              (responseChange)="t.grupo = $event"
+              [object]="t.grupo" [width]="'4'" [label]="'Grupo'">
+
+              <app-generic-label [width]="'3'">Tipo
+                  <app-generic-select [object]="t.tipo" [component]="this" [name]="'tipo'" [array]="util.tipos"
+                    (changeValue)="t.tipo = $event">
+                  </app-generic-select>
+              </app-generic-label>
+              <app-generic-label [width]="'3'">Path
+                <input class="validate" type="text" name="path" #path="ngModel" [(ngModel)]="t.path"
+                  maxlength="128" [disabled]="_detailMode">
+                <span class="helper-text" [attr.data-error]="showErrorMessage(path.errors)"></span>
+              </app-generic-label>
+
+            </app-generic-autocomplete>
+          </div>
+        </div>
+        <div #equipesTab>
+          <app-generic-autocomplete #autocompleteEquipe
+            [name]="'equipe'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'4'"
+            [service]="servico.getEquipeService()" [showAdd]="true" (responseAdd)="gridEquipes.add($event)">
+          </app-generic-autocomplete>
+          <div class="row">
+            <app-generic-grid #gridEquipes
+              [id]="'equipes'" [component]="this" [array]="t.equipes" [height]="'350px'" [delete]="true"
+              [def]="[['Nome','nome','','']]">
+            </app-generic-grid>
+          </div>
+        </div>
+        <div #itensTab>
+          <app-text-input-to-grid #textInputItem
+            [name]="'item'" [property]="'titulo'" [component]="this" [maxLength]="64" [width]="'4'"
+            [service]="servico" [method]="'toItem'"
+            [showAdd]="true" (responseAdd)="gridItem.add($event)">
+          </app-text-input-to-grid>
+          <div class="row">
+            <app-generic-grid #gridItem
+              [component]="this" [array]="t.itens" [height]="'350px'"
+              [id]="'itens'" [delete]="true"
+              [def]="[['Título','titulo','',''],['Path','path','text','true',64]]"
+              [textInput]="textInputItem">
+            </app-generic-grid>
+          </div>
+        </div>
+    </app-generic-tab>
+  </app-form-component>
+</form>
