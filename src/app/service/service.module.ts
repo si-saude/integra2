@@ -12,13 +12,14 @@ import { EquipeService } from './equipe.service';
 import { ExameService } from './exame.service';
 import { GerenciaService } from './gerencia.service';
 import { GheService } from './ghe.service';
+import { GrupoPerguntaFichaColetaService } from './grupo-pergunta-ficha-coleta.service';
 import { ImovelService } from './imovel.service';
 import { IndicadorSastService } from './indicador-sast.service';
 import { IntervencaoService } from './intervencao.service';
 import { PerfilService } from './perfil.service';
 import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
+import { RegraAtendimentoService } from './regra-atendimento.service';
 import { RiscoGheService } from './risco-ghe.service';
-import { GrupoPerguntaFichaColetaService } from './grupo-pergunta-ficha-coleta.service';
 import { UsuarioService } from './usuario.service';
 import { UtilService } from './util.service';
 
@@ -42,6 +43,7 @@ import { UtilService } from './util.service';
         IntervencaoService,
         PerfilService,
         PerguntaFichaColetaService,
+        RegraAtendimentoService,
         RiscoGheService,
         UsuarioService,
         UtilService

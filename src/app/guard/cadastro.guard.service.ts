@@ -22,6 +22,7 @@ import { IndicadorSastGuardService } from './cadastro/indicador-sast/indicador-s
 import { IntervencaoGuardService } from './cadastro/intervencao/intervencao.guard.service';
 import { PerfilGuardService } from './cadastro/perfil/perfil.guard.service';
 import { PerguntaFichaColetaGuardService } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.service';
+import { RegraAtendimentoGuardService } from './cadastro/regra-atendimento/regra-atendimento.guard.service';
 import { RiscoGheGuardService } from './cadastro/risco-ghe/risco-ghe.guard.service';
 
 @Injectable()
@@ -47,6 +48,7 @@ export class CadastroGuardService implements GenericGuardService {
         private intervencao: IntervencaoGuardService,
         private perfil: PerfilGuardService,
         private perguntaFichaColeta: PerguntaFichaColetaGuardService,
+        private regraAtendimento: RegraAtendimentoGuardService,
         private riscoGhe: RiscoGheGuardService,
         private grupoPerguntaFichaColeta: GrupoPerguntaFichaColetaGuardService) {
 
@@ -123,6 +125,10 @@ export class CadastroGuardService implements GenericGuardService {
             }
             case 'PERGUNTA-FICHA-COLETA': {
                 guardService = this.perguntaFichaColeta;
+                break;
+            }
+            case 'REGRA-ATENDIMENTO': {
+                guardService = this.regraAtendimento;
                 break;
             }
             case 'RISCO-GHE': {

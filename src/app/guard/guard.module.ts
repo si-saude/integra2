@@ -23,6 +23,7 @@ import { IndicadorSastGuardModule } from './cadastro/indicador-sast/indicador-sa
 import { IntervencaoGuardModule } from './cadastro/intervencao/intervencao.guard.module';
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
 import { PerguntaFichaColetaGuardModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.module';
+import { RegraAtendimentoGuardModule } from './cadastro/regra-atendimento/regra-atendimento.guard.module';
 import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
 
 
@@ -52,6 +53,7 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
         IntervencaoGuardModule,
         PerfilGuardModule,
         PerguntaFichaColetaGuardModule,
+        RegraAtendimentoGuardModule,
         RiscoGheGuardModule
     ]
 })

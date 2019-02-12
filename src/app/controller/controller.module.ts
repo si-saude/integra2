@@ -17,6 +17,7 @@ import { IndicadorSastComponentModule } from './cadastro/indicador-sast/indicado
 import { IntervencaoComponentModule } from './cadastro/intervencao/intervencao.component.module';
 import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module';
 import { PerguntaFichaColetaComponentModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.component.module';
+import { RegraAtendimentoComponentModule } from './cadastro/regra-atendimento/regra-atendimento.component.module';
 import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.component.module';
 import { GrupoPerguntaFichaColetaComponentModule } from './cadastro/grupo-pergunta-ficha-coleta/grupo-pergunta-ficha-coleta.component.module';
 
@@ -40,6 +41,7 @@ import { GrupoPerguntaFichaColetaComponentModule } from './cadastro/grupo-pergun
         IntervencaoComponentModule,
         PerfilComponentModule,
         PerguntaFichaColetaComponentModule,
+        RegraAtendimentoComponentModule,
         RiscoGheComponentModule
     ]
 })

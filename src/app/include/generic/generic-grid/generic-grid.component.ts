@@ -18,6 +18,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   @Input() delete = false;
   @Input() height = '300px';
   @Input() textInput: any;
+  @Input() idProperty = 'id';
 
   private helper: Helper;
   private models: Array<Array<any>>;
@@ -39,9 +40,12 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
 
   add(obj: G) {
     let showErrorMessage = false;
-
-    if (obj['id'] > 0) {
-      if (this.array.find(a => a['id'] === obj['id'])) {
+    const a1 = this.getObjectAndProperty(obj, this.idProperty);
+    if (a1[0][a1[1]] > 0) {
+      if (this.array.find(a => {
+          const a2 = this.getObjectAndProperty(a, this.idProperty);
+          return a1[0][a1[1]] === a2[0][a2[1]];
+        })) {
         showErrorMessage = true;
       }
     } else if (this.textInput) {

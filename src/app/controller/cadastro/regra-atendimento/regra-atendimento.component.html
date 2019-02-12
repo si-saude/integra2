@@ -1,0 +1,22 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'4'">Nome
+        <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome"
+        (ngModelChange)="t.nome=$event.toUpperCase()" maxlength="64" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+      </app-generic-label>
+    </div>
+    <app-generic-autocomplete #autocompleteEquipe
+      [name]="'equipe'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'3'"
+      [service]="servico.getEquipeService()" [showAdd]="true" (responseAdd)="util.addRegraAtendimentoEquipe(gridEquipes,$event)">
+    </app-generic-autocomplete>
+    <div class="row">
+      <app-generic-grid #gridEquipes
+        [id]="'equipes'" [component]="this" [array]="t.regraAtendimentoEquipes" [height]="'350px'" 
+        [delete]="true" [idProperty]="'equipe.id'"
+        [def]="[['Equipe','equipe.nome','','']]">
+      </app-generic-grid>
+    </div>
+  </app-form-component>
+</form>

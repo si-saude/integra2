@@ -26,6 +26,7 @@ import * as indicadorGuard from './guard/cadastro/indicador-sast/indicador-sast.
 import * as intervencaoGuard from './guard/cadastro/intervencao/intervencao.guard';
 import * as perfilGuard from './guard/cadastro/perfil/perfil.guard';
 import * as perguntaFichaColetaGuard from './guard/cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard';
+import * as regraAtendimentoGuard from './guard/cadastro/regra-atendimento/regra-atendimento.guard';
 import * as riscoGheGuard from './guard/cadastro/risco-ghe/risco-ghe.guard';
 
 export const appRoutes: Routes = [
@@ -52,6 +53,7 @@ export const appRoutes: Routes = [
     intervencaoGuard.Routing.route(HomeComponent),
     perfilGuard.Routing.route(HomeComponent),
     perguntaFichaColetaGuard.Routing.route(HomeComponent),
+    regraAtendimentoGuard.Routing.route(HomeComponent),
     riscoGheGuard.Routing.route(HomeComponent),
     { path : '', redirectTo: '/home', pathMatch: 'full'}
 ];
