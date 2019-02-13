@@ -8,7 +8,7 @@
       </app-generic-label>
     </div>
     <app-generic-autocomplete #autocompleteEquipe
-      [name]="'equipe'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'3'"
+      [name]="'equipe'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'3'" [label]="'Equipe'"
       [service]="servico.getEquipeService()" [showAdd]="true" (responseAdd)="util.addRegraAtendimentoEquipe(gridEquipes,$event)">
     </app-generic-autocomplete>
     <div class="row">
