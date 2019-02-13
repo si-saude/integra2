@@ -51,6 +51,7 @@ export class RegraAtendimentoService extends GenericService<RegraAtendimento, Re
         regraAtendimentoEquipe.$id = obj['id'];
         regraAtendimentoEquipe.$regraAtendimento = new RegraAtendimento();
         regraAtendimentoEquipe.$acolhimento = obj['acolhimento'];
+        regraAtendimentoEquipe.$ordem = obj['ordem'];
         regraAtendimentoEquipe.$version = obj['version'];
 
         if (this.helper.isNotNull(obj['equipe'])) {

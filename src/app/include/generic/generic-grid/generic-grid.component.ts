@@ -152,8 +152,8 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     this.selectedObject = {};
   }
 
-  select(x) {
-    if (this.selection) {
+  select(x, type) {
+    if (this.selection && type !== 'checkbox' && type !== 'integer' && type !== 'number' && type !== 'text') {
       for (let a of this.array) {
         for (let d of this.def) {
           let ar = this.getObjectAndProperty(a, d[1]);

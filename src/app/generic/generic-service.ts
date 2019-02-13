@@ -9,7 +9,7 @@ import { GenericFilter } from './generic-filter';
 
 export abstract class GenericService<T, F extends GenericFilter> {
 
-    readonly rootUrl = 'http://localhost:2080/IntegraApi2/rest/';
+    readonly rootUrl = 'http://localhost:1080/IntegraApi2/rest/';
 
     protected helper: Helper;
 

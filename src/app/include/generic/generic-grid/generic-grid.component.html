@@ -1,7 +1,8 @@
 <div class="generic-grid" [ngStyle]="{'height':height}">
   <thead>
     <tr>
-      <th *ngFor="let d of def">
+      <th [ngClass]="d[2]==='checkbox' ? 'center' : ''" 
+        *ngFor="let d of def">
         <label *ngIf="d[2]==='checkbox'">
           <input type="checkbox" (change)="dirtyForm();selectAll(d[1],$event)"
             [disabled]="!d[3] || component._detailMode" />
@@ -27,11 +28,11 @@
     <tr *ngFor="let a of (models | gridFilter : filter : this); let i = index"
     [ngClass]="selection && checkSelected(a) ? 'generic-grid-selected' : ''">
       <td [ngClass]="d[2]==='checkbox' ? 
-                            'right' : 
+                            'center' : 
                             d[2]==='' && selection ? 'cursor-pointer' : ''
                     "
           *ngFor="let d of def; let j = index"
-          (click)="select(a)">
+          (click)="select(a, d[2])">
         {{ d[2]==='' ? a[j][0][a[j][1]] : '' }}
         <label *ngIf="d[2]==='checkbox'">
           <input type="checkbox" [(ngModel)]="a[j][0][a[j][1]]" 
