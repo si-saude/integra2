@@ -46,6 +46,10 @@ export class UtilService extends GenericService<Object, GenericFilter> {
         this.genericGet('uf', filter, fThen, fCatch);
     }
 
+    getTipoAlimento(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('tipo-alimento', filter, fThen, fCatch);
+    }
+
     private genericGet(path: string, filter: string, fThen: any, fCatch: any) {
         this.toPromise(this.http.get(this.rootUrl + this.path + '/' + path + '?filter=' + filter, { headers: this.getHeaders() }  ),
             function (res) {

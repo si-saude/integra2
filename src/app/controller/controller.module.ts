@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 
+import { AlimentoComponentModule } from './cadastro/alimento/alimento.component.module';
+import { AtividadeFisicaComponentModule  } from './cadastro/atividade-fisica/atividade-fisica.component.module';
 import { BaseComponentModule } from './cadastro/base/base.component.module';
 import { CargoComponentModule } from './cadastro/cargo/cargo.component.module';
 import { CidadeComponentModule } from './cadastro/cidade/cidade.component.module';
@@ -8,17 +10,23 @@ import { CriterioComponentModule } from './cadastro/criterio/criterio.component.
 import { CursoComponentModule } from './cadastro/curso/curso.component.module';
 import { DiagnosticoComponentModule } from './cadastro/diagnostico/diagnostico.component.module';
 import { EixoComponentModule } from './cadastro/eixo/eixo.component.module';
+import { EnfaseComponentModule } from './cadastro/enfase/enfase.component.module';
 import { EquipeComponentModule } from './cadastro/equipe/equipe.component.module';
 import { ExameComponentModule } from './cadastro/exame/exame.component.module';
+import { FuncaoComponentModule } from './cadastro/funcao/funcao.component.module';
 import { GheComponentModule } from './cadastro/ghe/ghe.component.module';
 import { ImovelComponentModule } from './cadastro/imovel/imovel.component.module';
 import { IndicadorSastComponentModule } from './cadastro/indicador-sast/indicador-sast.component.module';
 import { IntervencaoComponentModule } from './cadastro/intervencao/intervencao.component.module';
+import { MedidaCaseiraComponentModule } from './cadastro/medida-caseira/medida-caseira.component.module';
 import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module';
+import { RegimeComponentModule } from './cadastro/regime/regime.component.module';
 import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.component.module';
 
 @NgModule({
     imports: [
+        AlimentoComponentModule,
+        AtividadeFisicaComponentModule,
         BaseComponentModule,
         CargoComponentModule,
         CidadeComponentModule,
@@ -27,13 +35,17 @@ import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.componen
         CursoComponentModule,
         DiagnosticoComponentModule,
         EixoComponentModule,
+        EnfaseComponentModule,
         EquipeComponentModule,
         ExameComponentModule,
+        FuncaoComponentModule,
         GheComponentModule,
         ImovelComponentModule,
         IndicadorSastComponentModule,
         IntervencaoComponentModule,
+        MedidaCaseiraComponentModule,
         PerfilComponentModule,
+        RegimeComponentModule,
         RiscoGheComponentModule
     ]
 })
