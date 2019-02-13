@@ -15,7 +15,7 @@
       <app-generic-grid #gridEquipes
         [id]="'equipes'" [component]="this" [array]="t.regraAtendimentoEquipes" [height]="'350px'" 
         [delete]="true" [idProperty]="'equipe.id'"
-        [def]="[['Equipe','equipe.nome','','']]" [selection]="true">
+        [def]="[['Equipe','equipe.nome','',''],['Acolhimento','acolhimento','checkbox',true]]" [selection]="true">
       </app-generic-grid>
     </div>
   </app-form-component>

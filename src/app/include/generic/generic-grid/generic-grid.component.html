@@ -31,7 +31,7 @@
                             d[2]==='' && selection ? 'cursor-pointer' : ''
                     "
           *ngFor="let d of def; let j = index"
-          (click)="teste(a)">
+          (click)="select(a)">
         {{ d[2]==='' ? a[j][0][a[j][1]] : '' }}
         <label *ngIf="d[2]==='checkbox'">
           <input type="checkbox" [(ngModel)]="a[j][0][a[j][1]]" 

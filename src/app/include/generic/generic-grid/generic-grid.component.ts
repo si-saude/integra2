@@ -143,7 +143,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     this.selectedObject = {};
   }
 
-  teste(x) {
+  select(x) {
     if (this.selection) {
       for (let a of this.array) {
         for (let d of this.def) {
