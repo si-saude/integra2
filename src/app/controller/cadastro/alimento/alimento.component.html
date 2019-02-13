@@ -1,0 +1,243 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],
+    [medidasCaseirasTab,'MEDIDAS CASEIRAS'],
+    [substituicoesTab,'SUBSTITUIÇÕES'],
+    [outrasInformacoesTab,'OUTRAS INFORMAÇÕES']]">
+      <div #dadosGeraisTab>
+        <div class="row">
+          <app-generic-label [width]="'12'">Nome
+            <input class="validate" type="text" name="nome" #nome="ngModel" [(ngModel)]="t.nome" maxlength="256" [disabled]="_detailMode"
+              required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'5'">Tipo
+            <app-generic-select [object]="t.tipo" [component]="this" [name]="'tipo'" [array]="util.tiposAlimento" (changeValue)="t.tipo = $event">
+            </app-generic-select>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Padrão (g)
+            <input class="validate" type="text" name="padrao" #padrao="ngModel" [ngModel]="t.padrao" (changeValue)="t.padrao=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!padrao.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Energia (kcal)
+            <input class="validate" type="text" name="energia" #energia="ngModel" [ngModel]="t.energia" (changeValue)="t.energia=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!energia.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'1'">Inativo
+            <input type="checkbox" name="inativo" #inativo="ngModel" [(ngModel)]="t.inativo" [disabled]="_detailMode" />
+            <span></span>
+          </app-generic-label>
+        </div>
+      </div>
+
+      <div #medidasCaseirasTab>
+        <app-generic-autocomplete #autocompleteMedidaCaseira [name]="'medidaCaseira'" [property]="'descricao'" [component]="this"
+          [maxLength]="256" [width]="'5'" [service]="servico.getMedidaCaseiraService()" [showAdd]="true" (responseAdd)="util.addAlimentoMedidaCaseira(gridAlimentosMedidaCaseira,$event)">
+        </app-generic-autocomplete>
+        <div class="row">
+          <app-generic-grid #gridAlimentosMedidaCaseira [id]="'alimentosMedidaCaseira'" [component]="this" [array]="t.alimentosMedidaCaseira"
+            [def]="[['Medida Caseira','medidaCaseira.descricao','',''],['Quantidade','quantidade','number',true,'30'],['Referência','referencia','text',true,'256']]"
+            [height]="'350px'" [delete]="true" [idProperty]="'medidaCaseira.id'">
+          </app-generic-grid>
+        </div>
+      </div>
+
+      <div #substituicoesTab>
+        <app-generic-autocomplete #autocompleteSubstituicoes [label]="'Alimento'" [name]="'substituicoes'" [property]="'nome'" [component]="this" [maxLength]="256"
+          [width]="'5'" [service]="servico" [showAdd]="true" (responseAdd)="gridSubstituicoes.add($event)">
+        </app-generic-autocomplete>
+        <div class="row">
+          <app-generic-grid #gridSubstituicoes [id]="'substituicoes'" [component]="this" [array]="t.substituicoes" [height]="'350px'"
+            [delete]="true" [def]="[['Nome','nome','','']]">
+          </app-generic-grid>
+        </div>
+      </div>
+
+      <div #outrasInformacoesTab>
+        <div class="row">
+          <app-generic-label [width]="'3'">Proteína (g)
+            <input class="validate" type="text" name="proteina" #proteina="ngModel" [ngModel]="t.proteina" (changeValue)="t.proteina=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!proteina.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Gordura Saturada (g)
+            <input class="validate" type="text" name="saturada" #saturada="ngModel" [ngModel]="t.saturada" (changeValue)="t.saturada=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!saturada.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Gordura Monoinsaturada (g)
+            <input class="validate" type="text" name="monoinsaturada" #monoinsaturada="ngModel" [ngModel]="t.monoinsaturada" (changeValue)="t.monoinsaturada=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!monoinsaturada.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Gordura Poliinsaturada (g)
+            <input class="validate" type="text" name="poliinsaturada" #poliinsaturada="ngModel" [ngModel]="t.poliinsaturada" (changeValue)="t.poliinsaturada=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!poliinsaturada.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'2'">Lipídeos (g)
+            <input class="validate" type="text" name="lipideos" #lipideos="ngModel" [ngModel]="t.lipideos" (changeValue)="t.lipideos=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!lipideos.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'2'">Ômega 3
+            <input class="validate" type="text" name="omega3" #omega3="ngModel" [ngModel]="t.omega3" (changeValue)="t.omega3=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!omega3.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'2'">Colesterol (mg)
+            <input class="validate" type="text" name="colesterol" #colesterol="ngModel" [ngModel]="t.colesterol" (changeValue)="t.colesterol=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!colesterol.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Carboidratos (g)
+            <input class="validate" type="text" name="cho" #cho="ngModel" [ngModel]="t.cho" (changeValue)="t.cho=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!cho.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Fibra (g)
+            <input class="validate" type="text" name="fibra" #fibra="ngModel" [ngModel]="t.fibra" (changeValue)="t.fibra=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!fibra.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'3'">Cálcio (mg)
+            <input class="validate" type="text" name="calcio" #calcio="ngModel" [ngModel]="t.calcio" (changeValue)="t.calcio=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!calcio.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Magnésio (mg)
+            <input class="validate" type="text" name="mg" #mg="ngModel" [ngModel]="t.mg" (changeValue)="t.mg=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!mg.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Manganês (mg)
+            <input class="validate" type="text" name="mn" #mn="ngModel" [ngModel]="t.mn" (changeValue)="t.mn=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!mn.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Fósforo (mg)
+            <input class="validate" type="text" name="p" #p="ngModel" [ngModel]="t.p" (changeValue)="t.p=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!p.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'3'">Ferro (mg)
+            <input class="validate" type="text" name="ferro" #ferro="ngModel" [ngModel]="t.ferro" (changeValue)="t.ferro=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!ferro.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Sódio (mg)
+            <input class="validate" type="text" name="sodio" #sodio="ngModel" [ngModel]="t.sodio" (changeValue)="t.sodio=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!sodio.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Potássio (mg)
+            <input class="validate" type="text" name="potassio" #potassio="ngModel" [ngModel]="t.potassio" (changeValue)="t.potassio=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!potassio.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Cobre (mg)
+            <input class="validate" type="text" name="cobre" #cobre="ngModel" [ngModel]="t.cobre" (changeValue)="t.cobre=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!cobre.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'3'">Zinco (mg)
+            <input class="validate" type="text" name="zinco" #zinco="ngModel" [ngModel]="t.zinco" (changeValue)="t.zinco=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!zinco.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Retinol (mg)
+            <input class="validate" type="text" name="retinol" #retinol="ngModel" [ngModel]="t.retinol" (changeValue)="t.retinol=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!retinol.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Tiamina (mg)
+            <input class="validate" type="text" name="tiamina" #tiamina="ngModel" [ngModel]="t.tiamina" (changeValue)="t.tiamina=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!tiamina.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Riboflavina (mg)
+            <input class="validate" type="text" name="riboflavina" #riboflavina="ngModel" [ngModel]="t.riboflavina" (changeValue)="t.riboflavina=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!riboflavina.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'3'">Piridoxina (mg)
+            <input class="validate" type="text" name="piridoxina" #piridoxina="ngModel" [ngModel]="t.piridoxina" (changeValue)="t.piridoxina=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!piridoxina.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Niacina (mg)
+            <input class="validate" type="text" name="niacina" #niacina="ngModel" [ngModel]="t.niacina" (changeValue)="t.niacina=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!niacina.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Vitamina C (mg)
+            <input class="validate" type="text" name="vitc" #vitc="ngModel" [ngModel]="t.vitc" (changeValue)="t.vitc=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!vitc.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Vitamina D (mg)
+            <input class="validate" type="text" name="vitd" #vitd="ngModel" [ngModel]="t.vitd" (changeValue)="t.vitd=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!vitd.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'3'">Vitamina E (mg)
+            <input class="validate" type="text" name="vite" #vite="ngModel" [ngModel]="t.vite" (changeValue)="t.vite=$event" maxlength="16"
+              [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!vite.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Ômega 6
+            <input class="validate" type="text" name="omega6" #omega6="ngModel" [ngModel]="t.omega6" (changeValue)="t.omega6=$event"
+              maxlength="16" [disabled]="_detailMode" numberFormat>
+            <span *ngIf="!omega6.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+        </div>
+      </div>
+    </app-generic-tab>
+  </app-form-component>
+</form>

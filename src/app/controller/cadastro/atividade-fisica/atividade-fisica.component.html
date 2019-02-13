@@ -1,0 +1,11 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'8'">Descrição
+        <input class="validate" type="text" name="descricao" #descricao="ngModel" [ngModel]="t.descricao"
+        (ngModelChange)="t.descricao=$event.toUpperCase()" maxlength="512" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(descricao.errors)"></span>
+      </app-generic-label>
+    </div>
+  </app-form-component>
+</form>

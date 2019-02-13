@@ -1,3 +1,4 @@
+import { Helper } from './../generic/helper';
 import { Exame } from './exame.model';
 
 export class CampoExame {
@@ -49,7 +50,7 @@ export class CampoExame {
     }
 
     public set $numeroLinhas(value: number) {
-        this.numeroLinhas = value;
+        this.numeroLinhas = Helper.validateNumber(value);
     }
 
     public set $version(value: number) {
