@@ -35,6 +35,7 @@ export class IntegerFormatDirective implements ControlValueAccessor, OnChanges {
         if (changes['ngModel'] && changes['ngModel']['currentValue'] !== undefined && !this.loaded) {
             this.loaded = true;
             this.input(changes['ngModel']['currentValue']);
+            this.el.nativeElement.value = changes['ngModel']['currentValue'];
         }
 
         if (changes['component'] && changes['component']['currentValue'] && !this.detailModeLoaded) {
@@ -74,17 +75,19 @@ export class IntegerFormatDirective implements ControlValueAccessor, OnChanges {
     }
 
     input(value) {
-        if (value !== undefined && value.toString().replace( /\D/g, '' ) !== value.toString()) {
-            if (value.toString().substring(0, 1) === '-') {
-                value = value.toString().substring(1);
+        if (value !== undefined) {
+            const negative = value.toString().includes('-') ? true : false;
+
+            value = value.toString().replace( /\D/g, '' );
+
+            if (negative) {
+                value = '-' + value;
             }
 
-            if (value.toString().replace( /\D/g, '' ) !== value.toString()) {
-                setTimeout(() => {
-                    this.el.nativeElement.value = '';
-                    this.changeValue.emit( '' );
-                }, 25);
-            }
+            setTimeout(() => {
+                this.el.nativeElement.value = value;
+                this.changeValue.emit(value);
+            }, 25);
         }
     }
 

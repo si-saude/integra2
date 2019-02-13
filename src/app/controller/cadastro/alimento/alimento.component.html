@@ -34,11 +34,14 @@
 
         <!-- ADICIONAR CAMPOS 'QUANTIDADE' E 'REFERÊNCIA' NA GRID, APÓS RECEBER COMMIT DA DIRETIVA -->
         <app-generic-autocomplete #autocompleteMedidaCaseira [name]="'medidaCaseira'" [property]="'descricao'" [component]="this"
-          [maxLength]="256" [width]="'5'" [service]="servico.getMedidaCaseiraService()" [showAdd]="true" (responseAdd)="gridAlimentosMedidaCaseira.add($event)">
+          [maxLength]="256" [width]="'5'" [service]="servico.getMedidaCaseiraService()" [showAdd]="true"
+          (responseAdd)="util.addAlimentoMedidaCaseira(gridAlimentosMedidaCaseira,$event)">
         </app-generic-autocomplete>
         <div class="row">
-          <app-generic-grid #gridAlimentosMedidaCaseira [id]="'alimentosMedidaCaseira'" [component]="this" [array]="t.alimentosMedidaCaseira"
-            [height]="'350px'" [delete]="true" [def]="[['Medida Caseira','medidaCaseira.descricao','',''],['Quantidade','quantidade','',''],['Referência','referencia','','']]">
+          <app-generic-grid #gridAlimentosMedidaCaseira 
+            [id]="'alimentosMedidaCaseira'" [component]="this" [array]="t.alimentosMedidaCaseira"
+            [height]="'350px'" [delete]="true" [idProperty]="'medidaCaseira.id'"
+            [def]="[['Medida Caseira','medidaCaseira.descricao','',''],['Quantidade','quantidade','number',true,'30'],['Referência','referencia','text',true,'256']]">
           </app-generic-grid>
         </div>
 

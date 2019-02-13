@@ -7,9 +7,8 @@
         <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
       </app-generic-label>
       <app-generic-label [width]="'2'">Validade (meses)
-        <input class="validate" type="text" name="validade" #validade="ngModel" [ngModel]="t.validade"
-          (changeValue)="t.validade=$event" [disabled]="_detailMode" numberFormat
-          (click)="teste()">
+        <input class="validate" type="text" name="validade" #validade="ngModel" [(ngModel)]="t.validade"
+          maxlength="3" [disabled]="_detailMode" integerValidator>
         <span *ngIf="!validade.valid && !_detailMode" class="input-error">Número inválido.</span>
       </app-generic-label>
     </div>

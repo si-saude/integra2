@@ -1,3 +1,5 @@
+import { Helper } from './../generic/helper';
+
 import { Alimento } from './alimento.model';
 import { MedidaCaseira } from './medida-caseira.model';
 
@@ -50,7 +52,7 @@ export class AlimentoMedidaCaseira {
     }
 
     public set $quantidade(value: number) {
-        this.quantidade = value;
+        this.quantidade = Helper.validateNumber(value);
     }
 
     public set $version(value: number) {

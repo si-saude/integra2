@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { GenericListComponent } from './../../../generic/generic-list-component';
 import { GenericComponent } from './../../../generic/generic-component';
 
+import { AlimentoMedidaCaseira } from './../../../model/alimento-medida-caseira.model';
 import { Alimento } from './../../../model/alimento.model';
 import { AlimentoFilter } from './../../../filter/alimento.filter';
 import { AlimentoService } from './../../../service/alimento.service';
@@ -104,5 +105,12 @@ export class AlimentoUtil {
     this.servico.getUtilService().getTipoAlimento('', function (list) {
       component.tiposAlimento = list;
     }, undefined);
+  }
+
+  addAlimentoMedidaCaseira(grid, medidaCaseira) {
+    const alimentoMedidaCaseira: AlimentoMedidaCaseira =
+      this.servico.toAlimentoMedidaCaseira(new AlimentoMedidaCaseira());
+    alimentoMedidaCaseira.$medidaCaseira = medidaCaseira;
+    grid.add(alimentoMedidaCaseira);
   }
 }

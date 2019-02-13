@@ -100,7 +100,16 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   }
 
   remove(a) {
-    this.array.splice(this.array.indexOf(a[0][0]), 1);
+    const obj = this.array.find(ar => {
+      for (let d of this.def) {
+        const arAux = this.getObjectAndProperty(ar, d[1]);
+        if (arAux[0] === a[0][0]) {
+          return true;
+        }
+      }
+      return false;
+    });
+    this.array.splice(this.array.indexOf(obj), 1);
     this.load();
     this.dirtyForm();
   }

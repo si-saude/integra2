@@ -57,10 +57,6 @@ export class CursoEditarComponent extends GenericComponent<Curso> implements OnI
     this.init(function(obj){
     });
   }
-
-  teste() {
-    console.log(this.t.$validade);
-  }
 }
 
 @Component({

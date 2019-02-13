@@ -89,7 +89,6 @@ export class AlimentoService extends GenericService<Alimento, AlimentoFilter> {
                 alimento.$alimentosMedidaCaseira.push(alimentoMedidaCaseira);
             }
         }
-
         return alimento;
     }
 
