@@ -1,0 +1,23 @@
+<app-list-component 
+    [component]="this"
+    [adicionar]="'GERENCIA_ADICIONAR'"
+    [editar]="'GERENCIA_EDITAR'"
+    [detalhar]="'GERENCIA_DETALHAR'"
+    [remover]="'GERENCIA_REMOVER'"
+    >
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'5'">Código
+            <input type="text" name="codigoCompleto" [(ngModel)]="filter.codigoCompleto" maxlength="256" modalConfirm
+            (changeValue)="filter.codigoCompleto = $event">
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'7'">Descrição
+            <input type="text" name="descricao" [(ngModel)]="filter.descricao" maxlength="200" modalConfirm
+            (changeValue)="filter.descricao = $event">
+        </app-generic-label>
+    </div>
+</app-generic-modal>

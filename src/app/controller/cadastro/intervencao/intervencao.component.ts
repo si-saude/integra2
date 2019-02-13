@@ -18,7 +18,7 @@ export class IntervencaoListarComponent extends GenericListComponent<Intervencao
   constructor(private servico: IntervencaoService, private router: Router) {
     super(servico, router, 'Intervenção',
       [
-        ['Descrição', 'descricao'],['Equipe', 'equipe.nome']
+        ['Equipe', 'equipe.nome'], ['Descrição', 'descricao']
       ]);
   }
 

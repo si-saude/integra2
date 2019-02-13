@@ -1,0 +1,16 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'5'">Nome
+        <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome"
+        (ngModelChange)="t.nome=$event.toUpperCase()" maxlength="64" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+      </app-generic-label>
+      <app-generic-label [width]="'2'">Ordem
+        <input class="validate" type="text" name="ordem" #ordem="ngModel" [(ngModel)]="t.ordem"
+          maxlength="3" [disabled]="_detailMode" integerValidator>
+        <span *ngIf="!ordem.valid && !_detailMode" class="input-error">Número inválido.</span>
+      </app-generic-label>
+    </div>
+  </app-form-component>
+</form>

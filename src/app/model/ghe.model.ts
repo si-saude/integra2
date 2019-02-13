@@ -1,3 +1,5 @@
+import { Helper } from './../generic/helper';
+
 import { RiscoGhe } from './risco-ghe.model';
 
 export class Ghe {
@@ -82,7 +84,7 @@ export class Ghe {
 	}
 
 	public set $duracaoJornada(value: number) {
-		this.duracaoJornada = value;
+		this.duracaoJornada = Helper.validateNumber(value);
 	}
 
 	public set $risco(value: RiscoGhe) {

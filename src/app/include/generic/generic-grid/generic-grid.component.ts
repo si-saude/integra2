@@ -18,13 +18,19 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   @Input() delete = false;
   @Input() height = '300px';
   @Input() textInput: any;
+  @Input() idProperty = 'id';
+  @Input() selection = false;
 
   private helper: Helper;
   private models: Array<Array<any>>;
-  private proxy: Array<any>;
+  private filter;
+  private filterBuilded = false;
+  private filterArray: Array<any>;
+  private selectedObject = {};
 
   constructor() {
     this.helper = new Helper();
+    this.filter = {};
   }
 
   ngOnInit() {
@@ -36,9 +42,12 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
 
   add(obj: G) {
     let showErrorMessage = false;
-
-    if (obj['id'] > 0) {
-      if (this.array.find(a => a['id'] === obj['id'])) {
+    const a1 = this.getObjectAndProperty(obj, this.idProperty);
+    if (a1[0][a1[1]] > 0) {
+      if (this.array.find(a => {
+          const a2 = this.getObjectAndProperty(a, this.idProperty);
+          return a1[0][a1[1]] === a2[0][a2[1]];
+        })) {
         showErrorMessage = true;
       }
     } else if (this.textInput) {
@@ -69,14 +78,19 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   load() {
     this.models = new Array<Array<any>>();
     if (this.array && this.def) {
-      this.proxy = new Array<any>();
       for (let a of this.array) {
         let ar = new Array<any>();
         for (let d of this.def) {
           ar.push(this.getObjectAndProperty(a, d[1]));
+          if (!this.filterBuilded) {
+            if (!this.filter) {
+              this.filter = {};
+            }
+            this.filter[d[1]] = '';
+          }
         }
+        this.filterBuilded = true;
         this.models.push(ar);
-        this.proxy.push(a);
       }
     }
   }
@@ -85,15 +99,15 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     return this.helper.getObjectAndProperty(obj, properties);
   }
 
-  remove(i) {
-    this.array.splice(i, 1);
+  remove(a) {
+    this.array.splice(this.array.indexOf(a[0][0]), 1);
     this.load();
     this.dirtyForm();
   }
 
   selectAll(property, event) {
-    for (let a of this.array) {
-      const ar = this.getObjectAndProperty(a, property);
+    for (let a of this.filterArray) {
+      const ar = this.getObjectAndProperty(this.array[this.array.indexOf(a[0][0])], property);
       ar[0][ar[1]] = event.target.checked;
     }
     this.load();
@@ -101,5 +115,57 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
 
   dirtyForm() {
     this.helper.dirtyForm(this.component);
+  }
+
+  changeFilter() {
+    const filter = {};
+    for (let key of Object.keys(this.filter)) {
+      filter[key] = this.filter[key];
+    }
+    this.filter = filter;
+    this.selectedObject = {};
+  }
+
+  changeBooleanFilter(property) {
+    const filter = {};
+    for (let key of Object.keys(this.filter)) {
+      if (key === property) {
+        if (this.filter[key] === 1) {
+          filter[key] = false;
+        } else if (this.filter[key] === 2) {
+          filter[key] = true;
+        }
+      } else {
+        filter[key] = this.filter[key];
+      }
+    }
+    this.filter = filter;
+    this.selectedObject = {};
+  }
+
+  teste(x) {
+    if (this.selection) {
+      for (let a of this.array) {
+        for (let d of this.def) {
+          let ar = this.getObjectAndProperty(a, d[1]);
+          if (ar[0] === x[0][0]) {
+            const prop = d[1].split('.')[0];
+            this.selectedObject = this.array.find(y => y[prop] === ar[0]);
+          }
+        }
+      }
+    }
+  }
+
+  checkSelected(x) {
+    if (this.selection) {
+      for (let d of this.def) {
+        let ar = this.getObjectAndProperty(this.selectedObject, d[1]);
+        if (ar[0] === x[0][0]) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

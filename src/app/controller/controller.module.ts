@@ -14,14 +14,19 @@ import { EnfaseComponentModule } from './cadastro/enfase/enfase.component.module
 import { EquipeComponentModule } from './cadastro/equipe/equipe.component.module';
 import { ExameComponentModule } from './cadastro/exame/exame.component.module';
 import { FuncaoComponentModule } from './cadastro/funcao/funcao.component.module';
+import { GerenciaComponentModule } from './cadastro/gerencia/gerencia.component.module';
 import { GheComponentModule } from './cadastro/ghe/ghe.component.module';
+import { GrupoPerguntaFichaColetaComponentModule } from './cadastro/grupo-pergunta-ficha-coleta/grupo-pergunta-ficha-coleta.component.module';
 import { ImovelComponentModule } from './cadastro/imovel/imovel.component.module';
 import { IndicadorSastComponentModule } from './cadastro/indicador-sast/indicador-sast.component.module';
 import { IntervencaoComponentModule } from './cadastro/intervencao/intervencao.component.module';
 import { MedidaCaseiraComponentModule } from './cadastro/medida-caseira/medida-caseira.component.module';
 import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module';
+import { PerguntaFichaColetaComponentModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.component.module';
 import { RegimeComponentModule } from './cadastro/regime/regime.component.module';
+import { RegraAtendimentoComponentModule } from './cadastro/regra-atendimento/regra-atendimento.component.module';
 import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.component.module';
+
 
 @NgModule({
     imports: [
@@ -39,13 +44,17 @@ import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.componen
         EquipeComponentModule,
         ExameComponentModule,
         FuncaoComponentModule,
+        GerenciaComponentModule,
         GheComponentModule,
+        GrupoPerguntaFichaColetaComponentModule,
         ImovelComponentModule,
         IndicadorSastComponentModule,
         IntervencaoComponentModule,
         MedidaCaseiraComponentModule,
         PerfilComponentModule,
+        PerguntaFichaColetaComponentModule,
         RegimeComponentModule,
+        RegraAtendimentoComponentModule,
         RiscoGheComponentModule
     ]
 })

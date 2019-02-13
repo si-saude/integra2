@@ -1,3 +1,5 @@
+import { Helper } from './../generic/helper';
+
 export class Equipe {
     private id: number;
     private nome: string;
@@ -38,7 +40,7 @@ export class Equipe {
     }
 
     public set $prioridadeSast(value: number) {
-        this.prioridadeSast = value;
+        this.prioridadeSast = Helper.validateNumber(value);
     }
 
     public set $version(value: number) {

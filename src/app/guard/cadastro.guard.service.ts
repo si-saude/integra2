@@ -18,13 +18,17 @@ import { EnfaseGuardService } from './cadastro/enfase/enfase.guard.service';
 import { EquipeGuardService } from './cadastro/equipe/equipe.guard.service';
 import { ExameGuardService } from './cadastro/exame/exame.guard.service';
 import { FuncaoGuardService } from './cadastro/funcao/funcao.guard.service';
+import { GerenciaGuardService } from './cadastro/gerencia/gerencia.guard.service';
 import { GheGuardService } from './cadastro/ghe/ghe.guard.service';
+import { GrupoPerguntaFichaColetaGuardService } from './cadastro/grupo-pergunta-ficha-coleta/grupo-pergunta-ficha-coleta.guard.service';
 import { ImovelGuardService } from './cadastro/imovel/imovel.guard.service';
 import { IndicadorSastGuardService } from './cadastro/indicador-sast/indicador-sast.guard.service';
 import { IntervencaoGuardService } from './cadastro/intervencao/intervencao.guard.service';
 import { MedidaCaseiraGuardService } from './cadastro/medida-caseira/medida-caseira.guard.service';
 import { PerfilGuardService } from './cadastro/perfil/perfil.guard.service';
+import { PerguntaFichaColetaGuardService } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.service';
 import { RegimeGuardService } from './cadastro/regime/regime.guard.service';
+import { RegraAtendimentoGuardService } from './cadastro/regra-atendimento/regra-atendimento.guard.service';
 import { RiscoGheGuardService } from './cadastro/risco-ghe/risco-ghe.guard.service';
 
 @Injectable()
@@ -47,13 +51,17 @@ export class CadastroGuardService implements GenericGuardService {
         private equipe: EquipeGuardService,
         private exame: ExameGuardService,
         private funcao: FuncaoGuardService,
+        private gerencia: GerenciaGuardService,
         private ghe: GheGuardService,
+        private grupoPerguntaFichaColeta: GrupoPerguntaFichaColetaGuardService,
         private imovel: ImovelGuardService,
         private indicadorSast: IndicadorSastGuardService,
         private intervencao: IntervencaoGuardService,
         private medidaCaseira: MedidaCaseiraGuardService,
         private perfil: PerfilGuardService,
+        private perguntaFichaColeta: PerguntaFichaColetaGuardService,
         private regime: RegimeGuardService,
+        private regraAtendimento: RegraAtendimentoGuardService,
         private riscoGhe: RiscoGheGuardService) {
 
             this.helper = new Helper();
@@ -119,8 +127,16 @@ export class CadastroGuardService implements GenericGuardService {
                 guardService = this.funcao;
                 break;
             }
+            case 'GERENCIA': {
+                guardService = this.gerencia;
+                break;
+            }
             case 'GHE': {
                 guardService = this.ghe;
+                break;
+            }
+            case 'GRUPO-PERGUNTA-FICHA-COLETA': {
+                guardService = this.grupoPerguntaFichaColeta;
                 break;
             }
             case 'IMOVEL': {
@@ -143,8 +159,16 @@ export class CadastroGuardService implements GenericGuardService {
                 guardService = this.perfil;
                 break;
             }
+            case 'PERGUNTA-FICHA-COLETA': {
+                guardService = this.perguntaFichaColeta;
+                break;
+            }
             case 'REGIME': {
                 guardService = this.regime;
+                break;
+            }
+            case 'REGRA-ATENDIMENTO': {
+                guardService = this.regraAtendimento;
                 break;
             }
             case 'RISCO-GHE': {

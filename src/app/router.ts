@@ -22,13 +22,17 @@ import * as enfaseGuard from './guard/cadastro/enfase/enfase.guard';
 import * as equipeGuard from './guard/cadastro/equipe/equipe.guard';
 import * as exameGuard from './guard/cadastro/exame/exame.guard';
 import * as funcaoGuard from './guard/cadastro/funcao/funcao.guard';
+import * as gerenciaGuard from './guard/cadastro/gerencia/gerencia.guard';
 import * as gheGuard from './guard/cadastro/ghe/ghe.guard';
+import * as grupoPerguntaFichaColetaGuard from './guard/cadastro/grupo-pergunta-ficha-coleta/grupo-pergunta-ficha-coleta.guard';
 import * as imovelGuard from './guard/cadastro/imovel/imovel.guard';
 import * as indicadorGuard from './guard/cadastro/indicador-sast/indicador-sast.guard';
 import * as intervencaoGuard from './guard/cadastro/intervencao/intervencao.guard';
 import * as medidaCaseiraGuard from './guard/cadastro/medida-caseira/medida-caseira.guard';
 import * as perfilGuard from './guard/cadastro/perfil/perfil.guard';
+import * as perguntaFichaColetaGuard from './guard/cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard';
 import * as regimeGuard from './guard/cadastro/regime/regime.guard';
+import * as regraAtendimentoGuard from './guard/cadastro/regra-atendimento/regra-atendimento.guard';
 import * as riscoGheGuard from './guard/cadastro/risco-ghe/risco-ghe.guard';
 
 export const appRoutes: Routes = [
@@ -51,13 +55,17 @@ export const appRoutes: Routes = [
     equipeGuard.Routing.route(HomeComponent),
     exameGuard.Routing.route(HomeComponent),
     funcaoGuard.Routing.route(HomeComponent),
+    gerenciaGuard.Routing.route(HomeComponent),
     gheGuard.Routing.route(HomeComponent),
+    grupoPerguntaFichaColetaGuard.Routing.route(HomeComponent),
     imovelGuard.Routing.route(HomeComponent),
     indicadorGuard.Routing.route(HomeComponent),
     intervencaoGuard.Routing.route(HomeComponent),
     medidaCaseiraGuard.Routing.route(HomeComponent),
     perfilGuard.Routing.route(HomeComponent),
+    perguntaFichaColetaGuard.Routing.route(HomeComponent),
     regimeGuard.Routing.route(HomeComponent),
+    regraAtendimentoGuard.Routing.route(HomeComponent),
     riscoGheGuard.Routing.route(HomeComponent),
     { path : '', redirectTo: '/home', pathMatch: 'full'}
 ];

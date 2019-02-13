@@ -268,8 +268,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-right: 0;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .generic-grid {
   overflow:scroll;
+}
+
+.generic-grid-selected {
+	background: #707070;
+	color: white;
 }
 
 .input-error {
