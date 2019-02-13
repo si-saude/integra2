@@ -18,11 +18,8 @@ import { EixoGuardModule } from './cadastro/eixo/eixo.guard.module';
 import { EnfaseGuardModule } from './cadastro/enfase/enfase.guard.module';
 import { EquipeGuardModule } from './cadastro/equipe/equipe.guard.module';
 import { ExameGuardModule } from './cadastro/exame/exame.guard.module';
-<<<<<<< HEAD
 import { FuncaoGuardModule } from './cadastro/funcao/funcao.guard.module';
-=======
 import { GerenciaGuardModule } from './cadastro/gerencia/gerencia.guard.module';
->>>>>>> branch 'master' of https://github.com/si-saude/integra2.git
 import { GheGuardModule } from './cadastro/ghe/ghe.guard.module';
 import { GrupoPerguntaFichaColetaGuardModule } from './cadastro/grupo-pergunta-ficha-coleta/grupo-pergunta-ficha-coleta.guard.module';
 import { ImovelGuardModule } from './cadastro/imovel/imovel.guard.module';
@@ -30,12 +27,9 @@ import { IndicadorSastGuardModule } from './cadastro/indicador-sast/indicador-sa
 import { IntervencaoGuardModule } from './cadastro/intervencao/intervencao.guard.module';
 import { MedidaCaseiraGuardModule } from './cadastro/medida-caseira/medida-caseira.guard.module';
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
-<<<<<<< HEAD
 import { RegimeGuardModule } from './cadastro/regime/regime.guard.module';
-=======
 import { PerguntaFichaColetaGuardModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.module';
 import { RegraAtendimentoGuardModule } from './cadastro/regra-atendimento/regra-atendimento.guard.module';
->>>>>>> branch 'master' of https://github.com/si-saude/integra2.git
 import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
 
 
@@ -60,11 +54,8 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
         EnfaseGuardModule,
         EquipeGuardModule,
         ExameGuardModule,
-<<<<<<< HEAD
         FuncaoGuardModule,
-=======
         GerenciaGuardModule,
->>>>>>> branch 'master' of https://github.com/si-saude/integra2.git
         GheGuardModule,
         GrupoPerguntaFichaColetaGuardModule,
         ImovelGuardModule,
@@ -72,12 +63,9 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
         IntervencaoGuardModule,
         MedidaCaseiraGuardModule,
         PerfilGuardModule,
-<<<<<<< HEAD
         RegimeGuardModule,
-=======
         PerguntaFichaColetaGuardModule,
         RegraAtendimentoGuardModule,
->>>>>>> branch 'master' of https://github.com/si-saude/integra2.git
         RiscoGheGuardModule
     ]
 })

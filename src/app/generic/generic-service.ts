@@ -9,11 +9,7 @@ import { GenericFilter } from './generic-filter';
 
 export abstract class GenericService<T, F extends GenericFilter> {
 
-<<<<<<< HEAD
     readonly rootUrl = 'http://localhost:8080/IntegraApi2/rest/';
-=======
-    readonly rootUrl = 'http://localhost:5080/IntegraApi2/rest/';
->>>>>>> branch 'master' of https://github.com/si-saude/integra2.git
 
     protected helper: Helper;
 
