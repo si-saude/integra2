@@ -38,7 +38,7 @@ export class RegraAtendimentoAdicionarComponent extends GenericComponent<RegraAt
   private util: RegraAtendimentoUtil;
 
   constructor(private servico: RegraAtendimentoService, router: Router, route: ActivatedRoute) {
-    super(servico, router, route, 'Regra de Atendimento');
+    super(servico, router, route, 'Regra de Atendimento - Adicionar');
   }
 
   ngOnInit() {
@@ -56,7 +56,7 @@ export class RegraAtendimentoEditarComponent extends GenericComponent<RegraAtend
   private util: RegraAtendimentoUtil;
 
   constructor(private servico: RegraAtendimentoService, router: Router, route: ActivatedRoute) {
-    super(servico, router, route, 'Regra de Atendimento');
+    super(servico, router, route, 'Regra de Atendimento - Editar');
   }
 
   ngOnInit() {
@@ -76,11 +76,13 @@ export class RegraAtendimentoDetalharComponent extends GenericComponent<RegraAte
   private util: RegraAtendimentoUtil;
 
   constructor(private servico: RegraAtendimentoService, router: Router, route: ActivatedRoute) {
-    super(servico, router, route, 'Regra de Atendimento');
+    super(servico, router, route, 'Regra de Atendimento - Detalhar');
     this.detailMode();
   }
 
   ngOnInit() {
+    this.init(function(t){
+    });
     this.util = new RegraAtendimentoUtil(this.servico);
   }
 }

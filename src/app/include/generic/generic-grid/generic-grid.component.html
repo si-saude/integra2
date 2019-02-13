@@ -23,9 +23,15 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let a of (models | gridFilter : filter : this); let i = index">
-      <td [ngClass]="d[2]==='checkbox' ? 'right' : ''" *ngFor="let d of def; let j = index">
+  <tbody> 
+    <tr *ngFor="let a of (models | gridFilter : filter : this); let i = index"
+    [ngClass]="selection && checkSelected(a) ? 'generic-grid-selected' : ''">
+      <td [ngClass]="d[2]==='checkbox' ? 
+                            'right' : 
+                            d[2]==='' && selection ? 'cursor-pointer' : ''
+                    "
+          *ngFor="let d of def; let j = index"
+          (click)="teste(a)">
         {{ d[2]==='' ? a[j][0][a[j][1]] : '' }}
         <label *ngIf="d[2]==='checkbox'">
           <input type="checkbox" [(ngModel)]="a[j][0][a[j][1]]" 

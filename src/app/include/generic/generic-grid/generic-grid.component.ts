@@ -19,12 +19,14 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   @Input() height = '300px';
   @Input() textInput: any;
   @Input() idProperty = 'id';
+  @Input() selection = false;
 
   private helper: Helper;
   private models: Array<Array<any>>;
   private filter;
   private filterBuilded = false;
   private filterArray: Array<any>;
+  private selectedObject = {};
 
   constructor() {
     this.helper = new Helper();
@@ -121,6 +123,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
       filter[key] = this.filter[key];
     }
     this.filter = filter;
+    this.selectedObject = {};
   }
 
   changeBooleanFilter(property) {
@@ -137,5 +140,32 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
       }
     }
     this.filter = filter;
+    this.selectedObject = {};
+  }
+
+  teste(x) {
+    if (this.selection) {
+      for (let a of this.array) {
+        for (let d of this.def) {
+          let ar = this.getObjectAndProperty(a, d[1]);
+          if (ar[0] === x[0][0]) {
+            const prop = d[1].split('.')[0];
+            this.selectedObject = this.array.find(y => y[prop] === ar[0]);
+          }
+        }
+      }
+    }
+  }
+
+  checkSelected(x) {
+    if (this.selection) {
+      for (let d of this.def) {
+        let ar = this.getObjectAndProperty(this.selectedObject, d[1]);
+        if (ar[0] === x[0][0]) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

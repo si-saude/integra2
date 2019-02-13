@@ -39,7 +39,7 @@ export class RegraAtendimentoService extends GenericService<RegraAtendimento, Re
             for (let x = 0; x < obj['regraAtendimentoEquipes'].length; x++) {
                 const regraAtendimentoEquipe: RegraAtendimentoEquipe
                     = this.toRegraAtendimentoEquipe(obj['regraAtendimentoEquipes'][x]);
-                regraAtendimentoEquipe.$regra.$id = regra.$id;
+                regraAtendimentoEquipe.$regraAtendimento.$id = regra.$id;
                 regra.$regraAtendimentoEquipes.push(regraAtendimentoEquipe);
             }
         }
@@ -49,7 +49,7 @@ export class RegraAtendimentoService extends GenericService<RegraAtendimento, Re
     toRegraAtendimentoEquipe(obj: RegraAtendimentoEquipe): RegraAtendimentoEquipe{
         const regraAtendimentoEquipe: RegraAtendimentoEquipe = new RegraAtendimentoEquipe();
         regraAtendimentoEquipe.$id = obj['id'];
-        regraAtendimentoEquipe.$regra = new RegraAtendimento();
+        regraAtendimentoEquipe.$regraAtendimento = new RegraAtendimento();
         regraAtendimentoEquipe.$acolhimento = obj['acolhimento'];
         regraAtendimentoEquipe.$version = obj['version'];
 

@@ -5,7 +5,7 @@ import { Dependencia } from './dependencia.model';
 export class RegraAtendimentoEquipe {
     private id: number;
     private equipe: Equipe;
-    private regra: RegraAtendimento;
+    private regraAtendimento: RegraAtendimento;
     private acolhimento: boolean;
     private dependencias: Array<Dependencia>;
     private version: number;
@@ -18,8 +18,8 @@ export class RegraAtendimentoEquipe {
         return this.equipe;
     }
 
-    public get $regra(): RegraAtendimento {
-        return this.regra;
+    public get $regraAtendimento(): RegraAtendimento {
+        return this.regraAtendimento;
     }
 
     public get $acolhimento(): boolean {
@@ -42,8 +42,8 @@ export class RegraAtendimentoEquipe {
         this.equipe = value;
     }
 
-    public set $regra(value: RegraAtendimento) {
-        this.regra = value;
+    public set $regraAtendimento(value: RegraAtendimento) {
+        this.regraAtendimento = value;
     }
 
     public set $acolhimento(value: boolean) {
