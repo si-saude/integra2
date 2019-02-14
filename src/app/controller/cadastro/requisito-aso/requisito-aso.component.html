@@ -1,0 +1,11 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'4'">Conteúdo
+        <input class="validate" type="text" name="conteudo" #conteudo="ngModel" [(ngModel)]="t.conteudo"
+        maxlength="50" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(conteudo.errors)"></span>
+      </app-generic-label>
+    </div>
+  </app-form-component>
+</form>

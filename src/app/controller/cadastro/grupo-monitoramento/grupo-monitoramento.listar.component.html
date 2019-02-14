@@ -1,0 +1,34 @@
+<app-list-component [component]="this" [adicionar]="'GRUPO-MONITORAMENTO_ADICIONAR'" [editar]="'GRUPO-MONITORAMENTO_EDITAR'"
+    [detalhar]="'GRUPO-MONITORAMENTO_DETALHAR'" [remover]="'GRUPO-MONITORAMENTO_REMOVER'">
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'8'">Nome
+            <input type="text" name="nome" [(ngModel)]="filter.nome" maxlength="128" modalConfirm (changeValue)="filter.nome = $event">
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'6'">Tipo do Grupo de Monitoramento
+            <input type="text" name="tipoGrupoMonitoramento" [(ngModel)]="filter.tipoGrupoMonitoramento.nome" maxlength="64" modalConfirm
+                (changeValue)="filter.tipoGrupoMonitoramento.nome = $event">
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'2'">Recorrente
+            <input type="checkbox" name="recorrente" [value]="filter.recorrente.value" checkboxFilter (changeValue)="filter.recorrente.value = $event"
+            />
+            <span></span>
+        </app-generic-label>
+        <app-generic-label [width]="'2'">Relatório
+            <input type="checkbox" name="relatorio" [value]="filter.relatorio.value" checkboxFilter (changeValue)="filter.relatorio.value = $event"
+            />
+            <span></span>
+        </app-generic-label>
+        <app-generic-label [width]="'2'">Auditoria ASO
+            <input type="checkbox" name="auditoriaAso" [value]="filter.auditoriaAso.value" checkboxFilter (changeValue)="filter.auditoriaAso.value = $event"
+            />
+            <span></span>
+        </app-generic-label>
+    </div>
+</app-generic-modal>

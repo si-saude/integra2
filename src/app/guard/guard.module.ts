@@ -21,6 +21,8 @@ import { ExameGuardModule } from './cadastro/exame/exame.guard.module';
 import { FuncaoGuardModule } from './cadastro/funcao/funcao.guard.module';
 import { GerenciaGuardModule } from './cadastro/gerencia/gerencia.guard.module';
 import { GheGuardModule } from './cadastro/ghe/ghe.guard.module';
+import { GheeGuardModule } from './cadastro/ghee/ghee.guard.module';
+import { GrupoMonitoramentoGuardModule } from './cadastro/grupo-monitoramento/grupo-monitoramento.guard.module';
 import { GrupoPerguntaFichaColetaGuardModule } from './cadastro/grupo-pergunta-ficha-coleta/grupo-pergunta-ficha-coleta.guard.module';
 import { ImovelGuardModule } from './cadastro/imovel/imovel.guard.module';
 import { IndicadorSastGuardModule } from './cadastro/indicador-sast/indicador-sast.guard.module';
@@ -30,7 +32,9 @@ import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
 import { RegimeGuardModule } from './cadastro/regime/regime.guard.module';
 import { PerguntaFichaColetaGuardModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.module';
 import { RegraAtendimentoGuardModule } from './cadastro/regra-atendimento/regra-atendimento.guard.module';
+import { RequisitoAsoGuardModule } from './cadastro/requisito-aso/requisito-aso.guard.module';
 import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
+import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard.module';
 
 
 @NgModule({
@@ -57,6 +61,8 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
         FuncaoGuardModule,
         GerenciaGuardModule,
         GheGuardModule,
+        GheeGuardModule,
+        GrupoMonitoramentoGuardModule,
         GrupoPerguntaFichaColetaGuardModule,
         ImovelGuardModule,
         IndicadorSastGuardModule,
@@ -66,7 +72,9 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
         RegimeGuardModule,
         PerguntaFichaColetaGuardModule,
         RegraAtendimentoGuardModule,
-        RiscoGheGuardModule
+        RequisitoAsoGuardModule,
+        RiscoGheGuardModule,
+        TipoGrupoMonitoramentoGuardModule
     ]
 })
 export class GuardModule { }

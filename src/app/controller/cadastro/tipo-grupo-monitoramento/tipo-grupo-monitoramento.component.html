@@ -1,0 +1,19 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'8'">Nome
+        <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome"
+        (ngModelChange)="t.nome=$event.toUpperCase()" maxlength="64" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+      </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'7'">Descrição
+          <textarea class="validate text-area" name="descricao" #descricao="ngModel" [(ngModel)]="t.descricao"
+            maxlength="1024" [disabled]="_detailMode">
+          </textarea>
+          <span class="helper-text" [attr.data-error]="showErrorMessage(descricao.errors)"></span>
+        </app-generic-label>
+      </div>
+  </app-form-component>
+</form>

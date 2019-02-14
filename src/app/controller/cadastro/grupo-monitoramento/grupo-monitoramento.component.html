@@ -1,0 +1,48 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],
+    [avaliacoesTab,'AVALIAÇÕES']]">
+      <div #dadosGeraisTab>
+        <div class="row">
+          <app-generic-label [width]="'8'">Nome
+            <input class="validate" type="text" name="nome" #nome="ngModel" [(ngModel)]="t.nome" maxlength="128" [disabled]="_detailMode"
+              required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+          </app-generic-label>
+        </div>
+        <app-generic-autocomplete #autocompleteTipoGrupoMonitoramento [name]="'tipoGrupoMonitoramento'" [property]="'nome'" [component]="this"
+          [maxLength]="64" [service]="servico.getTipoGrupoMonitoramentoService()" (responseChange)="t.tipoGrupoMonitoramento = $event"
+          [object]="t.tipoGrupoMonitoramento" [width]="'4'" [label]="'Tipo de Grupo de Monitoramento'">
+        </app-generic-autocomplete>
+        <div class="row">
+          <app-generic-label [width]="'2'">Recorrente
+            <input type="checkbox" name="recorrente" #recorrente="ngModel" [(ngModel)]="t.recorrente" [disabled]="_detailMode" />
+            <span></span>
+          </app-generic-label>
+          <app-generic-label [width]="'2'">Relatório
+            <input type="checkbox" name="relatorio" #relatorio="ngModel" [(ngModel)]="t.relatorio" [disabled]="_detailMode" />
+            <span></span>
+          </app-generic-label>
+          <app-generic-label [width]="'2'">Auditoria do ASO
+            <input type="checkbox" name="auditoriaAso" #auditoriaAso="ngModel" [(ngModel)]="t.auditoriaAso" [disabled]="_detailMode"
+            />
+            <span></span>
+          </app-generic-label>
+        </div>
+      </div>
+
+      <div #avaliacoesTab>
+        <app-text-input-to-grid #textInputAvaliacao [name]="'avaliacao'" [property]="'nome'" [component]="this" [maxLength]="128" [width]="'8'"
+          [service]="servico" [method]="'toAvaliacao'" [showAdd]="true" (responseAdd)="gridAvaliacoes.add($event)">
+        </app-text-input-to-grid>
+        <div class="row">
+          <app-generic-grid #gridAvaliacoes [component]="this" [array]="t.avaliacoes" [height]="'350px'" [id]="'avaliacoes'"
+          [def]="[['Nome','nome','',''],
+          ['Auditoria do ASO','auditoriaAso','checkbox',true],
+          ['Auditoria do Médico','auditoriaMedico','checkbox',true]]" [delete]="true" [textInput]="textInputAvaliacao">
+          </app-generic-grid>
+        </div>
+      </div>
+    </app-generic-tab>
+  </app-form-component>
+</form>

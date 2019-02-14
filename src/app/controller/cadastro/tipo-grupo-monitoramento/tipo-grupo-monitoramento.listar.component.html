@@ -1,0 +1,17 @@
+<app-list-component 
+    [component]="this"
+    [adicionar]="'TIPO-GRUPO-MONITORAMENTO_ADICIONAR'"
+    [editar]="'TIPO-GRUPO-MONITORAMENTO_EDITAR'"
+    [detalhar]="'TIPO-GRUPO-MONITORAMENTO_DETALHAR'"
+    [remover]="'TIPO-GRUPO-MONITORAMENTO_REMOVER'"
+    >
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'6'">Nome
+            <input type="text" name="nome" [(ngModel)]="filter.nome" maxlength="64" modalConfirm
+                (changeValue)="filter.nome = $event">
+        </app-generic-label>
+    </div>
+</app-generic-modal>
