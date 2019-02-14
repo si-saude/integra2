@@ -116,7 +116,11 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
 
   selectAll(property, event) {
     for (let a of this.filterArray) {
-      const ar = this.getObjectAndProperty(this.array[this.array.indexOf(a[0][0])], property);
+      const aux = this.array.find(y => {
+        const arAux = this.getObjectAndProperty(y, this.def[0][1]);
+        return arAux[0] === a[0][0];
+      });
+      const ar = this.getObjectAndProperty(this.array[this.array.indexOf(aux)], property);
       ar[0][ar[1]] = event.target.checked;
     }
     this.load();

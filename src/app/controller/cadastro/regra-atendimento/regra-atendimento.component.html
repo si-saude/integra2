@@ -7,26 +7,28 @@
         <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
       </app-generic-label>
     </div>
-    <app-generic-autocomplete  #autocompleteEquipe
-      [name]="'equipe'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'5'" [label]="'Equipe'"
-      [service]="servico.getEquipeService()" [showAdd]="true" (responseAdd)="util.addRegraAtendimentoEquipe(gridEquipes,$event)">
-      
-      <app-generic-autocomplete #autocompleteDependencia
-        [name]="'dependencia'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'4'" [label]="'Dependência'"
-        [service]="servico.getEquipeService()" [showAdd]="true" (responseAdd)="util.addDependencia(gridDependencias,$event)">
-      </app-generic-autocomplete>
-    
-    </app-generic-autocomplete>
     <div class="row">
       <app-generic-grid class="col s7" #gridEquipes
-        [id]="'equipes'" [component]="this" [array]="t.regraAtendimentoEquipes" [height]="'350px'" 
+        [id]="'equipes'" [component]="this" [array]="t.regraAtendimentoEquipes" [height]="'450px'" 
         [delete]="true" [idProperty]="'equipe.id'" [selection]="true"
         [def]="[['Equipe','equipe.nome','',''],['Ordem','ordem','integer',true,'3'],['Acolhimento','acolhimento','checkbox',true]]">
+
+        <app-generic-autocomplete  #autocompleteEquipe
+          [name]="'equipe'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'9'" [label]="'Equipe'"
+          [service]="servico.getEquipeService()" [showAdd]="true" (responseAdd)="util.addRegraAtendimentoEquipe(gridEquipes,$event)">
+        </app-generic-autocomplete>
+
       </app-generic-grid>
       <app-generic-grid class="col s5" #gridDependencias
-        [id]="'dependencias'" [component]="this" [array]="gridEquipes.selectedObject.dependencias" [height]="'350px'" 
+        [id]="'dependencias'" [component]="this" [array]="gridEquipes.selectedObject.dependencias" [height]="'450px'" 
         [delete]="true" [idProperty]="'equipe.id'"
         [def]="[['Equipe','equipe.nome','','']]">
+
+        <app-generic-autocomplete #autocompleteDependencia
+          [name]="'dependencia'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'9'" [label]="'Dependência'"
+          [service]="servico.getEquipeService()" [showAdd]="true" (responseAdd)="util.addDependencia(gridDependencias,$event)">
+        </app-generic-autocomplete>
+
       </app-generic-grid>
     </div>
   </app-form-component>
