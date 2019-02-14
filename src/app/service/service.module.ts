@@ -26,6 +26,7 @@ import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
 import { RegimeService } from './regime.service';
 import { RegraAtendimentoService } from './regra-atendimento.service';
 import { RiscoGheService } from './risco-ghe.service';
+import { ServicoService } from './servico.service';
 import { UsuarioService } from './usuario.service';
 import { UtilService } from './util.service';
 
@@ -57,6 +58,7 @@ import { UtilService } from './util.service';
         RegimeService,
         RegraAtendimentoService,
         RiscoGheService,
+        ServicoService,
         UsuarioService,
         UtilService
     ]

@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { GenericListComponent } from './../../../generic/generic-list-component';
 import { GenericComponent } from './../../../generic/generic-component';
 
-import { Dependencia } from './../../../model/dependencia.model';
 import { RegraAtendimento } from './../../../model/regra-atendimento.model';
 import { RegraAtendimentoEquipe } from './../../../model/regra-atendimento-equipe.model';
 import { RegraAtendimentoFilter } from './../../../filter/regra-atendimento.filter';
@@ -99,11 +98,5 @@ export class RegraAtendimentoUtil {
       this.servico.toRegraAtendimentoEquipe(new RegraAtendimentoEquipe());
     regraAtendimentoEquipe.$equipe = equipe;
     grid.add(regraAtendimentoEquipe);
-  }
-
-  addDependencia(grid, equipe) {
-    const dependencia: Dependencia = this.servico.toDependencia(new Dependencia());
-    dependencia.$equipe = equipe;
-    grid.add(dependencia);
   }
 }

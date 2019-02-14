@@ -31,6 +31,7 @@ import { RegimeGuardModule } from './cadastro/regime/regime.guard.module';
 import { PerguntaFichaColetaGuardModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.module';
 import { RegraAtendimentoGuardModule } from './cadastro/regra-atendimento/regra-atendimento.guard.module';
 import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
+import { ServicoGuardModule } from './cadastro/servico/servico.guard.module';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
         RegimeGuardModule,
         PerguntaFichaColetaGuardModule,
         RegraAtendimentoGuardModule,
-        RiscoGheGuardModule
+        RiscoGheGuardModule,
+        ServicoGuardModule
     ]
 })
 export class GuardModule { }

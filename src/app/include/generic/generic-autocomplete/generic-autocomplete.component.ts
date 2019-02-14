@@ -22,6 +22,7 @@ export class GenericAutocompleteComponent<T, F extends GenericFilter> implements
   @Input() object: T;
   @Input() label: string;
   @Input() id = 0;
+  @Input() disabled = false;
 
   @Output() responseAdd = new EventEmitter();
   @Output() responseChange = new EventEmitter();

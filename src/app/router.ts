@@ -34,6 +34,7 @@ import * as perguntaFichaColetaGuard from './guard/cadastro/pergunta-ficha-colet
 import * as regimeGuard from './guard/cadastro/regime/regime.guard';
 import * as regraAtendimentoGuard from './guard/cadastro/regra-atendimento/regra-atendimento.guard';
 import * as riscoGheGuard from './guard/cadastro/risco-ghe/risco-ghe.guard';
+import * as servicoGuard from './guard/cadastro/servico/servico.guard';
 
 export const appRoutes: Routes = [
     { path : 'home', component : HomeComponent, canActivate: [AuthGuard]},
@@ -67,5 +68,6 @@ export const appRoutes: Routes = [
     regimeGuard.Routing.route(HomeComponent),
     regraAtendimentoGuard.Routing.route(HomeComponent),
     riscoGheGuard.Routing.route(HomeComponent),
+    servicoGuard.Routing.route(HomeComponent),
     { path : '', redirectTo: '/home', pathMatch: 'full'}
 ];

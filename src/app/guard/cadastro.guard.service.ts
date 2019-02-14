@@ -30,6 +30,7 @@ import { PerguntaFichaColetaGuardService } from './cadastro/pergunta-ficha-colet
 import { RegimeGuardService } from './cadastro/regime/regime.guard.service';
 import { RegraAtendimentoGuardService } from './cadastro/regra-atendimento/regra-atendimento.guard.service';
 import { RiscoGheGuardService } from './cadastro/risco-ghe/risco-ghe.guard.service';
+import { ServicoGuardService } from './cadastro/servico/servico.guard.service';
 
 @Injectable()
 export class CadastroGuardService implements GenericGuardService {
@@ -62,7 +63,8 @@ export class CadastroGuardService implements GenericGuardService {
         private perguntaFichaColeta: PerguntaFichaColetaGuardService,
         private regime: RegimeGuardService,
         private regraAtendimento: RegraAtendimentoGuardService,
-        private riscoGhe: RiscoGheGuardService) {
+        private riscoGhe: RiscoGheGuardService,
+        private servico: ServicoGuardService) {
 
             this.helper = new Helper();
     }
@@ -173,6 +175,10 @@ export class CadastroGuardService implements GenericGuardService {
             }
             case 'RISCO-GHE': {
                 guardService = this.riscoGhe;
+                break;
+            }
+            case 'SERVICO': {
+                guardService = this.servico;
                 break;
             }
         }

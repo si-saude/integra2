@@ -27,6 +27,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   private filterBuilded = false;
   private filterArray: Array<any>;
   private selectedObject = {};
+  private selected = false;
 
   constructor() {
     this.helper = new Helper();
@@ -137,6 +138,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     }
     this.filter = filter;
     this.selectedObject = {};
+    this.selected = false;
   }
 
   changeBooleanFilter(property) {
@@ -154,6 +156,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     }
     this.filter = filter;
     this.selectedObject = {};
+    this.selected = false;
   }
 
   select(x, type) {
@@ -167,6 +170,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
           }
         }
       }
+      this.selected = true;
     }
   }
 
