@@ -1,3 +1,5 @@
+import { Helper } from './../generic/helper';
+
 import { Equipe } from './equipe.model';
 import { RegraAtendimento } from './regra-atendimento.model';
 import { Dependencia } from './dependencia.model';
@@ -6,7 +8,8 @@ export class RegraAtendimentoEquipe {
     private id: number;
     private equipe: Equipe;
     private regraAtendimento: RegraAtendimento;
-    private acolhimento: boolean;
+    private acolhimento = false;
+    private ordem: number;
     private dependencias: Array<Dependencia>;
     private version: number;
 
@@ -28,6 +31,10 @@ export class RegraAtendimentoEquipe {
 
     public get $dependencias(): Array<Dependencia> {
         return this.dependencias;
+    }
+
+    public get $ordem(): number {
+        return this.ordem;
     }
 
     public get $version(): number {
@@ -52,6 +59,10 @@ export class RegraAtendimentoEquipe {
 
     public set $dependencias(value: Array<Dependencia>) {
         this.dependencias = value;
+    }
+
+    public set $ordem(value: number) {
+        this.ordem = Helper.validateNumber(value);
     }
 
     public set $version(value: number) {
