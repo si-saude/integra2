@@ -5,12 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { CheckboxFilterDirective } from './../directive/checkbox-filter.directive';
+import { CepFormatDirective } from './../directive/cep-format.directive';
+import { CpfFormatDirective } from './../directive/cpf-format.directive';
 import { DateFormatDirective } from './../directive/date-format.directive';
 import { DateTimeFormatDirective } from './../directive/date-time-format.directive';
 import { IntegerFormatDirective } from './../directive/integer-format.directive';
 import { IntegerValidatorDirective } from './../directive/integer-validator.directive';
 import { ModalConfirmDirective } from './../directive/modal-confirm.directive';
 import { NumberFormatDirective } from './../directive/number-format.directive';
+import { PhoneFormatDirective } from './../directive/phone-format.directive';
 
 import { GridFilterPipe } from './../pipe/grid-filter.pipe';
 import { LimitCharacterPipe } from './../pipe/limit-character.pipe';
@@ -43,6 +46,8 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         GenericDateFilterComponent,
         GenericAutocompleteComponent,
         TextInputToGridComponent,
+        CepFormatDirective,
+        CpfFormatDirective,
         CheckboxFilterDirective,
         DateFormatDirective,
         DateTimeFormatDirective,
@@ -50,6 +55,7 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         IntegerValidatorDirective,
         ModalConfirmDirective,
         NumberFormatDirective,
+        PhoneFormatDirective,
         GridFilterPipe,
         LimitCharacterPipe
     ],
@@ -68,6 +74,8 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         GenericDateFilterComponent,
         GenericAutocompleteComponent,
         TextInputToGridComponent,
+        CepFormatDirective,
+        CpfFormatDirective,
         CheckboxFilterDirective,
         DateFormatDirective,
         DateTimeFormatDirective,
@@ -75,6 +83,7 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         IntegerValidatorDirective,
         ModalConfirmDirective,
         NumberFormatDirective,
+        PhoneFormatDirective,
         GridFilterPipe,
         LimitCharacterPipe
     ],

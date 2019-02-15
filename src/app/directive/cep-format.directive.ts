@@ -3,15 +3,15 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { GenericFormatDirective } from './../generic/generic-format-directive';
 
 @Directive( {
-    selector: '[dateFormat]',
+    selector: '[cepFormat]',
     providers: [{
         provide: NG_VALUE_ACCESSOR,
-        useExisting: DateFormatDirective,
+        useExisting: CepFormatDirective,
         multi: true
     }]
 } )
 
-export class DateFormatDirective extends GenericFormatDirective implements ControlValueAccessor, OnChanges {
+export class CepFormatDirective extends GenericFormatDirective implements ControlValueAccessor, OnChanges {
 
     @Input() ngModel;
     @Input() component;
@@ -39,34 +39,22 @@ export class DateFormatDirective extends GenericFormatDirective implements Contr
     }
 
     input(value) {
-        if (value.length > 10) {
-            value = value.substring(0,10);
+        if (value.length > 9) {
+            value = value.substring(0, 9);
         }
         value = value.replace(/\D/g, '')
-            .replace(/^(\d{2})(\d{2})?(\d{4})?/, '$1/$2/$3');
-        const c = this;
-        setTimeout(function() { 
-            c.el.nativeElement.value = value;
-            c.changeValue.emit( value );
+            .replace(/^(\d{5})?(\d{3})?/, '$1-$2');
+        setTimeout(() => {
+            this.el.nativeElement.value = value;
+            this.changeValue.emit( value.replace(/\D/g, '') );
         }, 25);
-    }
-
-    @HostListener( 'keydown', ['$event'] )
-    onKeydown( $event: any ) {
-        if ($event.key === 'Backspace') {
-            $event.target.value = '';
-            this.changeValue.emit( '' );
-            this.dirtyForm();
-        }
     }
 
     @HostListener( 'blur', ['$event'] )
     onBlur( $event: any ) {
         const value = $event.target.value;
-        if (value && value.length === 10) {
-            if (this.helper.validateDate($event.target.value)) {
-                return;
-            }
+        if (value && value.length === 9) {
+            return;
         }
         $event.target.value = '';
         this.changeValue.emit( '' );
