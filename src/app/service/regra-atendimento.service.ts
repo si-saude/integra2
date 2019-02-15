@@ -7,10 +7,10 @@ import { DialogService } from './../util/dialog/dialog.service';
 import { SpinnerService } from './../util/spinner/spinner.service';
 
 import { EquipeService } from './equipe.service';
+import { Equipe } from '../model/equipe.model';
 import { RegraAtendimento } from '../model/regra-atendimento.model';
 import { RegraAtendimentoFilter } from '../filter/regra-atendimento.filter';
 import { RegraAtendimentoEquipe } from '../model/regra-atendimento-equipe.model';
-import { Dependencia } from '../model/dependencia.model';
 
 @Injectable()
 export class RegraAtendimentoService extends GenericService<RegraAtendimento, RegraAtendimentoFilter> {
@@ -58,29 +58,15 @@ export class RegraAtendimentoService extends GenericService<RegraAtendimento, Re
             regraAtendimentoEquipe.$equipe = this.equipeService.toObject(obj['equipe']);
         }
 
-        regraAtendimentoEquipe.$dependencias = new Array<Dependencia>();
-        if (obj['dependencias']) {
-            for (let x = 0; x < obj['dependencias'].length; x++) {
-                const dependencia: Dependencia = this.toDependencia(obj['dependencias'][x]);
-                dependencia.$regraAtendimentoEquipe.$id = regraAtendimentoEquipe.$id;
-                regraAtendimentoEquipe.$dependencias.push(dependencia);
+        regraAtendimentoEquipe.$equipes = new Array<Equipe>();
+        if (obj['equipes']) {
+            for (let x = 0; x < obj['equipes'].length; x++) {
+                const equipe: Equipe = this.equipeService.toObject(obj['equipes'][x]);
+                regraAtendimentoEquipe.$equipes.push(equipe);
             }
         }
 
         return regraAtendimentoEquipe;
-    }
-
-    toDependencia(obj: Dependencia): Dependencia {
-        const dependencia: Dependencia = new Dependencia();
-        dependencia.$id = obj['id'];
-        dependencia.$regraAtendimentoEquipe = new RegraAtendimentoEquipe();
-        dependencia.$version = obj['version'];
-
-        if (this.helper.isNotNull(obj['equipe'])) {
-            dependencia.$equipe = this.equipeService.toObject(obj['equipe']);
-        }
-
-        return dependencia;
     }
 
     getEquipeService() {

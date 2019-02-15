@@ -26,6 +26,10 @@ export class UtilService extends GenericService<Object, GenericFilter> {
         return this.initializeObject();
     }
 
+    getGrupoServico(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('grupo-servico', filter, fThen, fCatch);
+    }
+
     getOperador(filter: string, fThen: any, fCatch: any) {
         this.genericGet('operador', filter, fThen, fCatch);
     }

@@ -33,6 +33,7 @@ import { RegimeGuardService } from './cadastro/regime/regime.guard.service';
 import { RegraAtendimentoGuardService } from './cadastro/regra-atendimento/regra-atendimento.guard.service';
 import { RequisitoAsoGuardService } from './cadastro/requisito-aso/requisito-aso.guard.service';
 import { RiscoGheGuardService } from './cadastro/risco-ghe/risco-ghe.guard.service';
+import { ServicoGuardService } from './cadastro/servico/servico.guard.service';
 import { TipoGrupoMonitoramentoGuardService } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard.service';
 
 @Injectable()
@@ -70,6 +71,7 @@ export class CadastroGuardService implements GenericGuardService {
         private regraAtendimento: RegraAtendimentoGuardService,
         private requisitoAso: RequisitoAsoGuardService,
         private riscoGhe: RiscoGheGuardService,
+        private servico: ServicoGuardService,
         private tipoGrupoMonitoramento: TipoGrupoMonitoramentoGuardService) {
 
             this.helper = new Helper();
@@ -187,12 +189,16 @@ export class CadastroGuardService implements GenericGuardService {
                 guardService = this.regraAtendimento;
                 break;
             }
+			case 'REQUISITO-ASO': {
+                guardService = this.requisitoAso;
+                break;
+            }
             case 'RISCO-GHE': {
                 guardService = this.riscoGhe;
                 break;
             }
-            case 'REQUISITO-ASO': {
-                guardService = this.requisitoAso;
+            case 'SERVICO': {
+                guardService = this.servico;
                 break;
             }
             case 'TIPO-GRUPO-MONITORAMENTO': {

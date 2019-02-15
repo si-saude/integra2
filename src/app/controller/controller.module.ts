@@ -29,6 +29,7 @@ import { RegimeComponentModule } from './cadastro/regime/regime.component.module
 import { RegraAtendimentoComponentModule } from './cadastro/regra-atendimento/regra-atendimento.component.module';
 import { RequisitoAsoComponentModule } from './cadastro/requisito-aso/requisito-aso.component.module';
 import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.component.module';
+import { ServicoComponentModule } from './cadastro/servico/servico.component.module';
 import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.component.module';
 
 
@@ -63,6 +64,7 @@ import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-mon
         RegraAtendimentoComponentModule,
         RequisitoAsoComponentModule,
         RiscoGheComponentModule,
+        ServicoComponentModule,
         TipoGrupoMonitoramentoComponentModule
     ]
 })

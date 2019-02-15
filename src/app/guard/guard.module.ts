@@ -34,6 +34,7 @@ import { PerguntaFichaColetaGuardModule } from './cadastro/pergunta-ficha-coleta
 import { RegraAtendimentoGuardModule } from './cadastro/regra-atendimento/regra-atendimento.guard.module';
 import { RequisitoAsoGuardModule } from './cadastro/requisito-aso/requisito-aso.guard.module';
 import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
+import { ServicoGuardModule } from './cadastro/servico/servico.guard.module';
 import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard.module';
 
 
@@ -74,6 +75,7 @@ import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitor
         RegraAtendimentoGuardModule,
         RequisitoAsoGuardModule,
         RiscoGheGuardModule,
+        ServicoGuardModule,
         TipoGrupoMonitoramentoGuardModule
     ]
 })

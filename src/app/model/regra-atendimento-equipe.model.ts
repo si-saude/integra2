@@ -2,7 +2,6 @@ import { Helper } from './../generic/helper';
 
 import { Equipe } from './equipe.model';
 import { RegraAtendimento } from './regra-atendimento.model';
-import { Dependencia } from './dependencia.model';
 
 export class RegraAtendimentoEquipe {
     private id: number;
@@ -10,7 +9,7 @@ export class RegraAtendimentoEquipe {
     private regraAtendimento: RegraAtendimento;
     private acolhimento = false;
     private ordem: number;
-    private dependencias: Array<Dependencia>;
+    private equipes: Array<Equipe>;
     private version: number;
 
     public get $id(): number {
@@ -29,8 +28,8 @@ export class RegraAtendimentoEquipe {
         return this.acolhimento;
     }
 
-    public get $dependencias(): Array<Dependencia> {
-        return this.dependencias;
+    public get $equipes(): Array<Equipe> {
+        return this.equipes;
     }
 
     public get $ordem(): number {
@@ -57,8 +56,8 @@ export class RegraAtendimentoEquipe {
         this.acolhimento = value;
     }
 
-    public set $dependencias(value: Array<Dependencia>) {
-        this.dependencias = value;
+    public set $equipes(value: Array<Equipe>) {
+        this.equipes = value;
     }
 
     public set $ordem(value: number) {

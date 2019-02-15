@@ -20,13 +20,14 @@
 
       </app-generic-grid>
       <app-generic-grid class="col s5" #gridDependencias
-        [id]="'dependencias'" [component]="this" [array]="gridEquipes.selectedObject.dependencias" [height]="'450px'" 
-        [delete]="true" [idProperty]="'equipe.id'"
-        [def]="[['Equipe','equipe.nome','','']]">
+        [id]="'dependencias'" [component]="this" [array]="gridEquipes.selectedObject.equipes" [height]="'450px'" 
+        [delete]="true" [def]="[['Equipe','nome','','']]">
 
         <app-generic-autocomplete #autocompleteDependencia
           [name]="'dependencia'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'9'" [label]="'Dependência'"
-          [service]="servico.getEquipeService()" [showAdd]="true" (responseAdd)="util.addDependencia(gridDependencias,$event)">
+          [service]="servico.getEquipeService()" [showAdd]="true" 
+          [id]="gridEquipes.selectedObject.equipe ? gridEquipes.selectedObject.equipe.id : 0"
+          [disabled]="!gridEquipes.selected" (responseAdd)="gridDependencias.add($event)">
         </app-generic-autocomplete>
 
       </app-generic-grid>
