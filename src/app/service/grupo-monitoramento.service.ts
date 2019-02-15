@@ -25,6 +25,10 @@ export class GrupoMonitoramentoService extends GenericService<GrupoMonitoramento
         return i;
     }
 
+    initializeAvaliacao() {
+        return new Avaliacao();
+    }
+
     initializeFilter() {
         const f = new GrupoMonitoramentoFilter();
         f.$tipoGrupoMonitoramento = this.tipoGrupoMonitoramentoService.initializeFilter();
@@ -67,7 +71,6 @@ export class GrupoMonitoramentoService extends GenericService<GrupoMonitoramento
         avaliacao.$version = obj['version'];
 
         avaliacao.$grupoMonitoramento = new GrupoMonitoramento();
-
         return avaliacao;
     }
 
