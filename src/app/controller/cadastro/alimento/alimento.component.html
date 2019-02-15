@@ -39,25 +39,27 @@
       </div>
 
       <div #medidasCaseirasTab>
-        <app-generic-autocomplete #autocompleteMedidaCaseira [name]="'medidaCaseira'" [property]="'descricao'" [component]="this"
-          [maxLength]="256" [width]="'5'" [service]="servico.getMedidaCaseiraService()" [showAdd]="true" (responseAdd)="util.addAlimentoMedidaCaseira(gridAlimentosMedidaCaseira,$event)">
-        </app-generic-autocomplete>
         <div class="row">
           <app-generic-grid #gridAlimentosMedidaCaseira [id]="'alimentosMedidaCaseira'" [component]="this" [array]="t.alimentosMedidaCaseira"
             [def]="[['Medida Caseira','medidaCaseira.descricao','',''],['Quantidade','quantidade','number',true,'30'],['Referência','referencia','text',true,'256']]"
             [height]="'350px'" [delete]="true" [idProperty]="'medidaCaseira.id'">
+
+            <app-generic-autocomplete #autocompleteMedidaCaseira [name]="'medidaCaseira'" [property]="'descricao'" [component]="this"
+              [maxLength]="256" [width]="'5'" [service]="servico.getMedidaCaseiraService()" [showAdd]="true" (responseAdd)="util.addAlimentoMedidaCaseira(gridAlimentosMedidaCaseira,$event)">
+            </app-generic-autocomplete>
           </app-generic-grid>
         </div>
       </div>
 
       <div #substituicoesTab>
-        <app-generic-autocomplete #autocompleteSubstituicoes [label]="'Alimento'" [name]="'substituicoes'" [property]="'nome'" [component]="this" [maxLength]="256"
-          [width]="'5'" [service]="servico" [showAdd]="true" (responseAdd)="gridSubstituicoes.add($event)">
-        </app-generic-autocomplete>
         <div class="row">
           <app-generic-grid #gridSubstituicoes [id]="'substituicoes'" [component]="this" [array]="t.substituicoes" [height]="'350px'"
-            [delete]="true" [def]="[['Nome','nome','','']]">
-          </app-generic-grid>
+          [delete]="true" [def]="[['Nome','nome','','']]">
+          
+          <app-generic-autocomplete #autocompleteSubstituicoes [label]="'Alimento'" [name]="'substituicoes'" [property]="'nome'" [component]="this"
+            [maxLength]="256" [width]="'5'" [service]="servico" [showAdd]="true" (responseAdd)="gridSubstituicoes.add($event)">
+          </app-generic-autocomplete>
+        </app-generic-grid>
         </div>
       </div>
 
@@ -128,20 +130,20 @@
           </app-generic-label>
 
           <app-generic-label [width]="'3'">Magnésio (mg)
-            <input class="validate" type="text" name="mg" #mg="ngModel" [ngModel]="t.mg" (changeValue)="t.mg=$event" maxlength="16"
-              [disabled]="_detailMode" numberFormat>
+            <input class="validate" type="text" name="mg" #mg="ngModel" [ngModel]="t.mg" (changeValue)="t.mg=$event" maxlength="16" [disabled]="_detailMode"
+              numberFormat>
             <span *ngIf="!mg.valid && !_detailMode" class="input-error">Número inválido.</span>
           </app-generic-label>
 
           <app-generic-label [width]="'3'">Manganês (mg)
-            <input class="validate" type="text" name="mn" #mn="ngModel" [ngModel]="t.mn" (changeValue)="t.mn=$event" maxlength="16"
-              [disabled]="_detailMode" numberFormat>
+            <input class="validate" type="text" name="mn" #mn="ngModel" [ngModel]="t.mn" (changeValue)="t.mn=$event" maxlength="16" [disabled]="_detailMode"
+              numberFormat>
             <span *ngIf="!mn.valid && !_detailMode" class="input-error">Número inválido.</span>
           </app-generic-label>
 
           <app-generic-label [width]="'3'">Fósforo (mg)
-            <input class="validate" type="text" name="p" #p="ngModel" [ngModel]="t.p" (changeValue)="t.p=$event" maxlength="16"
-              [disabled]="_detailMode" numberFormat>
+            <input class="validate" type="text" name="p" #p="ngModel" [ngModel]="t.p" (changeValue)="t.p=$event" maxlength="16" [disabled]="_detailMode"
+              numberFormat>
             <span *ngIf="!p.valid && !_detailMode" class="input-error">Número inválido.</span>
           </app-generic-label>
         </div>

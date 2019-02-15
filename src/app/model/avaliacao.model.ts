@@ -3,8 +3,8 @@ import { GrupoMonitoramento } from './grupo-monitoramento.model';
 export class Avaliacao {
     private id: number;
     private nome: string;
-    private auditoriaAso: boolean;
-    private auditoriaMedico: boolean;
+    private auditoriaAso = false;
+    private auditoriaMedico = false;
     private grupoMonitoramento: GrupoMonitoramento;
     private version: number;
 

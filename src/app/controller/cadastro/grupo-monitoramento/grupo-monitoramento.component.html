@@ -33,7 +33,7 @@
 
       <div #avaliacoesTab>
         <app-text-input-to-grid #textInputAvaliacao [name]="'avaliacao'" [property]="'nome'" [component]="this" [maxLength]="128" [width]="'8'"
-          [service]="servico" [method]="'toAvaliacao'" [showAdd]="true" (responseAdd)="gridAvaliacoes.add($event)">
+          [service]="servico" [method]="'initializeAvaliacao'" [showAdd]="true" (responseAdd)="gridAvaliacoes.add($event)">
         </app-text-input-to-grid>
         <div class="row">
           <app-generic-grid #gridAvaliacoes [component]="this" [array]="t.avaliacoes" [height]="'350px'" [id]="'avaliacoes'"
