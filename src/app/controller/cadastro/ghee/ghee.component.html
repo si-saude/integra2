@@ -1,0 +1,37 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'2'">Código
+        <input class="validate" type="text" name="codigo" #codigo="ngModel" [(ngModel)]="t.codigo" maxlength="64" [disabled]="_detailMode"
+          required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(codigo.errors)"></span>
+      </app-generic-label>
+      <app-generic-label [width]="'5'">Nome
+        <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome" (ngModelChange)="t.nome=$event.toUpperCase()"
+          maxlength="64" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+      </app-generic-label>
+    </div>
+
+    <div class="row">
+      <app-generic-label [width]="'2'">Data de Criação
+        <input class="validate" type="text" name="dataCriacaoFront" #dataCriacaoFront="ngModel" [ngModel]="t.dataCriacaoFront" (changeValue)="t.dataCriacaoFront=$event"
+          [component]="this" [disabled]="true" dateFormat>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(dataCriacaoFront.errors)"></span>
+      </app-generic-label>
+      <app-generic-label [width]="'2'">Data de Desativação
+        <input class="validate" type="text" name="dataDesativacaoFront" #dataDesativacaoFront="ngModel" [ngModel]="t.dataDesativacaoFront"
+          (changeValue)="t.dataDesativacaoFront=$event" [component]="this" dateFormat>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(dataDesativacaoFront.errors)"></span>
+      </app-generic-label>
+    </div>
+
+    <div class="row">
+      <app-generic-label [width]="'8'">Descrição
+        <textarea class="validate text-area" name="descricao" #descricao="ngModel" [(ngModel)]="t.descricao" maxlength="1024" [disabled]="_detailMode">
+                </textarea>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(descricao.errors)"></span>
+      </app-generic-label>
+    </div>
+  </app-form-component>
+</form>

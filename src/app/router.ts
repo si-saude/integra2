@@ -24,6 +24,8 @@ import * as exameGuard from './guard/cadastro/exame/exame.guard';
 import * as funcaoGuard from './guard/cadastro/funcao/funcao.guard';
 import * as gerenciaGuard from './guard/cadastro/gerencia/gerencia.guard';
 import * as gheGuard from './guard/cadastro/ghe/ghe.guard';
+import * as gheeGuard from './guard/cadastro/ghee/ghee.guard';
+import * as grupoMonitoramentoGuard from './guard/cadastro/grupo-monitoramento/grupo-monitoramento.guard';
 import * as grupoPerguntaFichaColetaGuard from './guard/cadastro/grupo-pergunta-ficha-coleta/grupo-pergunta-ficha-coleta.guard';
 import * as imovelGuard from './guard/cadastro/imovel/imovel.guard';
 import * as indicadorGuard from './guard/cadastro/indicador-sast/indicador-sast.guard';
@@ -33,8 +35,10 @@ import * as perfilGuard from './guard/cadastro/perfil/perfil.guard';
 import * as perguntaFichaColetaGuard from './guard/cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard';
 import * as regimeGuard from './guard/cadastro/regime/regime.guard';
 import * as regraAtendimentoGuard from './guard/cadastro/regra-atendimento/regra-atendimento.guard';
+import * as requisitoAso from './guard/cadastro/requisito-aso/requisito-aso.guard';
 import * as riscoGheGuard from './guard/cadastro/risco-ghe/risco-ghe.guard';
 import * as servicoGuard from './guard/cadastro/servico/servico.guard';
+import * as tipoGrupoMonitoramento from './guard/cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard';
 
 export const appRoutes: Routes = [
     { path : 'home', component : HomeComponent, canActivate: [AuthGuard]},
@@ -58,6 +62,8 @@ export const appRoutes: Routes = [
     funcaoGuard.Routing.route(HomeComponent),
     gerenciaGuard.Routing.route(HomeComponent),
     gheGuard.Routing.route(HomeComponent),
+    gheeGuard.Routing.route(HomeComponent),
+    grupoMonitoramentoGuard.Routing.route(HomeComponent),
     grupoPerguntaFichaColetaGuard.Routing.route(HomeComponent),
     imovelGuard.Routing.route(HomeComponent),
     indicadorGuard.Routing.route(HomeComponent),
@@ -67,7 +73,9 @@ export const appRoutes: Routes = [
     perguntaFichaColetaGuard.Routing.route(HomeComponent),
     regimeGuard.Routing.route(HomeComponent),
     regraAtendimentoGuard.Routing.route(HomeComponent),
+    requisitoAso.Routing.route(HomeComponent),
     riscoGheGuard.Routing.route(HomeComponent),
     servicoGuard.Routing.route(HomeComponent),
+    tipoGrupoMonitoramento.Routing.route(HomeComponent),
     { path : '', redirectTo: '/home', pathMatch: 'full'}
 ];

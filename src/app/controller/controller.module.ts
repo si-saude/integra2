@@ -16,6 +16,8 @@ import { ExameComponentModule } from './cadastro/exame/exame.component.module';
 import { FuncaoComponentModule } from './cadastro/funcao/funcao.component.module';
 import { GerenciaComponentModule } from './cadastro/gerencia/gerencia.component.module';
 import { GheComponentModule } from './cadastro/ghe/ghe.component.module';
+import { GheeComponentModule } from './cadastro/ghee/ghee.component.module';
+import { GrupoMonitoramentoComponentModule } from './cadastro/grupo-monitoramento/grupo-monitoramento.component.module';
 import { GrupoPerguntaFichaColetaComponentModule } from './cadastro/grupo-pergunta-ficha-coleta/grupo-pergunta-ficha-coleta.component.module';
 import { ImovelComponentModule } from './cadastro/imovel/imovel.component.module';
 import { IndicadorSastComponentModule } from './cadastro/indicador-sast/indicador-sast.component.module';
@@ -25,8 +27,10 @@ import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module
 import { PerguntaFichaColetaComponentModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.component.module';
 import { RegimeComponentModule } from './cadastro/regime/regime.component.module';
 import { RegraAtendimentoComponentModule } from './cadastro/regra-atendimento/regra-atendimento.component.module';
+import { RequisitoAsoComponentModule } from './cadastro/requisito-aso/requisito-aso.component.module';
 import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.component.module';
 import { ServicoComponentModule } from './cadastro/servico/servico.component.module';
+import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.component.module';
 
 
 @NgModule({
@@ -47,6 +51,8 @@ import { ServicoComponentModule } from './cadastro/servico/servico.component.mod
         FuncaoComponentModule,
         GerenciaComponentModule,
         GheComponentModule,
+        GheeComponentModule,
+        GrupoMonitoramentoComponentModule,
         GrupoPerguntaFichaColetaComponentModule,
         ImovelComponentModule,
         IndicadorSastComponentModule,
@@ -56,8 +62,10 @@ import { ServicoComponentModule } from './cadastro/servico/servico.component.mod
         PerguntaFichaColetaComponentModule,
         RegimeComponentModule,
         RegraAtendimentoComponentModule,
+        RequisitoAsoComponentModule,
         RiscoGheComponentModule,
-        ServicoComponentModule
+        ServicoComponentModule,
+        TipoGrupoMonitoramentoComponentModule
     ]
 })
 

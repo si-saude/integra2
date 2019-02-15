@@ -16,6 +16,8 @@ import { ExameService } from './exame.service';
 import { FuncaoService } from './funcao.service';
 import { GerenciaService } from './gerencia.service';
 import { GheService } from './ghe.service';
+import { GheeService } from './ghee.service';
+import { GrupoMonitoramentoService } from './grupo-monitoramento.service';
 import { GrupoPerguntaFichaColetaService } from './grupo-pergunta-ficha-coleta.service';
 import { ImovelService } from './imovel.service';
 import { IndicadorSastService } from './indicador-sast.service';
@@ -25,8 +27,10 @@ import { PerfilService } from './perfil.service';
 import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
 import { RegimeService } from './regime.service';
 import { RegraAtendimentoService } from './regra-atendimento.service';
+import { RequisitoAsoService } from './requisito-aso.service';
 import { RiscoGheService } from './risco-ghe.service';
 import { ServicoService } from './servico.service';
+import { TipoGrupoMonitoramentoService } from './tipo-grupo-monitoramento.service';
 import { UsuarioService } from './usuario.service';
 import { UtilService } from './util.service';
 
@@ -48,6 +52,8 @@ import { UtilService } from './util.service';
         FuncaoService,
         GerenciaService,
         GheService,
+        GheeService,
+        GrupoMonitoramentoService,
         GrupoPerguntaFichaColetaService,
         ImovelService,
         IndicadorSastService,
@@ -57,8 +63,10 @@ import { UtilService } from './util.service';
         PerguntaFichaColetaService,
         RegimeService,
         RegraAtendimentoService,
+        RequisitoAsoService,
         RiscoGheService,
         ServicoService,
+        TipoGrupoMonitoramentoService,
         UsuarioService,
         UtilService
     ]
