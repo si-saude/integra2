@@ -26,6 +26,14 @@ export class UtilService extends GenericService<Object, GenericFilter> {
         return this.initializeObject();
     }
 
+    getEscolaridade(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('escolaridade', filter, fThen, fCatch);
+    }
+
+    getEstadoCivil(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('estado-civil', filter, fThen, fCatch);
+    }
+
     getGrupoServico(filter: string, fThen: any, fCatch: any) {
         this.genericGet('grupo-servico', filter, fThen, fCatch);
     }
@@ -36,6 +44,10 @@ export class UtilService extends GenericService<Object, GenericFilter> {
 
     getSexo(filter: string, fThen: any, fCatch: any) {
         this.genericGet('sexo', filter, fThen, fCatch);
+    }
+
+    getStatusEmpregado(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('status-empregado', filter, fThen, fCatch);
     }
 
     getTipoCriterio(filter: string, fThen: any, fCatch: any) {
@@ -50,14 +62,17 @@ export class UtilService extends GenericService<Object, GenericFilter> {
         this.genericGet('type-filter', filter, fThen, fCatch);
     }
 
-    getUf(filter: string, fThen: any, fCatch: any) {
-        this.genericGet('uf', filter, fThen, fCatch);
-    }
-
     getTipoAlimento(filter: string, fThen: any, fCatch: any) {
         this.genericGet('tipo-alimento', filter, fThen, fCatch);
     }
 
+    getUf(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('uf', filter, fThen, fCatch);
+    }
+
+    getVinculoEmpregado(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('vinculo-empregado', filter, fThen, fCatch);
+    }
     private genericGet(path: string, filter: string, fThen: any, fCatch: any) {
         this.toPromise(this.http.get(this.rootUrl + this.path + '/' + path + '?filter=' + filter, { headers: this.getHeaders() }  ),
             function (res) {
