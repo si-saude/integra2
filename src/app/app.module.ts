@@ -10,9 +10,10 @@ import { ControllerModule } from './controller/controller.module';
 import { ServiceModule } from './service/service.module';
 import { GuardModule } from './guard/guard.module';
 import { AppComponent } from './app.component';
-import { DialogService } from './util/dialog/dialog.service';
 import { ConfirmService } from './util/confirm/confirm.service';
+import { DialogService } from './util/dialog/dialog.service';
 import { SpinnerService } from './util/spinner/spinner.service';
+import { WizardService } from './util/wizard-service/wizard-service.service';
 
 import { HomeComponent } from './home/home.component';
 import { UsuarioComponent } from './usuario/usuario.component';
@@ -45,9 +46,10 @@ import { MenuOptionComponent } from './include/generic/menu-option/menu-option.c
   ],
   providers: [
     FormBuilder,
+    ConfirmService,
     DialogService,
     SpinnerService,
-    ConfirmService
+    WizardService
   ],
   bootstrap: [AppComponent]
 })
