@@ -29,6 +29,7 @@ import { IntervencaoGuardService } from './cadastro/intervencao/intervencao.guar
 import { MedidaCaseiraGuardService } from './cadastro/medida-caseira/medida-caseira.guard.service';
 import { PerfilGuardService } from './cadastro/perfil/perfil.guard.service';
 import { PerguntaFichaColetaGuardService } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.service';
+import { QuestionarioGuardService } from './cadastro/questionario/questionario.guard.service';
 import { RegimeGuardService } from './cadastro/regime/regime.guard.service';
 import { RegraAtendimentoGuardService } from './cadastro/regra-atendimento/regra-atendimento.guard.service';
 import { RequisitoAsoGuardService } from './cadastro/requisito-aso/requisito-aso.guard.service';
@@ -67,6 +68,7 @@ export class CadastroGuardService implements GenericGuardService {
         private medidaCaseira: MedidaCaseiraGuardService,
         private perfil: PerfilGuardService,
         private perguntaFichaColeta: PerguntaFichaColetaGuardService,
+        private questionario: QuestionarioGuardService,
         private regime: RegimeGuardService,
         private regraAtendimento: RegraAtendimentoGuardService,
         private requisitoAso: RequisitoAsoGuardService,
@@ -181,6 +183,10 @@ export class CadastroGuardService implements GenericGuardService {
                 guardService = this.perguntaFichaColeta;
                 break;
             }
+            case 'QUESTIONARIO': {
+                guardService = this.questionario;
+                break;
+            }
             case 'REGIME': {
                 guardService = this.regime;
                 break;
@@ -189,7 +195,7 @@ export class CadastroGuardService implements GenericGuardService {
                 guardService = this.regraAtendimento;
                 break;
             }
-			case 'REQUISITO-ASO': {
+            case 'REQUISITO-ASO': {
                 guardService = this.requisitoAso;
                 break;
             }

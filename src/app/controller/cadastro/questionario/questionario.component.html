@@ -1,0 +1,86 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],[questoesTab,'QUESTÕES']]">
+        <div #dadosGeraisTab>
+          <div class="row">
+            <app-generic-label [width]="'6'">Nome
+              <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome"
+              (ngModelChange)="t.nome=$event.toUpperCase()" maxlength="128" [disabled]="_detailMode" required>
+              <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+            </app-generic-label>
+          </div>
+          <div class="row">
+            <app-generic-label [width]="'5'">Tipo
+                <app-generic-select [object]="t.tipo" [component]="this" [name]="'tipo'" [array]="util.tiposQuestionario"
+                  (changeValue)="t.tipo = $event">
+                </app-generic-select>
+            </app-generic-label>
+            <app-generic-label [width]="'1'">Inativo
+              <input type="checkbox" name="inativo" #inativo="ngModel" [(ngModel)]="t.inativo" [disabled]="_detailMode"  />
+              <span></span>
+            </app-generic-label>
+          </div>
+        </div>
+        <div #questoesTab>
+          <div class="row">
+            <app-generic-grid class="col s11" #gridQuestoes
+              [id]="'questoes'" [component]="this" [array]="t.questoes" [height]="'300px'" 
+              [delete]="true" [selection]="true" [def]="[['Código','codigo','',''],['Título','titulo','','']]"
+              [textInput]="textInputQuestao">
+
+                <app-text-input-to-grid #textInputQuestao [name]="'questao'" [property]="'codigo'" [component]="this" [maxLength]="4"
+                  [service]="servico" [method]="'toQuestao'" [showAdd]="true" (responseAdd)="gridQuestoes.add($event)"
+                  [width]="'3'" [label]="'Código da Questão'">
+                </app-text-input-to-grid>
+            </app-generic-grid>
+          </div>
+          <div class="row" *ngIf="gridQuestoes.selected">
+            <div class="col s4">
+              <div class="row">
+                <app-generic-label [width]="'12'">Título
+                  <textarea type="text" name="questaoNome" #questaoNome="ngModel" 
+                    [(ngModel)]="gridQuestoes.selectedObject.titulo" maxlength="2048">
+                  </textarea>
+                </app-generic-label>
+              </div>
+              <div class="row">
+                <app-generic-label [width]="'4'">Código
+                  <input type="text" name="questaoCodigo" #questaoCodigo="ngModel"
+                    [(ngModel)]="gridQuestoes.selectedObject.codigo" maxlength="4" [disabled]="_detailMode">
+                </app-generic-label>
+                <app-generic-label [width]="'8'">Tipo
+                  <app-generic-select [object]="gridQuestoes.selectedObject.tipo" [component]="this" 
+                    [name]="'questaoTipo'" [array]="util.tiposQuestao"
+                    (changeValue)="gridQuestoes.selectedObject.tipo = $event">
+                  </app-generic-select>
+                </app-generic-label> 
+              </div>
+              <div class="row" *ngIf="gridQuestoes.selectedObject.tipo === 'SUBJETIVA'">
+                <app-generic-label [width]="'5'">Código da Questão Anterior
+                  <input class="validate" type="text" name="questaoCodigoAnterior" #questaoCodigoAnterior="ngModel" 
+                    [(ngModel)]="gridQuestoes.selectedObject.codigoAnterior" maxlength="4" [disabled]="_detailMode">
+                </app-generic-label>
+                <app-generic-label [width]="'5'">Código da Próxima Questão
+                  <input class="validate" type="text" name="questaoCodigoProximo" #questaoCodigoProximo="ngModel" 
+                    [(ngModel)]="gridQuestoes.selectedObject.codigoProximo" maxlength="4" [disabled]="_detailMode">
+                </app-generic-label>
+              </div>
+            </div>
+            <div class="col s8" *ngIf="gridQuestoes.selectedObject.tipo &&
+                                       gridQuestoes.selectedObject.tipo.includes('OBJETIVA')">
+              <app-generic-grid #gridAlternativas
+                [id]="'alternativas'" [component]="this" [array]="gridQuestoes.selectedObject.alternativas" 
+                [height]="'450px'" 
+                [delete]="true" [def]="[['Código','codigo','','']]">
+        
+                <app-text-input-to-grid #textInputAlternativa [name]="'alternativa'" [property]="'codigo'" [component]="this" [maxLength]="4"
+                  [service]="servico" [method]="'toAlternativa'" [showAdd]="true" (responseAdd)="gridAlternativas.add($event)"
+                  [width]="'5'" [label]="'Código da Alternativa'" [disabled]="!gridQuestoes.selected">
+                </app-text-input-to-grid>
+              </app-generic-grid>
+            </div>
+          </div>
+        </div>
+      </app-generic-tab>
+  </app-form-component>
+</form>

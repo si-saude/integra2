@@ -66,6 +66,14 @@ export class UtilService extends GenericService<Object, GenericFilter> {
         this.genericGet('tipo-alimento', filter, fThen, fCatch);
     }
 
+    getTipoQuestao(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('tipo-questao', filter, fThen, fCatch);
+    }
+
+    getTipoQuestionario(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('tipo-questionario', filter, fThen, fCatch);
+    }
+
     getUf(filter: string, fThen: any, fCatch: any) {
         this.genericGet('uf', filter, fThen, fCatch);
     }

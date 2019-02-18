@@ -25,6 +25,7 @@ import { IntervencaoService } from './intervencao.service';
 import { MedidaCaseiraService } from './medida-caseira.service';
 import { PerfilService } from './perfil.service';
 import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
+import { QuestionarioService } from './questionario.service';
 import { RegimeService } from './regime.service';
 import { RegraAtendimentoService } from './regra-atendimento.service';
 import { RequisitoAsoService } from './requisito-aso.service';
@@ -61,6 +62,7 @@ import { UtilService } from './util.service';
         MedidaCaseiraService,
         PerfilService,
         PerguntaFichaColetaService,
+        QuestionarioService,
         RegimeService,
         RegraAtendimentoService,
         RequisitoAsoService,

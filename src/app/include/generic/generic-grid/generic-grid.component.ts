@@ -161,13 +161,12 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
 
   select(x, type) {
     if (this.selection && type !== 'checkbox' && type !== 'integer' && type !== 'number' && type !== 'text') {
+      const d = this.def[0];
       for (let a of this.array) {
-        for (let d of this.def) {
-          let ar = this.getObjectAndProperty(a, d[1]);
-          if (ar[0] === x[0][0]) {
-            const prop = d[1].split('.')[0];
-            this.selectedObject = this.array.find(y => y[prop] === ar[0]);
-          }
+        let ar = this.getObjectAndProperty(a, d[1]);
+        if (ar[0] === x[0][0]) {
+          const prop = d[1].split('.')[0];
+          this.selectedObject = this.array.find(y => y[prop] === ar[0] || y[prop] === ar[0][ar[1]]);
         }
       }
       this.selected = true;

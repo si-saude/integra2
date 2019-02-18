@@ -1,0 +1,29 @@
+<app-list-component 
+    [component]="this"
+    [adicionar]="'QUESTIONARIO_ADICIONAR'"
+    [editar]="'QUESTIONARIO_EDITAR'"
+    [detalhar]="'QUESTIONARIO_DETALHAR'"
+    [remover]="'QUESTIONARIO_REMOVER'"
+    >
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'6'">Nome
+            <input type="text" name="nome" [(ngModel)]="filter.nome" maxlength="128" modalConfirm
+                (changeValue)="filter.nome = $event">
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'5'">Tipo
+            <app-generic-select [component]="this" [name]="'tipo'" [array]="util.tiposQuestionario"
+                (changeValue)="filter.tipo = $event">
+            </app-generic-select>
+        </app-generic-label>
+        <app-generic-label [width]="'1'">Inativo
+            <input type="checkbox" name="inativo" [value]="filter.inativo.value" checkboxFilter
+                (changeValue)="filter.inativo.value = $event" />
+            <span></span>
+        </app-generic-label>
+    </div>
+</app-generic-modal>
