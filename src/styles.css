@@ -71,6 +71,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 82%;
     height: 100%;
     overflow:scroll;
+    transition: all 400ms linear;
+}
+
+.large-container {
+  position: fixed;
+  left: 9%;
+  width: 91%;
+  height: 100%;
+  overflow:scroll;
+  transition: all 400ms linear;
 }
 
 .sidebar {
