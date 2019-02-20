@@ -5,8 +5,13 @@
       <i class="material-icons center-icon">add</i>
     </button>
   </div>
-  <app-generic-label [width]="width">{{label}}
-    <input type="text" name="{{name}}" [(ngModel)]="objectAux[lastProperty]"
+  <app-generic-label [width]="width" [ngSwitch]="directive">{{label}}
+    <input *ngSwitchCase="''"
+      type="text" name="{{name}}" [(ngModel)]="objectAux[lastProperty]"
       maxlength="{{maxLength}}" [disabled]="component._detailMode || disabled">
+    <input *ngSwitchCase="'phoneFormat'"
+      type="text" name="{{name}}" [ngModel]="objectAux[lastProperty]" phoneFormat
+      maxlength="{{maxLength}}" [disabled]="component._detailMode || disabled"
+      (changeValue)="objectAux[lastProperty]=$event">
   </app-generic-label>
 </div>

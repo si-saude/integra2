@@ -15,6 +15,7 @@ import { ModalConfirmDirective } from './../directive/modal-confirm.directive';
 import { NumberFormatDirective } from './../directive/number-format.directive';
 import { PhoneFormatDirective } from './../directive/phone-format.directive';
 
+import { GenericPipe } from './../pipe/generic.pipe';
 import { GridFilterPipe } from './../pipe/grid-filter.pipe';
 import { LimitCharacterPipe } from './../pipe/limit-character.pipe';
 
@@ -56,6 +57,7 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         ModalConfirmDirective,
         NumberFormatDirective,
         PhoneFormatDirective,
+        GenericPipe,
         GridFilterPipe,
         LimitCharacterPipe
     ],
@@ -84,6 +86,7 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         ModalConfirmDirective,
         NumberFormatDirective,
         PhoneFormatDirective,
+        GenericPipe,
         GridFilterPipe,
         LimitCharacterPipe
     ],

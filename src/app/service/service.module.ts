@@ -10,6 +10,7 @@ import { CriterioService } from './criterio.service';
 import { CursoService } from './curso.service';
 import { DiagnosticoService } from './diagnostico.service';
 import { EixoService } from './eixo.service';
+import { EmpregadoService } from './empregado.service';
 import { EnfaseService } from './enfase.service';
 import { EquipeService } from './equipe.service';
 import { ExameService } from './exame.service';
@@ -22,6 +23,7 @@ import { GrupoPerguntaFichaColetaService } from './grupo-pergunta-ficha-coleta.s
 import { ImovelService } from './imovel.service';
 import { IndicadorSastService } from './indicador-sast.service';
 import { IntervencaoService } from './intervencao.service';
+import { LocalizacaoService } from './localizacao.service';
 import { MedidaCaseiraService } from './medida-caseira.service';
 import { PerfilService } from './perfil.service';
 import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
@@ -47,6 +49,7 @@ import { UtilService } from './util.service';
         CursoService,
         DiagnosticoService,
         EixoService,
+        EmpregadoService,
         EnfaseService,
         EquipeService,
         ExameService,
@@ -59,6 +62,7 @@ import { UtilService } from './util.service';
         ImovelService,
         IndicadorSastService,
         IntervencaoService,
+        LocalizacaoService,
         MedidaCaseiraService,
         PerfilService,
         PerguntaFichaColetaService,

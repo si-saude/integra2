@@ -1,0 +1,17 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'6'">Nome
+        <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome"
+        (ngModelChange)="t.nome=$event.toUpperCase()" maxlength="50" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+      </app-generic-label>
+    </div>
+    <app-generic-autocomplete #autocompleteBase
+      [name]="'base'" [property]="'nome'" [component]="this" [maxLength]="64"
+      [service]="servico.getBaseService()" (responseChange)="t.base = $event"
+      [object]="t.base" [width]="'6'" [label]="'Base'">
+    </app-generic-autocomplete>
+    
+  </app-form-component>
+</form>

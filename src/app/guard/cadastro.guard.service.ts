@@ -14,6 +14,7 @@ import { CriterioGuardService } from './cadastro/criterio/criterio.guard.service
 import { CursoGuardService } from './cadastro/curso/curso.guard.service';
 import { DiagnosticoGuardService } from './cadastro/diagnostico/diagnostico.guard.service';
 import { EixoGuardService } from './cadastro/eixo/eixo.guard.service';
+import { EmpregadoGuardService } from './cadastro/empregado/empregado.guard.service';
 import { EnfaseGuardService } from './cadastro/enfase/enfase.guard.service';
 import { EquipeGuardService } from './cadastro/equipe/equipe.guard.service';
 import { ExameGuardService } from './cadastro/exame/exame.guard.service';
@@ -26,6 +27,7 @@ import { GrupoPerguntaFichaColetaGuardService } from './cadastro/grupo-pergunta-
 import { ImovelGuardService } from './cadastro/imovel/imovel.guard.service';
 import { IndicadorSastGuardService } from './cadastro/indicador-sast/indicador-sast.guard.service';
 import { IntervencaoGuardService } from './cadastro/intervencao/intervencao.guard.service';
+import { LocalizacaoGuardService } from './cadastro/localizacao/localizacao.guard.service';
 import { MedidaCaseiraGuardService } from './cadastro/medida-caseira/medida-caseira.guard.service';
 import { PerfilGuardService } from './cadastro/perfil/perfil.guard.service';
 import { PerguntaFichaColetaGuardService } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.service';
@@ -53,6 +55,7 @@ export class CadastroGuardService implements GenericGuardService {
         private curso: CursoGuardService,
         private diagnostico: DiagnosticoGuardService,
         private eixo: EixoGuardService,
+        private empregado: EmpregadoGuardService,
         private enfase: EnfaseGuardService,
         private equipe: EquipeGuardService,
         private exame: ExameGuardService,
@@ -65,6 +68,7 @@ export class CadastroGuardService implements GenericGuardService {
         private imovel: ImovelGuardService,
         private indicadorSast: IndicadorSastGuardService,
         private intervencao: IntervencaoGuardService,
+        private localizacao: LocalizacaoGuardService,
         private medidaCaseira: MedidaCaseiraGuardService,
         private perfil: PerfilGuardService,
         private perguntaFichaColeta: PerguntaFichaColetaGuardService,
@@ -123,6 +127,10 @@ export class CadastroGuardService implements GenericGuardService {
                 guardService = this.eixo;
                 break;
             }
+            case 'EMPREGADO': {
+                guardService = this.empregado;
+                break;
+            }
             case 'ENFASE': {
                 guardService = this.enfase;
                 break;
@@ -169,6 +177,10 @@ export class CadastroGuardService implements GenericGuardService {
             }
             case 'INTERVENCAO': {
                 guardService = this.intervencao;
+                break;
+            }
+            case 'LOCALIZACAO': {
+                guardService = this.localizacao;
                 break;
             }
             case 'MEDIDA-CASEIRA': {

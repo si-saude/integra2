@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, ViewChild } from '@angular/core';
 
 import { Helper } from './../../../generic/helper';
 import { GenericService } from './../../../generic/generic-service';
 import { GenericFilter } from './../../../generic/generic-filter';
+import { PhoneFormatDirective } from './../../../directive/phone-format.directive';
 
 @Component({
   selector: 'app-text-input-to-grid',
@@ -10,6 +11,8 @@ import { GenericFilter } from './../../../generic/generic-filter';
   styleUrls: ['./text-input-to-grid.component.css']
 })
 export class TextInputToGridComponent<T, F extends GenericFilter> implements OnInit {
+
+  @ViewChild(PhoneFormatDirective) phoneFormat: PhoneFormatDirective;
 
   @Input() showAdd = false;
   @Input() component;
@@ -22,6 +25,7 @@ export class TextInputToGridComponent<T, F extends GenericFilter> implements OnI
   @Input() object: T;
   @Input() label: string;
   @Input() disabled = false;
+  @Input() directive = '';
 
   @Output() responseAdd = new EventEmitter();
 
@@ -59,5 +63,9 @@ export class TextInputToGridComponent<T, F extends GenericFilter> implements OnI
     const o = this.helper.getObjectAndProperty(this.object, this.property);
     this.objectAux = o[0];
     this.lastProperty = o[1];
+
+    if (this.phoneFormat) {
+      this.phoneFormat.el.nativeElement.value = '';
+    }
   }
 }

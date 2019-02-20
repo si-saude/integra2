@@ -4,6 +4,19 @@ export class Helper {
       return value !== '' ? value : undefined;
     }
 
+    static toPhoneFormat(value: string) {
+      if (value.length > 16) {
+        value = value.substring(0, 16);
+      }
+      value = value.replace(/\D/g, '');
+      if (value.length <= 10) {
+          value = value.replace(/^(\d{2})?(\d{4})?(\d{4})?/, '($1) $2-$3');
+      } else {
+          value = value.replace(/^(\d{2})?(\d{1})?(\d{4})?(\d{4})?/, '($1) $2 $3-$4');
+      }
+      return value;
+    }
+
     constructor() {
     }
 
@@ -141,5 +154,9 @@ export class Helper {
 
     isNotNull(obj) {
       return obj && Object.keys(obj).length > 0;
+    }
+
+    toPhoneFormat(value: string) {
+      return Helper.toPhoneFormat(value);
     }
 }

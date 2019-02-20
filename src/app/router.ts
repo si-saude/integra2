@@ -1,4 +1,4 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { AuthGuard } from './guard/auth.guard';
 import { DeactivateGuard } from './guard/deactivate.guard';
@@ -18,6 +18,7 @@ import * as criterioGuard from './guard/cadastro/criterio/criterio.guard';
 import * as cursoGuard from './guard/cadastro/curso/curso.guard';
 import * as diagnosticoGuard from './guard/cadastro/diagnostico/diagnostico.guard';
 import * as eixoGuard from './guard/cadastro/eixo/eixo.guard';
+import * as empregadoGuard from './guard/cadastro/empregado/empregado.guard';
 import * as enfaseGuard from './guard/cadastro/enfase/enfase.guard';
 import * as equipeGuard from './guard/cadastro/equipe/equipe.guard';
 import * as exameGuard from './guard/cadastro/exame/exame.guard';
@@ -30,6 +31,7 @@ import * as grupoPerguntaFichaColetaGuard from './guard/cadastro/grupo-pergunta-
 import * as imovelGuard from './guard/cadastro/imovel/imovel.guard';
 import * as indicadorGuard from './guard/cadastro/indicador-sast/indicador-sast.guard';
 import * as intervencaoGuard from './guard/cadastro/intervencao/intervencao.guard';
+import * as localizacaoGuard from './guard/cadastro/localizacao/localizacao.guard';
 import * as medidaCaseiraGuard from './guard/cadastro/medida-caseira/medida-caseira.guard';
 import * as perfilGuard from './guard/cadastro/perfil/perfil.guard';
 import * as perguntaFichaColetaGuard from './guard/cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard';
@@ -42,11 +44,15 @@ import * as servicoGuard from './guard/cadastro/servico/servico.guard';
 import * as tipoGrupoMonitoramento from './guard/cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard';
 
 export const appRoutes: Routes = [
-    { path : 'home', component : HomeComponent, canActivate: [AuthGuard]},
-    { path : 'login', component : UsuarioComponent,
-        children : [{ path : '', component : LoginComponent}] },
-    { path : 'nova-senha', component : UsuarioComponent,
-        children : [{ path : '', component : NovaSenhaComponent}]},
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    {
+        path: 'login', component: UsuarioComponent,
+        children: [{ path: '', component: LoginComponent }]
+    },
+    {
+        path: 'nova-senha', component: UsuarioComponent,
+        children: [{ path: '', component: NovaSenhaComponent }]
+    },
     alimentoGuard.Routing.route(HomeComponent),
     atividadeFisicaGuard.Routing.route(HomeComponent),
     baseGuard.Routing.route(HomeComponent),
@@ -57,6 +63,7 @@ export const appRoutes: Routes = [
     cursoGuard.Routing.route(HomeComponent),
     diagnosticoGuard.Routing.route(HomeComponent),
     eixoGuard.Routing.route(HomeComponent),
+    empregadoGuard.Routing.route(HomeComponent),
     enfaseGuard.Routing.route(HomeComponent),
     equipeGuard.Routing.route(HomeComponent),
     exameGuard.Routing.route(HomeComponent),
@@ -69,6 +76,7 @@ export const appRoutes: Routes = [
     imovelGuard.Routing.route(HomeComponent),
     indicadorGuard.Routing.route(HomeComponent),
     intervencaoGuard.Routing.route(HomeComponent),
+    localizacaoGuard.Routing.route(HomeComponent),
     medidaCaseiraGuard.Routing.route(HomeComponent),
     perfilGuard.Routing.route(HomeComponent),
     perguntaFichaColetaGuard.Routing.route(HomeComponent),
@@ -79,5 +87,5 @@ export const appRoutes: Routes = [
     riscoGheGuard.Routing.route(HomeComponent),
     servicoGuard.Routing.route(HomeComponent),
     tipoGrupoMonitoramento.Routing.route(HomeComponent),
-    { path : '', redirectTo: '/home', pathMatch: 'full'}
+    { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

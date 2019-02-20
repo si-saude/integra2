@@ -15,6 +15,7 @@ import { CriterioGuardModule } from './cadastro/criterio/criterio.guard.module';
 import { CursoGuardModule } from './cadastro/curso/curso.guard.module';
 import { DiagnosticoGuardModule } from './cadastro/diagnostico/diagnostico.guard.module';
 import { EixoGuardModule } from './cadastro/eixo/eixo.guard.module';
+import { EmpregadoGuardModule } from './cadastro/empregado/empregado.guard.module';
 import { EnfaseGuardModule } from './cadastro/enfase/enfase.guard.module';
 import { EquipeGuardModule } from './cadastro/equipe/equipe.guard.module';
 import { ExameGuardModule } from './cadastro/exame/exame.guard.module';
@@ -27,6 +28,7 @@ import { GrupoPerguntaFichaColetaGuardModule } from './cadastro/grupo-pergunta-f
 import { ImovelGuardModule } from './cadastro/imovel/imovel.guard.module';
 import { IndicadorSastGuardModule } from './cadastro/indicador-sast/indicador-sast.guard.module';
 import { IntervencaoGuardModule } from './cadastro/intervencao/intervencao.guard.module';
+import { LocalizacaoGuardModule } from './cadastro/localizacao/localizacao.guard.module';
 import { MedidaCaseiraGuardModule } from './cadastro/medida-caseira/medida-caseira.guard.module';
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
 import { RegimeGuardModule } from './cadastro/regime/regime.guard.module';
@@ -57,6 +59,7 @@ import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitor
         CursoGuardModule,
         DiagnosticoGuardModule,
         EixoGuardModule,
+        EmpregadoGuardModule,
         EnfaseGuardModule,
         EquipeGuardModule,
         ExameGuardModule,
@@ -69,6 +72,7 @@ import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitor
         ImovelGuardModule,
         IndicadorSastGuardModule,
         IntervencaoGuardModule,
+        LocalizacaoGuardModule,
         MedidaCaseiraGuardModule,
         PerfilGuardModule,
         RegimeGuardModule,

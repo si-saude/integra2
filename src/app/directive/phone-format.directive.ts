@@ -40,15 +40,7 @@ export class PhoneFormatDirective extends GenericFormatDirective implements Cont
     }
 
     input(value) {
-        if (value.length > 16) {
-            value = value.substring(0, 16);
-        }
-        value = value.replace(/\D/g, '');
-        if (value.length <= 10) {
-            value = value.replace(/^(\d{2})?(\d{4})?(\d{4})?/, '($1) $2-$3');
-        } else {
-            value = value.replace(/^(\d{2})?(\d{1})?(\d{4})?(\d{4})?/, '($1) $2 $3-$4');
-        }
+        value = this.helper.toPhoneFormat(value);
         setTimeout(() => {
             this.el.nativeElement.value = value;
             this.changeValue.emit( value.replace(/\D/g, '') );
