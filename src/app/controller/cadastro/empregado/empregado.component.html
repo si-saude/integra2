@@ -1,0 +1,229 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],
+      [dadosComplementaresTab,'DADOS COMPLEMENTARES'],
+      [telefonesTab,'TELEFONES'],
+      [enderecoTab,'ENDEREÇO'],
+      [gruposMonitoramentoTab, 'GRUPOS DE MONITORAMENTO']]">
+
+      <div #dadosGeraisTab>
+        <div class="row">
+          <app-generic-label [width]="'10'">Nome
+            <input class="validate" type="text" name="pessoaNome" #pessoaNome="ngModel" [ngModel]="t.pessoa.nome" (ngModelChange)="t.pessoa.nome=$event.toUpperCase()"
+              maxlength="400" [disabled]="_detailMode" required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(pessoaNome.errors)"></span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <!-- ADICIONAR MÁSCARA DE CPF -->
+          <app-generic-label [width]="'3'">CPF
+            <input class="validate" type="text" name="cpf" #cpf="ngModel" [ngModel]="t.pessoa.cpf" (ngModelChange)="t.pessoa.cpf=$event.toUpperCase()"
+              maxlength="11" [disabled]="_detailMode" required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(cpf.errors)"></span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">RG
+            <input class="validate" type="text" name="rg" #rg="ngModel" [ngModel]="t.pessoa.rg" (ngModelChange)="t.pessoa.rg=$event.toUpperCase()"
+              maxlength="11" [disabled]="_detailMode">
+            <span class="helper-text" [attr.data-error]="showErrorMessage(rg.errors)"></span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'2'">Data de Nascimento
+            <input class="validate" type="text" name="dataNascimentoFront" #dataNascimentoFront="ngModel" [ngModel]="t.pessoa.dataNascimentoFront"
+              (changeValue)="t.pessoa.dataNascimentoFront=$event" [component]="this" dateFormat>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(dataNascimentoFront.errors)"></span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'2'">Sexo
+            <app-generic-select [object]="t.pessoa.sexo" [component]="this" [name]="'sexo'" [array]="util.sexos" (changeValue)="t.pessoa.sexo = $event">
+            </app-generic-select>
+          </app-generic-label>
+        </div>
+
+      </div>
+
+      <div #dadosComplementaresTab>
+        <div class="row">
+          <app-generic-label [width]="'2'">Chave
+            <input class="validate" type="text" name="chave" #chave="ngModel" [ngModel]="t.chave" (ngModelChange)="t.chave=$event.toUpperCase()"
+              maxlength="4" [disabled]="_detailMode" required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(chave.errors)"></span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Matrícula
+            <input class="validate" type="text" name="matricula" #matricula="ngModel" [ngModel]="t.matricula" (ngModelChange)="t.matricula=$event.toUpperCase()"
+              maxlength="16" [disabled]="_detailMode" required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(matricula.errors)"></span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'2'">Data de Admissão
+            <input class="validate" type="text" name="dataAdmissaoFront" #dataAdmissaoFront="ngModel" [ngModel]="t.dataAdmissaoFront"
+              (changeValue)="t.dataAdmissaoFront=$event" [component]="this" dateFormat>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(dataAdmissaoFront.errors)"></span>
+          </app-generic-label>
+
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'2'">PIS
+            <input class="validate" type="text" name="pis" #pis="ngModel" [(ngModel)]="t.pis" maxlength="20" [disabled]="_detailMode">
+            <span class="helper-text" [attr.data-error]="showErrorMessage(pis.errors)"></span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'3'">Email
+            <input class="validate" type="text" name="email" #email="ngModel" [(ngModel)]="t.email" maxlength="128" [disabled]="_detailMode">
+            <span class="helper-text" [attr.data-error]="showErrorMessage(email.errors)"></span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'2'">Ramal
+            <input class="validate" type="text" name="ramal" #ramal="ngModel" [(ngModel)]="t.ramal" maxlength="16" [disabled]="_detailMode"
+              integerValidator>
+            <span *ngIf="!ramal.valid && !_detailMode" class="input-error">Número inválido.</span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'2'">Status
+            <app-generic-select [object]="t.status" [component]="this" [name]="'status'" [array]="util.statusEmpregados" (changeValue)="t.status = $event">
+            </app-generic-select>
+          </app-generic-label>
+
+          <app-generic-label [width]="'2'">Vínculo
+            <app-generic-select [object]="t.vinculo" [component]="this" [name]="'vinculo'" [array]="util.vinculos" (changeValue)="t.vinculo = $event">
+            </app-generic-select>
+          </app-generic-label>
+
+          <app-generic-label [width]="'2'">Estado Civil
+            <app-generic-select [object]="t.estadoCivil" [component]="this" [name]="'estadoCivil'" [array]="util.estadosCivis" (changeValue)="t.estadoCivil = $event">
+            </app-generic-select>
+          </app-generic-label>
+
+          <app-generic-label [width]="'6'">Escolaridade
+            <app-generic-select [object]="t.escolaridade" [component]="this" [name]="'escolaridade'" [array]="util.escolaridades" (changeValue)="t.escolaridade = $event">
+            </app-generic-select>
+          </app-generic-label>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <app-generic-autocomplete #autocompleteCargo [name]="'cargo'" [property]="'nome'" [component]="this" [maxLength]="120" [service]="servico.getCargoService()"
+              (responseChange)="t.cargo = $event" [object]="t.cargo" [width]="'11'" [label]="'Cargo'">
+            </app-generic-autocomplete>
+          </div>
+          <div class="col s6">
+            <app-generic-autocomplete #autocompleteFuncao [name]="'funcao'" [property]="'nome'" [component]="this" [maxLength]="64" [service]="servico.getFuncaoService()"
+              (responseChange)="t.funcao = $event" [object]="t.funcao" [width]="'11'" [label]="'Função'">
+            </app-generic-autocomplete>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s6">
+            <app-generic-autocomplete #autocompleteEnfase [name]="'enfase'" [property]="'descricao'" [component]="this" [maxLength]="256"
+              [service]="servico.getEnfaseService()" (responseChange)="t.enfase = $event" [object]="t.enfase" [width]="'11'"
+              [label]="'Ênfase'">
+            </app-generic-autocomplete>
+          </div>
+          <div class="col s6">
+            <app-generic-autocomplete #autocompleteRegime [name]="'regime'" [property]="'nome'" [component]="this" [maxLength]="64" [service]="servico.getRegimeService()"
+              (responseChange)="t.regime = $event" [object]="t.regime" [width]="'11'" [label]="'Regime'">
+            </app-generic-autocomplete>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <app-generic-autocomplete #autocompleteGerencia [name]="'gerencia'" [property]="'codigo'" [component]="this" [maxLength]="10"
+              [service]="servico.getGerenciaService()" (responseChange)="t.gerencia = $event" [object]="t.gerencia" [width]="'11'"
+              [label]="'Gerência'">
+            </app-generic-autocomplete>
+          </div>
+          <div class="col s6">
+            <app-generic-autocomplete #autocompleteBase [name]="'base'" [property]="'nome'" [component]="this" [maxLength]="64" [service]="servico.getBaseService()"
+              (responseChange)="t.base = $event" [object]="t.base" [width]="'11'" [label]="'Base'">
+            </app-generic-autocomplete>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s6">
+            <app-generic-autocomplete #autocompleteGhe [name]="'ghe'" [property]="'nome'" [component]="this" [maxLength]="64" [service]="servico.getGheService()"
+              (responseChange)="t.ghe = $event" [object]="t.ghe" [width]="'11'" [label]="'GHE'">
+            </app-generic-autocomplete>
+          </div>
+          <div class="col s6">
+            <app-generic-autocomplete #autocompleteGhee [name]="'ghee'" [property]="'nome'" [component]="this" [maxLength]="64" [service]="servico.getGheeService()"
+              (responseChange)="t.ghee = $event" [object]="t.ghee" [width]="'11'" [label]="'GHEE'">
+            </app-generic-autocomplete>
+          </div>
+        </div>
+
+      </div>
+
+      <div #enderecoTab>
+        <div class="row">
+          <app-generic-label [width]="'10'">Logradouro
+            <input class="validate" type="text" name="logradouro" #logradouro="ngModel" [ngModel]="t.pessoa.endereco.logradouro" (ngModelChange)="t.pessoa.endereco.logradouro=$event.toUpperCase()"
+              maxlength="200" [disabled]="_detailMode">
+            <span class="helper-text" [attr.data-error]="showErrorMessage(logradouro.errors)"></span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'3'">Número
+            <input class="validate" type="text" name="numero" #numero="ngModel" [ngModel]="t.pessoa.endereco.numero" (ngModelChange)="t.pessoa.endereco.numero=$event.toUpperCase()"
+              maxlength="12" [disabled]="_detailMode">
+            <span class="helper-text" [attr.data-error]="showErrorMessage(numero.errors)"></span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'7'">Complemento
+            <input class="validate" type="text" name="complemento" #complemento="ngModel" [ngModel]="t.pessoa.endereco.complemento" (ngModelChange)="t.pessoa.endereco.complemento=$event.toUpperCase()"
+              maxlength="200" [disabled]="_detailMode">
+            <span class="helper-text" [attr.data-error]="showErrorMessage(complemento.errors)"></span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'6'">Bairro
+            <input class="validate" type="text" name="bairro" #bairro="ngModel" [ngModel]="t.pessoa.endereco.bairro" (ngModelChange)="t.pessoa.endereco.bairro=$event.toUpperCase()"
+              maxlength="100" [disabled]="_detailMode">
+            <span class="helper-text" [attr.data-error]="showErrorMessage(bairro.errors)"></span>
+          </app-generic-label>
+
+          <!-- INSERIR MÁSCARA DE CEP -->
+          <app-generic-label [width]="'4'">CEP
+            <input class="validate" type="text" name="cep" #cep="ngModel" [(ngModel)]="t.pessoa.endereco.cep" maxlength="9" [disabled]="_detailMode">
+            <span class="helper-text" [attr.data-error]="showErrorMessage(cep.errors)"></span>
+          </app-generic-label>
+        </div>
+
+        <app-generic-autocomplete #autocompleteCidade [name]="'cidade'" [property]="'nome'" [component]="this" [maxLength]="64" [service]="servico.getCidadeService()"
+          (responseChange)="t.pessoa.endereco.cidade = $event" [object]="t.pessoa.endereco.cidade" [width]="'6'" [label]="'Cidade'">
+        </app-generic-autocomplete>
+      </div>
+
+      <div #telefonesTab>
+        <app-text-input-to-grid #textInputTelefone [name]="'telefone'" [property]="'numero'" [component]="this" [maxLength]="16"
+          [width]="'4'" [service]="servico" [method]="'toTelefone'" [showAdd]="true" (responseAdd)="gridTelefones.add($event)">
+        </app-text-input-to-grid>
+        <div class="row">
+          <app-generic-grid #gridTelefones [component]="this" [array]="t.pessoa.telefones" [height]="'350px'" [id]="'telefones'" [def]="[['Número','numero','','']]"
+            [delete]="true" [textInput]="textInputTelefone">
+          </app-generic-grid>
+        </div>
+      </div>
+
+      <div #gruposMonitoramentoTab>
+        <div class="row">
+          <app-generic-grid #gridGrupoMonitoramentos [id]="'grupoMonitoramentos'" [component]="this" [array]="t.grupoMonitoramentos"
+            [height]="'350px'" [delete]="true" [def]="[['Nome','nome','','']]">
+
+            <app-generic-autocomplete #autocompleteGrupoMonitoramento [name]="'grupoMonitoramento'" [property]="'nome'" [component]="this"
+              [maxLength]="128" [width]="'6'" [service]="servico.getGrupoMonitoramentoService()" [showAdd]="true" (responseAdd)="gridGrupoMonitoramentos.add($event)">
+            </app-generic-autocomplete>
+          </app-generic-grid>
+        </div>
+      </div>
+
+    </app-generic-tab>
+  </app-form-component>
+</form>

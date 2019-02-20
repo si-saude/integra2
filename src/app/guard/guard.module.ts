@@ -15,6 +15,7 @@ import { CriterioGuardModule } from './cadastro/criterio/criterio.guard.module';
 import { CursoGuardModule } from './cadastro/curso/curso.guard.module';
 import { DiagnosticoGuardModule } from './cadastro/diagnostico/diagnostico.guard.module';
 import { EixoGuardModule } from './cadastro/eixo/eixo.guard.module';
+import { EmpregadoGuardModule } from './cadastro/empregado/empregado.guard.module';
 import { EnfaseGuardModule } from './cadastro/enfase/enfase.guard.module';
 import { EquipeGuardModule } from './cadastro/equipe/equipe.guard.module';
 import { ExameGuardModule } from './cadastro/exame/exame.guard.module';
@@ -56,6 +57,7 @@ import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitor
         CursoGuardModule,
         DiagnosticoGuardModule,
         EixoGuardModule,
+        EmpregadoGuardModule,
         EnfaseGuardModule,
         EquipeGuardModule,
         ExameGuardModule,

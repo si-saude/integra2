@@ -10,6 +10,7 @@ import { CriterioService } from './criterio.service';
 import { CursoService } from './curso.service';
 import { DiagnosticoService } from './diagnostico.service';
 import { EixoService } from './eixo.service';
+import { EmpregadoService } from './empregado.service';
 import { EnfaseService } from './enfase.service';
 import { EquipeService } from './equipe.service';
 import { ExameService } from './exame.service';
@@ -46,6 +47,7 @@ import { UtilService } from './util.service';
         CursoService,
         DiagnosticoService,
         EixoService,
+        EmpregadoService,
         EnfaseService,
         EquipeService,
         ExameService,

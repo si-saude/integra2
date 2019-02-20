@@ -43,8 +43,8 @@ export class GheeService extends GenericService<Ghee, GheeFilter> {
         ghee.$descricao = obj['descricao'];
         ghee.$version = obj['version'];
 
-        ghee = this.transformDate(obj, 'dataCriacao');
-        ghee = this.transformDate(obj, 'dataDesativacao');
+        ghee = this.transformDate(obj, ghee, 'dataCriacao');
+        ghee = this.transformDate(obj, ghee, 'dataDesativacao');
 
         return ghee;
     }

@@ -96,6 +96,7 @@ export class GenericAutocompleteComponent<T, F extends GenericFilter> implements
     setTimeout( () => {
       if (!this.object['id'] || this.object['id'] === 0) {
         this.initializeObject();
+        this.object = <any>{};
         this.updateObjectAux();
         this.array = new Array<T>();
         this.helper.dirtyForm(this.component);

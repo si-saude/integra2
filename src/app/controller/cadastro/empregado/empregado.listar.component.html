@@ -1,0 +1,67 @@
+<app-list-component [component]="this" [adicionar]="'EMPREGADO_ADICIONAR'" [editar]="'EMPREGADO_EDITAR'" [detalhar]="'EMPREGADO_DETALHAR'"
+    [remover]="'EMPREGADO_REMOVER'">
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'6'">Nome
+            <input type="text" name="pessoa" [(ngModel)]="filter.pessoa.nome" maxlength="400" modalConfirm (changeValue)="filter.pessoa.nome = $event">
+        </app-generic-label>
+    </div>
+
+    <div class="row">
+        <app-generic-label [width]="'2'">Chave
+            <input type="text" name="chave" [(ngModel)]="filter.chave" maxlength="4" modalConfirm (changeValue)="filter.chave = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'4'">Matrícula
+            <input type="text" name="matricula" [(ngModel)]="filter.matricula" maxlength="16" modalConfirm (changeValue)="filter.matricula = $event">
+        </app-generic-label>
+    </div>
+
+    <div class="row">
+        <app-generic-label [width]="'4'">Status
+            <app-generic-select [component]="this" [name]="'status'" [array]="util.statusEmpregados" (changeValue)="filter.status = $event">
+            </app-generic-select>
+        </app-generic-label>
+        <app-generic-label [width]="'4'">Vínculo
+            <app-generic-select [component]="this" [name]="'vinculo'" [array]="util.vinculos" (changeValue)="filter.vinculo = $event">
+            </app-generic-select>
+        </app-generic-label>
+    </div>
+
+    <div class="row">
+        <app-generic-label [width]="'5'">Cargo
+            <input type="text" name="cargo" [(ngModel)]="filter.cargo.nome" maxlength="120" modalConfirm (changeValue)="filter.cargo.nome = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'5'">Função
+            <input type="text" name="funcao" [(ngModel)]="filter.funcao.nome" maxlength="64" modalConfirm (changeValue)="filter.funcao.nome = $event">
+        </app-generic-label>
+    </div>
+
+    <div class="row">
+        <app-generic-label [width]="'5'">Ênfase
+            <input type="text" name="enfase" [(ngModel)]="filter.enfase.descricao" maxlength="256" modalConfirm (changeValue)="filter.enfase.descricao = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'5'">Regime
+            <input type="text" name="regime" [(ngModel)]="filter.regime.nome" maxlength="64" modalConfirm (changeValue)="filter.regime.nome = $event">
+        </app-generic-label>
+    </div>
+
+    <div class="row">
+        <app-generic-label [width]="'5'">Gerência
+            <input type="text" name="gerencia" [(ngModel)]="filter.gerencia.codigoCompleto" maxlength="64" modalConfirm (changeValue)="filter.gerencia.codigoCompleto = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'5'">Base
+            <input type="text" name="base" [(ngModel)]="filter.base.nome" maxlength="64" modalConfirm (changeValue)="filter.base.nome = $event">
+        </app-generic-label>
+    </div>
+
+    <div class="row">
+        <app-generic-label [width]="'5'">GHE
+            <input type="text" name="ghe" [(ngModel)]="filter.ghe.nome" maxlength="64" modalConfirm (changeValue)="filter.ghe.nome = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'5'">GHEE
+            <input type="text" name="ghee" [(ngModel)]="filter.ghee.nome" maxlength="64" modalConfirm (changeValue)="filter.ghee.nome = $event">
+        </app-generic-label>
+    </div>
+</app-generic-modal>

@@ -1,4 +1,4 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { AuthGuard } from './guard/auth.guard';
 import { DeactivateGuard } from './guard/deactivate.guard';
@@ -18,6 +18,7 @@ import * as criterioGuard from './guard/cadastro/criterio/criterio.guard';
 import * as cursoGuard from './guard/cadastro/curso/curso.guard';
 import * as diagnosticoGuard from './guard/cadastro/diagnostico/diagnostico.guard';
 import * as eixoGuard from './guard/cadastro/eixo/eixo.guard';
+import * as empregadoGuard from './guard/cadastro/empregado/empregado.guard';
 import * as enfaseGuard from './guard/cadastro/enfase/enfase.guard';
 import * as equipeGuard from './guard/cadastro/equipe/equipe.guard';
 import * as exameGuard from './guard/cadastro/exame/exame.guard';
@@ -41,11 +42,15 @@ import * as servicoGuard from './guard/cadastro/servico/servico.guard';
 import * as tipoGrupoMonitoramento from './guard/cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard';
 
 export const appRoutes: Routes = [
-    { path : 'home', component : HomeComponent, canActivate: [AuthGuard]},
-    { path : 'login', component : UsuarioComponent,
-        children : [{ path : '', component : LoginComponent}] },
-    { path : 'nova-senha', component : UsuarioComponent,
-        children : [{ path : '', component : NovaSenhaComponent}]},
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    {
+        path: 'login', component: UsuarioComponent,
+        children: [{ path: '', component: LoginComponent }]
+    },
+    {
+        path: 'nova-senha', component: UsuarioComponent,
+        children: [{ path: '', component: NovaSenhaComponent }]
+    },
     alimentoGuard.Routing.route(HomeComponent),
     atividadeFisicaGuard.Routing.route(HomeComponent),
     baseGuard.Routing.route(HomeComponent),
@@ -56,6 +61,7 @@ export const appRoutes: Routes = [
     cursoGuard.Routing.route(HomeComponent),
     diagnosticoGuard.Routing.route(HomeComponent),
     eixoGuard.Routing.route(HomeComponent),
+    empregadoGuard.Routing.route(HomeComponent),
     enfaseGuard.Routing.route(HomeComponent),
     equipeGuard.Routing.route(HomeComponent),
     exameGuard.Routing.route(HomeComponent),
@@ -77,5 +83,5 @@ export const appRoutes: Routes = [
     riscoGheGuard.Routing.route(HomeComponent),
     servicoGuard.Routing.route(HomeComponent),
     tipoGrupoMonitoramento.Routing.route(HomeComponent),
-    { path : '', redirectTo: '/home', pathMatch: 'full'}
+    { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

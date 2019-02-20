@@ -10,6 +10,7 @@ import { CriterioComponentModule } from './cadastro/criterio/criterio.component.
 import { CursoComponentModule } from './cadastro/curso/curso.component.module';
 import { DiagnosticoComponentModule } from './cadastro/diagnostico/diagnostico.component.module';
 import { EixoComponentModule } from './cadastro/eixo/eixo.component.module';
+import { EmpregadoComponentModule } from './cadastro/empregado/empregado.component.module';
 import { EnfaseComponentModule } from './cadastro/enfase/enfase.component.module';
 import { EquipeComponentModule } from './cadastro/equipe/equipe.component.module';
 import { ExameComponentModule } from './cadastro/exame/exame.component.module';
@@ -45,6 +46,7 @@ import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-mon
         CursoComponentModule,
         DiagnosticoComponentModule,
         EixoComponentModule,
+        EmpregadoComponentModule,
         EnfaseComponentModule,
         EquipeComponentModule,
         ExameComponentModule,

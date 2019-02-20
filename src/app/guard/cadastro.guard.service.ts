@@ -14,6 +14,7 @@ import { CriterioGuardService } from './cadastro/criterio/criterio.guard.service
 import { CursoGuardService } from './cadastro/curso/curso.guard.service';
 import { DiagnosticoGuardService } from './cadastro/diagnostico/diagnostico.guard.service';
 import { EixoGuardService } from './cadastro/eixo/eixo.guard.service';
+import { EmpregadoGuardService } from './cadastro/empregado/empregado.guard.service';
 import { EnfaseGuardService } from './cadastro/enfase/enfase.guard.service';
 import { EquipeGuardService } from './cadastro/equipe/equipe.guard.service';
 import { ExameGuardService } from './cadastro/exame/exame.guard.service';
@@ -52,6 +53,7 @@ export class CadastroGuardService implements GenericGuardService {
         private curso: CursoGuardService,
         private diagnostico: DiagnosticoGuardService,
         private eixo: EixoGuardService,
+        private empregado: EmpregadoGuardService,
         private enfase: EnfaseGuardService,
         private equipe: EquipeGuardService,
         private exame: ExameGuardService,
@@ -119,6 +121,10 @@ export class CadastroGuardService implements GenericGuardService {
             }
             case 'EIXO': {
                 guardService = this.eixo;
+                break;
+            }
+            case 'EMPREGADO': {
+                guardService = this.empregado;
                 break;
             }
             case 'ENFASE': {
