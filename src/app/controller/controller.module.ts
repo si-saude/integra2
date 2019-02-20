@@ -23,6 +23,7 @@ import { GrupoPerguntaFichaColetaComponentModule } from './cadastro/grupo-pergun
 import { ImovelComponentModule } from './cadastro/imovel/imovel.component.module';
 import { IndicadorSastComponentModule } from './cadastro/indicador-sast/indicador-sast.component.module';
 import { IntervencaoComponentModule } from './cadastro/intervencao/intervencao.component.module';
+import { LocalizacaoComponentModule } from './cadastro/localizacao/localizacao.component.module';
 import { MedidaCaseiraComponentModule } from './cadastro/medida-caseira/medida-caseira.component.module';
 import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module';
 import { PerguntaFichaColetaComponentModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.component.module';
@@ -60,6 +61,7 @@ import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-mon
         ImovelComponentModule,
         IndicadorSastComponentModule,
         IntervencaoComponentModule,
+        LocalizacaoComponentModule,
         MedidaCaseiraComponentModule,
         PerfilComponentModule,
         PerguntaFichaColetaComponentModule,

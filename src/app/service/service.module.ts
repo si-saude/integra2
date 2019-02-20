@@ -23,6 +23,7 @@ import { GrupoPerguntaFichaColetaService } from './grupo-pergunta-ficha-coleta.s
 import { ImovelService } from './imovel.service';
 import { IndicadorSastService } from './indicador-sast.service';
 import { IntervencaoService } from './intervencao.service';
+import { LocalizacaoService } from './localizacao.service';
 import { MedidaCaseiraService } from './medida-caseira.service';
 import { PerfilService } from './perfil.service';
 import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
@@ -61,6 +62,7 @@ import { UtilService } from './util.service';
         ImovelService,
         IndicadorSastService,
         IntervencaoService,
+        LocalizacaoService,
         MedidaCaseiraService,
         PerfilService,
         PerguntaFichaColetaService,

@@ -31,6 +31,7 @@ import * as grupoPerguntaFichaColetaGuard from './guard/cadastro/grupo-pergunta-
 import * as imovelGuard from './guard/cadastro/imovel/imovel.guard';
 import * as indicadorGuard from './guard/cadastro/indicador-sast/indicador-sast.guard';
 import * as intervencaoGuard from './guard/cadastro/intervencao/intervencao.guard';
+import * as localizacaoGuard from './guard/cadastro/localizacao/localizacao.guard';
 import * as medidaCaseiraGuard from './guard/cadastro/medida-caseira/medida-caseira.guard';
 import * as perfilGuard from './guard/cadastro/perfil/perfil.guard';
 import * as perguntaFichaColetaGuard from './guard/cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard';
@@ -75,6 +76,7 @@ export const appRoutes: Routes = [
     imovelGuard.Routing.route(HomeComponent),
     indicadorGuard.Routing.route(HomeComponent),
     intervencaoGuard.Routing.route(HomeComponent),
+    localizacaoGuard.Routing.route(HomeComponent),
     medidaCaseiraGuard.Routing.route(HomeComponent),
     perfilGuard.Routing.route(HomeComponent),
     perguntaFichaColetaGuard.Routing.route(HomeComponent),

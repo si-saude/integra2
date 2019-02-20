@@ -28,6 +28,7 @@ import { GrupoPerguntaFichaColetaGuardModule } from './cadastro/grupo-pergunta-f
 import { ImovelGuardModule } from './cadastro/imovel/imovel.guard.module';
 import { IndicadorSastGuardModule } from './cadastro/indicador-sast/indicador-sast.guard.module';
 import { IntervencaoGuardModule } from './cadastro/intervencao/intervencao.guard.module';
+import { LocalizacaoGuardModule } from './cadastro/localizacao/localizacao.guard.module';
 import { MedidaCaseiraGuardModule } from './cadastro/medida-caseira/medida-caseira.guard.module';
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
 import { RegimeGuardModule } from './cadastro/regime/regime.guard.module';
@@ -71,6 +72,7 @@ import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitor
         ImovelGuardModule,
         IndicadorSastGuardModule,
         IntervencaoGuardModule,
+        LocalizacaoGuardModule,
         MedidaCaseiraGuardModule,
         PerfilGuardModule,
         RegimeGuardModule,
