@@ -21,6 +21,7 @@ export class TextInputToGridComponent<T, F extends GenericFilter> implements OnI
   @Input() maxLength = 1;
   @Input() object: T;
   @Input() label: string;
+  @Input() disabled = false;
 
   @Output() responseAdd = new EventEmitter();
 

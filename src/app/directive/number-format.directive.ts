@@ -1,6 +1,6 @@
 import { Directive, HostListener, EventEmitter, Output, ElementRef, SimpleChanges, OnChanges, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { Helper } from './../generic/helper';
+import { GenericFormatDirective } from './../generic/generic-format-directive';
 
 @Directive( {
     selector: '[numberFormat]',
@@ -11,52 +11,19 @@ import { Helper } from './../generic/helper';
     }]
 } )
 
-export class NumberFormatDirective implements ControlValueAccessor, OnChanges {
-    private helper: Helper;
-    private loaded = false;
-    private detailModeLoaded = false;
-    onChange: any;
-    onTouched: any;
+export class NumberFormatDirective extends GenericFormatDirective implements ControlValueAccessor, OnChanges {
 
     @Input() ngModel;
     @Input() component;
     @Input() disabled = false;
     @Output() changeValue = new EventEmitter();
 
-    constructor( private el: ElementRef ) {
-        this.helper = new Helper();
+    constructor(el: ElementRef ) {
+        super(el);
     }
 
     ngOnInit() {
 
-    }
-
-    ngOnChanges( changes: SimpleChanges ) {
-        if (changes['ngModel'] && changes['ngModel']['currentValue'] !== undefined && !this.loaded) {
-            this.loaded = true;
-            this.input(changes['ngModel']['currentValue']);
-        }
-
-        if (changes['component'] && changes['component']['currentValue'] && !this.detailModeLoaded) {
-            this.detailModeLoaded = true;
-            this.el.nativeElement.disabled = changes['component']['currentValue']['_detailMode'];
-        }
-
-        if (changes['disabled'] && changes['disabled']['currentValue']) {
-            this.el.nativeElement.disabled = this.disabled;
-        }
-    }
-
-    writeValue( value: any ): void {
-
-    }
-
-    registerOnChange( fn: any ): void {
-        this.onChange = fn;
-    }
-
-    registerOnTouched( fn: any ): void {
-        this.onTouched = fn;
     }
 
     @HostListener( 'input', ['$event'] )
@@ -67,10 +34,8 @@ export class NumberFormatDirective implements ControlValueAccessor, OnChanges {
         }
     }
 
-    dirtyForm() {
-        if ( this.component ) {
-            this.helper.dirtyForm(this.component);
-        }
+    getComponent() {
+        return this.component;
     }
 
     input(value) {

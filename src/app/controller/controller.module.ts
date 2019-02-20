@@ -26,6 +26,7 @@ import { IntervencaoComponentModule } from './cadastro/intervencao/intervencao.c
 import { MedidaCaseiraComponentModule } from './cadastro/medida-caseira/medida-caseira.component.module';
 import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module';
 import { PerguntaFichaColetaComponentModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.component.module';
+import { QuestionarioComponentModule } from './cadastro/questionario/questionario.component.module';
 import { RegimeComponentModule } from './cadastro/regime/regime.component.module';
 import { RegraAtendimentoComponentModule } from './cadastro/regra-atendimento/regra-atendimento.component.module';
 import { RequisitoAsoComponentModule } from './cadastro/requisito-aso/requisito-aso.component.module';
@@ -62,6 +63,7 @@ import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-mon
         MedidaCaseiraComponentModule,
         PerfilComponentModule,
         PerguntaFichaColetaComponentModule,
+        QuestionarioComponentModule,
         RegimeComponentModule,
         RegraAtendimentoComponentModule,
         RequisitoAsoComponentModule,

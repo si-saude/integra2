@@ -5,8 +5,8 @@
       <div #dadosGeraisTab>
         <div class="row">
           <app-generic-label [width]="'8'">Nome
-            <input class="validate" type="text" name="nome" #nome="ngModel" [(ngModel)]="t.nome" maxlength="128" [disabled]="_detailMode"
-              required>
+            <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome" maxlength="128" [disabled]="_detailMode"
+              (ngModelChange)="t.nome=$event.toUpperCase()" required>
             <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
           </app-generic-label>
         </div>

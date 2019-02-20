@@ -32,6 +32,7 @@ import { MedidaCaseiraGuardModule } from './cadastro/medida-caseira/medida-casei
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
 import { RegimeGuardModule } from './cadastro/regime/regime.guard.module';
 import { PerguntaFichaColetaGuardModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.module';
+import { QuestionarioGuardModule } from './cadastro/questionario/questionario.guard.module';
 import { RegraAtendimentoGuardModule } from './cadastro/regra-atendimento/regra-atendimento.guard.module';
 import { RequisitoAsoGuardModule } from './cadastro/requisito-aso/requisito-aso.guard.module';
 import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
@@ -74,6 +75,7 @@ import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitor
         PerfilGuardModule,
         RegimeGuardModule,
         PerguntaFichaColetaGuardModule,
+        QuestionarioGuardModule,
         RegraAtendimentoGuardModule,
         RequisitoAsoGuardModule,
         RiscoGheGuardModule,
