@@ -16,10 +16,9 @@
         </div>
 
         <div class="row">
-          <!-- ADICIONAR MÁSCARA DE CPF -->
           <app-generic-label [width]="'3'">CPF
-            <input class="validate" type="text" name="cpf" #cpf="ngModel" [ngModel]="t.pessoa.cpf" (ngModelChange)="t.pessoa.cpf=$event.toUpperCase()"
-              maxlength="11" [disabled]="_detailMode" required>
+            <input class="validate" type="text" name="cpf" #cpf="ngModel" [ngModel]="t.pessoa.cpf"
+            (changeValue)="t.pessoa.cpf=$event" maxlength="14" [disabled]="_detailMode" [component]="this" cpfFormat required>
             <span class="helper-text" [attr.data-error]="showErrorMessage(cpf.errors)"></span>
           </app-generic-label>
 
@@ -132,7 +131,7 @@
         </div>
         <div class="row">
           <div class="col s6">
-            <app-generic-autocomplete #autocompleteGerencia [name]="'gerencia'" [property]="'codigo'" [component]="this" [maxLength]="10"
+            <app-generic-autocomplete #autocompleteGerencia [name]="'gerencia'" [property]="'codigoCompleto'" [component]="this" [maxLength]="10"
               [service]="servico.getGerenciaService()" (responseChange)="t.gerencia = $event" [object]="t.gerencia" [width]="'11'"
               [label]="'Gerência'">
             </app-generic-autocomplete>
@@ -189,9 +188,9 @@
             <span class="helper-text" [attr.data-error]="showErrorMessage(bairro.errors)"></span>
           </app-generic-label>
 
-          <!-- INSERIR MÁSCARA DE CEP -->
           <app-generic-label [width]="'4'">CEP
-            <input class="validate" type="text" name="cep" #cep="ngModel" [(ngModel)]="t.pessoa.endereco.cep" maxlength="9" [disabled]="_detailMode">
+            <input class="validate" type="text" name="cep" #cep="ngModel" [ngModel]="t.pessoa.endereco.cep" maxlength="9" [disabled]="_detailMode"
+              [component]="this" (changeValue)="t.pessoa.endereco.cep=$event" cepFormat>
             <span class="helper-text" [attr.data-error]="showErrorMessage(cep.errors)"></span>
           </app-generic-label>
         </div>
@@ -203,11 +202,13 @@
 
       <div #telefonesTab>
         <app-text-input-to-grid #textInputTelefone [name]="'telefone'" [property]="'numero'" [component]="this" [maxLength]="16"
-          [width]="'4'" [service]="servico" [method]="'toTelefone'" [showAdd]="true" (responseAdd)="gridTelefones.add($event)">
+          [width]="'4'" [service]="servico" [method]="'toTelefone'" [showAdd]="true" (responseAdd)="gridTelefones.add($event)"
+          [component]="this" (changeValue)="telefone=$event" [directive]="'phoneFormat'">
         </app-text-input-to-grid>
         <div class="row">
-          <app-generic-grid #gridTelefones [component]="this" [array]="t.pessoa.telefones" [height]="'350px'" [id]="'telefones'" [def]="[['Número','numero','','']]"
-            [delete]="true" [textInput]="textInputTelefone">
+          <app-generic-grid #gridTelefones [component]="this" [array]="t.pessoa.telefones" [height]="'350px'" 
+            [id]="'telefones'" [delete]="true" [textInput]="textInputTelefone"
+            [def]="[['Número','numero','','','','phone']]">
           </app-generic-grid>
         </div>
       </div>

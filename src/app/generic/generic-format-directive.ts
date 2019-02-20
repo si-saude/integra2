@@ -8,7 +8,7 @@ export abstract class GenericFormatDirective implements OnChanges {
     protected onChange: any;
     protected onTouched: any;
 
-    constructor(protected el: ElementRef) {
+    constructor(public el: ElementRef) {
         this.helper = new Helper();
     }
 

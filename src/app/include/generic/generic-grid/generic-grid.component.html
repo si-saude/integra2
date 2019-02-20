@@ -34,7 +34,7 @@
                     "
           *ngFor="let d of def; let j = index"
           (click)="select(a, d[2])">
-        {{ d[2]==='' ? a[j][0][a[j][1]] : '' }}
+        {{ d[2]==='' ? (a[j][0][a[j][1]] | genericPipe : d[5]) : '' }}
         <label *ngIf="d[2]==='checkbox'">
           <input type="checkbox" [(ngModel)]="a[j][0][a[j][1]]" 
             [disabled]="!d[3] || component._detailMode" (click)="dirtyForm()" />
