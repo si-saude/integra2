@@ -9,7 +9,7 @@ import { GenericFilter } from './generic-filter';
 
 export abstract class GenericService<T, F extends GenericFilter> {
 
-    readonly rootUrl = 'http://localhost:8080/IntegraApi2/rest/';
+    readonly rootUrl = 'http://localhost:5080/IntegraApi2/rest/';
 
     protected helper: Helper;
 
@@ -113,13 +113,13 @@ export abstract class GenericService<T, F extends GenericFilter> {
         return this.path;
     }
 
-    transformDate(t: T, property: string): T {
-        if (t[property + 'Front'] && t[property + 'Front'] !== '') {
-            const date = this.helper.createDateFromString(t[property + 'Front']);
+    transformDate(obj, t, property: string) {
+        if (obj[property + 'Front'] && obj[property + 'Front'] !== '') {
+            const date = this.helper.createDateFromString(obj[property + 'Front']);
             t[property] = date.getTime();
-        } else if (t[property] !== 0) {
+        } else if (obj[property] !== 0) {
             // CRlAR UMA DATA A PARTR DO VALOR EM MlLlSEGUNDOS
-            let date = new Date(t[property]);
+            let date = new Date(obj[property]);
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
                 date.getHours() + this.helper.getTimeZoneNumber(), date.getMinutes(), 0, 0 );
             // MONTAR A DATA EM STRlNG E SETAR NA PROPRlEDADE STRlNG DO OBJETO

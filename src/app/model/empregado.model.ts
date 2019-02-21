@@ -20,6 +20,7 @@ export class Empregado {
     private pis: string;
     private email: string;
     private vinculo: string;
+    private foto: string;
     private version: number;
 
     private pessoa: Pessoa;
@@ -74,6 +75,10 @@ export class Empregado {
 
     public get $vinculo(): string {
         return this.vinculo;
+    }
+
+    public get $foto(): string {
+        return this.foto;
     }
 
     public get $version(): number {
@@ -166,6 +171,10 @@ export class Empregado {
 
     public set $vinculo(value: string){
         this.vinculo = value;
+    }
+
+    public set $foto(value: string){
+        this.foto = value;
     }
 
     public set $version(value: number) {

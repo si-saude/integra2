@@ -76,6 +76,7 @@ export class EmpregadoService extends GenericService<Empregado, EmpregadoFilter>
         empregado.$pis = obj['pis'];
         empregado.$email = obj['email'];
         empregado.$vinculo = obj['vinculo'];
+        empregado.$foto = obj['foto'];
         empregado.$version = obj['version'];
         empregado = this.transformDate(obj, empregado, 'dataAdmissao');
 

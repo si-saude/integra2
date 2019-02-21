@@ -69,6 +69,18 @@ export class EmpregadoEditarComponent extends GenericComponent<Empregado> implem
     this.util = new EmpregadoUtil(this.servico);
     this.util.onInit();
   }
+
+  teste(event) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.t.$foto = reader.result.toString();
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 }
 
 @Component({
