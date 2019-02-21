@@ -8,6 +8,13 @@
 
       <div #dadosGeraisTab>
         <div class="row">
+          <div class="col s4">
+            <app-generic-label [width]="'12'">Foto
+              <app-image-input [img]="t.foto" [name]="'foto'" [accept]="'.png'" [component]="this"
+                (changeImg)="t.foto=$event">
+              </app-image-input>
+            </app-generic-label>
+          </div>
           <div class="col s8">
             <div class="row">
               <app-generic-label [width]="'12'">Nome
@@ -41,12 +48,6 @@
                 </app-generic-select>
               </app-generic-label>
             </div>
-          </div>
-          <div class="col s3">
-            <app-generic-label [width]="'12'">Foto
-              <input type="file" name="foto" accept=".png" (change)="teste($event)">
-              <img src="{{t.foto}}"/>
-            </app-generic-label>
           </div>
         </div>
       </div>
@@ -164,7 +165,13 @@
             </app-generic-autocomplete>
           </div>
         </div>
-
+        <div class="row">
+          <app-generic-label [width]="'2'">Assinatura
+            <app-image-input [img]="t.assinatura" [name]="'assinatura'" [accept]="'.png'" [component]="this"
+              (changeImg)="t.assinatura=$event">
+            </app-image-input>
+          </app-generic-label>
+        </div>
       </div>
 
       <div #enderecoTab>
