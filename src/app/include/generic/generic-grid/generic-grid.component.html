@@ -48,6 +48,12 @@
         <input *ngIf="d[2]==='number'" type="text" maxlength="{{d[4] ? d[4] : 1 }}"
             [ngModel]="a[j][0][models[i][j][1]]" (changeValue)="a[j][0][a[j][1]]=$event"
             [disabled]="!d[3] || component._detailMode" (change)="dirtyForm()" numberFormat />
+        <input *ngIf="d[2]==='date'" type="text" maxlength="{{d[4] ? d[4] : 1 }}"
+            [ngModel]="a[j][0][models[i][j][1]]" (changeValue)="a[j][0][a[j][1]]=$event"
+            [disabled]="!d[3] || component._detailMode" (change)="dirtyForm()" dateFormat />
+        <input *ngIf="d[2]==='dateTime'" type="text" maxlength="{{d[4] ? d[4] : 1 }}"
+            [ngModel]="a[j][0][models[i][j][1]]" (changeValue)="a[j][0][a[j][1]]=$event"
+            [disabled]="!d[3] || component._detailMode" (change)="dirtyForm()" dateTimeFormat />
       </td>
       <td class="center">
           <i class="material-icons" *ngIf="delete && !component._detailMode"  

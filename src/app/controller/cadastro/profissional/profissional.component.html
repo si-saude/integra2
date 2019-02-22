@@ -1,0 +1,126 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+
+    <app-generic-tab [tabs]="[
+      [dadosGeraisTab,'DADOS GERAIS'],[curriculoTab,'CURRÍCULO'],
+      [registroTab,'REGISTRO'],[equipesTab,'EQUIPES'],[servicosTab,'SERVIÇOS']]">
+      <div #dadosGeraisTab>
+        <div class="row">
+          <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'pessoa.nome'" [component]="this"
+            [maxLength]="400" [service]="servico.getEmpregadoService()" (responseChange)="t.empregado = $event" [object]="t.empregado"
+            [width]="'11'" [label]="'Empregado'">
+          </app-generic-autocomplete>
+
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'4'">MI
+            <input class="validate" type="text" name="mi" #mi="ngModel" [ngModel]="t.mi" (ngModelChange)="t.mi=$event.toUpperCase()"
+              maxlength="12" [disabled]="_detailMode">
+            <span class="helper-text" [attr.data-error]="showErrorMessage(mi.errors)"></span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'2'">Data do ASO
+            <input class="validate" type="text" name="dataAsoFront" #dataAsoFront="ngModel" [ngModel]="t.dataAsoFront" (changeValue)="t.dataAsoFront=$event"
+              [component]="this" dateFormat>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(dataAsoFront.errors)"></span>
+          </app-generic-label>
+        </div>
+      </div>
+
+      <div #curriculoTab>
+        <div class="row">
+          <app-generic-label [width]="'7'">Histórico
+            <textarea class="validate text-area" name="historico" #historico="ngModel" [(ngModel)]="t.curriculo.historico" maxlength="4096"
+              [disabled]="_detailMode" required>
+            </textarea>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(historico.errors)"></span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'7'">Formação
+            <textarea class="validate text-area" name="formacao" #formacao="ngModel" [(ngModel)]="t.curriculo.formacao" maxlength="512"
+              [disabled]="_detailMode">
+            </textarea>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(formacao.errors)"></span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-label [width]="'7'">Atuação
+            <textarea class="validate text-area" name="atuacao" #atuacao="ngModel" [(ngModel)]="t.curriculo.atuacao" maxlength="512"
+              [disabled]="_detailMode">
+            </textarea>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(atuacao.errors)"></span>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+          <app-generic-grid #gridCurriculoCursos [id]="'curriculoCursos'" [component]="this" [array]="t.curriculo.curriculoCursos"
+            [def]="[['Curso','curso.nome','','',''],['Data','dataFront','date',true,'10']]"
+            [height]="'350px'" [delete]="true" [idProperty]="'curso.id'">
+
+            <app-generic-autocomplete #autocompleteCurso [name]="'curso'" [property]="'nome'" [component]="this" [maxLength]="120" [width]="'5'"
+              [service]="servico.getCursoService()" [showAdd]="true" (responseAdd)="util.addCurriculoCurso(gridCurriculoCursos,$event)"
+              [label]="'Curso'">
+            </app-generic-autocomplete>
+          </app-generic-grid>
+        </div>
+      </div>
+
+      <div #registroTab>
+        <div class="row">
+          <app-generic-label [width]="'8'">Conselho
+            <input class="validate" type="text" name="conselho" #conselho="ngModel" [ngModel]="t.registro.conselho" (ngModelChange)="t.registro.conselho=$event.toUpperCase()"
+              maxlength="200" [disabled]="_detailMode" required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(conselho.errors)"></span>
+          </app-generic-label>
+
+          <app-generic-label [width]="'2'">UF
+            <app-generic-select [object]="t.registro.uf" [component]="this" [name]="'uf'" [array]="util.ufs" (changeValue)="t.registro.uf = $event">
+            </app-generic-select>
+          </app-generic-label>
+        </div>
+
+        <div class="row">
+            <app-generic-label [width]="'3'">Número
+                <input class="validate" type="text" name="numero" #numero="ngModel" [(ngModel)]="t.registro.numero" maxlength="26" [disabled]="_detailMode">
+                <span class="helper-text" [attr.data-error]="showErrorMessage(numero.errors)"></span>
+              </app-generic-label>
+
+          <app-generic-label [width]="'2'">Vencimento
+            <input class="validate" type="text" name="vencimentoFront" #vencimentoFront="ngModel" [ngModel]="t.registro.vencimentoFront" (changeValue)="t.registro.vencimentoFront=$event"
+              [component]="this" dateFormat>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(vencimentoFront.errors)"></span>
+          </app-generic-label>
+        </div>
+      </div>
+
+      <div #equipesTab>
+        <div class="row">
+          <app-generic-grid #gridEquipes [id]="'equipes'" [component]="this" [array]="t.equipes" [height]="'350px'" [delete]="true"
+            [def]="[['Abreviação','abreviacao','',''],['Nome','nome','','']]">
+
+            <app-generic-autocomplete #autocompleteEquipe [name]="'equipe'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'5'"
+              [service]="servico.getEquipeService()" [showAdd]="true" (responseAdd)="gridEquipes.add($event)">
+            </app-generic-autocomplete>
+          </app-generic-grid>
+        </div>
+      </div>
+
+      <div #servicosTab>
+        <div class="row">
+          <app-generic-grid #gridServicos [id]="'servicos'" [component]="this" [array]="t.servicos" [height]="'350px'" [delete]="true"
+            [def]="[['Código','codigo','',''],['Nome','nome','','']]">
+
+            <app-generic-autocomplete #autocompleteServico [name]="'servico'" [property]="'nome'" [component]="this" [maxLength]="128" [width]="'5'"
+              [service]="servico.getServicoService()" [showAdd]="true" (responseAdd)="gridServicos.add($event)">
+            </app-generic-autocomplete>
+          </app-generic-grid>
+        </div>
+      </div>
+
+    </app-generic-tab>
+  </app-form-component>
+</form>

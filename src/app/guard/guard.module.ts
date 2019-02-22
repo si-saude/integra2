@@ -32,9 +32,10 @@ import { IntervencaoGuardModule } from './cadastro/intervencao/intervencao.guard
 import { LocalizacaoGuardModule } from './cadastro/localizacao/localizacao.guard.module';
 import { MedidaCaseiraGuardModule } from './cadastro/medida-caseira/medida-caseira.guard.module';
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
-import { RegimeGuardModule } from './cadastro/regime/regime.guard.module';
 import { PerguntaFichaColetaGuardModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.module';
+import { ProfissionalGuardModule } from './cadastro/profissional/profissional.guard.module';
 import { QuestionarioGuardModule } from './cadastro/questionario/questionario.guard.module';
+import { RegimeGuardModule } from './cadastro/regime/regime.guard.module';
 import { RegraAtendimentoGuardModule } from './cadastro/regra-atendimento/regra-atendimento.guard.module';
 import { RequisitoAsoGuardModule } from './cadastro/requisito-aso/requisito-aso.guard.module';
 import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
@@ -77,9 +78,10 @@ import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitor
         LocalizacaoGuardModule,
         MedidaCaseiraGuardModule,
         PerfilGuardModule,
-        RegimeGuardModule,
         PerguntaFichaColetaGuardModule,
+        ProfissionalGuardModule,
         QuestionarioGuardModule,
+        RegimeGuardModule,
         RegraAtendimentoGuardModule,
         RequisitoAsoGuardModule,
         RiscoGheGuardModule,
