@@ -1,0 +1,25 @@
+<app-list-component 
+    [component]="this"
+    [adicionar]="'PROFISSIONAL_ADICIONAR'"
+    [editar]="'PROFISSIONAL_EDITAR'"
+    [detalhar]="'PROFISSIONAL_DETALHAR'"
+    [remover]="'PROFISSIONAL_REMOVER'"
+>
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'6'">Nome
+            <input type="text" name="nome" [(ngModel)]="filter.empregado.pessoa.nome" maxlength="400" modalConfirm
+                (changeValue)="filter.empregado.pessoa.nome = $event">
+        </app-generic-label>
+    </div>
+    <div class="row">
+        <app-generic-label [width]="'2'">Chave
+            <input type="text" name="chave" [(ngModel)]="filter.empregado.chave" maxlength="4" modalConfirm (changeValue)="filter.empregado.chave = $event">
+        </app-generic-label>
+        <app-generic-label [width]="'4'">Matrícula
+            <input type="text" name="matricula" [(ngModel)]="filter.empregado.matricula" maxlength="16" modalConfirm (changeValue)="filter.empregado.matricula = $event">
+        </app-generic-label>
+    </div>
+</app-generic-modal>
