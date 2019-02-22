@@ -42,6 +42,7 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
 import { ServicoGuardModule } from './cadastro/servico/servico.guard.module';
 import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard.module';
 
+import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard.module';
 
 @NgModule({
     providers: [
@@ -86,7 +87,9 @@ import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitor
         RequisitoAsoGuardModule,
         RiscoGheGuardModule,
         ServicoGuardModule,
-        TipoGrupoMonitoramentoGuardModule
+        TipoGrupoMonitoramentoGuardModule,
+
+        SolicitacaoGuardModule
     ]
 })
 export class GuardModule { }

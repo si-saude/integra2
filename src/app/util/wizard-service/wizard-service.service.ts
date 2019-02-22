@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class WizardService<T> {
 
-    private data:T;
+    private data: T;
     private first: string;
 
     getData() {

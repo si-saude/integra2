@@ -1,0 +1,11 @@
+<form class="col s12" #form="ngForm">
+  <app-wizard-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'4'">Serviço
+        <app-generic-select [component]="this" [name]="'servico'" [object]="t.servico" [property]="'nome'" [array]="util.servicos"
+            (changeValue)="t.servico = $event; changeServico($event);">
+        </app-generic-select>
+      </app-generic-label>
+    </div>
+  </app-wizard-component>
+</form>

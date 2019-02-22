@@ -104,14 +104,13 @@ export class GheUtil {
   riscoFilter: RiscoGheFilter;
 
   constructor(private servico: GheService) {
-    this.riscoFilter = new RiscoGheFilter();
+    this.riscoFilter = servico.getRiscoGheService().initializeFilter();
     this.riscoFilter.$pageSize = 100000;
   }
 
   onInit() {
-    const component = this;
-    this.servico.getRiscoGheService().list(this.riscoFilter, function(res) {
-      component.riscos = component.servico.getRiscoGheService().toList(res.json().list);
+    this.servico.getRiscoGheService().list(this.riscoFilter, (res) => {
+      this.riscos = this.servico.getRiscoGheService().toList(res.json().list);
     }, undefined);
   }
 }

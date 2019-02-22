@@ -67,6 +67,9 @@
     </div>
     <div id="processo" style="display: none">
         <ul><li><a class="menuoption" (click)="goToPrincipal()"><i class="material-icons">chevron_left</i></a></li></ul>
+        <app-menu-option [label]="'Solicitação'" [routerLink]="'/solicitacao'" [funcionalidade]="'SOLICITACAO_SOLICITAR'" [homeComponent]="this" [group]="'PROCESSO'"></app-menu-option>
+        <br>
+        <br>
     </div>
     <div id="relatorio" style="display: none">
         <ul><li><a class="menuoption" (click)="goToPrincipal()"><i class="material-icons">chevron_left</i></a></li></ul>

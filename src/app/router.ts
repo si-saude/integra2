@@ -44,6 +44,8 @@ import * as riscoGheGuard from './guard/cadastro/risco-ghe/risco-ghe.guard';
 import * as servicoGuard from './guard/cadastro/servico/servico.guard';
 import * as tipoGrupoMonitoramento from './guard/cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard';
 
+import * as solicitacao from './guard/processo/solicitacao/solicitacao.guard';
+
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     {
@@ -89,5 +91,7 @@ export const appRoutes: Routes = [
     riscoGheGuard.Routing.route(HomeComponent),
     servicoGuard.Routing.route(HomeComponent),
     tipoGrupoMonitoramento.Routing.route(HomeComponent),
+
+    solicitacao.Routing.route(HomeComponent),
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

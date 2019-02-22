@@ -36,6 +36,8 @@ import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.componen
 import { ServicoComponentModule } from './cadastro/servico/servico.component.module';
 import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.component.module';
 
+import { AtendimentoOcupacionalComponentModule } from './processo/solicitacao/atendimento-ocupacional/atendimento-ocupacional.component.module';
+import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.component.module';
 
 @NgModule({
     imports: [
@@ -73,7 +75,10 @@ import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-mon
         RequisitoAsoComponentModule,
         RiscoGheComponentModule,
         ServicoComponentModule,
-        TipoGrupoMonitoramentoComponentModule
+        TipoGrupoMonitoramentoComponentModule,
+
+        AtendimentoOcupacionalComponentModule,
+        SolicitacaoComponentModule
     ]
 })
 

@@ -29,8 +29,8 @@ export class GuardService {
     }
 
     findCheck(funcionalidade: string): boolean {
+        this.checkAll(funcionalidade);
         const guardArray: Array<GenericGuardService> = new Array<GenericGuardService>();
-        this.check(funcionalidade);
         guardArray.push(this.cadastro);
         guardArray.push(this.processo);
         for (let guard of guardArray){
@@ -50,6 +50,21 @@ export class GuardService {
         if (!this.permissoes.has(funcionalidade)) {
             this.permissoes.set(funcionalidade,
                 this.guardService.hasPermission(funcionalidade).checkPermission());
+        }
+    }
+
+    private checkAll(funcionalidade: string) {
+        if (!this.permissoes.has(funcionalidade)) {
+            const guardArray: Array<GenericGuardService> = new Array<GenericGuardService>();
+            guardArray.push(this.cadastro);
+            guardArray.push(this.processo);
+            for (let guard of guardArray){
+                if (guard.hasPermission(funcionalidade).checkPermission()) {
+                    this.permissoes.set(funcionalidade, true);
+                    return;
+                }
+            }
+            this.permissoes.set(funcionalidade, false);
         }
     }
 
