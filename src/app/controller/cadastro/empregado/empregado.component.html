@@ -8,38 +8,48 @@
 
       <div #dadosGeraisTab>
         <div class="row">
-          <app-generic-label [width]="'10'">Nome
-            <input class="validate" type="text" name="pessoaNome" #pessoaNome="ngModel" [ngModel]="t.pessoa.nome" (ngModelChange)="t.pessoa.nome=$event.toUpperCase()"
-              maxlength="400" [disabled]="_detailMode" required>
-            <span class="helper-text" [attr.data-error]="showErrorMessage(pessoaNome.errors)"></span>
-          </app-generic-label>
+          <div class="col s4">
+            <app-generic-label [width]="'12'">Foto
+              <app-image-input [img]="t.foto" [name]="'foto'" [accept]="'.png'" [component]="this"
+                (changeImg)="t.foto=$event">
+              </app-image-input>
+            </app-generic-label>
+          </div>
+          <div class="col s8">
+            <div class="row">
+              <app-generic-label [width]="'12'">Nome
+                <input class="validate" type="text" name="pessoaNome" #pessoaNome="ngModel" [ngModel]="t.pessoa.nome" (ngModelChange)="t.pessoa.nome=$event.toUpperCase()"
+                  maxlength="400" [disabled]="_detailMode" required>
+                <span class="helper-text" [attr.data-error]="showErrorMessage(pessoaNome.errors)"></span>
+              </app-generic-label>
+            </div>
+
+            <div class="row">
+              <app-generic-label [width]="'3'">CPF
+                <input class="validate" type="text" name="cpf" #cpf="ngModel" [ngModel]="t.pessoa.cpf"
+                (changeValue)="t.pessoa.cpf=$event" maxlength="14" [disabled]="_detailMode" [component]="this" cpfFormat required>
+                <span class="helper-text" [attr.data-error]="showErrorMessage(cpf.errors)"></span>
+              </app-generic-label>
+
+              <app-generic-label [width]="'3'">RG
+                <input class="validate" type="text" name="rg" #rg="ngModel" [ngModel]="t.pessoa.rg" (ngModelChange)="t.pessoa.rg=$event.toUpperCase()"
+                  maxlength="11" [disabled]="_detailMode">
+                <span class="helper-text" [attr.data-error]="showErrorMessage(rg.errors)"></span>
+              </app-generic-label>
+
+              <app-generic-label [width]="'2'">Data de Nascimento
+                <input class="validate" type="text" name="dataNascimentoFront" #dataNascimentoFront="ngModel" [ngModel]="t.pessoa.dataNascimentoFront"
+                  (changeValue)="t.pessoa.dataNascimentoFront=$event" [component]="this" dateFormat>
+                <span class="helper-text" [attr.data-error]="showErrorMessage(dataNascimentoFront.errors)"></span>
+              </app-generic-label>
+
+              <app-generic-label [width]="'3'">Sexo
+                <app-generic-select [object]="t.pessoa.sexo" [component]="this" [name]="'sexo'" [array]="util.sexos" (changeValue)="t.pessoa.sexo = $event">
+                </app-generic-select>
+              </app-generic-label>
+            </div>
+          </div>
         </div>
-
-        <div class="row">
-          <app-generic-label [width]="'3'">CPF
-            <input class="validate" type="text" name="cpf" #cpf="ngModel" [ngModel]="t.pessoa.cpf"
-            (changeValue)="t.pessoa.cpf=$event" maxlength="14" [disabled]="_detailMode" [component]="this" cpfFormat required>
-            <span class="helper-text" [attr.data-error]="showErrorMessage(cpf.errors)"></span>
-          </app-generic-label>
-
-          <app-generic-label [width]="'3'">RG
-            <input class="validate" type="text" name="rg" #rg="ngModel" [ngModel]="t.pessoa.rg" (ngModelChange)="t.pessoa.rg=$event.toUpperCase()"
-              maxlength="11" [disabled]="_detailMode">
-            <span class="helper-text" [attr.data-error]="showErrorMessage(rg.errors)"></span>
-          </app-generic-label>
-
-          <app-generic-label [width]="'2'">Data de Nascimento
-            <input class="validate" type="text" name="dataNascimentoFront" #dataNascimentoFront="ngModel" [ngModel]="t.pessoa.dataNascimentoFront"
-              (changeValue)="t.pessoa.dataNascimentoFront=$event" [component]="this" dateFormat>
-            <span class="helper-text" [attr.data-error]="showErrorMessage(dataNascimentoFront.errors)"></span>
-          </app-generic-label>
-
-          <app-generic-label [width]="'2'">Sexo
-            <app-generic-select [object]="t.pessoa.sexo" [component]="this" [name]="'sexo'" [array]="util.sexos" (changeValue)="t.pessoa.sexo = $event">
-            </app-generic-select>
-          </app-generic-label>
-        </div>
-
       </div>
 
       <div #dadosComplementaresTab>
@@ -155,7 +165,13 @@
             </app-generic-autocomplete>
           </div>
         </div>
-
+        <div class="row">
+          <app-generic-label [width]="'2'">Assinatura
+            <app-image-input [img]="t.assinatura" [name]="'assinatura'" [accept]="'.png'" [component]="this"
+              (changeImg)="t.assinatura=$event">
+            </app-image-input>
+          </app-generic-label>
+        </div>
       </div>
 
       <div #enderecoTab>

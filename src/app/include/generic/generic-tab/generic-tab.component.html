@@ -1,6 +1,6 @@
 <ul class="tabs">
   <li class="tab" *ngFor="let t of tabs; let i = index">
-    <a id="tab-link-{{i}}" style="font-size:medium;cursor:pointer;" (click)="show(i)">
+    <a *ngIf="!t[2]" id="tab-link-{{i}}" style="font-size:medium;cursor:pointer;" (click)="show(i)">
       {{t[1]}}
     </a>
   </li>

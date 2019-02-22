@@ -34,7 +34,7 @@ input::placeholder {
 .search-drop-down {
     position: relative;
     top: -30px;
-    width: 38%;
+    width: 100%;
     max-height: 300px;
     overflow-y: auto;
     z-index: 10;

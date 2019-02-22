@@ -72,7 +72,7 @@
         <ul><li><a class="menuoption" (click)="goToPrincipal()"><i class="material-icons">chevron_left</i></a></li></ul>
     </div>
 </div>
-<div class="card-content container">
+<div [ngClass]="showMenu ? 'card-content container' : 'card-content large-container'">
     <div class="row" style="width:93%">
         <br>
         <router-outlet></router-outlet>

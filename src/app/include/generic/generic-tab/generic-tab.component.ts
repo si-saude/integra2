@@ -7,6 +7,8 @@ import { Component, Input, AfterViewInit } from '@angular/core';
 })
 export class GenericTabComponent implements AfterViewInit {
 
+  private selected: number;
+
   @Input() tabs: Array<Array<any>>;
 
   constructor() { }
@@ -21,6 +23,7 @@ export class GenericTabComponent implements AfterViewInit {
     const style = document.getElementById('tab-link-' + index).style;
     style.textDecoration = 'underline';
     style.fontWeight = 'bold';
+    this.selected = index;
   }
 
   hide(index) {
@@ -32,7 +35,9 @@ export class GenericTabComponent implements AfterViewInit {
 
   hideAll() {
     for (let i = 0; i < this.tabs.length; i++) {
-      this.hide(i);
+      if (!this.tabs[i][2]) {
+        this.hide(i);
+      }
     }
   }
 }

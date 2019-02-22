@@ -1,6 +1,9 @@
 <form class="col s12" #form="ngForm">
   <app-form-component [component]="this">
-    <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],[questoesTab,'QUESTÕES']]">
+    <app-generic-tab #tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],
+            [questoesTab,'QUESTÕES'],
+            [alternativasTab,'ALTERNATIVAS DA QUESTÃO '+ gridQuestoes.selectedObject.codigo, 
+                  !(gridQuestoes.selected && gridQuestoes.selectedObject.tipo && !gridQuestoes.selectedObject.tipo.includes('SUBJETIVA')) ]]">
         <div #dadosGeraisTab>
           <div class="row">
             <app-generic-label [width]="'6'">Nome
@@ -23,22 +26,21 @@
         </div>
         <div #questoesTab>
           <div class="row">
-            <app-generic-grid class="col s11" #gridQuestoes
-              [id]="'questoes'" [component]="this" [array]="t.questoes" [height]="'300px'" 
+            <app-text-input-to-grid #textInputQuestao [name]="'questao'" [property]="'codigo'" [component]="this" [maxLength]="4"
+              [service]="servico" [method]="'toQuestao'" [showAdd]="true" (responseAdd)="gridQuestoes.add($event)"
+              [width]="'6'" [label]="'Código da Questão'">
+            </app-text-input-to-grid>
+          </div>
+          <div class="row">
+            <app-generic-grid class="col s8" #gridQuestoes
+              [id]="'questoes'" [component]="this" [array]="t.questoes" [height]="'400px'" 
               [delete]="true" [selection]="true" [def]="[['Código','codigo','',''],['Título','titulo','','']]"
               [textInput]="textInputQuestao">
-
-                <app-text-input-to-grid #textInputQuestao [name]="'questao'" [property]="'codigo'" [component]="this" [maxLength]="4"
-                  [service]="servico" [method]="'toQuestao'" [showAdd]="true" (responseAdd)="gridQuestoes.add($event)"
-                  [width]="'3'" [label]="'Código da Questão'">
-                </app-text-input-to-grid>
             </app-generic-grid>
-          </div>
-          <div class="row" *ngIf="gridQuestoes.selected">
-            <div class="col s4">
+            <div class="col s4" *ngIf="gridQuestoes.selected">
               <div class="row">
                 <app-generic-label [width]="'12'">Título
-                  <textarea type="text" name="questaoNome" #questaoNome="ngModel" 
+                  <textarea type="text" name="questaoNome" #questaoNome="ngModel" [disabled]="_detailMode"
                     [(ngModel)]="gridQuestoes.selectedObject.titulo" maxlength="2048">
                   </textarea>
                 </app-generic-label>
@@ -66,18 +68,45 @@
                 </app-generic-label>
               </div>
             </div>
-            <div class="col s8" *ngIf="gridQuestoes.selectedObject.tipo &&
-                                       gridQuestoes.selectedObject.tipo.includes('OBJETIVA')">
-              <app-generic-grid #gridAlternativas
-                [id]="'alternativas'" [component]="this" [array]="gridQuestoes.selectedObject.alternativas" 
-                [height]="'450px'" 
-                [delete]="true" [def]="[['Código','codigo','','']]">
-        
-                <app-text-input-to-grid #textInputAlternativa [name]="'alternativa'" [property]="'codigo'" [component]="this" [maxLength]="4"
-                  [service]="servico" [method]="'toAlternativa'" [showAdd]="true" (responseAdd)="gridAlternativas.add($event)"
-                  [width]="'5'" [label]="'Código da Alternativa'" [disabled]="!gridQuestoes.selected">
-                </app-text-input-to-grid>
+          </div>
+        </div>
+        <div #alternativasTab>
+          <div *ngIf="tab.selected === 2">
+            <div class="row">
+              <app-text-input-to-grid #textInputAlternativa [name]="'alternativa'" [property]="'codigo'" [component]="this" [maxLength]="4"
+                [service]="servico" [method]="'toAlternativa'" [showAdd]="true" (responseAdd)="gridAlternativas.add($event)"
+                [width]="'4'" [label]="'Código da Alternativa'">
+              </app-text-input-to-grid>
+            </div>
+            <div class="row">
+              <app-generic-grid class="col s8" #gridAlternativas
+                  [id]="'alternativas'" [component]="this" [array]="gridQuestoes.selectedObject.alternativas" [height]="'400px'" 
+                  [delete]="true" [selection]="true" [def]="[['Código','codigo','',''],['Título','titulo','','']]"
+                  [textInput]="textInputAlternativa">
               </app-generic-grid>
+              <div class="col s4" *ngIf="gridAlternativas.selected">
+                <div class="row">
+                  <app-generic-label [width]="'2'">Código
+                    <input type="text" name="alternativaCodigo" #alternativaCodigo="ngModel"
+                      [(ngModel)]="gridAlternativas.selectedObject.codigo" maxlength="4" [disabled]="_detailMode">
+                  </app-generic-label>
+                  <app-generic-label [width]="'10'">Título
+                    <textarea type="text" name="alternativaNome" #alternativaNome="ngModel" [disabled]="_detailMode"
+                      [(ngModel)]="gridAlternativas.selectedObject.titulo" maxlength="1024">
+                    </textarea>
+                  </app-generic-label>
+                </div>
+                <div class="row">
+                  <app-generic-label [width]="'6'">Código da Questão Anterior
+                    <input class="validate" type="text" name="alternativaCodigoAnterior" #alternativaCodigoAnterior="ngModel" 
+                      [(ngModel)]="gridAlternativas.selectedObject.codigoAnterior" maxlength="4" [disabled]="_detailMode">
+                  </app-generic-label>
+                  <app-generic-label [width]="'6'">Código da Próxima Questão
+                    <input class="validate" type="text" name="alternativaCodigoProximo" #alternativaCodigoProximo="ngModel" 
+                      [(ngModel)]="gridAlternativas.selectedObject.codigoProximo" maxlength="4" [disabled]="_detailMode">
+                  </app-generic-label>
+                </div>
+              </div>
             </div>
           </div>
         </div>

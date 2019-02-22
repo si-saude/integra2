@@ -31,6 +31,7 @@ import { GenericSelectComponent } from '../include/generic/generic-select/generi
 import { GenericFormModalComponent } from '../include/generic/generic-form-modal/generic-form-modal.component';
 import { GenericDateFilterComponent } from '../include/generic/generic-date-filter/generic-date-filter.component';
 import { GenericAutocompleteComponent } from '../include/generic/generic-autocomplete/generic-autocomplete.component';
+import { ImageInputComponent } from '../include/generic/image-input/image-input.component';
 import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/text-input-to-grid.component';
 
 @NgModule({
@@ -46,6 +47,7 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         GenericFormModalComponent,
         GenericDateFilterComponent,
         GenericAutocompleteComponent,
+        ImageInputComponent,
         TextInputToGridComponent,
         CepFormatDirective,
         CpfFormatDirective,
@@ -75,6 +77,7 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         GenericFormModalComponent,
         GenericDateFilterComponent,
         GenericAutocompleteComponent,
+        ImageInputComponent,
         TextInputToGridComponent,
         CepFormatDirective,
         CpfFormatDirective,
