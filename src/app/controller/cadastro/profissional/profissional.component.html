@@ -6,11 +6,10 @@
       [registroTab,'REGISTRO'],[equipesTab,'EQUIPES'],[servicosTab,'SERVIÇOS']]">
       <div #dadosGeraisTab>
         <div class="row">
-          <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'pessoa.nome'" [component]="this"
-            [maxLength]="400" [service]="servico.getEmpregadoService()" (responseChange)="t.empregado = $event" [object]="t.empregado"
-            [width]="'11'" [label]="'Empregado'">
+          <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'pessoa.nome'" [component]="this" [maxLength]="400"
+            [service]="servico.getEmpregadoService()" (responseChange)="t.empregado = $event" [object]="t.empregado" [width]="'11'"
+            [label]="'Empregado'">
           </app-generic-autocomplete>
-
         </div>
 
         <div class="row">
@@ -58,8 +57,8 @@
 
         <div class="row">
           <app-generic-grid #gridCurriculoCursos [id]="'curriculoCursos'" [component]="this" [array]="t.curriculo.curriculoCursos"
-            [def]="[['Curso','curso.nome','','',''],['Data','dataFront','date',true,'10']]"
-            [height]="'350px'" [delete]="true" [idProperty]="'curso.id'">
+            [def]="[['Curso','curso.nome','','',''],['Data','dataFront','date',true,'10']]" [height]="'350px'" [delete]="true"
+            [idProperty]="'curso.id'">
 
             <app-generic-autocomplete #autocompleteCurso [name]="'curso'" [property]="'nome'" [component]="this" [maxLength]="120" [width]="'5'"
               [service]="servico.getCursoService()" [showAdd]="true" (responseAdd)="util.addCurriculoCurso(gridCurriculoCursos,$event)"
@@ -84,14 +83,14 @@
         </div>
 
         <div class="row">
-            <app-generic-label [width]="'3'">Número
-                <input class="validate" type="text" name="numero" #numero="ngModel" [(ngModel)]="t.registro.numero" maxlength="26" [disabled]="_detailMode">
-                <span class="helper-text" [attr.data-error]="showErrorMessage(numero.errors)"></span>
-              </app-generic-label>
+          <app-generic-label [width]="'3'">Número
+            <input class="validate" type="text" name="numero" #numero="ngModel" [(ngModel)]="t.registro.numero" maxlength="26" [disabled]="_detailMode">
+            <span class="helper-text" [attr.data-error]="showErrorMessage(numero.errors)"></span>
+          </app-generic-label>
 
           <app-generic-label [width]="'2'">Vencimento
-            <input class="validate" type="text" name="vencimentoFront" #vencimentoFront="ngModel" [ngModel]="t.registro.vencimentoFront" (changeValue)="t.registro.vencimentoFront=$event"
-              [component]="this" dateFormat>
+            <input class="validate" type="text" name="vencimentoFront" #vencimentoFront="ngModel" [ngModel]="t.registro.vencimentoFront"
+              (changeValue)="t.registro.vencimentoFront=$event" [component]="this" dateFormat>
             <span class="helper-text" [attr.data-error]="showErrorMessage(vencimentoFront.errors)"></span>
           </app-generic-label>
         </div>
@@ -114,8 +113,8 @@
           <app-generic-grid #gridServicos [id]="'servicos'" [component]="this" [array]="t.servicos" [height]="'350px'" [delete]="true"
             [def]="[['Código','codigo','',''],['Nome','nome','','']]">
 
-            <app-generic-autocomplete #autocompleteServico [name]="'servico'" [property]="'nome'" [component]="this" [maxLength]="128" [width]="'5'"
-              [service]="servico.getServicoService()" [showAdd]="true" (responseAdd)="gridServicos.add($event)">
+            <app-generic-autocomplete #autocompleteServico [name]="'servico'" [property]="'nome'" [component]="this" [maxLength]="128"
+              [width]="'5'" [service]="servico.getServicoService()" [showAdd]="true" (responseAdd)="gridServicos.add($event)">
             </app-generic-autocomplete>
           </app-generic-grid>
         </div>

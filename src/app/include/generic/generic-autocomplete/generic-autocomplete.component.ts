@@ -23,6 +23,7 @@ export class GenericAutocompleteComponent<T, F extends GenericFilter> implements
   @Input() label: string;
   @Input() id = 0;
   @Input() disabled = false;
+  @Input() method = 'initializeObject';
 
   @Output() responseAdd = new EventEmitter();
   @Output() responseChange = new EventEmitter();
@@ -48,7 +49,7 @@ export class GenericAutocompleteComponent<T, F extends GenericFilter> implements
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['object'] && changes['object']['currentValue'] && !this.objectLoaded) {
+    if (changes['object'] && this.helper.isNotNull(changes['object']['currentValue']) && !this.objectLoaded) {
       this.objectLoaded = true;
       this.updateObjectAux();
     }
@@ -60,7 +61,7 @@ export class GenericAutocompleteComponent<T, F extends GenericFilter> implements
   }
 
   initializeObject() {
-    this.object = this.service.initializeObject();
+    this.object = this.service[this.method]();
     this.updateObjectAux();
   }
 
@@ -96,7 +97,6 @@ export class GenericAutocompleteComponent<T, F extends GenericFilter> implements
     setTimeout( () => {
       if (!this.object['id'] || this.object['id'] === 0) {
         this.initializeObject();
-        this.object = <any>{};
         this.updateObjectAux();
         this.array = new Array<T>();
         this.helper.dirtyForm(this.component);
