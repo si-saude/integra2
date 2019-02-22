@@ -4,6 +4,7 @@ import { AuthGuard } from './auth.guard';
 import { DeactivateGuard } from './deactivate.guard';
 import { GuardService } from './guard.service';
 import { CadastroGuardService } from './cadastro.guard.service';
+import { ProcessoGuardService } from './processo.guard.service';
 
 import { AlimentoGuardModule } from './cadastro/alimento/alimento.guard.module';
 import { AtividadeFisicaGuardModule } from './cadastro/atividade-fisica/atividade-fisica.guard.module';
@@ -46,6 +47,7 @@ import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitor
         AuthGuard,
         GuardService,
         CadastroGuardService,
+        ProcessoGuardService,
         DeactivateGuard
     ],
     imports: [

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { GenericGuardService } from './../generic/generic-guard.service';
 import { CadastroGuardService } from './cadastro.guard.service';
+import { ProcessoGuardService } from './processo.guard.service';
 
 @Injectable()
 export class GuardService {
@@ -10,7 +11,8 @@ export class GuardService {
     private permissoes: Map<string, boolean>;
     private guardService: GenericGuardService;
 
-    constructor(private cadastro: CadastroGuardService) {
+    constructor(private cadastro: CadastroGuardService,
+        private processo: ProcessoGuardService) {
         this.clear();
     }
 
@@ -20,13 +22,20 @@ export class GuardService {
         return this.hasPermission(funcionalidade);
     }
 
+    checkProcesso(funcionalidade: string): boolean {
+        this.guardService = this.processo;
+        this.check(funcionalidade);
+        return this.hasPermission(funcionalidade);
+    }
+
     findCheck(funcionalidade: string): boolean {
-        let guardArray: Array<GenericGuardService> = new Array<GenericGuardService>();
+        const guardArray: Array<GenericGuardService> = new Array<GenericGuardService>();
         this.check(funcionalidade);
         guardArray.push(this.cadastro);
-        for(let guard of guardArray){
+        guardArray.push(this.processo);
+        for (let guard of guardArray){
             this.guardService = guard;
-            if(this.hasPermission(funcionalidade) === true) {
+            if (this.hasPermission(funcionalidade) === true) {
                 return true;
             }
         }
