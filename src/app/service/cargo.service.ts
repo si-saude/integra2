@@ -24,6 +24,10 @@ export class CargoService extends GenericService<Cargo, CargoFilter> {
         return cargo;
     }
 
+    initializeToAutocomplete() {
+        return new Cargo();
+    }
+
     initializeFilter() {
         return new CargoFilter();
     }

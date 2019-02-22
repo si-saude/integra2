@@ -116,7 +116,7 @@
         <div class="row">
           <div class="col s6">
             <app-generic-autocomplete #autocompleteCargo [name]="'cargo'" [property]="'nome'" [component]="this" [maxLength]="120" [service]="servico.getCargoService()"
-              (responseChange)="t.cargo = $event" [object]="t.cargo" [width]="'11'" [label]="'Cargo'">
+              (responseChange)="t.cargo = $event" [object]="t.cargo" [width]="'11'" [label]="'Cargo'" [method]="'initializeToAutocomplete'">
             </app-generic-autocomplete>
           </div>
           <div class="col s6">
@@ -141,7 +141,7 @@
         </div>
         <div class="row">
           <div class="col s6">
-            <app-generic-autocomplete #autocompleteGerencia [name]="'gerencia'" [property]="'codigoCompleto'" [component]="this" [maxLength]="10"
+            <app-generic-autocomplete #autocompleteGerencia [name]="'gerencia'" [property]="'codigoCompleto'" [component]="this" [maxLength]="60"
               [service]="servico.getGerenciaService()" (responseChange)="t.gerencia = $event" [object]="t.gerencia" [width]="'11'"
               [label]="'Gerência'">
             </app-generic-autocomplete>
