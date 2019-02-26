@@ -1,0 +1,21 @@
+<form class="col s12" #form="ngForm">
+  <app-wizard-component [component]="this">
+    <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'pessoa.nome'" [component]="this" [maxLength]="400"
+      [service]="servico.getEmpregadoService()" (responseChange)="t.empregado = $event; checkSubmit();" [object]="t.empregado" [width]="'5'"
+      [label]="'Empregado'">
+
+      <app-generic-label [width]="'3'">Localização
+        <app-generic-select [component]="this" [name]="'localizacao'" [object]="t.localizacao" [property]="'nome'" [array]="util.localizacoes"
+            (changeValue)="t.localizacao = $event; checkSubmit();" [refresh]="true"
+            (callRefresh)="t.localizacao = $event; checkSubmit(); util.loadLocalizacoes();">
+        </app-generic-select>
+      </app-generic-label>
+
+      <app-generic-label [width]="'2'" *ngIf="util.servicos">Serviço
+        <app-generic-select [component]="this" [name]="'servico'" [object]="t.servico" [property]="'nome'"
+            (changeValue)="t.servico = $event" [array]="util.servicos">
+        </app-generic-select>
+      </app-generic-label>
+    </app-generic-autocomplete>
+  </app-wizard-component>
+</form>

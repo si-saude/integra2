@@ -31,13 +31,23 @@ export class GenericWizardComponent<T> extends GenericComponent<T> {
     }
 
     goFirst() {
-        this.rtr.navigate([this.first]);
+        if (this.first) {
+            this.rtr.navigate([this.first]);
+        }
     }
 
     goPrevious() {
         if (this.previous) {
             this.do(this.previous);
         }
+    }
+
+    goPreviousIfNullModel(): boolean {
+        if (this.helper.isNull(this.t)) {
+            this.goPrevious();
+            return true;
+        }
+        return false;
     }
 
     goNext() {

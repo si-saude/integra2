@@ -62,4 +62,10 @@ export class ServicoService extends GenericService<Servico, ServicoFilter> {
     getUtilService() {
         return this.utilService;
     }
+
+    getListExisteTarefaAbertaPendenteByEmpregado(empregadoId: number, fThen: any, fCatch: any) {
+        this.showSpinner();
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/get-list-existe-tarefa-aberta-pendente-by-empregado', 
+            empregadoId, { headers: this.getHeaders()}) ,fThen, fCatch, undefined);
+    }
 }

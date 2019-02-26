@@ -39,8 +39,9 @@ export class GenericAutocompleteComponent<T, F extends GenericFilter> implements
   }
 
   ngOnInit() {
-    this.initializeObject();
-
+    if (!this.lastProperty || !this.objectAux || !this.objectAux[this.lastProperty]) {
+      this.initializeObject();
+    }
     if (!this.component._detailMode) {
       if (this.filter === undefined) {
         this.filter = this.service.initializeFilter();

@@ -31,7 +31,7 @@
         <div class="row">
           <app-generic-label [width]="'7'">Histórico
             <textarea class="validate text-area" name="historico" #historico="ngModel" [(ngModel)]="t.curriculo.historico" maxlength="4096"
-              [disabled]="_detailMode" required>
+              [disabled]="_detailMode">
             </textarea>
             <span class="helper-text" [attr.data-error]="showErrorMessage(historico.errors)"></span>
           </app-generic-label>
@@ -72,7 +72,7 @@
         <div class="row">
           <app-generic-label [width]="'8'">Conselho
             <input class="validate" type="text" name="conselho" #conselho="ngModel" [ngModel]="t.registro.conselho" (ngModelChange)="t.registro.conselho=$event.toUpperCase()"
-              maxlength="200" [disabled]="_detailMode" required>
+              maxlength="200" [disabled]="_detailMode">
             <span class="helper-text" [attr.data-error]="showErrorMessage(conselho.errors)"></span>
           </app-generic-label>
 

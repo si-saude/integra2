@@ -84,4 +84,16 @@ export class TarefaService extends GenericService<Tarefa, TarefaFilter> {
     public getUtilService(): UtilService {
         return this.utilService;
     }
+
+    registrar(t: Tarefa, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/registrar', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                this.showMessage(res._body);
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
 }

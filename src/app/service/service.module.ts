@@ -5,6 +5,7 @@ import { AtividadeFisicaService } from './atividade-fisica.service';
 import { BaseService } from './base.service';
 import { CargoService } from './cargo.service';
 import { CidadeService } from './cidade.service';
+import { CheckinService } from './checkin.service';
 import { ClinicaService } from './clinica.service';
 import { CriterioService } from './criterio.service';
 import { CursoService } from './curso.service';
@@ -46,6 +47,7 @@ import { UtilService } from './util.service';
         BaseService,
         CargoService,
         CidadeService,
+        CheckinService,
         ClinicaService,
         CriterioService,
         CursoService,

@@ -14,8 +14,10 @@ export class GenericSelectComponent implements OnInit {
   @Input() array: Array<any>;
   @Input() property: string;
   @Input() object;
+  @Input() refresh = false;
 
   @Output() changeValue = new EventEmitter();
+  @Output() callRefresh = new EventEmitter();
 
   private helper: Helper;
   private loaded = false;
@@ -55,5 +57,12 @@ export class GenericSelectComponent implements OnInit {
 
   change() {
     this.changeValue.emit(this.object);
+  }
+
+  doRefresh() {
+    if (this.object != undefined) {
+      this.dirtyForm();
+    }
+    this.callRefresh.emit(undefined);
   }
 }

@@ -156,6 +156,10 @@ export class Helper {
       return obj && Object.keys(obj).length > 0;
     }
 
+    isNull(obj) {
+      return !this.isNotNull(obj);
+    }
+
     toPhoneFormat(value: string) {
       return Helper.toPhoneFormat(value);
     }

@@ -37,6 +37,7 @@ import { ServicoComponentModule } from './cadastro/servico/servico.component.mod
 import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.component.module';
 
 import { AtendimentoOcupacionalComponentModule } from './processo/solicitacao/atendimento-ocupacional/atendimento-ocupacional.component.module';
+import { CheckinComponentModule } from './processo/checkin/checkin.component.module';
 import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.component.module';
 
 @NgModule({
@@ -78,6 +79,7 @@ import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.c
         TipoGrupoMonitoramentoComponentModule,
 
         AtendimentoOcupacionalComponentModule,
+        CheckinComponentModule,
         SolicitacaoComponentModule
     ]
 })

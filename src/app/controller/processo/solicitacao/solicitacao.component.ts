@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { GenericListComponent } from './../../../generic/generic-list-component';
 import { GenericWizardComponent } from './../../../generic/generic-wizard-component';
 import { WizardService } from './../../../util/wizard-service/wizard-service.service';
 
 import { Servico } from './../../../model/servico.model';
 import { ServicoFilter } from './../../../filter/servico.filter';
 import { Tarefa } from './../../../model/tarefa.model';
-import { TarefaFilter } from './../../../filter/tarefa.filter';
 import { TarefaService } from './../../../service/tarefa.service';
 
 @Component({
@@ -24,10 +22,14 @@ export class SolicitacaoComponent extends GenericWizardComponent<Tarefa> impleme
       wizardService: WizardService<Tarefa>) {
     super(servico, router, route, 'Solicitação', wizardService, undefined, '', undefined);
     this.util = new SolicitacaoUtil(servico);
+    this.first = 'solicitacao';
   }
 
   ngOnInit() {
     this.util.onInit();
+    if (this.t && this.t.$servico) {
+      this.changeServico(this.t.$servico);
+    }
   }
 
   changeServico(servico: Servico) {

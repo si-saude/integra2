@@ -1,13 +1,18 @@
 <form class="col s12" #form="ngForm">
   <app-wizard-component [component]="this">
     <div class="row">
-      <b>Serviço:</b>{{t.servico.nome}}
+      <b>Serviço:</b>{{' ' + t.servico?.nome}}
     </div>
     <div class="row">
       <app-generic-autocomplete #autocompleteCliente
         [name]="'cliente'" [property]="'pessoa.nome'" [component]="this" [maxLength]="400"
-        [service]="servico.getEmpregadoService()" (responseChange)="t.cliente = $event"
-        [object]="t.cliente" [width]="'4'" [label]="'Cliente'">
+        [service]="servico.getEmpregadoService()" (responseChange)="t.cliente = $event; checkSubmit();"
+        [object]="t.cliente" [width]="'5'" [label]="'Cliente'">
+
+        <app-generic-label [width]="'2'">Data
+          <input type="text" name="inicioFront" #inicioFront="ngModel" [ngModel]="t.inicioFront"
+            (changeValue)="t.inicioFront=$event; checkSubmit();" [component]="this" dateFormat>
+        </app-generic-label>
       </app-generic-autocomplete>
     </div>
   </app-wizard-component>
