@@ -1,0 +1,51 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'7'">Nome
+        <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome" (ngModelChange)="t.nome=$event.toUpperCase()"
+          maxlength="128" [disabled]="_detailMode" required>
+        <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+      </app-generic-label>
+
+      <app-generic-label [width]="'2'">Vínculo
+        <app-generic-select [object]="t.vinculo" [component]="this" [name]="'vinculo'" [array]="util.vinculos" (changeValue)="t.vinculo = $event">
+        </app-generic-select>
+      </app-generic-label>
+
+      <app-generic-label [width]="'1'">Concluído
+        <input type="checkbox" name="concluido" #concluido="ngModel" [(ngModel)]="t.concluido" [disabled]="_detailMode" />
+        <span></span>
+      </app-generic-label>
+    </div>
+
+    <div class="row">
+      <app-generic-grid class="col s4" #gridGrupos [id]="'grupos'" [component]="this" [array]="t.profissiogramaGrupos" [height]="'450px'"
+        [delete]="true" [idProperty]="'grupoMonitoramento.id'" [selection]="true" [def]="[['Grupo de Monitoramento','grupoMonitoramento.nome','','']]"
+        (changeSelected)="gridExames.cleanGridSelected()">
+
+        <app-generic-autocomplete #autocompleteGrupo [name]="'grupoMonitoramento'" [property]="'nome'" [component]="this" [maxLength]="128" [width]="'11'"
+          [label]="'Grupo de Monitoramento'" [service]="servico.getGrupoMonitoramentoService()" [showAdd]="true" (responseAdd)="util.addProfissiogramaGrupo(gridGrupos,$event)">
+        </app-generic-autocomplete>
+      </app-generic-grid>
+
+      <app-generic-grid class="col s4" #gridExames [id]="'exames'" [component]="this" [array]="gridGrupos.selectedObject.profissiogramaExames"
+        [height]="'450px'" [delete]="true" [idProperty]="'exame.id'" [selection]="true" [def]="[['Exame','exame.descricao','','']]">
+
+        <app-generic-autocomplete #autocompleteExame [name]="'exame'" [property]="'descricao'" [component]="this" [maxLength]="150"
+          [width]="'11'" [label]="'Exame'" [service]="servico.getExameService()" [showAdd]="true"
+          [disabled]="!gridGrupos.selected" (responseAdd)="util.addProfissiogramaExame(gridExames,$event)">
+        </app-generic-autocomplete>
+      </app-generic-grid>
+
+      <app-generic-grid class="col s4" #gridCriterios [id]="'criterios'" [component]="this" [array]="gridExames.selectedObject.criterios"
+        [height]="'450px'" [delete]="true" [def]="[['Critério','nome','','']]">
+
+        <app-generic-autocomplete #autocompleteCriterio [name]="'criterio'" [property]="'nome'" [component]="this" [maxLength]="256"
+          [width]="'11'" [label]="'Critério'" [service]="servico.getCriterioService()" [showAdd]="true"
+          [disabled]="!gridExames.selected" (responseAdd)="gridCriterios.add($event)">
+        </app-generic-autocomplete>
+      </app-generic-grid>
+
+    </div>
+  </app-form-component>
+</form>

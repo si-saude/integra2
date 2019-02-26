@@ -8,7 +8,7 @@
         <div class="row">
           <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'pessoa.nome'" [component]="this" [maxLength]="400"
             [service]="servico.getEmpregadoService()" (responseChange)="t.empregado = $event" [object]="t.empregado" [width]="'11'"
-            [label]="'Empregado'">
+            [method]="'initializeToAutocomplete'" [label]="'Empregado'">
           </app-generic-autocomplete>
         </div>
 

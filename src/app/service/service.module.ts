@@ -30,6 +30,7 @@ import { LocalizacaoService } from './localizacao.service';
 import { MedidaCaseiraService } from './medida-caseira.service';
 import { PerfilService } from './perfil.service';
 import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
+import { ProfissiogramaService } from './profissiograma.service';
 import { ProfissionalService } from './profissional.service';
 import { QuestionarioService } from './questionario.service';
 import { RegimeService } from './regime.service';
@@ -74,6 +75,7 @@ import { UtilService } from './util.service';
         MedidaCaseiraService,
         PerfilService,
         PerguntaFichaColetaService,
+        ProfissiogramaService,
         ProfissionalService,
         QuestionarioService,
         RegimeService,
