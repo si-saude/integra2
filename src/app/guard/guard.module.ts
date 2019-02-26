@@ -32,6 +32,7 @@ import { LocalizacaoGuardModule } from './cadastro/localizacao/localizacao.guard
 import { MedidaCaseiraGuardModule } from './cadastro/medida-caseira/medida-caseira.guard.module';
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
 import { PerguntaFichaColetaGuardModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.module';
+import { ProfissiogramaGuardModule } from './cadastro/profissiograma/profissiograma.guard.module';
 import { ProfissionalGuardModule } from './cadastro/profissional/profissional.guard.module';
 import { QuestionarioGuardModule } from './cadastro/questionario/questionario.guard.module';
 import { RegimeGuardModule } from './cadastro/regime/regime.guard.module';
@@ -77,6 +78,7 @@ import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitor
         MedidaCaseiraGuardModule,
         PerfilGuardModule,
         PerguntaFichaColetaGuardModule,
+        ProfissiogramaGuardModule,
         ProfissionalGuardModule,
         QuestionarioGuardModule,
         RegimeGuardModule,

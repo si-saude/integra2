@@ -48,6 +48,13 @@ export class EmpregadoService extends GenericService<Empregado, EmpregadoFilter>
         return e;
     }
 
+    initializeToAutocomplete() {
+        const e = new Empregado();
+        e.$pessoa = new Pessoa();
+
+        return e;
+    }
+
     initializeFilter() {
         const f = new EmpregadoFilter();
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, SimpleChanges } from '@angular/core';
 
 import { Helper } from './../../../generic/helper';
 import { GenericFilter } from './../../../generic/generic-filter';
@@ -20,6 +20,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   @Input() textInput: any;
   @Input() idProperty = 'id';
   @Input() selection = false;
+  @Output() changeSelected = new EventEmitter();
 
   private helper: Helper;
   private models: Array<Array<any>>;
@@ -113,6 +114,8 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     this.array.splice(this.array.indexOf(obj), 1);
     this.load();
     this.dirtyForm();
+    this.cleanGridSelected();
+    this.changeSelected.emit( '' );
   }
 
   selectAll(property, event) {
@@ -139,6 +142,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     this.filter = filter;
     this.selectedObject = {};
     this.selected = false;
+    this.changeSelected.emit( '' );
   }
 
   changeBooleanFilter(property) {
@@ -157,6 +161,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     this.filter = filter;
     this.selectedObject = {};
     this.selected = false;
+    this.changeSelected.emit( '' );
   }
 
   select(x, type) {
@@ -170,6 +175,7 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
         }
       }
       this.selected = true;
+      this.changeSelected.emit( '' );
     }
   }
 
@@ -183,5 +189,10 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
       }
     }
     return false;
+  }
+
+  cleanGridSelected() {
+    this.selectedObject = {};
+    this.selected = false;
   }
 }
