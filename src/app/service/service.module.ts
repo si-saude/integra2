@@ -5,6 +5,7 @@ import { AtividadeFisicaService } from './atividade-fisica.service';
 import { BaseService } from './base.service';
 import { CargoService } from './cargo.service';
 import { CidadeService } from './cidade.service';
+import { CheckinService } from './checkin.service';
 import { ClinicaService } from './clinica.service';
 import { CriterioService } from './criterio.service';
 import { CursoService } from './curso.service';
@@ -35,6 +36,7 @@ import { RegraAtendimentoService } from './regra-atendimento.service';
 import { RequisitoAsoService } from './requisito-aso.service';
 import { RiscoGheService } from './risco-ghe.service';
 import { ServicoService } from './servico.service';
+import { TarefaService } from './tarefa.service';
 import { TipoGrupoMonitoramentoService } from './tipo-grupo-monitoramento.service';
 import { UsuarioService } from './usuario.service';
 import { UtilService } from './util.service';
@@ -46,6 +48,7 @@ import { UtilService } from './util.service';
         BaseService,
         CargoService,
         CidadeService,
+        CheckinService,
         ClinicaService,
         CriterioService,
         CursoService,
@@ -76,6 +79,7 @@ import { UtilService } from './util.service';
         RequisitoAsoService,
         RiscoGheService,
         ServicoService,
+        TarefaService,
         TipoGrupoMonitoramentoService,
         UsuarioService,
         UtilService

@@ -28,6 +28,11 @@ export class GenericComponent<T> implements IComponent {
     protected rt: ActivatedRoute, protected title: string) {
     this.t = service.initializeObject();
     this.helper = new Helper();
+    this.setTitle(title);
+  }
+
+  setTitle(title: string) {
+    this.title = title;
     this.rtr.routerState.snapshot.url = this.title;
   }
 

@@ -33,6 +33,7 @@ import { GenericDateFilterComponent } from '../include/generic/generic-date-filt
 import { GenericAutocompleteComponent } from '../include/generic/generic-autocomplete/generic-autocomplete.component';
 import { ImageInputComponent } from '../include/generic/image-input/image-input.component';
 import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/text-input-to-grid.component';
+import { WizardComponentComponent } from '../include/generic/wizard-component/wizard-component.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         GenericAutocompleteComponent,
         ImageInputComponent,
         TextInputToGridComponent,
+        WizardComponentComponent,
         CepFormatDirective,
         CpfFormatDirective,
         CheckboxFilterDirective,
@@ -79,6 +81,7 @@ import { TextInputToGridComponent } from '../include/generic/text-input-to-grid/
         GenericAutocompleteComponent,
         ImageInputComponent,
         TextInputToGridComponent,
+        WizardComponentComponent,
         CepFormatDirective,
         CpfFormatDirective,
         CheckboxFilterDirective,

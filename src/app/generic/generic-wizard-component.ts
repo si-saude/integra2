@@ -6,13 +6,13 @@ import { GenericService } from './generic-service';
 import { WizardService } from './../util/wizard-service/wizard-service.service';
 
 export class GenericWizardComponent<T> extends GenericComponent<T> {
-    
+
     protected first: string;
-    
+
     constructor(protected service: GenericService<T, GenericFilter>, protected rtr: Router,
         protected rt: ActivatedRoute, protected title: string, protected wizardService: WizardService<T>,
         protected previous: string, protected next: string, protected _submit: string) {
-            super(service,rtr,rt,title);
+            super(service, rtr, rt, title);
             this.getData();
     }
 
@@ -31,13 +31,23 @@ export class GenericWizardComponent<T> extends GenericComponent<T> {
     }
 
     goFirst() {
-        this.rtr.navigate([this.first]);
+        if (this.first) {
+            this.rtr.navigate([this.first]);
+        }
     }
 
     goPrevious() {
         if (this.previous) {
             this.do(this.previous);
         }
+    }
+
+    goPreviousIfNullModel(): boolean {
+        if (this.helper.isNull(this.t)) {
+            this.goPrevious();
+            return true;
+        }
+        return false;
     }
 
     goNext() {

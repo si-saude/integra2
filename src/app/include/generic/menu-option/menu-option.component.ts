@@ -13,14 +13,31 @@ export class MenuOptionComponent implements OnInit {
   @Input() routerLink: string;
   @Input() funcionalidade: string;
   @Input() label: string;
+  @Input() group: string;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  check(): boolean {
+    if (this.group) {
+      switch (this.group) {
+        case 'CADASTRO':
+          return this.checkCadastro();
+        case 'PROCESSO':
+          return this.checkProcesso();
+      }
+    } else {
+      return this.checkCadastro();
+    }
+  }
+
   checkCadastro(): boolean {
     return this.homeComponent.checkCadastro(this.funcionalidade);
   }
 
+  checkProcesso(): boolean {
+    return this.homeComponent.checkProcesso(this.funcionalidade);
+  }
 }

@@ -13,7 +13,7 @@
   <ng-content></ng-content>
 </div>
 <div class="row">
-  <ul class='search-drop-down' [ngStyle]="{'left': !component._detailMode && showAdd ? '12%' : '' }">
+  <ul [ngClass]="array && array.length > 0 ? 'search-drop-down col s' + width : 'search-drop-down'" [ngStyle]="{'left': !component._detailMode && showAdd ? '12%' : '' }">
     <li class='search-results' *ngFor="let a of array" (click)="confirm(a)">{{helper.getProperty(a,property)}}</li>
   </ul>
 </div>
