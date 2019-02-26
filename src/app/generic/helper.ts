@@ -52,6 +52,17 @@ export class Helper {
       return date;
     }
 
+    getToday() {
+      const date: Date = new Date();
+      let stringDate = '';
+      stringDate += this.addLeftZero(date.getDate().toString());
+      stringDate += '/';
+      stringDate += this.addLeftZero((date.getMonth() + 1).toString());
+      stringDate += '/';
+      stringDate += date.getFullYear().toString();
+      return stringDate;
+    }
+
     ignoreLastStringArrayItem(str: string, separator: string) {
       const array = str.split(separator);
       let ret = '';

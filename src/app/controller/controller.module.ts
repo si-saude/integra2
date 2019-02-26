@@ -36,6 +36,7 @@ import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.componen
 import { ServicoComponentModule } from './cadastro/servico/servico.component.module';
 import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.component.module';
 
+import { AtendimentoComponentModule } from './processo/atendimento/atendimento.component.module';
 import { AtendimentoOcupacionalComponentModule } from './processo/solicitacao/atendimento-ocupacional/atendimento-ocupacional.component.module';
 import { CheckinComponentModule } from './processo/checkin/checkin.component.module';
 import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.component.module';
@@ -78,6 +79,7 @@ import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.c
         ServicoComponentModule,
         TipoGrupoMonitoramentoComponentModule,
 
+        AtendimentoComponentModule,
         AtendimentoOcupacionalComponentModule,
         CheckinComponentModule,
         SolicitacaoComponentModule

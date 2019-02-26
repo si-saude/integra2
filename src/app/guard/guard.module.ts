@@ -42,6 +42,7 @@ import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module
 import { ServicoGuardModule } from './cadastro/servico/servico.guard.module';
 import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard.module';
 
+import { AtendimentoGuardModule } from './processo/atendimento/atendimento.guard.module';
 import { CheckinGuardModule } from './processo/checkin/checkin.guard.module';
 import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard.module';
 
@@ -90,6 +91,7 @@ import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard
         ServicoGuardModule,
         TipoGrupoMonitoramentoGuardModule,
 
+        AtendimentoGuardModule,
         CheckinGuardModule,
         SolicitacaoGuardModule
     ]

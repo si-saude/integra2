@@ -1,0 +1,60 @@
+<form class="col s12" #form="ngForm">
+  <app-wizard-component [component]="this">
+    <div class="row">
+      <div class="col s1" *ngIf="!(t.id > 0)">
+        <i class="large material-icons" (click)="entrarOuVoltar()">play_arrow</i>
+        <i class="large material-icons">pause</i>
+        <i class="large material-icons">note_add</i>
+      </div>
+      <div class="col s1" *ngIf="t.id > 0">
+        <i class="medium material-icons">play_arrow</i>
+        <i class="medium material-icons">thumb_up</i>
+        <i class="medium material-icons">done</i>
+        <i class="medium material-icons">done_all</i>
+        <i class="medium material-icons">keyboard_return</i>
+        <i class="medium material-icons">warning</i>
+      </div>
+      <div class="col s11">
+        <div class="row">
+          <div class="col s1">
+          </div>
+          <div class="col s11">
+            <b>Profissional:</b><br>
+            <b>Localização:</b><br>
+            <b>Status:</b>
+          </div>
+        </div>
+        <div class="row" *ngIf="t.id > 0">
+          <div class="col s1">
+          </div>
+          <div class="col s11" >
+            <b>Empregado:</b><br>
+            <app-generic-tab [tabs]="[[fichaColetaTab,'FICHA DE COLETA'],
+              [fichaTriagemTab,'FICHA DE TRIAGEM'],
+              [planejamentoTab, 'PLANEJAMENTO']]">
+              <div #fichaColetaTab>
+                coleta
+              </div>
+              <div #fichaTriagemTab>
+                triagem
+              </div>
+              <div #planejamentoTab>
+                planejamento
+              </div>
+            </app-generic-tab>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-wizard-component>
+</form>
+
+<app-generic-modal [title]="'Localização'" [component]="modalEntrar">
+    <div class="row">
+        <app-generic-label [width]="'4'">Localização
+            <app-generic-select [component]="this" [name]="'localizacao'" [object]="fila.localizacao" 
+                [property]="'nome'" [array]="util.localizacoes" (changeValue)="fila.localizacao = $event">
+            </app-generic-select>
+        </app-generic-label>
+    </div>
+</app-generic-modal>

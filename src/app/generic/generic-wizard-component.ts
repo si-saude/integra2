@@ -27,12 +27,16 @@ export class GenericWizardComponent<T> extends GenericComponent<T> {
     do(path) {
         this.wizardService.setData(this.t);
         this.wizardService.setFirst(this.first);
+        this.navigate(path);
+    }
+
+    navigate(path) {
         this.rtr.navigate([path]);
     }
 
     goFirst() {
         if (this.first) {
-            this.rtr.navigate([this.first]);
+            this.navigate(this.first);
         }
     }
 
