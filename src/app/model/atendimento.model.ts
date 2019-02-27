@@ -1,3 +1,4 @@
+import { Checkin } from './checkin.model';
 import { FilaAtendimento } from './fila-atendimento.model';
 import { Tarefa } from './tarefa.model';
 
@@ -5,6 +6,7 @@ export class Atendimento {
     private id: number;
     private fila: FilaAtendimento;
     private tarefa: Tarefa;
+    private checkin: Checkin;
     private version: number;
 
     public get $id(): number {
@@ -17,6 +19,10 @@ export class Atendimento {
 
     public get $tarefa(): Tarefa {
         return this.tarefa;
+    }
+
+    public get $checkin(): Checkin {
+        return this.checkin;
     }
 
     public get $version(): number {
@@ -33,6 +39,10 @@ export class Atendimento {
 
     public set $tarefa(value: Tarefa) {
         this.tarefa = value;
+    }
+
+    public set $checkin(value: Checkin) {
+        this.checkin = value;
     }
 
     public set $version(value: number) {

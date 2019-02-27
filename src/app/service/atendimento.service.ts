@@ -8,6 +8,7 @@ import { SpinnerService } from './../util/spinner/spinner.service';
 
 import { Atendimento } from '../model/atendimento.model';
 import { AtendimentoFilter } from '../filter/atendimento.filter';
+import { CheckinService } from './checkin.service';
 import { FilaAtendimentoService } from './fila-atendimento.service';
 import { TarefaService } from './tarefa.service';
 
@@ -15,7 +16,7 @@ import { TarefaService } from './tarefa.service';
 export class AtendimentoService extends GenericService<Atendimento, AtendimentoFilter> {
     constructor(http: Http, router: Router, private dialogService: DialogService,
         private spinnerService: SpinnerService, private tarefaService: TarefaService,
-        private filaService: FilaAtendimentoService) {
+        private filaService: FilaAtendimentoService, private checkinService: CheckinService) {
         super(http, 'atendimento', router, dialogService, spinnerService);
     }
 
@@ -25,6 +26,8 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
 
     initializeFilter() {
         const a = new AtendimentoFilter();
+        a.$checkin = this.checkinService.initializeFilter();
+        a.$fila = this.filaService.initializeFilter();
         a.$tarefa = this.tarefaService.initializeFilter();
         return a;
     }
@@ -33,6 +36,10 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
         const atendimento: Atendimento = new Atendimento();
         atendimento.$id = obj['id'];
         atendimento.$version = obj['version'];
+
+        if (this.helper.isNotNull(obj['checkin'])) {
+            atendimento.$checkin = this.checkinService.toObject(obj['checkin']);
+        }
 
         if (this.helper.isNotNull(obj['tarefa'])) {
             atendimento.$tarefa = this.tarefaService.toObject(obj['tarefa']);
@@ -51,5 +58,9 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
 
     public getTarefaService(): TarefaService {
         return this.tarefaService;
+    }
+
+    public getCheckinService() : CheckinService {
+        return this.checkinService;
     }
 }

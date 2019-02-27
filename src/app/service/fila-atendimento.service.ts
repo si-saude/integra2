@@ -62,4 +62,47 @@ export class FilaAtendimentoService extends GenericService<FilaAtendimento, Fila
     getProfissionalService() {
         return this.profissionalService;
     }
+
+    entrarOuVoltar(t: FilaAtendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/entrar-ou-voltar', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
+    pausar(t: FilaAtendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/pausar', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
+    encerrar(t: FilaAtendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/encerrar', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
+    getListNaoEncerrado(f: FilaAtendimentoFilter, fThen: any, fCatch: any) {
+        this.showSpinner();
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/get-list-nao-encerrado', f, { headers: this.getHeaders()}) ,
+            (res) => {
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
 }

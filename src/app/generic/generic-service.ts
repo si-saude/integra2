@@ -9,9 +9,9 @@ import { GenericFilter } from './generic-filter';
 
 export abstract class GenericService<T, F extends GenericFilter> {
 
-    readonly rootUrl = 'http://localhost:7080/IntegraApi2/rest/';
+    readonly rootUrl = 'http://localhost:5080/IntegraApi2/rest/';
 
-    protected helper: Helper;
+    public helper: Helper;
 
     constructor(protected http: Http, protected path: string, protected router: Router,
             protected dialog: DialogService, protected spinner: SpinnerService) {
@@ -117,7 +117,7 @@ export abstract class GenericService<T, F extends GenericFilter> {
         if (obj[property + 'Front'] && obj[property + 'Front'] !== '') {
             const date = this.helper.createDateFromString(obj[property + 'Front']);
             t[property] = date.getTime();
-        } else if (obj[property] !== 0) {
+        } else if (obj[property] && obj[property] !== 0) {
             // CRlAR UMA DATA A PARTR DO VALOR EM MlLlSEGUNDOS
             let date = new Date(obj[property]);
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate(),

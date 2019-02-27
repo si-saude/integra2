@@ -45,13 +45,14 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
 
   ngOnInit() {
     this.util.onInit();
+    this.getProfissional();
   }
 
   entrarOuVoltar() {
-    if (this.helper.isNull(this.fila)) {
+    if (this.util.isNullFila(this.fila)) {
       this.modalEntrar.open();
     } else if (this.fila.$status === 'INDISPONÍVEL') {
-      this.servico.showMessage('Você voltou para entrar na fila de atendimento.');
+      this.callEntrarOuVoltar('Você voltou para a fila de atendimento.');
     } else if (this.fila.$status === 'DISPONÍVEL') {
       this.servico.showMessage('Você já está na fila de atendimento.');
     } else {
@@ -64,7 +65,48 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
       this.servico.showMessage('Informe a Localização para entrar na fila de atendimento.');
       return false;
     }
+    this.callEntrarOuVoltar('Você entrou na fila de atendimento.');
     return true;
+  }
+
+  pausar() {
+    if (this.util.isNullFila(this.fila)) {
+      this.servico.showMessage('Você não entrou na fila de atendimento.');
+    } else if (this.fila.$status === 'INDISPONÍVEL') {
+      this.servico.showMessage('A fila de atendimento já está pausada.');
+    } else {
+      this.callPausar('Você pausou a fila de atendimento.');
+    }
+  }
+
+  encerrar() {
+    if (this.util.isNullFila(this.fila)) {
+      this.servico.showMessage('Você não entrou na fila de atendimento.');
+    } else {
+      this.callEncerrar('Você encerrou a fila de atendimento.');
+    }
+  }
+  
+  callEntrarOuVoltar(message: string) {
+    this.setProfissionalNaFila();
+    this.servico.getFilaAtendimentoService().entrarOuVoltar(this.fila, (res) => {
+      this.fila = this.util.getReturnFila(res, message);
+    }, undefined);  
+  }
+
+  callPausar(message: string) {
+    this.setProfissionalNaFila();
+    this.servico.getFilaAtendimentoService().pausar(this.fila, (res) => {
+      this.fila = this.util.getReturnFila(res, message);
+    }, undefined);  
+  }
+
+  callEncerrar(message: string) {
+    this.setProfissionalNaFila();
+    this.servico.getFilaAtendimentoService().encerrar(this.fila, (res) => {
+      this.fila = this.servico.getFilaAtendimentoService().initializeObject();
+      this.servico.showMessage(message);
+    }, undefined);  
   }
 
   getProfissional() {
@@ -89,13 +131,12 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
 
   getFila() {
     let filter: FilaAtendimentoFilter = this.servico.getFilaAtendimentoService().initializeFilter();
-    filter.$pageSize = 1;
     filter.$profissional.$id = this.profissional.$id;
     filter.$data.$inicioFront = this.helper.getToday();
     filter = this.servico.getFilaAtendimentoService().transformFilter(filter);
-    this.servico.getFilaAtendimentoService().list(filter, (res) => {
-      const list = res.json().list;
-      if (list && list[0]) {
+    this.servico.getFilaAtendimentoService().getListNaoEncerrado(filter, (res) => {
+      const list = res.json();
+      if (list && list[0] && list[0]) {
         this.fila = this.servico.getFilaAtendimentoService().toObject(list[0]);
         if (!this.fila.$status.includes('DISPONÍVEL')) {
           this.getAtendimento();
@@ -116,6 +157,10 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
         this.t = this.servico.toObject(list[0]);
       }
     }, undefined);
+  }
+
+  setProfissionalNaFila() {
+    this.fila.$profissional = this.profissional;
   }
 
   refresh() {
@@ -145,5 +190,16 @@ export class AtendimentoUtil {
           this.localizacoes = this.servico.getFilaAtendimentoService()
               .getLocalizacaoService().toList(res.json().list);
     }, undefined);
+  }
+
+  isNullFila(fila: FilaAtendimento) {
+    return this.servico.helper.isNull(fila) || !(fila.$id > 0)
+  }
+
+  getReturnFila(res, message: string) {
+    if (message) {
+      this.servico.showMessage(message);
+    }
+    return this.servico.getFilaAtendimentoService().toObject(res.json());
   }
 }

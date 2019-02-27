@@ -3,11 +3,13 @@ import { Profissional } from './profissional.model';
 
 export class FilaAtendimento {
     private id: number;
-    private data: number;
     private profissional: Profissional;
     private localizacao: Localizacao;
     private status: string;
     private version: number;
+    
+    private data: number;
+    private dataFront: string;
 
     public get $id(): number {
         return this.id;
@@ -15,6 +17,10 @@ export class FilaAtendimento {
 
     public get $data(): number {
         return this.data;
+    }
+
+    public get $dataFront(): string {
+        return this.dataFront;
     }
 
     public get $profissional(): Profissional {
@@ -39,6 +45,10 @@ export class FilaAtendimento {
 
     public set $data(value: number) {
         this.data = value;
+    }
+
+    public set $dataFront(value: string) {
+        this.dataFront = value;
     }
 
     public set $profissional(value: Profissional) {

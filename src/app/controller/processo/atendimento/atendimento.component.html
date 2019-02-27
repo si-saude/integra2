@@ -3,7 +3,8 @@
     <div class="row">
       <div class="col s1" *ngIf="!(t.id > 0)">
         <i class="large material-icons" (click)="entrarOuVoltar()">play_arrow</i>
-        <i class="large material-icons">pause</i>
+        <i class="large material-icons" (click)="pausar()">pause</i>
+        <i class="large material-icons" (click)="encerrar()">cancel</i>
         <i class="large material-icons">note_add</i>
       </div>
       <div class="col s1" *ngIf="t.id > 0">
@@ -19,9 +20,9 @@
           <div class="col s1">
           </div>
           <div class="col s11">
-            <b>Profissional:</b><br>
-            <b>Localização:</b><br>
-            <b>Status:</b>
+            <b>Profissional:</b>{{' '+ (fila && fila.id > 0 ? fila.profissional.empregado.pessoa.nome : '')}}<br>
+            <b>Localização:</b>{{' '+ (fila && fila.id > 0 ? fila.localizacao.nome : '')}}<br>
+            <b>Status:</b>{{' '+ (fila && fila.id > 0 ? fila.status : '')}}
           </div>
         </div>
         <div class="row" *ngIf="t.id > 0">
