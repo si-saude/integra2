@@ -15,6 +15,7 @@ export class GenericModalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
   keyDown(event) {

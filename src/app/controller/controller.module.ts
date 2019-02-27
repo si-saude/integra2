@@ -27,6 +27,7 @@ import { LocalizacaoComponentModule } from './cadastro/localizacao/localizacao.c
 import { MedidaCaseiraComponentModule } from './cadastro/medida-caseira/medida-caseira.component.module';
 import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module';
 import { PerguntaFichaColetaComponentModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.component.module';
+import { ProfissiogramaComponentModule } from './cadastro/profissiograma/profissiograma.component.module';
 import { ProfissionalComponentModule } from './cadastro/profissional/profissional.component.module';
 import { QuestionarioComponentModule } from './cadastro/questionario/questionario.component.module';
 import { RegimeComponentModule } from './cadastro/regime/regime.component.module';
@@ -36,6 +37,7 @@ import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.componen
 import { ServicoComponentModule } from './cadastro/servico/servico.component.module';
 import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.component.module';
 
+import { AtendimentoComponentModule } from './processo/atendimento/atendimento.component.module';
 import { AtendimentoOcupacionalComponentModule } from './processo/solicitacao/atendimento-ocupacional/atendimento-ocupacional.component.module';
 import { CheckinComponentModule } from './processo/checkin/checkin.component.module';
 import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.component.module';
@@ -69,6 +71,7 @@ import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.c
         MedidaCaseiraComponentModule,
         PerfilComponentModule,
         PerguntaFichaColetaComponentModule,
+        ProfissiogramaComponentModule,
         ProfissionalComponentModule,
         QuestionarioComponentModule,
         RegimeComponentModule,
@@ -78,6 +81,7 @@ import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.c
         ServicoComponentModule,
         TipoGrupoMonitoramentoComponentModule,
 
+        AtendimentoComponentModule,
         AtendimentoOcupacionalComponentModule,
         CheckinComponentModule,
         SolicitacaoComponentModule

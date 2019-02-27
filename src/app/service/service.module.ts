@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { AlimentoService } from './alimento.service';
+import { AtendimentoService } from './atendimento.service';
 import { AtividadeFisicaService } from './atividade-fisica.service';
 import { BaseService } from './base.service';
 import { CargoService } from './cargo.service';
@@ -15,6 +16,7 @@ import { EmpregadoService } from './empregado.service';
 import { EnfaseService } from './enfase.service';
 import { EquipeService } from './equipe.service';
 import { ExameService } from './exame.service';
+import { FilaAtendimentoService } from './fila-atendimento.service';
 import { FuncaoService } from './funcao.service';
 import { GerenciaService } from './gerencia.service';
 import { GheService } from './ghe.service';
@@ -28,6 +30,7 @@ import { LocalizacaoService } from './localizacao.service';
 import { MedidaCaseiraService } from './medida-caseira.service';
 import { PerfilService } from './perfil.service';
 import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
+import { ProfissiogramaService } from './profissiograma.service';
 import { ProfissionalService } from './profissional.service';
 import { QuestionarioService } from './questionario.service';
 import { RegimeService } from './regime.service';
@@ -43,6 +46,7 @@ import { UtilService } from './util.service';
 @NgModule({
     providers: [
         AlimentoService,
+        AtendimentoService,
         AtividadeFisicaService,
         BaseService,
         CargoService,
@@ -57,6 +61,7 @@ import { UtilService } from './util.service';
         EnfaseService,
         EquipeService,
         ExameService,
+        FilaAtendimentoService,
         FuncaoService,
         GerenciaService,
         GheService,
@@ -70,6 +75,7 @@ import { UtilService } from './util.service';
         MedidaCaseiraService,
         PerfilService,
         PerguntaFichaColetaService,
+        ProfissiogramaService,
         ProfissionalService,
         QuestionarioService,
         RegimeService,

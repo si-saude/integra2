@@ -64,13 +64,11 @@ export class ProfissionalService extends GenericService<Profissional, Profission
             profissional.$empregado = this.empregadoService.toObject(obj['empregado']);
         }
 
-        if (this.helper.isNotNull(obj['curriculo'])) {
-            profissional.$curriculo = this.toCurriculo(obj['curriculo']);
-        }
+        profissional.$curriculo = this.toCurriculo(this.helper.isNotNull(obj['curriculo']) ?
+        obj['curriculo'] : <any>{});
 
-        if (this.helper.isNotNull(obj['registro'])) {
-            profissional.$registro = this.toRegistro(obj['registro']);
-        }
+        profissional.$registro = this.toRegistro(this.helper.isNotNull(obj['registro']) ?
+        obj['registro'] : <any>{});
 
         profissional.$equipes = new Array<Equipe>();
         if (obj['equipes']) {

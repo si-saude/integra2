@@ -31,6 +31,7 @@ import { LocalizacaoGuardService } from './cadastro/localizacao/localizacao.guar
 import { MedidaCaseiraGuardService } from './cadastro/medida-caseira/medida-caseira.guard.service';
 import { PerfilGuardService } from './cadastro/perfil/perfil.guard.service';
 import { PerguntaFichaColetaGuardService } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.service';
+import { ProfissiogramaGuardService } from './cadastro/profissiograma/profissiograma.guard.service';
 import { ProfissionalGuardService } from './cadastro/profissional/profissional.guard.service';
 import { QuestionarioGuardService } from './cadastro/questionario/questionario.guard.service';
 import { RegimeGuardService } from './cadastro/regime/regime.guard.service';
@@ -73,6 +74,7 @@ export class CadastroGuardService implements GenericGuardService {
         private medidaCaseira: MedidaCaseiraGuardService,
         private perfil: PerfilGuardService,
         private perguntaFichaColeta: PerguntaFichaColetaGuardService,
+        private profissiograma: ProfissiogramaGuardService,
         private profissional: ProfissionalGuardService,
         private questionario: QuestionarioGuardService,
         private regime: RegimeGuardService,
@@ -195,6 +197,10 @@ export class CadastroGuardService implements GenericGuardService {
             }
             case 'PERGUNTA-FICHA-COLETA': {
                 guardService = this.perguntaFichaColeta;
+                break;
+            }
+            case 'PROFISSIOGRAMA': {
+                guardService = this.profissiograma;
                 break;
             }
             case 'PROFISSIONAL': {
