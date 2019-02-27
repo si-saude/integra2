@@ -86,7 +86,7 @@ export class CheckinService extends GenericService<Checkin, CheckinFilter> {
     registrar(t: Checkin, fThen: any, fCatch: any) {
         this.showSpinner();
         t = this.toObject(t);
-        this.toPromise(this.http.post(this.rootUrl + this.path + '/submit', t, { headers: this.getHeaders()}) ,
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/registrar', t, { headers: this.getHeaders()}) ,
             (res) => {
                 this.showMessage(res._body);
                 if (fThen) {

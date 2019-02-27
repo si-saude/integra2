@@ -15,6 +15,7 @@ export class GenericSelectComponent implements OnInit {
   @Input() property: string;
   @Input() object;
   @Input() refresh = false;
+  @Input() disabled = false;
 
   @Output() changeValue = new EventEmitter();
   @Output() callRefresh = new EventEmitter();

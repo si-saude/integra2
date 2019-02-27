@@ -13,7 +13,7 @@
 
       <app-generic-label [width]="'2'" *ngIf="util.servicos">Serviço
         <app-generic-select [component]="this" [name]="'servico'" [object]="t.servico" [property]="'nome'"
-            (changeValue)="t.servico = $event" [array]="util.servicos">
+            (changeValue)="t.servico = $event; changeServico();" [array]="util.servicos" [disabled]="util.servicos.length === 1">
         </app-generic-select>
       </app-generic-label>
     </app-generic-autocomplete>

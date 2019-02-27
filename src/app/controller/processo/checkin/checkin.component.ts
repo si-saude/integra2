@@ -32,22 +32,32 @@ export class CheckinComponent extends GenericWizardComponent<Checkin> implements
   }
 
   checkSubmit() {
-    if (this.t.$localizacao && this.t.$localizacao.$id > 0 && this.t.$empregado && this.t.$empregado.$id > 0) {
+    if (this.helper.isNotNull(this.t.$localizacao) && this.t.$empregado && this.t.$empregado.$id > 0) {
       this.servico.getServicoService()
           .getListExisteTarefaAbertaPendenteByEmpregado(this.t.$empregado.$id, (res) => {
             this.util.servicos = this.servico.getServicoService().toList(res.json());
-            if(!this.util.servicos || this.util.servicos.length == 0) {
-              
+            if (this.util.servicos.length === 1) {
+              this.t.$servico = this.servico.getServicoService().toObject(this.util.servicos[0]);
+              this._submit = 'registrar';
+            }
+            if (!this.util.servicos || this.util.servicos.length == 0) {
+              this.servico.showMessage('Não há solicitação para ' + this.t.$empregado.$pessoa.$nome);
             }
           }, undefined);
-      //this._submit = 'submit';
     } else {
       this.util.servicos = undefined;
       this._submit = undefined;
+      this.t.$servico = undefined;
     }
   }
 
-  // this._submit = servico ? 'checkin/' + servico.$url : '';
+  changeServico() {
+    if (this.helper.isNotNull(this.t.$servico)) {
+      this._submit = 'registrar';
+    } else {
+      this._submit = undefined;
+    }
+  }
 }
 
 export class CheckinUtil {
