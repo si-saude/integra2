@@ -29,6 +29,7 @@ import { IndicadorSastGuardService } from './cadastro/indicador-sast/indicador-s
 import { IntervencaoGuardService } from './cadastro/intervencao/intervencao.guard.service';
 import { LocalizacaoGuardService } from './cadastro/localizacao/localizacao.guard.service';
 import { MedidaCaseiraGuardService } from './cadastro/medida-caseira/medida-caseira.guard.service';
+import { ParametroGuardService } from './cadastro/parametro/parametro.guard.service';
 import { PerfilGuardService } from './cadastro/perfil/perfil.guard.service';
 import { PerguntaFichaColetaGuardService } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.service';
 import { ProfissiogramaGuardService } from './cadastro/profissiograma/profissiograma.guard.service';
@@ -72,6 +73,7 @@ export class CadastroGuardService implements GenericGuardService {
         private intervencao: IntervencaoGuardService,
         private localizacao: LocalizacaoGuardService,
         private medidaCaseira: MedidaCaseiraGuardService,
+        private parametro: ParametroGuardService,
         private perfil: PerfilGuardService,
         private perguntaFichaColeta: PerguntaFichaColetaGuardService,
         private profissiograma: ProfissiogramaGuardService,
@@ -189,6 +191,10 @@ export class CadastroGuardService implements GenericGuardService {
             }
             case 'MEDIDA-CASEIRA': {
                 guardService = this.medidaCaseira;
+                break;
+            }
+            case 'PARAMETRO': {
+                guardService = this.parametro;
                 break;
             }
             case 'PERFIL': {

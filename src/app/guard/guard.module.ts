@@ -31,6 +31,7 @@ import { IndicadorSastGuardModule } from './cadastro/indicador-sast/indicador-sa
 import { IntervencaoGuardModule } from './cadastro/intervencao/intervencao.guard.module';
 import { LocalizacaoGuardModule } from './cadastro/localizacao/localizacao.guard.module';
 import { MedidaCaseiraGuardModule } from './cadastro/medida-caseira/medida-caseira.guard.module';
+import { ParametroGuardModule } from './cadastro/parametro/parametro.guard.module';
 import { PerfilGuardModule } from './cadastro/perfil/perfil.guard.module';
 import { PerguntaFichaColetaGuardModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard.module';
 import { ProfissiogramaGuardModule } from './cadastro/profissiograma/profissiograma.guard.module';
@@ -81,6 +82,7 @@ import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard
         IntervencaoGuardModule,
         LocalizacaoGuardModule,
         MedidaCaseiraGuardModule,
+        ParametroGuardModule,
         PerfilGuardModule,
         PerguntaFichaColetaGuardModule,
         ProfissiogramaGuardModule,

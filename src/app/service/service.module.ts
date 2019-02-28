@@ -28,6 +28,7 @@ import { IndicadorSastService } from './indicador-sast.service';
 import { IntervencaoService } from './intervencao.service';
 import { LocalizacaoService } from './localizacao.service';
 import { MedidaCaseiraService } from './medida-caseira.service';
+import { ParametroService } from './parametro.service';
 import { PerfilService } from './perfil.service';
 import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
 import { ProfissiogramaService } from './profissiograma.service';
@@ -73,6 +74,7 @@ import { UtilService } from './util.service';
         IntervencaoService,
         LocalizacaoService,
         MedidaCaseiraService,
+        ParametroService,
         PerfilService,
         PerguntaFichaColetaService,
         ProfissiogramaService,

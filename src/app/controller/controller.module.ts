@@ -25,6 +25,7 @@ import { IndicadorSastComponentModule } from './cadastro/indicador-sast/indicado
 import { IntervencaoComponentModule } from './cadastro/intervencao/intervencao.component.module';
 import { LocalizacaoComponentModule } from './cadastro/localizacao/localizacao.component.module';
 import { MedidaCaseiraComponentModule } from './cadastro/medida-caseira/medida-caseira.component.module';
+import { ParametroComponentModule } from './cadastro/parametro/parametro.component.module';
 import { PerfilComponentModule } from './cadastro/perfil/perfil.component.module';
 import { PerguntaFichaColetaComponentModule } from './cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.component.module';
 import { ProfissiogramaComponentModule } from './cadastro/profissiograma/profissiograma.component.module';
@@ -69,6 +70,7 @@ import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.c
         IntervencaoComponentModule,
         LocalizacaoComponentModule,
         MedidaCaseiraComponentModule,
+        ParametroComponentModule,
         PerfilComponentModule,
         PerguntaFichaColetaComponentModule,
         ProfissiogramaComponentModule,

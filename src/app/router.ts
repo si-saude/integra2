@@ -33,6 +33,7 @@ import * as indicadorGuard from './guard/cadastro/indicador-sast/indicador-sast.
 import * as intervencaoGuard from './guard/cadastro/intervencao/intervencao.guard';
 import * as localizacaoGuard from './guard/cadastro/localizacao/localizacao.guard';
 import * as medidaCaseiraGuard from './guard/cadastro/medida-caseira/medida-caseira.guard';
+import * as parametroGuard from './guard/cadastro/parametro/parametro.guard';
 import * as perfilGuard from './guard/cadastro/perfil/perfil.guard';
 import * as perguntaFichaColetaGuard from './guard/cadastro/pergunta-ficha-coleta/pergunta-ficha-coleta.guard';
 import * as profissiogramaGuard from './guard/cadastro/profissiograma/profissiograma.guard';
@@ -84,6 +85,7 @@ export const appRoutes: Routes = [
     intervencaoGuard.Routing.route(HomeComponent),
     localizacaoGuard.Routing.route(HomeComponent),
     medidaCaseiraGuard.Routing.route(HomeComponent),
+    parametroGuard.Routing.route(HomeComponent),
     perfilGuard.Routing.route(HomeComponent),
     perguntaFichaColetaGuard.Routing.route(HomeComponent),
     profissiogramaGuard.Routing.route(HomeComponent),

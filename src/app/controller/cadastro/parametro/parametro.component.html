@@ -1,0 +1,11 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <div class="row">
+      <app-generic-label [width]="'4'">Regra de Atendimento do Periódico
+        <app-generic-select [component]="this" [name]="'regraPeriodico'" [object]="t.regraPeriodico" [property]="'nome'" [array]="util.regras"
+            (changeValue)="t.regraPeriodico = $event">
+        </app-generic-select>
+      </app-generic-label>
+    </div>
+  </app-form-component>
+</form>
