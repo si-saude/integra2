@@ -86,19 +86,19 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
       this.callEncerrar('Você encerrou a fila de atendimento.');
     }
   }
-  
+
   callEntrarOuVoltar(message: string) {
     this.setProfissionalNaFila();
     this.servico.getFilaAtendimentoService().entrarOuVoltar(this.fila, (res) => {
       this.fila = this.util.getReturnFila(res, message);
-    }, undefined);  
+    }, undefined);
   }
 
   callPausar(message: string) {
     this.setProfissionalNaFila();
     this.servico.getFilaAtendimentoService().pausar(this.fila, (res) => {
       this.fila = this.util.getReturnFila(res, message);
-    }, undefined);  
+    }, undefined);
   }
 
   callEncerrar(message: string) {
@@ -106,7 +106,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
     this.servico.getFilaAtendimentoService().encerrar(this.fila, (res) => {
       this.fila = this.servico.getFilaAtendimentoService().initializeObject();
       this.servico.showMessage(message);
-    }, undefined);  
+    }, undefined);
   }
 
   getProfissional() {
@@ -133,6 +133,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
     let filter: FilaAtendimentoFilter = this.servico.getFilaAtendimentoService().initializeFilter();
     filter.$profissional.$id = this.profissional.$id;
     filter.$data.$inicioFront = this.helper.getToday();
+    filter.$data.$typeFilter = 'IGUAL';
     filter = this.servico.getFilaAtendimentoService().transformFilter(filter);
     this.servico.getFilaAtendimentoService().getListNaoEncerrado(filter, (res) => {
       const list = res.json();

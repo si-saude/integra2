@@ -160,7 +160,7 @@ export class Helper {
     }
 
     getTimeZoneNumber() {
-      return new Date(2000, 1, 1).getHours();
+      return new Date().getTimezoneOffset() / 60;
     }
 
     isNotNull(obj) {
