@@ -12,6 +12,7 @@
                 <i class="material-icons" routerLink="{{'./detalhar/' + a.id }}" *ngIf="canDetalhar">details</i>
                 <i class="material-icons" routerLink="{{'./editar/' + a.id }}" *ngIf="canEditar">mode_edit</i>
                 <i class="material-icons" *ngIf="canRemover" (click)="remove(a.id)">delete</i>
+                <i *ngFor="let f of functions" class="material-icons"(click)="component[f[1]](a)">{{f[0]}}</i>
             </td>
         </tr>
     </tbody>

@@ -18,6 +18,7 @@ export class ListComponentComponent<T, F extends GenericFilter> implements OnIni
   @Input() detalhar: string;
   @Input() editar: string;
   @Input() remover: string;
+  @Input() functions: Array<Array<string>>;
 
   private helper: Helper;
   private canAdicionar = false;
@@ -30,10 +31,10 @@ export class ListComponentComponent<T, F extends GenericFilter> implements OnIni
   }
 
   ngOnInit() {
-    this.canAdicionar = this.guardService.findCheck(this.adicionar);
-    this.canEditar = this.guardService.findCheck(this.editar);
-    this.canDetalhar = this.guardService.findCheck(this.detalhar);
-    this.canRemover = this.guardService.findCheck(this.remover);
+    this.canAdicionar = this.adicionar ? this.guardService.findCheck(this.adicionar) : false;
+    this.canEditar = this.editar ? this.guardService.findCheck(this.editar) : false;
+    this.canDetalhar = this.detalhar ? this.guardService.findCheck(this.detalhar) : false;
+    this.canRemover = this.remover ? this.guardService.findCheck(this.remover) : false;
   }
 
   remove(id) {
