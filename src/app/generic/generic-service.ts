@@ -9,7 +9,7 @@ import { GenericFilter } from './generic-filter';
 
 export abstract class GenericService<T, F extends GenericFilter> {
 
-    readonly rootUrl = 'http://localhost:7080/IntegraApi2/rest/';
+    readonly rootUrl = 'http://localhost:8080/IntegraApi2/rest/';
 
     public helper: Helper;
 
@@ -115,13 +115,11 @@ export abstract class GenericService<T, F extends GenericFilter> {
 
     transformDate(obj, t, property: string) {
         if (obj[property + 'Front'] && obj[property + 'Front'] !== '') {
-            const date = this.helper.createDateFromString(obj[property + 'Front']);
+            const date = this.helper.createDateFromString(obj[property + 'Front'], true);
             t[property] = date.getTime();
         } else if (obj[property] && obj[property] !== 0) {
             // CRlAR UMA DATA A PARTR DO VALOR EM MlLlSEGUNDOS
-            let date = new Date(obj[property]);
-            date = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-                date.getHours() + this.helper.getTimeZoneNumber(), date.getMinutes(), 0, 0 );
+            const date = new Date(obj[property]);
             // MONTAR A DATA EM STRlNG E SETAR NA PROPRlEDADE STRlNG DO OBJETO
             let dateString = '';
             dateString += this.helper.addLeftZero(date.getDate().toString());
@@ -147,7 +145,7 @@ export abstract class GenericService<T, F extends GenericFilter> {
 
     private transformDateFilterProperty(f: F, mainProperty: string, property: string): F {
         if (f[mainProperty] && f[mainProperty][property + 'Front'] && f[mainProperty][property + 'Front'] !== '') {
-            f[mainProperty][property] = this.helper.createDateFromString(f[mainProperty][property + 'Front']).getTime();
+            f[mainProperty][property] = this.helper.createDateFromString(f[mainProperty][property + 'Front'], true).getTime();
         }
         return f;
     }

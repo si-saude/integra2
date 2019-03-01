@@ -114,7 +114,7 @@ export class Helper {
       return s;
     }
 
-    createDateFromString(stringDate: string): Date {
+    createDateFromString(stringDate: string, useTimezone: boolean): Date {
       const fullDateArray = stringDate.split(' ');
       const dateArray = fullDateArray[0].split('/');
       let timeArray = new Array<any>();
@@ -125,14 +125,14 @@ export class Helper {
       }
       // CRlAR UMA DATA A PARTlR DAS POSlÇÕES DO VETOR E CONVERTER PARA MlLlSEGUNDOS
       const date = new Date(Number(dateArray[2]), Number(dateArray[1]) - 1, Number(dateArray[0]),
-          Number(timeArray[0]) - this.getTimeZoneNumber(), Number(timeArray[1]), 0, 0);
+          Number(timeArray[0]) - (useTimezone ? this.getTimeZoneNumber() : 0), Number(timeArray[1]), 0, 0);
       return date;
     }
 
     validateDate(stringDate: string): boolean {
       const fullDateArray = stringDate.split(' ');
       const dateArray = fullDateArray[0].split('/');
-      const date = this.createDateFromString(stringDate);
+      const date = this.createDateFromString(stringDate, false);
       if (date.getFullYear() === Number(dateArray[2]) && date.getMonth() ===  Number(dateArray[1]) - 1
           && date.getDate() === Number(dateArray[0])) {
             return true;
@@ -149,10 +149,10 @@ export class Helper {
       } else {
           timeArray = [0, 0];
       }
-      const date = this.createDateFromString(stringDate);
+      const date = this.createDateFromString(stringDate, false);
       if (date.getFullYear() === Number(dateArray[2]) && date.getMonth() ===  Number(dateArray[1]) - 1
           && date.getDate() === Number(dateArray[0])
-          && date.getHours() === Number(timeArray[0]) - this.getTimeZoneNumber()
+          && date.getHours() === Number(timeArray[0])
           && date.getMinutes() === Number(timeArray[1])) {
             return true;
       }
