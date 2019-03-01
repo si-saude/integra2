@@ -57,6 +57,7 @@ export class CheckinService extends GenericService<Checkin, CheckinFilter> {
             checkin.$localizacao = this.localizacaoService.toObject(obj['localizacao']);
         }
 
+        checkin.$tarefas = new Array<Tarefa>();
         if (obj['tarefas']) {
             for (let x = 0; x < obj['tarefas'].length; x++) {
                 const tarefa: Tarefa = this.tarefaService.toObject(obj['tarefas'][x]);

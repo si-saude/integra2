@@ -8,7 +8,7 @@ export class AtendimentoFilter extends GenericFilter {
     private checkin: CheckinFilter;
     private tarefa: TarefaFilter;
     private fila: FilaAtendimentoFilter;
-    
+
     public get $checkin(): CheckinFilter {
         return this.checkin;
     }

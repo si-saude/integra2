@@ -33,6 +33,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   private profissional: Profissional;
   private timeout: Subscription;
   private modalEntrar: Modal;
+  private beep: any;
 
   constructor(private servico: AtendimentoService, router: Router, route: ActivatedRoute,
       wizardService: WizardService<Atendimento>, private usuarioService: UsuarioService) {
@@ -41,11 +42,14 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
     this.util = new AtendimentoUtil(servico);
     this.fila = this.servico.getFilaAtendimentoService().initializeObject();
     this.modalEntrar = new Modal(this, 'entrar');
+    this.beep = new Audio();
+    this.beep.src = './../../../../assets/audio/beep.mp3';
   }
 
   ngOnInit() {
     this.util.onInit();
     this.getProfissional();
+    this.refresh();
   }
 
   entrarOuVoltar() {
@@ -156,6 +160,8 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
       const list = res.json().list;
       if (list && list[0]) {
         this.t = this.servico.toObject(list[0]);
+        this.fila = this.t.$fila;
+        this.playBeep();
       }
     }, undefined);
   }
@@ -165,7 +171,19 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   }
 
   refresh() {
-    this.timeout = Observable.timer(17500).subscribe(() => this.refresh());
+    if (this.fila) {
+      if (this.fila.$status === 'DISPONÍVEL') {
+        this.getAtendimento();
+      } else if (this.fila.$status === 'AGUARDANDO EMPREGADO') {
+        this.playBeep();
+      }
+    }
+    this.timeout = Observable.timer(10000).subscribe(() => this.refresh());
+  }
+
+  playBeep() {
+    this.beep.load();
+    this.beep.play();
   }
 
   ngOnDestroy() {
@@ -194,7 +212,7 @@ export class AtendimentoUtil {
   }
 
   isNullFila(fila: FilaAtendimento) {
-    return this.servico.helper.isNull(fila) || !(fila.$id > 0)
+    return this.servico.helper.isNull(fila) || !(fila.$id > 0);
   }
 
   getReturnFila(res, message: string) {
