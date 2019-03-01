@@ -1,0 +1,27 @@
+<app-list-component [component]="this" [functions]="[['remove_circle','checkOut']]">
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+  <div class="row">
+    <app-generic-label [width]="'8'">Nome do Empregado
+      <input type="text" name="nome" [(ngModel)]="filter.empregado.pessoa.nome" maxlength="400" modalConfirm (changeValue)="filter.empregado.pessoa.nome = $event">
+    </app-generic-label>
+  </div>
+  <div class="row">
+    <app-generic-date-filter [label]="'Data de Chegada'" [property]="'chegada'" [dateFilter]="filter.chegada" (changeValue)="filter.chegada=$event">
+    </app-generic-date-filter>
+    <app-generic-label [width]="'3'">Status
+      <app-generic-select [component]="this" [name]="'status'" [array]="util.statusCheckins" (changeValue)="filter.status = $event">
+      </app-generic-select>
+    </app-generic-label>
+  </div>
+  <div class="row">
+    <app-generic-label [width]="'5'">Localização
+        <input type="text" name="localizacao" [(ngModel)]="filter.localizacao.nome" maxlength="50" modalConfirm (changeValue)="filter.localizacao.nome = $event">
+    </app-generic-label>
+    <app-generic-label [width]="'5'">Serviço
+        <input type="text" name="servico" [(ngModel)]="filter.servico.nome" maxlength="128" modalConfirm (changeValue)="filter.servico.nome = $event">
+    </app-generic-label>
+</div>
+
+</app-generic-modal>

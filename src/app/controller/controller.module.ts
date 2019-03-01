@@ -41,6 +41,7 @@ import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-mon
 import { AtendimentoComponentModule } from './processo/atendimento/atendimento.component.module';
 import { AtendimentoOcupacionalComponentModule } from './processo/solicitacao/atendimento-ocupacional/atendimento-ocupacional.component.module';
 import { CheckinComponentModule } from './processo/checkin/checkin.component.module';
+import { CheckoutComponentModule } from './processo/checkin/checkout/checkout.component.module';
 import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.component.module';
 
 @NgModule({
@@ -86,6 +87,7 @@ import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.c
         AtendimentoComponentModule,
         AtendimentoOcupacionalComponentModule,
         CheckinComponentModule,
+        CheckoutComponentModule,
         SolicitacaoComponentModule
     ]
 })

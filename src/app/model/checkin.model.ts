@@ -8,11 +8,15 @@ export class Checkin {
     private empregado: Empregado;
     private localizacao: Localizacao;
     private servico: Servico;
-    private chegada: number;
-    private atualizacao: number;
     private status: string;
     private tarefas: Array<Tarefa>;
     private version: number;
+
+    private chegada: number;
+    private chegadaFront: string;
+
+    private atualizacao: number;
+    private atualizacaoFront: string;
 
     public get $id(): number {
         return this.id;
@@ -30,14 +34,6 @@ export class Checkin {
         return this.servico;
     }
 
-    public get $atualizacao(): number {
-        return this.atualizacao;
-    }
-
-    public get $chegada(): number {
-        return this.chegada;
-    }
-
     public get $status(): string {
         return this.status;
     }
@@ -48,6 +44,22 @@ export class Checkin {
 
     public get $version(): number {
         return this.version;
+    }
+
+    public get $chegada(): number {
+        return this.chegada;
+    }
+
+    public get $chegadaFront(): string {
+        return this.chegadaFront;
+    }
+
+    public get $atualizacao(): number {
+        return this.atualizacao;
+    }
+
+    public get $atualizacaoFront(): string {
+        return this.atualizacaoFront;
     }
 
     public set $id(value: number) {
@@ -66,14 +78,6 @@ export class Checkin {
         this.localizacao = value;
     }
 
-    public set $chegada(value: number) {
-        this.chegada = value;
-    }
-
-    public set $atualizacao(value: number) {
-        this.atualizacao = value;
-    }
-
     public set $status(value: string) {
         this.status = value;
     }
@@ -84,5 +88,21 @@ export class Checkin {
 
     public set $version(value: number) {
         this.version = value;
+    }
+
+    public set $chegada(value: number) {
+        this.chegada = value;
+    }
+
+    public set $chegadaFront(value: string) {
+        this.chegadaFront = value;
+    }
+
+    public set $atualizacao(value: number) {
+        this.atualizacao = value;
+    }
+
+    public set $atualizacaoFront(value: string) {
+        this.atualizacaoFront = value;
     }
 }

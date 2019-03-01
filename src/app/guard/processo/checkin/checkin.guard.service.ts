@@ -7,7 +7,7 @@ import * as guard from './checkin.guard';
 @Injectable()
 export class CheckinGuardService implements GenericGuardService {
 
-    constructor(private checkin: guard.CheckinGuard) {
+    constructor(private checkin: guard.CheckinGuard, private checkout: guard.CheckoutGuard) {
 
     }
 
@@ -16,6 +16,10 @@ export class CheckinGuardService implements GenericGuardService {
         switch (funcionalidade) {
             case 'CHECKIN_CHECKIN': {
                 guard = this.checkin;
+                break;
+            }
+            case 'CHECKIN_CHECKOUT': {
+                guard = this.checkout;
                 break;
             }
         }

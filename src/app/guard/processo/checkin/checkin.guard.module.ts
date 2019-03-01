@@ -6,6 +6,7 @@ import * as checkin from './checkin.guard';
 @NgModule({
     providers: [
         checkin.CheckinGuard,
+        checkin.CheckoutGuard,
         CheckinGuardService
     ]
 })
