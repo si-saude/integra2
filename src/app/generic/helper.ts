@@ -54,6 +54,10 @@ export class Helper {
 
     getToday() {
       const date: Date = new Date();
+      return this.dateToString(date);
+    }
+
+    dateToString(date: Date) {
       let stringDate = '';
       stringDate += this.addLeftZero(date.getDate().toString());
       stringDate += '/';

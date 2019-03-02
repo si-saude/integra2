@@ -7,7 +7,7 @@
         (changeValue)="dateFilter.fimFront=$event; changeValue.emit(dateFilter);" [component]="this" dateFormat>
 </app-generic-label>
 <app-generic-label [width]="'3'">Tipo
-    <app-generic-select [component]="this" [name]="property + 'typeFilter'" [array]="types"
+    <app-generic-select [component]="this" [name]="property + 'typeFilter'" [array]="types" [object]="dateFilter.typeFilter"
         (changeValue)="dateFilter.typeFilter=$event; changeValue.emit(dateFilter);">
     </app-generic-select>
 </app-generic-label>

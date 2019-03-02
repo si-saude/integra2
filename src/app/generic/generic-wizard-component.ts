@@ -66,10 +66,20 @@ export class GenericWizardComponent<T> extends GenericComponent<T> {
         if (this._submit) {
             this.initSave();
             this.service[this._submit](this.t, (res) => {
-                this.goFirst();
+                if (this.rtr.url.replace('/', '') === this.first) {
+                    this.t = this.service.initializeObject();
+                    this.clean();
+                    this.finishSave();
+                } else {
+                    this.goFirst();
+                }
             }, (error) => {
                 this.finishSave();
             });
         }
+    }
+
+    clean() {
+    
     }
 }

@@ -9,7 +9,7 @@ import { GenericFilter } from './generic-filter';
 
 export abstract class GenericService<T, F extends GenericFilter> {
 
-    readonly rootUrl = 'http://localhost:7080/IntegraApi2/rest/';
+    readonly rootUrl = 'http://localhost:5080/IntegraApi2/rest/';
 
     public helper: Helper;
 
@@ -115,7 +115,7 @@ export abstract class GenericService<T, F extends GenericFilter> {
 
     transformDate(obj, t, property: string) {
         if (obj[property + 'Front'] && obj[property + 'Front'] !== '') {
-            const date = this.helper.createDateFromString(obj[property + 'Front'], true);
+            const date = this.helper.createDateFromString(obj[property + 'Front'], false);
             t[property] = date.getTime();
         } else if (obj[property] && obj[property] !== 0) {
             // CRlAR UMA DATA A PARTR DO VALOR EM MlLlSEGUNDOS
@@ -145,7 +145,7 @@ export abstract class GenericService<T, F extends GenericFilter> {
 
     private transformDateFilterProperty(f: F, mainProperty: string, property: string): F {
         if (f[mainProperty] && f[mainProperty][property + 'Front'] && f[mainProperty][property + 'Front'] !== '') {
-            f[mainProperty][property] = this.helper.createDateFromString(f[mainProperty][property + 'Front'], true).getTime();
+            f[mainProperty][property] = this.helper.createDateFromString(f[mainProperty][property + 'Front'], false).getTime();
         }
         return f;
     }

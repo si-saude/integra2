@@ -10,16 +10,16 @@
   <div class="row">
     <app-generic-date-filter [label]="'Data de Chegada'" [property]="'chegada'" [dateFilter]="filter.chegada" (changeValue)="filter.chegada=$event">
     </app-generic-date-filter>
+  </div>
+  <div class="row">
     <app-generic-label [width]="'3'">Status
       <app-generic-select [component]="this" [name]="'status'" [array]="util.statusCheckins" (changeValue)="filter.status = $event">
       </app-generic-select>
     </app-generic-label>
-  </div>
-  <div class="row">
-    <app-generic-label [width]="'5'">Localização
+    <app-generic-label [width]="'4'">Localização
         <input type="text" name="localizacao" [(ngModel)]="filter.localizacao.nome" maxlength="50" modalConfirm (changeValue)="filter.localizacao.nome = $event">
     </app-generic-label>
-    <app-generic-label [width]="'5'">Serviço
+    <app-generic-label [width]="'4'">Serviço
         <input type="text" name="servico" [(ngModel)]="filter.servico.nome" maxlength="128" modalConfirm (changeValue)="filter.servico.nome = $event">
     </app-generic-label>
 </div>

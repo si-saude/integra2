@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { GenericWizardComponent } from './../../../generic/generic-wizard-component';
@@ -18,6 +18,8 @@ import { CheckinService } from './../../../service/checkin.service';
 })
 export class CheckinComponent extends GenericWizardComponent<Checkin> implements OnInit {
 
+  @ViewChild( 'autocompleteEmpregado' ) autocompleteEmpregado;
+  
   private util: CheckinUtil;
 
   constructor(private servico: CheckinService, router: Router, route: ActivatedRoute,
@@ -45,9 +47,7 @@ export class CheckinComponent extends GenericWizardComponent<Checkin> implements
             }
           }, undefined);
     } else {
-      this.util.servicos = undefined;
-      this._submit = undefined;
-      this.t.$servico = undefined;
+      this.limpar();
     }
   }
 
@@ -57,6 +57,18 @@ export class CheckinComponent extends GenericWizardComponent<Checkin> implements
     } else {
       this._submit = undefined;
     }
+  }
+
+  clean() {
+    this.limpar();
+    this.t.$empregado = this.servico.getEmpregadoService().initializeObject();
+    this.autocompleteEmpregado.validate();
+  }
+
+  limpar() {
+    this.util.servicos = undefined;
+    this._submit = undefined;
+    this.t.$servico = undefined;
   }
 }
 

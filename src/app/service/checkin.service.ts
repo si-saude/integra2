@@ -40,6 +40,11 @@ export class CheckinService extends GenericService<Checkin, CheckinFilter> {
         return f;
     }
 
+    transformFilter(filter: CheckinFilter) {
+        filter = this.transformDateFilter(filter, 'chegada');
+        return filter;
+    }
+
     toObject(obj: any): Checkin {
         let checkin: Checkin = new Checkin();
         checkin.$id = obj['id'];

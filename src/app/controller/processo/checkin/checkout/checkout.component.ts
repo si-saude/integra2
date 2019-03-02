@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { ConfirmService } from './../../../../util/confirm/confirm.service';
 import { GenericListComponent } from './../../../../generic/generic-list-component';
-import { GenericComponent } from './../../../../generic/generic-component';
 
 import { Checkin } from './../../../../model/checkin.model';
 import { CheckinFilter } from './../../../../filter/checkin.filter';
@@ -19,7 +18,7 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
   private util: CheckoutUtil;
 
   constructor(private servico: CheckinService, private router: Router, private confirmService: ConfirmService) {
-    super(servico, router, 'Checkout',
+    super(servico, router, 'Check-out',
       [
         ['Empregado', 'empregado.pessoa.nome'], ['Localização', 'localizacao.nome'],
         ['Chegada', 'chegadaFront'], ['Status', 'status']
@@ -27,23 +26,23 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
   }
 
   ngOnInit() {
-    this.util = new CheckoutUtil(this.servico, this.confirmService, this);
+    this.util = new CheckoutUtil(this.servico);
     this.util.onInit();
-
-    const hojeAux = this.servico.helper.getToday();
-
-    const hoje = this.servico.helper.createDateFromString(hojeAux, false);
-    const amanha = this.servico.helper.createDateFromString(hojeAux, false);
+    const hoje = this.servico.helper.getToday();
+    const amanha = this.servico.helper.createDateFromString(hoje, false);
     amanha.setDate(amanha.getDate() + 1);
-
-    this.filter.$chegada.$inicio = hoje.getTime();
-    this.filter.$chegada.$fim = amanha.getTime();
-    this.filter.$chegada = this.servico.transformDate(this.filter.$chegada, this.filter.$chegada, 'inicio');
-    this.filter.$chegada = this.servico.transformDate(this.filter.$chegada, this.filter.$chegada, 'fim');
-
+    this.filter.$chegada.$inicioFront = hoje;
+    this.filter.$chegada.$fimFront = this.servico.helper.dateToString(amanha);
     this.filter.$chegada.$typeFilter = 'ENTRE';
-
     this.page(1);
+  }
+
+  checkOut(obj) {
+    this.confirmService.show('Deseja realizar o check-out do empregado?', this, function (c) {
+      c.getService().checkOut(obj, function (res) {
+        c.callPage();
+      }, undefined);
+    }, undefined, undefined);
   }
 }
 
@@ -51,8 +50,7 @@ export class CheckoutUtil {
 
   statusCheckins: Array<string>;
 
-  constructor(private servico: CheckinService, private confirmService: ConfirmService,
-    private component: CheckoutComponent) {
+  constructor(private servico: CheckinService) {
 
   }
 
@@ -61,13 +59,5 @@ export class CheckoutUtil {
     this.servico.getUtilService().getStatusCheckin('', function (list) {
       component.statusCheckins = list;
     }, undefined);
-  }
-
-  checkOut(obj) {
-    this.confirmService.show('Deseja realizar o check-out do empregado?', this.component, function (c) {
-      c.getService().checkOut(obj, function (res) {
-        c.callPage();
-      }, undefined);
-    }, undefined, undefined);
   }
 }
