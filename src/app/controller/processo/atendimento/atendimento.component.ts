@@ -64,6 +64,47 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
     }
   }
 
+  iniciar() {
+    if (!this.util.isNullFila(this.fila) && this.fila.$status === 'AGUARDANDO EMPREGADO') {
+      this.callIniciar();
+    } else {
+      this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
+    }
+  }
+
+  liberar() {
+    if (!this.util.isNullFila(this.fila) && this.fila.$status === 'EM ATENDIMENTO') {
+      this.callLiberar();
+    } else {
+      this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
+    }
+  }
+
+  devolver() {
+    if (this.t.$id > 0) {
+      this.callDevolver();
+    } else {
+      this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
+    }
+  }
+
+  registrarAusencia() {
+    if (this.t.$id > 0) {
+      this.callRegistrarAusencia();
+    } else {
+      this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
+    }
+  }
+
+  finalizar(status) {
+    if (!this.util.isNullFila(this.fila) && 
+      (this.fila.$status === 'EM ATENDIMENTO' || this.fila.$status === 'LANÇAMENTO DE INFORMAÇÕES')) {
+      this.callFinalizar(status);
+    } else {
+      this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
+    }
+  }
+
   entrar() {
     if (this.helper.isNull(this.fila) || this.helper.isNull(this.fila.$localizacao)) {
       this.servico.showMessage('Informe a Localização para entrar na fila de atendimento.');
@@ -113,6 +154,38 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
     }, undefined);
   }
 
+  callIniciar() {
+    this.servico.iniciar(this.t, (res) => {
+      this.getFila();
+    }, undefined);
+  }
+
+  callLiberar() {
+    this.servico.liberar(this.t, (res) => {
+      this.getFila();
+    }, undefined);
+  }
+
+  callFinalizar(status: string) {
+    const atendimento: Atendimento = this.servico.toObject(this.t);
+    atendimento.$fila.$status = status;
+    this.servico.finalizar(atendimento, (res) => {
+      this.getFila();
+    }, undefined);
+  }
+
+  callDevolver() {
+    this.servico.devolver(this.t, (res) => {
+      this.getFila();
+    }, undefined);
+  }
+
+  callRegistrarAusencia() {
+    this.servico.registrarAusencia(this.t, (res) => {
+      this.getFila();
+    }, undefined);
+  }
+
   getProfissional() {
     const usuario: Usuario = this.usuarioService.toObject(JSON.parse(localStorage.getItem('user')));
     const filter: ProfissionalFilter = this.servico.getFilaAtendimentoService()
@@ -143,9 +216,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
       const list = res.json();
       if (list && list[0] && list[0]) {
         this.fila = this.servico.getFilaAtendimentoService().toObject(list[0]);
-        if (!this.fila.$status.includes('DISPONÍVEL')) {
-          this.getAtendimento();
-        }
+        this.getAtendimento();
       }
     }, undefined);
   }
@@ -162,6 +233,8 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
         this.t = this.servico.toObject(list[0]);
         this.fila = this.t.$fila;
         this.playBeep();
+      } else {
+        this.t = this.servico.initializeObject();
       }
     }, undefined);
   }

@@ -63,4 +63,64 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
     public getCheckinService() : CheckinService {
         return this.checkinService;
     }
+
+    iniciar(t: Atendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/iniciar', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                this.showMessage(res._body);
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
+    liberar(t: Atendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/liberar', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                this.showMessage(res._body);
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
+    finalizar(t: Atendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/finalizar', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                this.showMessage(res._body);
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
+    devolver(t: Atendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/devolver', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                this.showMessage(res._body);
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
+    registrarAusencia(t: Atendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/registrar-ausencia', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                this.showMessage(res._body);
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
 }

@@ -8,12 +8,14 @@
         <i class="large material-icons">note_add</i>
       </div>
       <div class="col s1" *ngIf="t.id > 0">
-        <i class="medium material-icons">play_arrow</i>
-        <i class="medium material-icons">thumb_up</i>
-        <i class="medium material-icons">done</i>
-        <i class="medium material-icons">done_all</i>
-        <i class="medium material-icons">keyboard_return</i>
-        <i class="medium material-icons">warning</i>
+        <i class="medium material-icons" (click)="iniciar()" *ngIf="fila && fila.status === 'AGUARDANDO EMPREGADO'">play_arrow</i>
+        <i class="medium material-icons" (click)="liberar()" *ngIf="fila && fila.status === 'EM ATENDIMENTO'">thumb_up</i>
+        <i class="medium material-icons" (click)="finalizar('DISPONÍVEL')"
+                *ngIf="fila && (fila.status === 'EM ATENDIMENTO' || fila.status === 'LANÇAMENTO DE INFORMAÇÕES')">done</i>
+        <i class="medium material-icons" (click)="finalizar('INDISPONÍVEL')"
+                *ngIf="fila && (fila.status === 'EM ATENDIMENTO' || fila.status === 'LANÇAMENTO DE INFORMAÇÕES')">done_all</i>
+        <i class="medium material-icons" (click)="devolver()">keyboard_return</i>
+        <i class="medium material-icons" (click)="registrarAusencia()">warning</i>
       </div>
       <div class="col s11">
         <div class="row">
@@ -31,16 +33,12 @@
           <div class="col s11" >
             <b>Empregado:</b><br>
             <app-generic-tab [tabs]="[[fichaColetaTab,'FICHA DE COLETA'],
-              [fichaTriagemTab,'FICHA DE TRIAGEM'],
-              [planejamentoTab, 'PLANEJAMENTO']]">
+              [fichaTriagemTab,'FICHA DE TRIAGEM']]">
               <div #fichaColetaTab>
                 coleta
               </div>
               <div #fichaTriagemTab>
                 triagem
-              </div>
-              <div #planejamentoTab>
-                planejamento
               </div>
             </app-generic-tab>
           </div>
