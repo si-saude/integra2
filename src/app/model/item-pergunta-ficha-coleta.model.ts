@@ -5,6 +5,7 @@ export class ItemPerguntaFichaColeta {
     private titulo: string;
     private path: string;
     private pergunta: PerguntaFichaColeta;
+    private ordem: number;
     private version: number;
 
     public get $id(): number {
@@ -27,6 +28,10 @@ export class ItemPerguntaFichaColeta {
         return this.version;
     }
 
+    public get $ordem(): number {
+        return this.ordem;
+    }
+
     public set $id(value: number) {
         this.id = value;
     }
@@ -41,6 +46,10 @@ export class ItemPerguntaFichaColeta {
 
     public set $pergunta(value: PerguntaFichaColeta) {
         this.pergunta = value;
+    }
+
+    public set $ordem(value: number) {
+        this.ordem = value;
     }
 
     public set $version(value: number) {

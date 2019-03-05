@@ -178,4 +178,10 @@ export class Helper {
     toPhoneFormat(value: string) {
       return Helper.toPhoneFormat(value);
     }
+
+    distinct(array: Array<any>) {
+      return array.filter(function (value, index, self) { 
+        return self.indexOf(value) === index;
+      });
+    }
 }

@@ -8,10 +8,14 @@ import { DialogService } from './../util/dialog/dialog.service';
 import { SpinnerService } from './../util/spinner/spinner.service';
 
 import { Checkin } from '../model/checkin.model';
+import { DetalheRespostaFichaColeta } from '../model/detalhe-resposta-ficha-coleta.model';
+import { ItemRespostaFichaColeta } from '../model/item-resposta-ficha-coleta.model';
+import { RespostaFichaColeta } from '../model/resposta-ficha-coleta.model';
 import { Tarefa } from '../model/tarefa.model';
 import { CheckinFilter } from '../filter/checkin.filter';
 import { EmpregadoService } from './empregado.service';
 import { LocalizacaoService } from './localizacao.service';
+import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
 import { ServicoService } from './servico.service';
 import { TarefaService } from './tarefa.service';
 import { UtilService } from './util.service';
@@ -21,13 +25,15 @@ export class CheckinService extends GenericService<Checkin, CheckinFilter> {
     constructor(http: Http, router: Router, private dialogService: DialogService,
         private spinnerService: SpinnerService, private empregadoService: EmpregadoService,
         private servicoService: ServicoService, private localizacaoService: LocalizacaoService,
-        private tarefaService: TarefaService, private utilService: UtilService) {
+        private tarefaService: TarefaService, private perguntaService: PerguntaFichaColetaService,
+        private utilService: UtilService) {
         super(http, 'checkin', router, dialogService, spinnerService);
     }
 
     initializeObject() {
         const checkin: Checkin = new Checkin();
         checkin.$tarefas = new Array<Tarefa>();
+        checkin.$respostas = new Array<RespostaFichaColeta>();
         return checkin;
     }
 
@@ -74,7 +80,66 @@ export class CheckinService extends GenericService<Checkin, CheckinFilter> {
             }
         }
 
+        checkin.$respostas = new Array<RespostaFichaColeta>();
+        if (obj['respostas']) {
+            for (let x = 0; x < obj['respostas'].length; x++) {
+                const resposta: RespostaFichaColeta = this.toResposta(obj['respostas'][x]);
+                checkin.$respostas.push(resposta);
+            }
+        }
+
         return checkin;
+    }
+
+    toResposta(obj: RespostaFichaColeta): RespostaFichaColeta{
+        const resposta: RespostaFichaColeta = new RespostaFichaColeta();
+        resposta.$id = obj['id'];
+        resposta.$checkin = new Checkin();
+        resposta.$codigo = obj['codigo'];
+        resposta.$conteudo = obj['conteudo'];
+        resposta.$version = obj['version'];
+        
+        if (this.helper.isNotNull(obj['pergunta'])) {
+            resposta.$pergunta = this.perguntaService.toObject(obj['pergunta']);
+        }
+
+        resposta.$itens = new Array<ItemRespostaFichaColeta>();
+        if (obj['itens']) {
+            for (let x = 0; x < obj['itens'].length; x++) {
+                const item: ItemRespostaFichaColeta = this.toItem(obj['itens'][x]);
+                item.$resposta.$id = resposta.$id;
+                resposta.$itens.push(item);
+            }
+        }
+        
+        return resposta;
+    }
+
+    toItem(obj: ItemRespostaFichaColeta): ItemRespostaFichaColeta{
+        const item: ItemRespostaFichaColeta = new ItemRespostaFichaColeta();
+        item.$id = obj['id'];
+        item.$resposta = new RespostaFichaColeta();
+        item.$version = obj['version'];
+
+        item.$detalhes = new Array<DetalheRespostaFichaColeta>();
+        if (obj['detalhes']) {
+            for (let x = 0; x < obj['detalhes'].length; x++) {
+                const detalhe: DetalheRespostaFichaColeta = this.toDetalhe(obj['detalhes'][x]);
+                detalhe.$item.$id = item.$id;
+                item.$detalhes.push(detalhe);
+            }
+        }
+        return item;
+    }
+
+    toDetalhe(obj: DetalheRespostaFichaColeta): DetalheRespostaFichaColeta{
+        const detalhe: DetalheRespostaFichaColeta = new DetalheRespostaFichaColeta();
+        detalhe.$id = obj['id'];
+        detalhe.$item = new ItemRespostaFichaColeta();
+        detalhe.$conteudo = obj['conteudo'];
+        detalhe.$ordem = obj['ordem'];
+        detalhe.$version = obj['version'];
+        return detalhe;
     }
 
     getEmpregadoService() {
@@ -83,6 +148,10 @@ export class CheckinService extends GenericService<Checkin, CheckinFilter> {
 
     getLocalizacaoService() {
         return this.localizacaoService;
+    }
+
+    getPerguntaFichaColetaService() {
+        return this.perguntaService;
     }
 
     getServicoService() {

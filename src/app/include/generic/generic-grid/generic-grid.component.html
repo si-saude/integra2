@@ -30,11 +30,18 @@
     [ngClass]="selection && checkSelected(a) ? 'generic-grid-selected' : ''">
       <td [ngClass]="d[2]==='checkbox' ? 
                             'center' : 
-                            d[2]==='' && selection ? 'cursor-pointer' : ''
+                            d[2]==='' && selection ? 
+                              'cursor-pointer' : 
+                              (d[6] ? 
+                                  (checkSelectedCell(a, d[6]) ? 'cursor-pointer generic-grid-selected' : 'cursor-pointer') : 
+                                  '')
                     "
           *ngFor="let d of def; let j = index"
-          (click)="select(a, d[2])">
-        {{ d[2]==='' ? (a[j][0][a[j][1]] | genericPipe : d[5]) : '' }}
+          (click)="select(a, d[2]); selectCell(a, d[6]);">
+        {{ d[2]==='' || (d[2] && d[2].includes('fBold') && !fBold(a, d[2])) ? 
+          (a[j][0][a[j][1]] | genericPipe : d[5]) : '' }}
+        <b *ngIf="d[2]==='bold'">{{ a[j][0][a[j][1]] | genericPipe : d[5] }}</b>
+        <b *ngIf="d[2] && d[2].includes('fBold') && fBold(a, d[2])">{{ a[j][0][a[j][1]] | genericPipe : d[5] }}</b>
         <label *ngIf="d[2]==='checkbox'">
           <input type="checkbox" [(ngModel)]="a[j][0][a[j][1]]" 
             [disabled]="!d[3] || component._detailMode" (click)="dirtyForm()" />

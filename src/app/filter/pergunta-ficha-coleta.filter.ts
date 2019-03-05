@@ -10,6 +10,7 @@ export class PerguntaFichaColetaFilter extends GenericFilter {
     private codigo: string;
 	private path: string;
 	private inativo: BooleanFilter;
+	private obrigatorio: BooleanFilter;
 
     public get $tipo(): string {
         return this.tipo;
@@ -31,6 +32,10 @@ export class PerguntaFichaColetaFilter extends GenericFilter {
 		return this.inativo;
 	}
 
+	public get $obrigatorio(): BooleanFilter {
+		return this.obrigatorio;
+	}
+
 	public get $grupo(): GrupoPerguntaFichaColetaFilter {
 		return this.grupo;
 	}
@@ -45,6 +50,10 @@ export class PerguntaFichaColetaFilter extends GenericFilter {
 
 	public set $inativo(value: BooleanFilter) {
 		this.inativo = value;
+	}
+
+	public set $obrigatorio(value: BooleanFilter) {
+		this.obrigatorio = value;
 	}
 
 	public set $grupo(value: GrupoPerguntaFichaColetaFilter) {

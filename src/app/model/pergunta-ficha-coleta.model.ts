@@ -10,6 +10,7 @@ export class PerguntaFichaColeta {
     private path: string;
     private descricao: string;
     private inativo: boolean;
+    private obrigatorio: boolean;
     private itens: Array<ItemPerguntaFichaColeta>;
     private equipes: Array<Equipe>;
     private version: number;
@@ -36,6 +37,10 @@ export class PerguntaFichaColeta {
 
     public get $inativo(): boolean{
         return this.inativo;
+    }
+
+    public get $obrigatorio(): boolean{
+        return this.obrigatorio;
     }
 
     public get $itens(): Array<ItemPerguntaFichaColeta>{
@@ -76,6 +81,10 @@ export class PerguntaFichaColeta {
 
     public set $inativo(value: boolean) {
         this.inativo = value;
+    }
+
+    public set $obrigatorio(value: boolean) {
+        this.obrigatorio = value;
     }
 
     public set $equipes(value: Array<Equipe>) {

@@ -22,6 +22,11 @@
                 (changeValue)="filter.inativo.value = $event" />
             <span></span>
         </app-generic-label>
+        <app-generic-label [width]="'1'">Obrigatório
+            <input type="checkbox" name="obrigatorio" [value]="filter.obrigatorio.value" checkboxFilter
+                (changeValue)="filter.obrigatorio.value = $event" />
+            <span></span>
+        </app-generic-label>
     </div>
     <div class="row">
         <app-generic-label [width]="'4'">Tipo

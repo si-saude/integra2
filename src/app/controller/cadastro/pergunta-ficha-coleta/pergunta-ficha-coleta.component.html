@@ -13,6 +13,10 @@
             <input type="checkbox" name="inativo" #inativo="ngModel" [(ngModel)]="t.inativo" [disabled]="_detailMode" />
             <span></span>
           </app-generic-label>
+          <app-generic-label [width]="'1'">Obrigatório
+            <input type="checkbox" name="obrigatorio" #obrigatorio="ngModel" [(ngModel)]="t.obrigatorio" [disabled]="_detailMode" />
+            <span></span>
+          </app-generic-label>
         </div>
         <div class="row">
           <app-generic-label [width]="'8'">Descrição
@@ -54,7 +58,8 @@
           [service]="servico" [method]="'toItem'" [showAdd]="true" (responseAdd)="gridItem.add($event)">
         </app-text-input-to-grid>
         <div class="row">
-          <app-generic-grid #gridItem [component]="this" [array]="t.itens" [height]="'350px'" [id]="'itens'" [delete]="true" [def]="[['Título','titulo','',''],['Path','path','text','true',64]]"
+          <app-generic-grid #gridItem [component]="this" [array]="t.itens" [height]="'350px'" [id]="'itens'" [delete]="true" 
+            [def]="[['Título','titulo','',''],['Path','path','text','true',64],['Ordem','ordem','integer','true',3]]"
             [textInput]="textInputItem">
           </app-generic-grid>
         </div>

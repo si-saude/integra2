@@ -7,21 +7,27 @@ import { DialogService } from './../util/dialog/dialog.service';
 import { SpinnerService } from './../util/spinner/spinner.service';
 
 import { Atendimento } from '../model/atendimento.model';
+import { Triagem } from '../model/triagem.model';
 import { AtendimentoFilter } from '../filter/atendimento.filter';
 import { CheckinService } from './checkin.service';
 import { FilaAtendimentoService } from './fila-atendimento.service';
+import { IndicadorSastService } from './indicador-sast.service';
+import { UtilService } from './util.service';
 import { TarefaService } from './tarefa.service';
 
 @Injectable()
 export class AtendimentoService extends GenericService<Atendimento, AtendimentoFilter> {
     constructor(http: Http, router: Router, private dialogService: DialogService,
         private spinnerService: SpinnerService, private tarefaService: TarefaService,
-        private filaService: FilaAtendimentoService, private checkinService: CheckinService) {
+        private filaService: FilaAtendimentoService, private checkinService: CheckinService,
+        private indicadorService: IndicadorSastService, private utilService: UtilService) {
         super(http, 'atendimento', router, dialogService, spinnerService);
     }
 
     initializeObject() {
-        return new Atendimento();
+        const a = new Atendimento();
+        a.$triagens = new Array<Triagem>();
+        return a;
     }
 
     initializeFilter() {
@@ -49,7 +55,32 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
             atendimento.$fila = this.filaService.toObject(obj['fila']);
         }
 
+        atendimento.$triagens = new Array<Triagem>();
+        if (obj['triagens']) {
+            for (let x = 0; x < obj['triagens'].length; x++) {
+                const triagem: Triagem
+                    = this.toTriagem(obj['triagens'][x]);
+                triagem.$atendimento.$id = atendimento.$id;
+                atendimento.$triagens.push(triagem);
+            }
+        }
+
         return atendimento;
+    }
+
+    toTriagem(obj: Triagem): Triagem {
+        const triagem: Triagem = new Triagem();
+        triagem.$id = obj['id'];
+        triagem.$atendimento = new Atendimento();
+        triagem.$indice = obj['indice'];
+        triagem.$codigo = obj['codigo'];
+        triagem.$version = obj['version'];
+
+        if (this.helper.isNotNull(obj['indicador'])) {
+            triagem.$indicador = this.indicadorService.toObject(obj['indicador']);
+        }
+
+        return triagem;
     }
 
     public getFilaAtendimentoService(): FilaAtendimentoService {
@@ -62,6 +93,14 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
 
     public getCheckinService() : CheckinService {
         return this.checkinService;
+    }
+
+    public getIndicadorSastService(): IndicadorSastService {
+        return this.indicadorService;
+    }
+
+    public getUtilService(): UtilService {
+        return this.utilService;
     }
 
     iniciar(t: Atendimento, fThen: any, fCatch: any) {

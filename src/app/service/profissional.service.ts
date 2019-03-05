@@ -141,6 +141,12 @@ export class ProfissionalService extends GenericService<Profissional, Profission
         return curriculoCurso;
     }
 
+    listEquipes(filter: ProfissionalFilter, fThen: any, fCatch: any) {
+        this.showSpinner();
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/list-equipes', filter, { headers: this.getHeaders() }  ),
+            fThen, fCatch, undefined);
+    }
+
     getEmpregadoService(): EmpregadoService {
         return this.empregadoService;
     }

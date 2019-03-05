@@ -1,12 +1,14 @@
 import { Checkin } from './checkin.model';
 import { FilaAtendimento } from './fila-atendimento.model';
 import { Tarefa } from './tarefa.model';
+import { Triagem } from './triagem.model';
 
 export class Atendimento {
     private id: number;
     private fila: FilaAtendimento;
     private tarefa: Tarefa;
     private checkin: Checkin;
+    private triagens: Array<Triagem>;
     private version: number;
 
     public get $id(): number {
@@ -23,6 +25,10 @@ export class Atendimento {
 
     public get $checkin(): Checkin {
         return this.checkin;
+    }
+
+    public get $triagens(): Array<Triagem> {
+        return this.triagens;
     }
 
     public get $version(): number {
@@ -43,6 +49,10 @@ export class Atendimento {
 
     public set $checkin(value: Checkin) {
         this.checkin = value;
+    }
+
+    public set $triagens(value: Array<Triagem>) {
+        this.triagens = value;
     }
 
     public set $version(value: number) {

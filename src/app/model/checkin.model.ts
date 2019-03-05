@@ -1,5 +1,6 @@
 import { Empregado } from './empregado.model';
 import { Localizacao } from './localizacao.model';
+import { RespostaFichaColeta } from './resposta-ficha-coleta.model';
 import { Servico } from './servico.model';
 import { Tarefa } from './tarefa.model';
 
@@ -10,6 +11,7 @@ export class Checkin {
     private servico: Servico;
     private status: string;
     private tarefas: Array<Tarefa>;
+    private respostas: Array<RespostaFichaColeta>;
     private version: number;
 
     private chegada: number;
@@ -40,6 +42,10 @@ export class Checkin {
 
     public get $tarefas(): Array<Tarefa> {
         return this.tarefas;
+    }
+
+    public get $respostas(): Array<RespostaFichaColeta> {
+        return this.respostas;
     }
 
     public get $version(): number {
@@ -84,6 +90,10 @@ export class Checkin {
 
     public set $tarefas(value: Array<Tarefa>) {
         this.tarefas = value;
+    }
+
+    public set $respostas(value: Array<RespostaFichaColeta>) {
+        this.respostas = value;
     }
 
     public set $version(value: number) {

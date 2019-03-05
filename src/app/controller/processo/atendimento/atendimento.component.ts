@@ -20,6 +20,9 @@ import { Profissional } from './../../../model/profissional.model';
 import { ProfissionalFilter } from './../../../filter/profissional.filter';
 import { Usuario } from './../../../model/usuario.model';
 import { UsuarioService } from './../../../service/usuario.service';
+import { RespostaFichaColeta } from 'app/model/resposta-ficha-coleta.model';
+import { ItemRespostaFichaColeta } from 'app/model/item-resposta-ficha-coleta.model';
+import { DetalheRespostaFichaColeta } from 'app/model/detalhe-resposta-ficha-coleta.model';
 
 @Component({
   selector: 'app-atendimento',
@@ -74,7 +77,20 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
 
   liberar() {
     if (!this.util.isNullFila(this.fila) && this.fila.$status === 'EM ATENDIMENTO') {
-      this.callLiberar();
+      if (this.validarFichaColeta()) {
+        this.callLiberar();
+      }
+    } else {
+      this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
+    }
+  }
+  
+  finalizar(status) {
+    if (!this.util.isNullFila(this.fila) && 
+      (this.fila.$status === 'EM ATENDIMENTO' || this.fila.$status === 'LANÇAMENTO DE INFORMAÇÕES')) {
+        if (this.validarTriagens()) {
+          this.callFinalizar(status);
+        }
     } else {
       this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
     }
@@ -96,13 +112,25 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
     }
   }
 
-  finalizar(status) {
-    if (!this.util.isNullFila(this.fila) && 
-      (this.fila.$status === 'EM ATENDIMENTO' || this.fila.$status === 'LANÇAMENTO DE INFORMAÇÕES')) {
-      this.callFinalizar(status);
-    } else {
-      this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
+  validarFichaColeta() {
+    for(let resposta of this.t.$checkin.$respostas) {
+      const check: boolean = this.util.checkEquipe(resposta, this.profissional);
+      if (check === true && resposta.$pergunta.$obrigatorio === true && 
+        (resposta.$conteudo === undefined || resposta.$conteudo.trim() === '')) {
+        this.servico.showMessage('Não é possível prosseguir pois há itens obrigatórios não preenchidos na ficha de coleta: '+
+          resposta.$pergunta.$descricao);
+        return false;  
+      }
     }
+    return true;
+  }
+
+  validarTriagens() {
+    if (this.t.$triagens.filter(t=>t.$indicador.$obrigatorio && t.$indice === -1).length > 0) {
+      this.servico.showMessage('Não é possível prosseguir pois há indicadores obrigatórios não preenchidos na ficha de triagem.');
+      return false;
+    }
+    return true;
   }
 
   entrar() {
@@ -192,7 +220,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
                                           .getProfissionalService().initializeFilter();
     filter.$pageSize = 1;
     filter.$empregado.$chave = usuario.$chave;
-    this.servico.getFilaAtendimentoService().getProfissionalService().list(
+    this.servico.getFilaAtendimentoService().getProfissionalService().listEquipes(
       filter, (res) => {
         const list = res.json().list;
         if (list && list[0]) {
@@ -232,9 +260,11 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
       if (list && list[0]) {
         this.t = this.servico.toObject(list[0]);
         this.fila = this.t.$fila;
+        this.util.grupos = this.helper.distinct(this.t.$checkin.$respostas.map(r => r.$pergunta.$grupo.$nome));
         this.playBeep();
       } else {
         this.t = this.servico.initializeObject();
+        this.util.grupos = undefined;
       }
     }, undefined);
   }
@@ -269,6 +299,8 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
 export class AtendimentoUtil {
   localizacoes: Array<Localizacao>;
   localizacaoFilter: LocalizacaoFilter;
+  grupos: Array<string>;
+  simNao: Array<string>;
 
   constructor(private servico: AtendimentoService) {
     this.localizacaoFilter = servico.getFilaAtendimentoService().getLocalizacaoService()
@@ -282,6 +314,18 @@ export class AtendimentoUtil {
           this.localizacoes = this.servico.getFilaAtendimentoService()
               .getLocalizacaoService().toList(res.json().list);
     }, undefined);
+
+    this.servico.getUtilService().getSimNao('', (list) => {
+      this.simNao = list;
+    }, undefined);
+  }
+
+  getEnumArray(path: string) {
+    switch(path) {
+      case 'sim-nao':
+        return this.simNao;
+    }
+    return undefined;
   }
 
   isNullFila(fila: FilaAtendimento) {
@@ -293,5 +337,41 @@ export class AtendimentoUtil {
       this.servico.showMessage(message);
     }
     return this.servico.getFilaAtendimentoService().toObject(res.json());
+  }
+
+  checkItemRespostaFichaColeta(resposta: RespostaFichaColeta) {
+    if (resposta.$pergunta.$path === 'sim-nao') {
+      if (resposta.$conteudo === 'SIM') {
+        if (!resposta.$itens) {
+          resposta.$itens = new Array<ItemRespostaFichaColeta>();
+        }
+        if (resposta.$itens.length === 0) {
+          resposta.$itens.push(this.newItemRespostaFichaColeta(resposta));
+        }
+      } else {
+        resposta.$itens = new Array<ItemRespostaFichaColeta>();
+      }
+    }
+  }
+
+  addItemRespostaFichaColeta(resposta: RespostaFichaColeta) {
+    resposta.$itens.push(this.newItemRespostaFichaColeta(resposta));
+  }
+
+  newItemRespostaFichaColeta(resposta: RespostaFichaColeta) {
+    const item: ItemRespostaFichaColeta = this.servico.getCheckinService().toItem(new ItemRespostaFichaColeta());
+    let x = 0;
+    for(let i of resposta.$pergunta.$itens) {
+      const detalhe: DetalheRespostaFichaColeta = this.servico.getCheckinService().toDetalhe(new DetalheRespostaFichaColeta());
+      detalhe.$ordem = x;
+      detalhe.$item = item;
+      item.$detalhes.push(detalhe);
+      x++;
+    }
+    return item;
+  }
+
+  checkEquipe(resposta: RespostaFichaColeta, profissional: Profissional) {
+    return resposta.$pergunta.$equipes.find(e => profissional.$equipes.find(ee => ee.$id === e.$id) !== undefined) !== undefined;
   }
 }

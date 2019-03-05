@@ -31,14 +31,68 @@
           <div class="col s1">
           </div>
           <div class="col s11" >
-            <b>Empregado:</b><br>
+            <b>Empregado:</b>{{' '+ t.checkin.empregado.pessoa.nome}}<br>
             <app-generic-tab [tabs]="[[fichaColetaTab,'FICHA DE COLETA'],
               [fichaTriagemTab,'FICHA DE TRIAGEM']]">
               <div #fichaColetaTab>
-                coleta
+                <div *ngFor="let grupo of util.grupos">
+                  <fieldset>
+                    <b>{{grupo}}</b>
+                    <div *ngFor="let resposta of t.checkin.respostas; let i = index">
+                      <fieldset *ngIf="resposta.pergunta.grupo.nome === grupo" [ngSwitch]="resposta.pergunta.tipo">
+                        <b>{{resposta.pergunta.descricao}}</b><br>
+                        <input *ngSwitchCase="'TEXTO'" type="text"
+                            name="resposta{{i}}" [(ngModel)]="resposta.conteudo" maxlength="2048" 
+                            [disabled]="!util.checkEquipe(resposta,profissional) || fila.status === 'LANÇAMENTO DE INFORMAÇÕES'">
+                        <input *ngSwitchCase="'INTEIRO'" type="text"
+                            name="resposta{{i}}" [ngModel]="resposta.conteudo" maxlength="16"
+                            (changeValue)="resposta.conteudo=$event" integerFormat>
+                        <input *ngSwitchCase="'DOUBLE'" type="text"
+                            name="resposta{{i}}" [ngModel]="resposta.conteudo" maxlength="16"
+                            (changeValue)="resposta.conteudo=$event" numberFormat>
+                        <textarea *ngSwitchCase="'TEXTAREA'"
+                            name="resposta{{i}}" [(ngModel)]="resposta.conteudo" maxlength="2048"></textarea>
+                        <div>
+                          <button *ngIf="resposta.pergunta.path === 'sim-nao'" class="btn-floating waves-effect waves-light left"
+                            (click)="util.addItemRespostaFichaColeta(resposta)" [disabled]="resposta.conteudo !== 'SIM'"> 
+                            <i class="material-icons center-icon">add</i>
+                          </button>
+                          <app-generic-select *ngSwitchCase="'ENUM'"
+                            [object]="resposta.conteudo" [component]="this" [name]="'resposta'+i" 
+                            [array]="util.getEnumArray(resposta.pergunta.path)"
+                            (changeValue)="resposta.conteudo=$event; util.checkItemRespostaFichaColeta(resposta);">
+                          </app-generic-select>
+                          <table *ngIf="resposta.pergunta.path === 'sim-nao'">
+                            <thead *ngIf="resposta.conteudo === 'SIM'">
+                              <tr>
+                                <td *ngFor="let item of resposta.pergunta.itens"> {{item.titulo}}</td>
+                              </tr>
+                            </thead>
+                            <tr *ngFor="let item of resposta.itens; let j = index">
+                              <td *ngFor="let detalhe of item.detalhes; let m = index">
+                                <input type="text" name="resposta{{i}}.item{{j}}.detalhe{{m}}"
+                                  [(ngModel)]="detalhe.conteudo" maxlength="2048">
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </fieldset>
+                </div>
               </div>
               <div #fichaTriagemTab>
-                triagem
+                <div class="row">
+                  <app-generic-grid #gridTriagens
+                    [id]="'triagens'" [component]="this" [array]="t.triagens" [height]="'350px'"
+                    [def]="[['Indicador','indicador.nome','fBold:obrigatorio',''],
+                    ['Índice 0','indicador.indice0','','', undefined, undefined, ['indice',0,-1]],
+                    ['Índice 1','indicador.indice1','','', undefined, undefined, ['indice',1,-1]],
+                    ['Índice 2','indicador.indice2','','', undefined, undefined, ['indice',2,-1]],
+                    ['Índice 3','indicador.indice3','','', undefined, undefined, ['indice',3,-1]],
+                    ['Índice 4','indicador.indice4','','', undefined, undefined, ['indice',4,-1]]]">
+                  </app-generic-grid>
+                </div>
               </div>
             </app-generic-tab>
           </div>

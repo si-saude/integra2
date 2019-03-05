@@ -35,6 +35,7 @@ export class PerguntaFichaColetaService extends GenericService<PerguntaFichaCole
         const f = new PerguntaFichaColetaFilter();
         f.$grupo = this.grupoPerguntaFichaColetaService.initializeFilter();
         f.$inativo = new BooleanFilter();
+        f.$obrigatorio = new BooleanFilter();
         return f;
     }
 
@@ -44,6 +45,7 @@ export class PerguntaFichaColetaService extends GenericService<PerguntaFichaCole
         pergunta.$codigo = obj['codigo'];
         pergunta.$descricao = obj['descricao'];
         pergunta.$inativo = obj['inativo'];
+        pergunta.$obrigatorio = obj['obrigatorio'];
         pergunta.$path = obj['path'];
         pergunta.$tipo = obj['tipo'];
         pergunta.$version = obj['version'];
@@ -74,6 +76,7 @@ export class PerguntaFichaColetaService extends GenericService<PerguntaFichaCole
         item.$pergunta = new PerguntaFichaColeta();
         item.$path = obj['path'];
         item.$titulo = obj['titulo'];
+        item.$ordem = obj['ordem'];
         item.$version = obj['version'];
         return item;
     }

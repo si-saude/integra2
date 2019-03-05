@@ -179,6 +179,49 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
     }
   }
 
+  selectCell(x, def) {
+    if (def) {
+      const d = this.def[0];
+      for (let a of this.array) {
+        let ar = this.getObjectAndProperty(a, d[1]);
+        if (ar[0] === x[0][0]) {
+          const prop = d[1].split('.')[0];
+          const o = this.array.find(y => y[prop] === ar[0] || y[prop] === ar[0][ar[1]]);
+          const aux = this.getObjectAndProperty(o, def[0]);
+          if (aux[0][aux[1]] === def[1]) {
+            aux[0][aux[1]] = def[2];
+          } else {
+            aux[0][aux[1]] = def[1];
+          }
+        }
+      }
+    }
+  }
+
+  checkSelectedCell(x, def) {
+    if (def) {
+      const d = this.def[0];
+      for (let a of this.array) {
+        let ar = this.getObjectAndProperty(a, d[1]);
+        if (ar[0] === x[0][0]) {
+          const prop = d[1].split('.')[0];
+          const o = this.array.find(y => y[prop] === ar[0] || y[prop] === ar[0][ar[1]]);
+          const aux = this.getObjectAndProperty(o, def[0]);
+          if (aux[0][aux[1]] === def[1]) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  fBold(a, f: string) {
+    const property = f.split(':')[1];
+    const ar = this.getObjectAndProperty(a[0][0],property)
+    return ar[0][ar[1]];
+  }
+
   checkSelected(x) {
     if (this.selection) {
       for (let d of this.def) {
