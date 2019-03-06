@@ -191,6 +191,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   callLiberar() {
     this.servico.liberar(this.t, (res) => {
       this.getFila();
+      this.detailMode();
     }, undefined);
   }
 
@@ -262,6 +263,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
         this.fila = this.t.$fila;
         this.util.grupos = this.helper.distinct(this.t.$checkin.$respostas.map(r => r.$pergunta.$grupo.$nome));
         this.playBeep();
+        this._detailMode = (this.fila.$status === 'LANÇAMENTO DE INFORMAÇÕES');
       } else {
         this.t = this.servico.initializeObject();
         this.util.grupos = undefined;

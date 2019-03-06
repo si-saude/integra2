@@ -1,0 +1,29 @@
+<form class="col s12" #form="ngForm">
+  <app-wizard-component [component]="this">
+    <div class="row" *ngIf="t.questionario && questao">
+      <b>{{ questao.titulo }}</b><br>
+      <div *ngIf="questao.tipo !== 'SUBJETIVA'">
+        <table class="zui-table highlight">
+          <tr *ngFor="let alternativa of questao.alternativas; let i = index">
+            <td style="width:5px">
+              <app-generic-label [width]="'1'">
+                <input type="checkbox" name="checkbox{{i}}" [(ngModel)]="alternativa.marcado" (change)="check(questao,alternativa)" />
+                <span></span>
+              </app-generic-label>
+            </td>
+            <td>
+              <b>{{alternativa.titulo}}</b>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf="questao.tipo === 'SUBJETIVA' || questao.tipo.includes('OBSERVAÇÃO')">
+        <app-generic-label [width]="'10'"> {{ questao.tipo.includes('OBSERVAÇÃO') ? 'Observação' : '' }}
+          <textarea class="text-area" name="conteudo" [ngModel]="questao.conteudo"
+            maxlength="2048" (ngModelChange)="questao.conteudo = $event; change(questao);" >
+          </textarea>
+        </app-generic-label>
+      </div>
+    </div>
+  </app-wizard-component>
+</form>

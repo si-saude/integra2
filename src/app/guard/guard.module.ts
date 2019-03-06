@@ -45,6 +45,7 @@ import { ServicoGuardModule } from './cadastro/servico/servico.guard.module';
 import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard.module';
 
 import { AtendimentoGuardModule } from './processo/atendimento/atendimento.guard.module';
+import { AvaliacaoAtendimentoGuardModule } from './processo/avaliacao-atendimento/avaliacao-atendimento.guard.module';
 import { CheckinGuardModule } from './processo/checkin/checkin.guard.module';
 import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard.module';
 
@@ -96,6 +97,7 @@ import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard
         TipoGrupoMonitoramentoGuardModule,
 
         AtendimentoGuardModule,
+        AvaliacaoAtendimentoGuardModule,
         CheckinGuardModule,
         SolicitacaoGuardModule
     ]

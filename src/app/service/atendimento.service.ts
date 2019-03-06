@@ -129,7 +129,6 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
 
     finalizar(t: Atendimento, fThen: any, fCatch: any) {
         this.showSpinner();
-        t = this.toObject(t);
         this.toPromise(this.http.post(this.rootUrl + this.path + '/finalizar', t, { headers: this.getHeaders()}) ,
             (res) => {
                 this.showMessage(res._body);

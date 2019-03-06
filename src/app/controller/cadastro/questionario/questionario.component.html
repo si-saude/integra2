@@ -57,7 +57,8 @@
                   </app-generic-select>
                 </app-generic-label> 
               </div>
-              <div class="row" *ngIf="gridQuestoes.selectedObject.tipo === 'SUBJETIVA'">
+              <div class="row" *ngIf="gridQuestoes.selectedObject.tipo === 'SUBJETIVA' || 
+                                      gridQuestoes.selectedObject.tipo.includes('MULTIPLA')">
                 <app-generic-label [width]="'5'">Código da Questão Anterior
                   <input class="validate" type="text" name="questaoCodigoAnterior" #questaoCodigoAnterior="ngModel" 
                     [(ngModel)]="gridQuestoes.selectedObject.codigoAnterior" maxlength="4" [disabled]="_detailMode">
@@ -96,7 +97,7 @@
                     </textarea>
                   </app-generic-label>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="!gridQuestoes.selectedObject.tipo.includes('MULTIPLA')">
                   <app-generic-label [width]="'6'">Código da Questão Anterior
                     <input class="validate" type="text" name="alternativaCodigoAnterior" #alternativaCodigoAnterior="ngModel" 
                       [(ngModel)]="gridAlternativas.selectedObject.codigoAnterior" maxlength="4" [disabled]="_detailMode">

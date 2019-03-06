@@ -11,9 +11,14 @@ export class Questao {
     private codigoProximo: string;
     private alternativas: Array<Alternativa>;
     private version: number;
+    private conteudo: string;
 
     public get $id(): number {
         return this.id;
+    }
+
+    public get $conteudo(): string {
+        return this.conteudo;
     }
 
     public get $questionario(): Questionario {
@@ -50,6 +55,10 @@ export class Questao {
 
     public set $id(value: number) {
         this.id = value;
+    }
+
+    public set $conteudo(value: string) {
+        this.conteudo = value;
     }
 
     public set $alternativas(value: Array<Alternativa>) {

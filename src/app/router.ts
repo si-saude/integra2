@@ -47,6 +47,7 @@ import * as servicoGuard from './guard/cadastro/servico/servico.guard';
 import * as tipoGrupoMonitoramento from './guard/cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard';
 
 import * as atendimento from './guard/processo/atendimento/atendimento.guard';
+import * as avaliacaoAtendimento from './guard/processo/avaliacao-atendimento/avaliacao-atendimento.guard';
 import * as checkin from './guard/processo/checkin/checkin.guard';
 import * as solicitacao from './guard/processo/solicitacao/solicitacao.guard';
 
@@ -99,6 +100,7 @@ export const appRoutes: Routes = [
     tipoGrupoMonitoramento.Routing.route(HomeComponent),
 
     atendimento.Routing.route(HomeComponent),
+    avaliacaoAtendimento.Routing.route(HomeComponent),
     checkin.Routing.route(HomeComponent),
     solicitacao.Routing.route(HomeComponent),
     { path: '', redirectTo: '/home', pathMatch: 'full' }

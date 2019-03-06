@@ -7,10 +7,15 @@ export class Alternativa {
     private codigo: string;
     private codigoAnterior: string;
     private codigoProximo: string;
+    private marcado = false;
     private version: number;
 
     public get $id(): number {
         return this.id;
+    }
+
+    public get $marcado(): boolean {
+        return this.marcado;
     }
 
     public get $questao(): Questao {
@@ -39,6 +44,10 @@ export class Alternativa {
 
     public set $id(value: number) {
         this.id = value;
+    }
+
+    public set $marcado(value: boolean) {
+        this.marcado = value;
     }
 
     public set $questao(value: Questao) {

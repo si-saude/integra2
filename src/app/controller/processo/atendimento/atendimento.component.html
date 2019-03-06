@@ -43,26 +43,31 @@
                         <b>{{resposta.pergunta.descricao}}</b><br>
                         <input *ngSwitchCase="'TEXTO'" type="text"
                             name="resposta{{i}}" [(ngModel)]="resposta.conteudo" maxlength="2048" 
-                            [disabled]="!util.checkEquipe(resposta,profissional) || fila.status === 'LANÇAMENTO DE INFORMAÇÕES'">
+                            [disabled]="!util.checkEquipe(resposta,profissional) || _detailMode">
                         <input *ngSwitchCase="'INTEIRO'" type="text"
                             name="resposta{{i}}" [ngModel]="resposta.conteudo" maxlength="16"
-                            (changeValue)="resposta.conteudo=$event" integerFormat>
+                            (changeValue)="resposta.conteudo=$event" integerFormat
+                            [disabled]="!util.checkEquipe(resposta,profissional) || _detailMode">
                         <input *ngSwitchCase="'DOUBLE'" type="text"
                             name="resposta{{i}}" [ngModel]="resposta.conteudo" maxlength="16"
-                            (changeValue)="resposta.conteudo=$event" numberFormat>
+                            (changeValue)="resposta.conteudo=$event" numberFormat
+                            [disabled]="!util.checkEquipe(resposta,profissional) || _detailMode">
                         <textarea *ngSwitchCase="'TEXTAREA'"
-                            name="resposta{{i}}" [(ngModel)]="resposta.conteudo" maxlength="2048"></textarea>
+                            name="resposta{{i}}" [(ngModel)]="resposta.conteudo" maxlength="2048"
+                            [disabled]="!util.checkEquipe(resposta,profissional) || _detailMode"></textarea>
                         <div>
                           <button *ngIf="resposta.pergunta.path === 'sim-nao'" class="btn-floating waves-effect waves-light left"
-                            (click)="util.addItemRespostaFichaColeta(resposta)" [disabled]="resposta.conteudo !== 'SIM'"> 
+                            (click)="util.addItemRespostaFichaColeta(resposta)" 
+                            [disabled]="resposta.conteudo !== 'SIM' || !util.checkEquipe(resposta,profissional) || _detailMode"> 
                             <i class="material-icons center-icon">add</i>
                           </button>
                           <app-generic-select *ngSwitchCase="'ENUM'"
                             [object]="resposta.conteudo" [component]="this" [name]="'resposta'+i" 
                             [array]="util.getEnumArray(resposta.pergunta.path)"
+                            [disabled]="!util.checkEquipe(resposta,profissional) || _detailMode"
                             (changeValue)="resposta.conteudo=$event; util.checkItemRespostaFichaColeta(resposta);">
                           </app-generic-select>
-                          <table *ngIf="resposta.pergunta.path === 'sim-nao'">
+                          <table class="zui-table highlight" *ngIf="resposta.pergunta.path === 'sim-nao'">
                             <thead *ngIf="resposta.conteudo === 'SIM'">
                               <tr>
                                 <td *ngFor="let item of resposta.pergunta.itens"> {{item.titulo}}</td>
@@ -71,7 +76,8 @@
                             <tr *ngFor="let item of resposta.itens; let j = index">
                               <td *ngFor="let detalhe of item.detalhes; let m = index">
                                 <input type="text" name="resposta{{i}}.item{{j}}.detalhe{{m}}"
-                                  [(ngModel)]="detalhe.conteudo" maxlength="2048">
+                                  [(ngModel)]="detalhe.conteudo" maxlength="2048"
+                                  [disabled]="resposta.conteudo !== 'SIM' || !util.checkEquipe(resposta,profissional) || _detailMode">
                               </td>
                             </tr>
                           </table>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { AlimentoService } from './alimento.service';
 import { AtendimentoService } from './atendimento.service';
+import { AvaliacaoAtendimentoService } from './avaliacao-atendimento.service';
 import { AtividadeFisicaService } from './atividade-fisica.service';
 import { BaseService } from './base.service';
 import { CargoService } from './cargo.service';
@@ -48,6 +49,7 @@ import { UtilService } from './util.service';
     providers: [
         AlimentoService,
         AtendimentoService,
+        AvaliacaoAtendimentoService,
         AtividadeFisicaService,
         BaseService,
         CargoService,

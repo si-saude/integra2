@@ -5,6 +5,7 @@ import { Helper } from './../generic/helper';
 import { GenericGuardService } from './../generic/generic-guard.service';
 
 import { AtendimentoGuardService } from './processo/atendimento/atendimento.guard.service';
+import { AvaliacaoAtendimentoGuardService } from './processo/avaliacao-atendimento/avaliacao-atendimento.guard.service';
 import { CheckinGuardService } from './processo/checkin/checkin.guard.service';
 import { SolicitacaoGuardService } from './processo/solicitacao/solicitacao.guard.service';
 
@@ -15,6 +16,7 @@ export class ProcessoGuardService implements GenericGuardService {
 
     constructor(
         private atendimento: AtendimentoGuardService,
+        private avaliacaoAtendimento: AvaliacaoAtendimentoGuardService,
         private checkin: CheckinGuardService,
         private solicitacao: SolicitacaoGuardService) {
 
@@ -27,6 +29,10 @@ export class ProcessoGuardService implements GenericGuardService {
         switch (grupo) {
             case 'ATENDIMENTO': {
                 guardService = this.atendimento;
+                break;
+            }
+            case 'AVALIACAO-ATENDIMENTO': {
+                guardService = this.avaliacaoAtendimento;
                 break;
             }
             case 'CHECKIN': {
