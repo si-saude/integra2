@@ -1,9 +1,51 @@
-<app-generic-modal [title]="'Localização'" [component]="modalLocalizacao">
+<app-generic-modal [title]="'Localização'" [component]="modalLocalizacao" [closeDisabled]="true">
     <div class="row">
         <app-generic-label [width]="'4'">Localização
-            <app-generic-select [component]="this" [name]="'localizacao'" [object]="fila.localizacao" 
-                [property]="'nome'" [array]="util.localizacoes" (changeValue)="fila.localizacao = $event">
+            <app-generic-select [component]="this" [name]="'localizacao'"
+                [property]="'nome'" [array]="util.localizacoes" [object]="atendimento.fila.localizacao"
+                (changeValue)="atendimento.fila.localizacao = $event">
             </app-generic-select>
         </app-generic-label>
     </div>
 </app-generic-modal>
+
+<fieldset>
+    <h5>Chamadas</h5><br>
+    <table class="zui-table highlight" *ngIf="atendimentos">
+        <thead>
+            <tr>
+                <td><b>Empregado</b></td>
+                <td><b>Serviço</b></td>
+                <td><b>Equipe</b></td>
+                <td><b>Status</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a of atendimentos">
+                <td>{{a.tarefa.cliente.pessoa.nome}}</td>
+                <td>{{a.tarefa.servico.nome}}</td>
+                <td>{{a.tarefa.equipe.nome}}</td>
+                <td>{{a.fila.status}}</td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset><br>
+<fieldset>
+    <h5>Fila de Atendimento</h5><br>
+    <table class="zui-table highlight" *ngIf="filas">
+        <thead>
+            <tr>
+                <td><b>Profissional</b></td>
+                <td><b>Status</b></td>
+                <td><b>Empregado</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a of filas">
+                <td>{{a.fila.profissional.empregado.pessoa.nome}}</td>
+                <td>{{a.fila.status}}</td>
+                <td>{{ a.tarefa ? a.tarefa.cliente.pessoa.nome : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>

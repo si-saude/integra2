@@ -84,7 +84,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
       this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
     }
   }
-  
+
   finalizar(status) {
     if (!this.util.isNullFila(this.fila) && 
       (this.fila.$status === 'EM ATENDIMENTO' || this.fila.$status === 'LANÇAMENTO DE INFORMAÇÕES')) {
@@ -113,13 +113,13 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   }
 
   validarFichaColeta() {
-    for(let resposta of this.t.$checkin.$respostas) {
+    for (let resposta of this.t.$checkin.$respostas) {
       const check: boolean = this.util.checkEquipe(resposta, this.profissional);
       if (check === true && resposta.$pergunta.$obrigatorio === true && 
         (resposta.$conteudo === undefined || resposta.$conteudo.trim() === '')) {
         this.servico.showMessage('Não é possível prosseguir pois há itens obrigatórios não preenchidos na ficha de coleta: '+
           resposta.$pergunta.$descricao);
-        return false;  
+        return false;
       }
     }
     return true;

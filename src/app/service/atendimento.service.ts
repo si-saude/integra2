@@ -83,6 +83,30 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
         return triagem;
     }
 
+    getListAtendimentosAguardandoEmpregadoByLocalizacao(t: Atendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path +
+            '/get-list-atendimentos-aguardando-empregado-by-localizacao', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
+    getListFilasAtendimentoByLocalizacao(t: Atendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path +
+            '/get-list-filas-atendimento-by-localizacao', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
     public getFilaAtendimentoService(): FilaAtendimentoService {
         return this.filaService;
     }

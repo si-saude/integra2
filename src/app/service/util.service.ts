@@ -58,6 +58,14 @@ export class UtilService extends GenericService<Object, GenericFilter> {
         this.genericGet('status-empregado', filter, fThen, fCatch);
     }
 
+    getStatusRiscoEmpregado(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('status-risco-empregado', filter, fThen, fCatch);
+    }
+
+    getStatusRiscoPotencial(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('status-risco-potencial', filter, fThen, fCatch);
+    }
+
     getStatusTarefa(filter: string, fThen: any, fCatch: any) {
         this.genericGet('status-tarefa', filter, fThen, fCatch);
     }

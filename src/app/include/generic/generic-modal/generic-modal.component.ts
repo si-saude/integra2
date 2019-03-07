@@ -11,6 +11,7 @@ export class GenericModalComponent implements OnInit {
 
   @Input() component: IModal;
   @Input() title: string;
+  @Input() closeDisabled = false;
 
   constructor() { }
 
@@ -21,7 +22,7 @@ export class GenericModalComponent implements OnInit {
   keyDown(event) {
     if (event.key === 'Enter') {
       this.component.confirmModal();
-    } else if (event.key === 'Escape') {
+    } else if (event.key === 'Escape' && !this.closeDisabled) {
       this.component.closeModal();
     }
   }
