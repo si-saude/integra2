@@ -39,6 +39,7 @@ import { RegimeService } from './regime.service';
 import { RegraAtendimentoService } from './regra-atendimento.service';
 import { RequisitoAsoService } from './requisito-aso.service';
 import { RiscoGheService } from './risco-ghe.service';
+import { RiscoPotencialService } from './risco-potencial.service';
 import { ServicoService } from './servico.service';
 import { TarefaService } from './tarefa.service';
 import { TipoGrupoMonitoramentoService } from './tipo-grupo-monitoramento.service';
@@ -86,6 +87,7 @@ import { UtilService } from './util.service';
         RegraAtendimentoService,
         RequisitoAsoService,
         RiscoGheService,
+        RiscoPotencialService,
         ServicoService,
         TarefaService,
         TipoGrupoMonitoramentoService,

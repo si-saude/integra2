@@ -7,6 +7,7 @@ import { GenericGuardService } from './../generic/generic-guard.service';
 import { AtendimentoGuardService } from './processo/atendimento/atendimento.guard.service';
 import { AvaliacaoAtendimentoGuardService } from './processo/avaliacao-atendimento/avaliacao-atendimento.guard.service';
 import { CheckinGuardService } from './processo/checkin/checkin.guard.service';
+import { RiscoPotencialGuardService } from './processo/risco-potencial/risco-potencial.guard.service';
 import { SolicitacaoGuardService } from './processo/solicitacao/solicitacao.guard.service';
 
 @Injectable()
@@ -18,7 +19,9 @@ export class ProcessoGuardService implements GenericGuardService {
         private atendimento: AtendimentoGuardService,
         private avaliacaoAtendimento: AvaliacaoAtendimentoGuardService,
         private checkin: CheckinGuardService,
-        private solicitacao: SolicitacaoGuardService) {
+        private riscoPotencial: RiscoPotencialGuardService,
+        private solicitacao: SolicitacaoGuardService
+        ) {
 
             this.helper = new Helper();
     }
@@ -37,6 +40,10 @@ export class ProcessoGuardService implements GenericGuardService {
             }
             case 'CHECKIN': {
                 guardService = this.checkin;
+                break;
+            }
+            case 'RISCO-POTENCIAL': {
+                guardService = this.riscoPotencial;
                 break;
             }
             case 'SOLICITACAO': {

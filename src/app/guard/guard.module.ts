@@ -47,6 +47,7 @@ import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitor
 import { AtendimentoGuardModule } from './processo/atendimento/atendimento.guard.module';
 import { AvaliacaoAtendimentoGuardModule } from './processo/avaliacao-atendimento/avaliacao-atendimento.guard.module';
 import { CheckinGuardModule } from './processo/checkin/checkin.guard.module';
+import { RiscoPotencialGuardModule } from './processo/risco-potencial/risco-potencial.guard.module';
 import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard.module';
 
 @NgModule({
@@ -99,6 +100,7 @@ import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard
         AtendimentoGuardModule,
         AvaliacaoAtendimentoGuardModule,
         CheckinGuardModule,
+        RiscoPotencialGuardModule,
         SolicitacaoGuardModule
     ]
 })

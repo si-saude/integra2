@@ -49,6 +49,7 @@ import * as tipoGrupoMonitoramento from './guard/cadastro/tipo-grupo-monitoramen
 import * as atendimento from './guard/processo/atendimento/atendimento.guard';
 import * as avaliacaoAtendimento from './guard/processo/avaliacao-atendimento/avaliacao-atendimento.guard';
 import * as checkin from './guard/processo/checkin/checkin.guard';
+import * as riscoPotencial from './guard/processo/risco-potencial/risco-potencial.guard';
 import * as solicitacao from './guard/processo/solicitacao/solicitacao.guard';
 
 export const appRoutes: Routes = [
@@ -102,6 +103,7 @@ export const appRoutes: Routes = [
     atendimento.Routing.route(HomeComponent),
     avaliacaoAtendimento.Routing.route(HomeComponent),
     checkin.Routing.route(HomeComponent),
+    riscoPotencial.Routing.route(HomeComponent),
     solicitacao.Routing.route(HomeComponent),
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
