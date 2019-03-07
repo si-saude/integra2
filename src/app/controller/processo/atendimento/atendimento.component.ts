@@ -39,7 +39,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   private beep: any;
 
   constructor(private servico: AtendimentoService, router: Router, route: ActivatedRoute,
-      wizardService: WizardService<Atendimento>, private usuarioService: UsuarioService) {
+    wizardService: WizardService<Atendimento>, private usuarioService: UsuarioService) {
     super(servico, router, route, 'Atendimento', wizardService, undefined, '', '');
     this.first = 'atendimento';
     this.util = new AtendimentoUtil(servico);
@@ -84,13 +84,13 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
       this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
     }
   }
-  
+
   finalizar(status) {
-    if (!this.util.isNullFila(this.fila) && 
+    if (!this.util.isNullFila(this.fila) &&
       (this.fila.$status === 'EM ATENDIMENTO' || this.fila.$status === 'LANÇAMENTO DE INFORMAÇÕES')) {
-        if (this.validarTriagens()) {
-          this.callFinalizar(status);
-        }
+      if (this.validarTriagens()) {
+        this.callFinalizar(status);
+      }
     } else {
       this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
     }
@@ -113,20 +113,20 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   }
 
   validarFichaColeta() {
-    for(let resposta of this.t.$checkin.$respostas) {
+    for (let resposta of this.t.$checkin.$respostas) {
       const check: boolean = this.util.checkEquipe(resposta, this.profissional);
-      if (check === true && resposta.$pergunta.$obrigatorio === true && 
+      if (check === true && resposta.$pergunta.$obrigatorio === true &&
         (resposta.$conteudo === undefined || resposta.$conteudo.trim() === '')) {
-        this.servico.showMessage('Não é possível prosseguir pois há itens obrigatórios não preenchidos na ficha de coleta: '+
+        this.servico.showMessage('Não é possível prosseguir pois há itens obrigatórios não preenchidos na ficha de coleta: ' +
           resposta.$pergunta.$descricao);
-        return false;  
+        return false;
       }
     }
     return true;
   }
 
   validarTriagens() {
-    if (this.t.$triagens.filter(t=>t.$indicador.$obrigatorio && t.$indice === -1).length > 0) {
+    if (this.t.$triagens.filter(t => t.$indicador.$obrigatorio && t.$indice === -1).length > 0) {
       this.servico.showMessage('Não é possível prosseguir pois há indicadores obrigatórios não preenchidos na ficha de triagem.');
       return false;
     }
@@ -218,7 +218,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   getProfissional() {
     const usuario: Usuario = this.usuarioService.toObject(JSON.parse(localStorage.getItem('user')));
     const filter: ProfissionalFilter = this.servico.getFilaAtendimentoService()
-                                          .getProfissionalService().initializeFilter();
+      .getProfissionalService().initializeFilter();
     filter.$pageSize = 1;
     filter.$empregado.$chave = usuario.$chave;
     this.servico.getFilaAtendimentoService().getProfissionalService().listEquipes(
@@ -226,7 +226,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
         const list = res.json().list;
         if (list && list[0]) {
           this.profissional = this.servico.getFilaAtendimentoService().getProfissionalService()
-                                  .toObject(list[0]);
+            .toObject(list[0]);
           this.getFila();
         } else {
           this.servico.showMessage('O usuário logado não é um profissional de saúde.');
@@ -299,34 +299,182 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
 }
 
 export class AtendimentoUtil {
+
+  abrangencia: Array<string>;
+  aptidaoCardiorrespiratoria: Array<string>;
+  aptidaoFisicaBrigadista: Array<string>;
+  autoavaliacaoHabitosAlimentares: Array<string>;
+  direitoEsquerdo: Array<string>;
+  doresCorporais: Array<string>;
+  exposicaoRiscosAmbientais: Array<string>;
+  flexibilidade: Array<string>;
+  forcaAbdominal: Array<string>;
+  forcaPreensaoManual: Array<string>;
+  fuma: Array<string>;
+  fumaClassificacao: Array<string>;
+  grupos: Array<string>;
+  intensidade: Array<string>;
   localizacoes: Array<Localizacao>;
   localizacaoFilter: LocalizacaoFilter;
-  grupos: Array<string>;
+  nivelAtividadeFisica: Array<string>;
+  partesCorpo: Array<string>;
+  refereQualidadeAgua: Array<string>;
   simNao: Array<string>;
+  tempoAnos: Array<string>;
+  tempoMeses: Array<string>;
 
   constructor(private servico: AtendimentoService) {
     this.localizacaoFilter = servico.getFilaAtendimentoService().getLocalizacaoService()
-                                    .initializeFilter();
+      .initializeFilter();
     this.localizacaoFilter.$pageSize = 100000;
   }
 
   onInit() {
     this.servico.getFilaAtendimentoService().getLocalizacaoService()
-        .list(this.localizacaoFilter, (res) => {
-          this.localizacoes = this.servico.getFilaAtendimentoService()
-              .getLocalizacaoService().toList(res.json().list);
+      .list(this.localizacaoFilter, (res) => {
+        this.localizacoes = this.servico.getFilaAtendimentoService()
+          .getLocalizacaoService().toList(res.json().list);
+      }, undefined);
+
+    this.servico.getUtilService().getAbrangencia('', (list) => {
+      this.abrangencia = list;
+    }, undefined);
+
+    this.servico.getUtilService().getAptidaoCardiorrespiratoria('', (list) => {
+      this.aptidaoCardiorrespiratoria = list;
+    }, undefined);
+
+    this.servico.getUtilService().getAptidaoFisicaBrigadista('', (list) => {
+      this.aptidaoFisicaBrigadista = list;
+    }, undefined);
+
+    this.servico.getUtilService().getAutoavaliacaoHabitosAlimentares('', (list) => {
+      this.autoavaliacaoHabitosAlimentares = list;
+    }, undefined);
+
+    this.servico.getUtilService().getDireitoEsquerdo('', (list) => {
+      this.direitoEsquerdo = list;
+    }, undefined);
+
+    this.servico.getUtilService().getDoresCorporais('', (list) => {
+      this.doresCorporais = list;
+    }, undefined);
+
+    this.servico.getUtilService().getExposicaoRiscosAmbientais('', (list) => {
+      this.exposicaoRiscosAmbientais = list;
+    }, undefined);
+
+    this.servico.getUtilService().getFlexibilidade('', (list) => {
+      this.flexibilidade = list;
+    }, undefined);
+
+    this.servico.getUtilService().getForcaAbdominal('', (list) => {
+      this.forcaAbdominal = list;
+    }, undefined);
+
+    this.servico.getUtilService().getForcaPreensaoManual('', (list) => {
+      this.forcaPreensaoManual = list;
+    }, undefined);
+
+    this.servico.getUtilService().getFuma('', (list) => {
+      this.fuma = list;
+    }, undefined);
+
+    this.servico.getUtilService().getFumaClassificacao('', (list) => {
+      this.fumaClassificacao = list;
+    }, undefined);
+
+    this.servico.getUtilService().getIntensidade('', (list) => {
+      this.intensidade = list;
+    }, undefined);
+
+    this.servico.getUtilService().getNivelAtividadeFisica('', (list) => {
+      this.nivelAtividadeFisica = list;
+    }, undefined);
+
+    this.servico.getUtilService().getPartesCorpo('', (list) => {
+      this.partesCorpo = list;
+    }, undefined);
+
+    this.servico.getUtilService().getRefereQualidadeAgua('', (list) => {
+      this.refereQualidadeAgua = list;
     }, undefined);
 
     this.servico.getUtilService().getSimNao('', (list) => {
       this.simNao = list;
     }, undefined);
+
+    this.servico.getUtilService().getTempoAnos('', (list) => {
+      this.tempoAnos = list;
+    }, undefined);
+
+    this.servico.getUtilService().getTempoMeses('', (list) => {
+      this.tempoMeses = list;
+    }, undefined);
+
   }
 
   getEnumArray(path: string) {
-    switch(path) {
+
+    switch (path) {
+      case 'abrangencia':
+        return this.abrangencia;
+
+      case 'aptidao-cardiorrespiratoria':
+        return this.aptidaoCardiorrespiratoria;
+
+      case 'aptidao-fisica-brigadista':
+        return this.aptidaoFisicaBrigadista;
+
+      case 'autoavaliacao-habitos-alimentares':
+        return this.autoavaliacaoHabitosAlimentares;
+
+      case 'direito-esquerdo':
+        return this.direitoEsquerdo;
+
+      case 'dores-corporais':
+        return this.doresCorporais;
+
+      case 'exposicao-riscos-ambientais':
+        return this.exposicaoRiscosAmbientais;
+
+      case 'flexibilidade':
+        return this.flexibilidade;
+
+      case 'forca-abdominal':
+        return this.forcaAbdominal;
+
+      case 'forca-prenssao-manual':
+        return this.forcaPreensaoManual;
+
+      case 'fuma':
+        return this.fuma;
+
+      case 'fuma-classificacao':
+        return this.fumaClassificacao;
+
+      case 'intensidade':
+        return this.intensidade;
+
+      case 'nivel-atividade-fisica':
+        return this.nivelAtividadeFisica;
+
+      case 'partes-corpo':
+        return this.partesCorpo;
+
+      case 'refere-qualidade-agua':
+        return this.refereQualidadeAgua;
+
       case 'sim-nao':
         return this.simNao;
+
+      case 'tempo-anos':
+        return this.tempoAnos;
+
+      case 'tempo-meses':
+        return this.tempoMeses;
     }
+
     return undefined;
   }
 
@@ -363,7 +511,7 @@ export class AtendimentoUtil {
   newItemRespostaFichaColeta(resposta: RespostaFichaColeta) {
     const item: ItemRespostaFichaColeta = this.servico.getCheckinService().toItem(new ItemRespostaFichaColeta());
     let x = 0;
-    for(let i of resposta.$pergunta.$itens) {
+    for (let i of resposta.$pergunta.$itens) {
       const detalhe: DetalheRespostaFichaColeta = this.servico.getCheckinService().toDetalhe(new DetalheRespostaFichaColeta());
       detalhe.$ordem = x;
       detalhe.$item = item;

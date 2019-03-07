@@ -26,6 +26,30 @@ export class UtilService extends GenericService<Object, GenericFilter> {
         return this.initializeObject();
     }
 
+    getAbrangencia(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('abrangencia', filter, fThen, fCatch);
+    }
+
+    getAptidaoCardiorrespiratoria(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('aptidao-cardiorrespiratoria', filter, fThen, fCatch);
+    }
+
+    getAptidaoFisicaBrigadista(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('aptidao-fisica-brigadista', filter, fThen, fCatch);
+    }
+
+    getAutoavaliacaoHabitosAlimentares(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('getAutoavaliacaoHabitosAlimentares', filter, fThen, fCatch);
+    }
+
+    getDireitoEsquerdo(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('direito-esquerdo', filter, fThen, fCatch);
+    }
+
+    getDoresCorporais(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('dores-corporais', filter, fThen, fCatch);
+    }
+
     getEscolaridade(filter: string, fThen: any, fCatch: any) {
         this.genericGet('escolaridade', filter, fThen, fCatch);
     }
@@ -34,12 +58,52 @@ export class UtilService extends GenericService<Object, GenericFilter> {
         this.genericGet('estado-civil', filter, fThen, fCatch);
     }
 
+    getExposicaoRiscosAmbientais(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('exposicao-riscos-ambientais', filter, fThen, fCatch);
+    }
+
+    getFlexibilidade(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('flexibilidade', filter, fThen, fCatch);
+    }
+
+    getForcaAbdominal(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('forca-abdominal', filter, fThen, fCatch);
+    }
+
+    getForcaPreensaoManual(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('forca-prenssao-manual', filter, fThen, fCatch);
+    }
+
+    getFuma(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('fuma', filter, fThen, fCatch);
+    }
+
+    getFumaClassificacao(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('fuma-classificacao', filter, fThen, fCatch);
+    }
+
     getGrupoServico(filter: string, fThen: any, fCatch: any) {
         this.genericGet('grupo-servico', filter, fThen, fCatch);
     }
 
+    getIntensidade(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('intensidade', filter, fThen, fCatch);
+    }
+
+    getNivelAtividadeFisica(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('nivel-atividade-fisica', filter, fThen, fCatch);
+    }
+
     getOperador(filter: string, fThen: any, fCatch: any) {
         this.genericGet('operador', filter, fThen, fCatch);
+    }
+
+    getPartesCorpo(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('partes-corpo', filter, fThen, fCatch);
+    }
+
+    getRefereQualidadeAgua(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('refere-qualidade-agua', filter, fThen, fCatch);
     }
 
     getSexo(filter: string, fThen: any, fCatch: any) {
@@ -64,6 +128,14 @@ export class UtilService extends GenericService<Object, GenericFilter> {
 
     getSimNao(filter: string, fThen: any, fCatch: any) {
         this.genericGet('sim-nao', filter, fThen, fCatch);
+    }
+
+    getTempoAnos(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('tempo-anos', filter, fThen, fCatch);
+    }
+
+    getTempoMeses(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('tempo-meses', filter, fThen, fCatch);
     }
 
     getTipoCriterio(filter: string, fThen: any, fCatch: any) {
