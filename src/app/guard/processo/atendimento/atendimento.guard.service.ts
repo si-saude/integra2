@@ -7,7 +7,8 @@ import * as guard from './atendimento.guard';
 @Injectable()
 export class AtendimentoGuardService implements GenericGuardService {
 
-    constructor(private atendimento: guard.AtendimentoGuard) {
+    constructor(private atendimento: guard.AtendimentoGuard,
+        private fila: guard.AtendimentoFilaGuard) {
 
     }
 
@@ -16,6 +17,10 @@ export class AtendimentoGuardService implements GenericGuardService {
         switch (funcionalidade) {
             case 'ATENDIMENTO_ATENDIMENTO': {
                 guard = this.atendimento;
+                break;
+            }
+            case 'ATENDIMENTO_FILA': {
+                guard = this.fila;
                 break;
             }
         }

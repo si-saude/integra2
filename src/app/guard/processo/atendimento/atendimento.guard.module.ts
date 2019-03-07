@@ -6,6 +6,7 @@ import * as atendimento from './atendimento.guard';
 @NgModule({
     providers: [
         atendimento.AtendimentoGuard,
+        atendimento.AtendimentoFilaGuard,
         AtendimentoGuardService
     ]
 })

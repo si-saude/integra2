@@ -1,0 +1,9 @@
+<app-generic-modal [title]="'Localização'" [component]="modalLocalizacao">
+    <div class="row">
+        <app-generic-label [width]="'4'">Localização
+            <app-generic-select [component]="this" [name]="'localizacao'" [object]="fila.localizacao" 
+                [property]="'nome'" [array]="util.localizacoes" (changeValue)="fila.localizacao = $event">
+            </app-generic-select>
+        </app-generic-label>
+    </div>
+</app-generic-modal>

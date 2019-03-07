@@ -39,6 +39,7 @@ import { ServicoComponentModule } from './cadastro/servico/servico.component.mod
 import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.component.module';
 
 import { AtendimentoComponentModule } from './processo/atendimento/atendimento.component.module';
+import { FilaComponentModule } from './processo/atendimento/fila/fila.component.module';
 import { AvaliacaoAtendimentoComponentModule } from './processo/avaliacao-atendimento/avaliacao-atendimento.component.module';
 import { QuestaoComponentModule } from './processo/avaliacao-atendimento/questao/questao.component.module';
 import { AtendimentoOcupacionalComponentModule } from './processo/solicitacao/atendimento-ocupacional/atendimento-ocupacional.component.module';
@@ -87,6 +88,7 @@ import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.c
         TipoGrupoMonitoramentoComponentModule,
 
         AtendimentoComponentModule,
+        FilaComponentModule,
         AvaliacaoAtendimentoComponentModule,
         QuestaoComponentModule,
         AtendimentoOcupacionalComponentModule,

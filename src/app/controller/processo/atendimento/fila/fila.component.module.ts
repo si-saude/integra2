@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../../shared.module';
-import * as checkout from './checkout.component';
+import * as fila from './fila.component';
 
 @NgModule({
     declarations: [
-        checkout.CheckoutComponent
+        fila.FilaComponent
     ],
 imports: [
     SharedModule
 ]})
-export class CheckoutComponentModule { }
+export class FilaComponentModule { }
