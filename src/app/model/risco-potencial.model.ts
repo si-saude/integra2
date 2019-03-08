@@ -8,6 +8,7 @@ export class RiscoPotencial {
     private empregado: Empregado;
     private responsavel: Equipe;
     private riscos: Array<RiscoEmpregado>;
+    private valor: number;
     private version: number;
 
     public get $id(): number {
@@ -28,6 +29,10 @@ export class RiscoPotencial {
 
     public get $riscos(): Array<RiscoEmpregado> {
         return this.riscos;
+    }
+
+    public get $valor(): number {
+        return this.valor;
     }
 
     public get $version(): number {
@@ -52,6 +57,10 @@ export class RiscoPotencial {
 
     public set $riscos(value: Array<RiscoEmpregado>) {
         this.riscos = value;
+    }
+
+    public set $valor(value: number) {
+        this.valor = value;
     }
 
     public set $version(value: number) {

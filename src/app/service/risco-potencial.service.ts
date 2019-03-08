@@ -42,6 +42,7 @@ export class RiscoPotencialService extends GenericService<RiscoPotencial, RiscoP
         const riscoPotencial: RiscoPotencial = new RiscoPotencial();
         riscoPotencial.$id = obj['id'];
         riscoPotencial.$status = obj['status'];
+        riscoPotencial.$valor = obj['valor'];
         riscoPotencial.$version = obj['version'];
 
         if (this.helper.isNotNull(obj['empregado'])) {
@@ -71,6 +72,10 @@ export class RiscoPotencialService extends GenericService<RiscoPotencial, RiscoP
         riscoEmpregado.$status = obj['status'];
         riscoEmpregado.$valor = obj['valor'];
         riscoEmpregado.$version = obj['version'];
+
+        if (this.helper.isNotNull(obj['equipe'])) {
+            riscoEmpregado.$equipe = this.equipeService.toObject(obj['equipe']);
+        }
 
         riscoEmpregado = this.transformDate(obj, riscoEmpregado, 'data');
         riscoEmpregado.$risco = new RiscoPotencial();

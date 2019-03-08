@@ -1,10 +1,12 @@
 import { RiscoPotencial } from './risco-potencial.model';
+import { Equipe } from './equipe.model';
 
 export class RiscoEmpregado {
     private id: number;
     private status: string;
     private risco: RiscoPotencial;
     private valor: number;
+    private equipe: Equipe;
     private version: number;
 
     private data: number;
@@ -20,6 +22,10 @@ export class RiscoEmpregado {
 
     public get $risco(): RiscoPotencial {
         return this.risco;
+    }
+
+    public get $equipe(): Equipe {
+        return this.equipe;
     }
 
     public get $valor(): number {
@@ -48,6 +54,10 @@ export class RiscoEmpregado {
 
     public set $risco(value: RiscoPotencial) {
         this.risco = value;
+    }
+
+    public set $equipe(value: Equipe) {
+        this.equipe = value;
     }
 
     public set $valor(value: number) {
