@@ -411,7 +411,6 @@ export class AtendimentoUtil {
     this.servico.getUtilService().getTempoMeses('', (list) => {
       this.tempoMeses = list;
     }, undefined);
-
   }
 
   getEnumArray(path: string) {

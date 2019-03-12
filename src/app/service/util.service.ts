@@ -39,7 +39,7 @@ export class UtilService extends GenericService<Object, GenericFilter> {
     }
 
     getAutoavaliacaoHabitosAlimentares(filter: string, fThen: any, fCatch: any) {
-        this.genericGet('getAutoavaliacaoHabitosAlimentares', filter, fThen, fCatch);
+        this.genericGet('autoavaliacao-habitos-alimentares', filter, fThen, fCatch);
     }
 
     getDireitoEsquerdo(filter: string, fThen: any, fCatch: any) {
