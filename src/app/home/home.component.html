@@ -81,6 +81,9 @@
     </div>
     <div id="relatorio" style="display: none">
         <ul><li><a class="menuoption" (click)="goToPrincipal()"><i class="material-icons">chevron_left</i></a></li></ul>
+        <app-menu-option [label]="'Agenda'" [routerLink]="'/agenda'" [funcionalidade]="'REPORT_AGENDA'" [homeComponent]="this" [group]="'REPORT'"></app-menu-option>
+        <br>
+        <br>
     </div>
 </div>
 <div [ngClass]="showMenu ? 'card-content container' : 'card-content large-container'">

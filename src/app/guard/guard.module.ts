@@ -5,6 +5,7 @@ import { DeactivateGuard } from './deactivate.guard';
 import { GuardService } from './guard.service';
 import { CadastroGuardService } from './cadastro.guard.service';
 import { ProcessoGuardService } from './processo.guard.service';
+import { ReportGuardService } from './report.guard.service';
 
 import { AlimentoGuardModule } from './cadastro/alimento/alimento.guard.module';
 import { AtividadeFisicaGuardModule } from './cadastro/atividade-fisica/atividade-fisica.guard.module';
@@ -50,12 +51,15 @@ import { CheckinGuardModule } from './processo/checkin/checkin.guard.module';
 import { RiscoPotencialGuardModule } from './processo/risco-potencial/risco-potencial.guard.module';
 import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard.module';
 
+import { AgendaGuardModule } from './report/agenda/agenda.guard.module';
+
 @NgModule({
     providers: [
         AuthGuard,
         GuardService,
         CadastroGuardService,
         ProcessoGuardService,
+        ReportGuardService,
         DeactivateGuard
     ],
     imports: [
@@ -101,7 +105,9 @@ import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard
         AvaliacaoAtendimentoGuardModule,
         CheckinGuardModule,
         RiscoPotencialGuardModule,
-        SolicitacaoGuardModule
+        SolicitacaoGuardModule,
+
+        AgendaGuardModule
     ]
 })
 export class GuardModule { }

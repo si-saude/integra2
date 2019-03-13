@@ -27,6 +27,8 @@ export class MenuOptionComponent implements OnInit {
           return this.checkCadastro();
         case 'PROCESSO':
           return this.checkProcesso();
+        case 'REPORT':
+          return this.checkReport();
       }
     } else {
       return this.checkCadastro();
@@ -39,5 +41,9 @@ export class MenuOptionComponent implements OnInit {
 
   checkProcesso(): boolean {
     return this.homeComponent.checkProcesso(this.funcionalidade);
+  }
+
+  checkReport(): boolean {
+    return this.homeComponent.checkReport(this.funcionalidade);
   }
 }

@@ -29,6 +29,10 @@ export class HomeComponent implements OnInit {
     return this.guardService.checkProcesso(funcionalidade);
   }
 
+  checkReport(funcionalidade): boolean {
+    return this.guardService.checkReport(funcionalidade);
+  }
+
   toggleSidebar() {
     this.showMenu = !this.showMenu;
     document.getElementById('sidebar').style.left = this.showMenu ? '0%' : '-18%';

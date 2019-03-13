@@ -14,6 +14,7 @@ export class GenericDateFilterComponent implements OnInit {
   @Input() dateFilter: DateFilter;
   @Input() property: string;
   @Input() label: string;
+  @Input() defaultType = false;
 
   @Output() changeValue = new EventEmitter();
 

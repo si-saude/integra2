@@ -11,6 +11,14 @@ export class GenericPipe implements PipeTransform {
                 case 'phone':
                     value = Helper.toPhoneFormat(value);
                 break;
+                case 'dateTime':
+                    if (value) {
+                        const time = value.split(' ');
+                        if (time[1] && time[1] === '00:00') {
+                            value = time[0];
+                        }
+                    }
+                break;
             }
         }
         return value;

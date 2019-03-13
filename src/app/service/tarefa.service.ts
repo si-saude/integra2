@@ -3,9 +3,11 @@ import { Http } from '@angular/http';
 import { GenericService } from '../generic/generic-service';
 import { Router } from '@angular/router';
 
+import { DateFilter } from './../generic/date-filter';
 import { DialogService } from './../util/dialog/dialog.service';
 import { SpinnerService } from './../util/spinner/spinner.service';
 
+import { Agenda } from '../dto/agenda.dto';
 import { Tarefa } from '../model/tarefa.model';
 import { TarefaFilter } from '../filter/tarefa.filter';
 import { EquipeService } from './equipe.service';
@@ -33,7 +35,15 @@ export class TarefaService extends GenericService<Tarefa, TarefaFilter> {
         t.$equipe = this.equipeService.initializeFilter();
         t.$responsavel = this.profissionalService.initializeFilter();
         t.$servico = this.servicoService.initializeFilter();
+        t.$inicio = new DateFilter();
+        t.$fim = new DateFilter();
         return t;
+    }
+
+    transformFilter(filter: TarefaFilter) {
+        filter = this.transformDateFilter(filter, 'inicio');
+        filter = this.transformDateFilter(filter, 'fim');
+        return filter;
     }
 
     toObject(obj: any): Tarefa {
@@ -65,6 +75,24 @@ export class TarefaService extends GenericService<Tarefa, TarefaFilter> {
         return tarefa;
     }
 
+    toAgenda(obj: any): Agenda {
+        let agenda: Agenda = new Agenda();
+        agenda.$cliente = obj['cliente'];
+        agenda.$servico = obj['servico'];
+        agenda.$equipes = obj['equipes'];
+        agenda.$status = obj['status'];
+        agenda = this.transformDate(obj, agenda, 'data');
+        return agenda;
+    }
+
+    toAgendas(objs: any): Array<Agenda> {
+        const array: Array<Agenda> = new Array<Agenda>();
+        for (let x = 0; x < objs.length; x++) {
+            array.push(this.toAgenda(objs[x]));
+        }
+        return array;
+    }
+
     public getEmpregadoService(): EmpregadoService {
         return this.empregadoService;
     }
@@ -91,6 +119,17 @@ export class TarefaService extends GenericService<Tarefa, TarefaFilter> {
         this.toPromise(this.http.post(this.rootUrl + this.path + '/registrar', t, { headers: this.getHeaders()}) ,
             (res) => {
                 this.showMessage(res._body);
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
+    reportAgenda(f: TarefaFilter, fThen: any, fCatch: any) {
+        this.showSpinner();
+        f = this.transformFilter(f);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/report-agenda', f, { headers: this.getHeaders()}) ,
+            (res) => {
                 if (fThen) {
                     fThen(res);
                 }

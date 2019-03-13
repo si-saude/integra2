@@ -52,6 +52,8 @@ import * as checkin from './guard/processo/checkin/checkin.guard';
 import * as riscoPotencial from './guard/processo/risco-potencial/risco-potencial.guard';
 import * as solicitacao from './guard/processo/solicitacao/solicitacao.guard';
 
+import * as agenda from './guard/report/agenda/agenda.guard';
+
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     {
@@ -105,5 +107,8 @@ export const appRoutes: Routes = [
     checkin.Routing.route(HomeComponent),
     riscoPotencial.Routing.route(HomeComponent),
     solicitacao.Routing.route(HomeComponent),
+
+    agenda.Routing.route(HomeComponent),
+
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

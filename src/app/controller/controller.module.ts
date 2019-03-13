@@ -48,6 +48,8 @@ import { QuestaoComponentModule } from './processo/avaliacao-atendimento/questao
 import { RiscoPotencialComponentModule } from './processo/risco-potencial/risco-potencial.component.module';
 import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.component.module';
 
+import { AgendaComponentModule } from './report/agenda/agenda.component.module';
+
 @NgModule({
     imports: [
         AlimentoComponentModule,
@@ -96,7 +98,9 @@ import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.c
         FilaComponentModule,
         QuestaoComponentModule,
         RiscoPotencialComponentModule,
-        SolicitacaoComponentModule
+        SolicitacaoComponentModule,
+
+        AgendaComponentModule
     ]
 })
 
