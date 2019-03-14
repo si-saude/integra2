@@ -75,9 +75,16 @@
                             </thead>
                             <tr *ngFor="let item of resposta.itens; let j = index">
                               <td *ngFor="let detalhe of item.detalhes; let m = index">
-                                <input type="text" name="resposta{{i}}.item{{j}}.detalhe{{m}}"
+                                <input *ngIf="!util.detalheTemPath(resposta,detalhe)"
+                                  type="text" name="resposta{{i}}.item{{j}}.detalhe{{m}}"
                                   [(ngModel)]="detalhe.conteudo" maxlength="2048"
                                   [disabled]="resposta.conteudo !== 'SIM' || !util.checkEquipe(resposta,profissional) || _detailMode">
+                                <app-generic-select *ngIf="util.detalheTemPath(resposta,detalhe)"
+                                  [object]="detalhe.conteudo" [component]="this" [name]="'resposta'+i+'.item'+j+'.detalhe'+m" 
+                                  [array]="util.getEnumArray(util.detalheTemPath(resposta,detalhe).path)"
+                                  [disabled]="!util.checkEquipe(resposta,profissional) || _detailMode"
+                                  (changeValue)="detalhe.conteudo=$event;">
+                                </app-generic-select>
                               </td>
                             </tr>
                           </table>

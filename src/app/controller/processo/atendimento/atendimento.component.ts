@@ -509,7 +509,7 @@ export class AtendimentoUtil {
 
   newItemRespostaFichaColeta(resposta: RespostaFichaColeta) {
     const item: ItemRespostaFichaColeta = this.servico.getCheckinService().toItem(new ItemRespostaFichaColeta());
-    let x = 0;
+    let x = 1;
     for (let i of resposta.$pergunta.$itens) {
       const detalhe: DetalheRespostaFichaColeta = this.servico.getCheckinService().toDetalhe(new DetalheRespostaFichaColeta());
       detalhe.$ordem = x;
@@ -522,5 +522,9 @@ export class AtendimentoUtil {
 
   checkEquipe(resposta: RespostaFichaColeta, profissional: Profissional) {
     return resposta.$pergunta.$equipes.find(e => profissional.$equipes.find(ee => ee.$id === e.$id) !== undefined) !== undefined;
+  }
+
+  detalheTemPath(resposta: RespostaFichaColeta, detalhe: DetalheRespostaFichaColeta) {
+    return resposta.$pergunta.$itens.find(i => i.$path && i.$path.trim() !== '' && i.$ordem === detalhe.$ordem);
   }
 }
