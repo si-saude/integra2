@@ -20,6 +20,8 @@ export class GenericGridComponent<T, F extends GenericFilter, G> implements OnIn
   @Input() textInput: any;
   @Input() idProperty = 'id';
   @Input() selection = false;
+  @Input() rowClass: string;
+
   @Output() changeSelected = new EventEmitter();
 
   private helper: Helper;

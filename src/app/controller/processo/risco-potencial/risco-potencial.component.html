@@ -1,7 +1,8 @@
 <div class="row">
     <app-generic-grid #gridRiscosPotenciais
-        [id]="'riscosPotenciais'" [component]="this" [array]="riscos" [height]="'550px'"
-        [def]="[['Empregado','empregado.pessoa.nome','',''],
-                ['Responsável','equipeResponsavel.nome','','']]">
+        [id]="'riscosPotenciais'" [component]="this" [array]="riscos" [height]="'550px'" [rowClass]="'getClass'"
+        [def]="[['Posição','ranking','',''],
+                ['Empregado','empregado.pessoa.nome','',''],
+                ['Responsável','responsavel.nome','','']]">
     </app-generic-grid>
 </div>

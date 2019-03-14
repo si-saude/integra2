@@ -10,6 +10,7 @@ export class RiscoPotencial {
     private riscos: Array<RiscoEmpregado>;
     private valor: number;
     private version: number;
+    private ranking: number;
 
     public get $id(): number {
         return this.id;
@@ -39,6 +40,10 @@ export class RiscoPotencial {
         return this.version;
     }
 
+    public get $ranking(): number {
+        return this.ranking;
+    }
+
     public set $id(value: number) {
         this.id = value;
     }
@@ -65,5 +70,9 @@ export class RiscoPotencial {
 
     public set $version(value: number) {
         this.version = value;
+    }
+
+    public set $ranking(value: number) {
+        this.ranking = value;
     }
 }

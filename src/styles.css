@@ -291,6 +291,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	color: white;
 }
 
+.row-vermelho{
+	background: darkred;
+	color: white;
+}
+
+.row-amarelo{
+	background: darkgoldenrod;
+	color: white;
+}
+
+.row-verde{
+	background: darkgreen;
+	color: white;
+}
+
 .input-error {
   color: rgba(255, 0, 0, 0.80);
   position: relative;
