@@ -7,6 +7,7 @@ import { GenericGuardService } from './../generic/generic-guard.service';
 import { AtendimentoGuardService } from './processo/atendimento/atendimento.guard.service';
 import { AvaliacaoAtendimentoGuardService } from './processo/avaliacao-atendimento/avaliacao-atendimento.guard.service';
 import { CheckinGuardService } from './processo/checkin/checkin.guard.service';
+import { FichaColetaGuardService } from './processo/ficha-coleta/ficha-coleta.guard.service';
 import { RiscoPotencialGuardService } from './processo/risco-potencial/risco-potencial.guard.service';
 import { SolicitacaoGuardService } from './processo/solicitacao/solicitacao.guard.service';
 
@@ -19,6 +20,7 @@ export class ProcessoGuardService implements GenericGuardService {
         private atendimento: AtendimentoGuardService,
         private avaliacaoAtendimento: AvaliacaoAtendimentoGuardService,
         private checkin: CheckinGuardService,
+        private fichaColeta: FichaColetaGuardService,
         private riscoPotencial: RiscoPotencialGuardService,
         private solicitacao: SolicitacaoGuardService
         ) {
@@ -40,6 +42,10 @@ export class ProcessoGuardService implements GenericGuardService {
             }
             case 'CHECKIN': {
                 guardService = this.checkin;
+                break;
+            }
+            case 'FICHA-COLETA': {
+                guardService = this.fichaColeta;
                 break;
             }
             case 'RISCO-POTENCIAL': {

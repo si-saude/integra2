@@ -20,7 +20,9 @@ export class UsuarioService extends GenericService<Usuario, UsuarioFilter> {
     }
 
     initializeObject() {
-        return new Usuario();
+        const usuario: Usuario = new Usuario();
+        usuario.$perfis = new Array<Perfil>();
+        return usuario;
     }
 
     initializeFilter() {
@@ -72,5 +74,9 @@ export class UsuarioService extends GenericService<Usuario, UsuarioFilter> {
         this.showSpinner();
         return this.http.get(this.rootUrl + this.path + '/check?chave=' + chave, { headers: this.getHeaders() }  )
             .toPromise();
+    }
+
+    getPerfilService(): PerfilService {
+        return this.perfilService;
     }
 }

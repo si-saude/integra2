@@ -41,6 +41,7 @@ import { RequisitoAsoGuardService } from './cadastro/requisito-aso/requisito-aso
 import { RiscoGheGuardService } from './cadastro/risco-ghe/risco-ghe.guard.service';
 import { ServicoGuardService } from './cadastro/servico/servico.guard.service';
 import { TipoGrupoMonitoramentoGuardService } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard.service';
+import { UsuarioGuardService } from './cadastro/usuario/usuario.guard.service';
 
 @Injectable()
 export class CadastroGuardService implements GenericGuardService {
@@ -84,7 +85,8 @@ export class CadastroGuardService implements GenericGuardService {
         private requisitoAso: RequisitoAsoGuardService,
         private riscoGhe: RiscoGheGuardService,
         private servico: ServicoGuardService,
-        private tipoGrupoMonitoramento: TipoGrupoMonitoramentoGuardService) {
+        private tipoGrupoMonitoramento: TipoGrupoMonitoramentoGuardService,
+        private usuario: UsuarioGuardService) {
 
             this.helper = new Helper();
     }
@@ -239,6 +241,10 @@ export class CadastroGuardService implements GenericGuardService {
             }
             case 'TIPO-GRUPO-MONITORAMENTO': {
                 guardService = this.tipoGrupoMonitoramento;
+                break;
+            }
+            case 'USUARIO': {
+                guardService = this.usuario;
                 break;
             }
         }

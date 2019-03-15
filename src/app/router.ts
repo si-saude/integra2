@@ -45,10 +45,12 @@ import * as requisitoAso from './guard/cadastro/requisito-aso/requisito-aso.guar
 import * as riscoGheGuard from './guard/cadastro/risco-ghe/risco-ghe.guard';
 import * as servicoGuard from './guard/cadastro/servico/servico.guard';
 import * as tipoGrupoMonitoramento from './guard/cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard';
+import * as usuarioGuard from './guard/cadastro/usuario/usuario.guard';
 
 import * as atendimento from './guard/processo/atendimento/atendimento.guard';
 import * as avaliacaoAtendimento from './guard/processo/avaliacao-atendimento/avaliacao-atendimento.guard';
 import * as checkin from './guard/processo/checkin/checkin.guard';
+import * as fichaColeta from './guard/processo/ficha-coleta/ficha-coleta.guard';
 import * as riscoPotencial from './guard/processo/risco-potencial/risco-potencial.guard';
 import * as solicitacao from './guard/processo/solicitacao/solicitacao.guard';
 
@@ -101,10 +103,12 @@ export const appRoutes: Routes = [
     riscoGheGuard.Routing.route(HomeComponent),
     servicoGuard.Routing.route(HomeComponent),
     tipoGrupoMonitoramento.Routing.route(HomeComponent),
+    usuarioGuard.Routing.route(HomeComponent),
 
     atendimento.Routing.route(HomeComponent),
     avaliacaoAtendimento.Routing.route(HomeComponent),
     checkin.Routing.route(HomeComponent),
+    fichaColeta.Routing.route(HomeComponent),
     riscoPotencial.Routing.route(HomeComponent),
     solicitacao.Routing.route(HomeComponent),
 

@@ -44,10 +44,12 @@ import { RequisitoAsoGuardModule } from './cadastro/requisito-aso/requisito-aso.
 import { RiscoGheGuardModule } from './cadastro/risco-ghe/risco-ghe.guard.module';
 import { ServicoGuardModule } from './cadastro/servico/servico.guard.module';
 import { TipoGrupoMonitoramentoGuardModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.guard.module';
+import { UsuarioGuardModule } from './cadastro/usuario/usuario.guard.module';
 
 import { AtendimentoGuardModule } from './processo/atendimento/atendimento.guard.module';
 import { AvaliacaoAtendimentoGuardModule } from './processo/avaliacao-atendimento/avaliacao-atendimento.guard.module';
 import { CheckinGuardModule } from './processo/checkin/checkin.guard.module';
+import { FichaColetaGuardModule } from './processo/ficha-coleta/ficha-coleta.guard.module';
 import { RiscoPotencialGuardModule } from './processo/risco-potencial/risco-potencial.guard.module';
 import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard.module';
 
@@ -100,10 +102,12 @@ import { AgendaGuardModule } from './report/agenda/agenda.guard.module';
         RiscoGheGuardModule,
         ServicoGuardModule,
         TipoGrupoMonitoramentoGuardModule,
+        UsuarioGuardModule,
 
         AtendimentoGuardModule,
         AvaliacaoAtendimentoGuardModule,
         CheckinGuardModule,
+        FichaColetaGuardModule,
         RiscoPotencialGuardModule,
         SolicitacaoGuardModule,
 

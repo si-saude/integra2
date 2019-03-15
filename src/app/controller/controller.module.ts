@@ -37,6 +37,7 @@ import { RequisitoAsoComponentModule } from './cadastro/requisito-aso/requisito-
 import { RiscoGheComponentModule } from './cadastro/risco-ghe/risco-ghe.component.module';
 import { ServicoComponentModule } from './cadastro/servico/servico.component.module';
 import { TipoGrupoMonitoramentoComponentModule } from './cadastro/tipo-grupo-monitoramento/tipo-grupo-monitoramento.component.module';
+import { UsuarioComponentModule } from './cadastro/usuario/usuario.component.module';
 
 import { AtendimentoComponentModule } from './processo/atendimento/atendimento.component.module';
 import { AtendimentoOcupacionalComponentModule } from './processo/solicitacao/atendimento-ocupacional/atendimento-ocupacional.component.module';
@@ -44,6 +45,7 @@ import { AvaliacaoAtendimentoComponentModule } from './processo/avaliacao-atendi
 import { CheckinComponentModule } from './processo/checkin/checkin.component.module';
 import { CheckoutComponentModule } from './processo/checkin/checkout/checkout.component.module';
 import { FilaComponentModule } from './processo/atendimento/fila/fila.component.module';
+import { FichaColetaComponentModule } from './processo/ficha-coleta/ficha-coleta.component.module';
 import { QuestaoComponentModule } from './processo/avaliacao-atendimento/questao/questao.component.module';
 import { RiscoPotencialComponentModule } from './processo/risco-potencial/risco-potencial.component.module';
 import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.component.module';
@@ -89,6 +91,7 @@ import { AgendaComponentModule } from './report/agenda/agenda.component.module';
         RiscoGheComponentModule,
         ServicoComponentModule,
         TipoGrupoMonitoramentoComponentModule,
+        UsuarioComponentModule,
 
         AtendimentoComponentModule,
         AtendimentoOcupacionalComponentModule,
@@ -96,6 +99,7 @@ import { AgendaComponentModule } from './report/agenda/agenda.component.module';
         CheckinComponentModule,
         CheckoutComponentModule,
         FilaComponentModule,
+        FichaColetaComponentModule,
         QuestaoComponentModule,
         RiscoPotencialComponentModule,
         SolicitacaoComponentModule,
