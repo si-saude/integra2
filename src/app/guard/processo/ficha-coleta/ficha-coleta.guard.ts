@@ -17,7 +17,7 @@ export class FichaColetaGuard extends GenericGuard {
 export class Routing {
     public static route(homeComponent): Route {
         return { path: 'ficha-coleta', component: homeComponent,
-            children: [{ path: '/:id',
+            children: [{ path: ':id',
             component: fichaColetaController.FichaColetaComponent, canActivate: [FichaColetaGuard]}] };
     }
 }

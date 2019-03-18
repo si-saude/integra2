@@ -26,6 +26,15 @@ export class NumberFormatDirective extends GenericFormatDirective implements Con
 
     }
 
+    @HostListener( 'focus', ['$event'] )
+    onFocus( $event: any ) {
+        const value = $event.target.value;
+        if (value === '') {
+            $event.target.value = '0,00';
+            this.changeValue.emit( '' );
+        }
+    }
+
     @HostListener( 'input', ['$event'] )
     onInput( $event: any ) {
         if ( $event.target.value ) {

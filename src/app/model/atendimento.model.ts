@@ -9,6 +9,7 @@ export class Atendimento {
     private tarefa: Tarefa;
     private checkin: Checkin;
     private triagens: Array<Triagem>;
+    private acolhimento: boolean;
     private version: number;
 
     public get $id(): number {
@@ -29,6 +30,10 @@ export class Atendimento {
 
     public get $triagens(): Array<Triagem> {
         return this.triagens;
+    }
+
+    public get $acolhimento(): boolean {
+        return this.acolhimento;
     }
 
     public get $version(): number {
@@ -53,6 +58,10 @@ export class Atendimento {
 
     public set $triagens(value: Array<Triagem>) {
         this.triagens = value;
+    }
+
+    public set $acolhimento(value: boolean) {
+        this.acolhimento = value;
     }
 
     public set $version(value: number) {

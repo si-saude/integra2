@@ -32,11 +32,14 @@
           </div>
           <div class="col s11" >
             <b>Empregado:</b>{{' '+ t.checkin.empregado.pessoa.nome}}<br>
-            <app-generic-tab [tabs]="[[fichaColetaTab,'FICHA DE COLETA'],
-              [fichaTriagemTab,'FICHA DE TRIAGEM']]">
+            <app-generic-tab #tab [tabs]="[[fichaColetaTab,'FICHA DE COLETA'],
+              [fichaTriagemTab,'FICHA DE TRIAGEM'],
+              [acolhimentoTab,'ACOLHIMENTO',!t.acolhimento]]" *ngIf="fila.status !== 'AGUARDANDO EMPREGADO' ">
               <div #fichaColetaTab>
                 <div *ngFor="let grupo of util.grupos">
-                  <fieldset>
+                  <fieldset *ngIf="grupo !== 'TESTE DE FAGERSTRÖM' || 
+                      (respostaFuma && respostaFuma.conteudo && respostaFuma.conteudo.length > 0 && 
+                          (respostaFuma.conteudo === 'FUMANTE' || respostaFuma.conteudo === 'ABSTÊMIO'))">
                     <b>{{grupo}}</b>
                     <div *ngFor="let resposta of t.checkin.respostas; let i = index">
                       <fieldset *ngIf="resposta.pergunta.grupo.nome === grupo" [ngSwitch]="resposta.pergunta.tipo">
@@ -61,14 +64,19 @@
                             [disabled]="resposta.conteudo !== 'SIM' || !util.checkEquipe(resposta,profissional) || _detailMode"> 
                             <i class="material-icons center-icon">add</i>
                           </button>
+                          <button *ngIf="resposta.pergunta.path === 'fuma'" class="btn-floating waves-effect waves-light left"
+                            (click)="util.addItemRespostaFichaColeta(resposta)" 
+                            [disabled]="!resposta.conteudo || resposta.conteudo === 'NÃO' || !util.checkEquipe(resposta,profissional) || _detailMode"> 
+                            <i class="material-icons center-icon">add</i>
+                          </button>
                           <app-generic-select *ngSwitchCase="'ENUM'"
                             [object]="resposta.conteudo" [component]="this" [name]="'resposta'+i" 
                             [array]="util.getEnumArray(resposta.pergunta.path)"
                             [disabled]="!util.checkEquipe(resposta,profissional) || _detailMode"
                             (changeValue)="resposta.conteudo=$event; util.checkItemRespostaFichaColeta(resposta);">
                           </app-generic-select>
-                          <table class="zui-table highlight" *ngIf="resposta.pergunta.path === 'sim-nao'">
-                            <thead *ngIf="resposta.conteudo === 'SIM'">
+                          <table class="zui-table highlight" *ngIf="resposta.pergunta.path === 'sim-nao' || resposta.pergunta.path === 'fuma'">
+                            <thead *ngIf="resposta.itens && resposta.itens.length > 0">
                               <tr>
                                 <td *ngFor="let item of resposta.pergunta.itens"> {{item.titulo}}</td>
                               </tr>
@@ -78,7 +86,7 @@
                                 <input *ngIf="!util.detalheTemPath(resposta,detalhe)"
                                   type="text" name="resposta{{i}}.item{{j}}.detalhe{{m}}"
                                   [(ngModel)]="detalhe.conteudo" maxlength="2048"
-                                  [disabled]="resposta.conteudo !== 'SIM' || !util.checkEquipe(resposta,profissional) || _detailMode">
+                                  [disabled]="!util.checkEquipe(resposta,profissional) || _detailMode">
                                 <app-generic-select *ngIf="util.detalheTemPath(resposta,detalhe)"
                                   [object]="detalhe.conteudo" [component]="this" [name]="'resposta'+i+'.item'+j+'.detalhe'+m" 
                                   [array]="util.getEnumArray(util.detalheTemPath(resposta,detalhe).path)"
@@ -105,6 +113,24 @@
                     ['Índice 3','indicador.indice3','','', undefined, undefined, ['indice',3,-1]],
                     ['Índice 4','indicador.indice4','','', undefined, undefined, ['indice',4,-1]]]">
                   </app-generic-grid>
+                </div>
+              </div>
+              <div #acolhimentoTab>
+                <div *ngIf="tab.selected === 2">
+                  <div *ngFor="let at of atendimentos">
+                    <fieldset>
+                      <b>{{at.tarefa.equipe.nome}}</b><br>
+                      <div *ngFor="let tr of at.triagens">
+                        <div class="row" *ngIf="tr.indice >= 0 && tr.indice < 3" [ngSwitch]="tr.indice">
+                          <div class="col s3">{{tr.indicador.nome}}</div>
+                          <div class="col s1">{{tr.indice}}</div>
+                          <div class="col s8" *ngSwitchCase="0">{{tr.indicador.indice0}}</div>
+                          <div class="col s8" *ngSwitchCase="1">{{tr.indicador.indice1}}</div>
+                          <div class="col s8" *ngSwitchCase="2">{{tr.indicador.indice2}}</div>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
                 </div>
               </div>
             </app-generic-tab>

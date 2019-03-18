@@ -1,3 +1,4 @@
+import { BooleanFilter } from './../generic/boolean-filter';
 import { GenericFilter } from './../generic/generic-filter';
 
 import { CheckinFilter } from './checkin.filter';
@@ -8,6 +9,7 @@ export class AtendimentoFilter extends GenericFilter {
     private checkin: CheckinFilter;
     private tarefa: TarefaFilter;
     private fila: FilaAtendimentoFilter;
+    private acolhimento: BooleanFilter;
 
     public get $checkin(): CheckinFilter {
         return this.checkin;
@@ -31,5 +33,13 @@ export class AtendimentoFilter extends GenericFilter {
 
     public set $fila(value: FilaAtendimentoFilter) {
         this.fila = value;
+    }
+
+    public get $acolhimento(): BooleanFilter {
+        return this.acolhimento;
+    }
+
+    public set $acolhimento(value: BooleanFilter) {
+        this.acolhimento = value;
     }
 }

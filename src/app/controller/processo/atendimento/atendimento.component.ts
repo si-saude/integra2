@@ -37,6 +37,8 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   private timeout: Subscription;
   private modalEntrar: Modal;
   private beep: any;
+  private respostaFuma: RespostaFichaColeta;
+  private atendimentos: Array<Atendimento>;
 
   constructor(private servico: AtendimentoService, router: Router, route: ActivatedRoute,
     wizardService: WizardService<Atendimento>, private usuarioService: UsuarioService) {
@@ -117,8 +119,12 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
       const check: boolean = this.util.checkEquipe(resposta, this.profissional);
       if (check === true && resposta.$pergunta.$obrigatorio === true &&
         (resposta.$conteudo === undefined || resposta.$conteudo.trim() === '')) {
-        this.servico.showMessage('Não é possível prosseguir pois há itens obrigatórios não preenchidos na ficha de coleta: ' +
-          resposta.$pergunta.$descricao);
+          if (resposta.$pergunta.$grupo.$nome === 'TESTE DE FAGERSTRÖM' && this.respostaFuma && this.respostaFuma.$conteudo && 
+              this.respostaFuma.$conteudo !== 'FUMANTE' && this.respostaFuma.$conteudo !== 'ABSTÊMIO') {
+                continue;
+          }
+          this.servico.showMessage('Não é possível prosseguir pois há itens obrigatórios não preenchidos na ficha de coleta: ' +
+            resposta.$pergunta.$descricao);
         return false;
       }
     }
@@ -251,7 +257,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   }
 
   getAtendimento() {
-    const filter: AtendimentoFilter = this.servico.initializeFilter();
+    let filter: AtendimentoFilter = this.servico.initializeFilter();
     filter.$pageSize = 1;
     filter.$fila.$id = this.fila.$id;
     filter.$tarefa.$responsavel.$id = this.profissional.$id;
@@ -262,11 +268,30 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
         this.t = this.servico.toObject(list[0]);
         this.fila = this.t.$fila;
         this.util.grupos = this.helper.distinct(this.t.$checkin.$respostas.map(r => r.$pergunta.$grupo.$nome));
-        this.playBeep();
         this._detailMode = (this.fila.$status === 'LANÇAMENTO DE INFORMAÇÕES');
+        this.respostaFuma = this.t.$checkin.$respostas.find(r => r.$pergunta.$path === 'fuma');
+        
+        if (this.fila.$status === 'AGUARDANDO EMPREGADO' ) {
+          this.playBeep();
+        }
+
+        if (this.t.$acolhimento === true) {
+          filter = this.servico.initializeFilter();
+          filter.$pageSize = 100000;
+          filter.$checkin.$id = this.t.$checkin.$id;
+          filter.$tarefa.$status = 'CONCLUÍDA';
+          this.servico.list(filter, (r) => {
+            const l = r.json().list;
+            if (l && l.length > 0) {
+              this.atendimentos = this.servico.toList(l);
+            }
+          }, undefined);
+        }
       } else {
         this.t = this.servico.initializeObject();
         this.util.grupos = undefined;
+        this.respostaFuma = undefined;
+        this.atendimentos = undefined;
       }
     }, undefined);
   }
@@ -491,15 +516,25 @@ export class AtendimentoUtil {
   checkItemRespostaFichaColeta(resposta: RespostaFichaColeta) {
     if (resposta.$pergunta.$path === 'sim-nao') {
       if (resposta.$conteudo === 'SIM') {
-        if (!resposta.$itens) {
-          resposta.$itens = new Array<ItemRespostaFichaColeta>();
-        }
-        if (resposta.$itens.length === 0) {
-          resposta.$itens.push(this.newItemRespostaFichaColeta(resposta));
-        }
+        this.processarItemRespostaFichaColeta(resposta);
       } else {
         resposta.$itens = new Array<ItemRespostaFichaColeta>();
       }
+    } else if (resposta.$pergunta.$path === 'fuma') {
+      if (resposta.$conteudo && resposta.$conteudo.length > 0 && resposta.$conteudo !== 'NÃO') {
+        this.processarItemRespostaFichaColeta(resposta);
+      } else {
+        resposta.$itens = new Array<ItemRespostaFichaColeta>();
+      }
+    }
+  }
+
+  processarItemRespostaFichaColeta(resposta: RespostaFichaColeta) {
+    if (!resposta.$itens) {
+      resposta.$itens = new Array<ItemRespostaFichaColeta>();
+    }
+    if (resposta.$itens.length === 0) {
+      resposta.$itens.push(this.newItemRespostaFichaColeta(resposta));
     }
   }
 

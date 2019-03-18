@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { GenericService } from '../generic/generic-service';
 import { Router } from '@angular/router';
 
+import { BooleanFilter } from './../generic/boolean-filter';
 import { DialogService } from './../util/dialog/dialog.service';
 import { SpinnerService } from './../util/spinner/spinner.service';
 
@@ -35,12 +36,15 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
         a.$checkin = this.checkinService.initializeFilter();
         a.$fila = this.filaService.initializeFilter();
         a.$tarefa = this.tarefaService.initializeFilter();
+        a.$acolhimento = new BooleanFilter();
+
         return a;
     }
 
     toObject(obj: any): Atendimento {
         const atendimento: Atendimento = new Atendimento();
         atendimento.$id = obj['id'];
+        atendimento.$acolhimento = obj['acolhimento'];
         atendimento.$version = obj['version'];
 
         if (this.helper.isNotNull(obj['checkin'])) {
