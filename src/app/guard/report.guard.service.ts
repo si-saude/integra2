@@ -28,6 +28,6 @@ export class ReportGuardService implements GenericGuardService {
                 break;
             }
         }
-        return guardService.hasPermission(funcionalidade);
+        return guardService ? guardService.hasPermission(funcionalidade) : undefined;
     }
 }

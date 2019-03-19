@@ -13,6 +13,8 @@ export class GenericFormModalComponent<T> implements OnInit {
   @Input() initializeMethod: string;
   @Input() component: any;
   @Input() validator: IValidator<T>;
+  @Input() disabled = false;
+  @Input() btnConfirm = true;
 
   @Output() confirm = new EventEmitter();
 
@@ -38,6 +40,11 @@ export class GenericFormModalComponent<T> implements OnInit {
   open() {
     this._show = true;
     this.initializeObject();
+  }
+
+  openObject(obj: T) {
+    this._show = true;
+    this.t = obj;
   }
 
   close() {

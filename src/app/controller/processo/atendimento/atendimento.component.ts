@@ -90,7 +90,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   finalizar(status) {
     if (!this.util.isNullFila(this.fila) &&
       (this.fila.$status === 'EM ATENDIMENTO' || this.fila.$status === 'LANÇAMENTO DE INFORMAÇÕES')) {
-      if (this.validarTriagens()) {
+      if (this.validarFichaColeta() && this.validarTriagens()) {
         this.callFinalizar(status);
       }
     } else {

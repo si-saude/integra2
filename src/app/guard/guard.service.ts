@@ -5,6 +5,7 @@ import { GenericGuardService } from './../generic/generic-guard.service';
 import { CadastroGuardService } from './cadastro.guard.service';
 import { ProcessoGuardService } from './processo.guard.service';
 import { ReportGuardService } from './report.guard.service';
+import { GenericGuard } from 'app/generic/generic-guard';
 
 @Injectable()
 export class GuardService {
@@ -68,8 +69,9 @@ export class GuardService {
             guardArray.push(this.cadastro);
             guardArray.push(this.processo);
             guardArray.push(this.report);
-            for (let guard of guardArray){
-                if (guard.hasPermission(funcionalidade).checkPermission()) {
+            for (let guard of guardArray) {
+                const genericGuard: GenericGuard = guard.hasPermission(funcionalidade);
+                if (genericGuard && genericGuard.checkPermission()) {
                     this.permissoes.set(funcionalidade, true);
                     return;
                 }

@@ -1,6 +1,6 @@
 <div class="col s1">
   <button type="button" class="btn-floating waves-effect waves-light right" (click)="open()" 
-    *ngIf="!component._detailMode"> 
+    *ngIf="!component._detailMode && !disabled"> 
     <i class="material-icons center-icon">add</i>
   </button>
 </div>
@@ -15,7 +15,7 @@
       <div class="col s8">
       </div>
       <div class="col s2">
-          <button class="btn-small btn-submit right"
+          <button class="btn-small btn-submit right" *ngIf="btnConfirm"
             (click)="confirmAndClose();">Confirmar</button>
       </div>
       <div class="col s2">
