@@ -24,7 +24,7 @@ export class FichaColetaValidator implements IValidator<Checkin> {
         this.helper = new Helper();
     }
 
-    getProfissional() {
+    getProfissional(fThen: any) {
         const usuario: Usuario = this.usuarioService.toObject(JSON.parse(localStorage.getItem('user')));
         const filter: ProfissionalFilter = this.servico.getFilaAtendimentoService()
             .getProfissionalService().initializeFilter();
@@ -36,6 +36,9 @@ export class FichaColetaValidator implements IValidator<Checkin> {
             if (list && list[0]) {
                 this.profissional = this.servico.getFilaAtendimentoService().getProfissionalService()
                 .toObject(list[0]);
+                if (fThen) {
+                    fThen();
+                }
             } else {
                 this.profissional = undefined;
             }
@@ -48,7 +51,7 @@ export class FichaColetaValidator implements IValidator<Checkin> {
 
     validate(checkin: Checkin): boolean {
         if (!this.profissional) {
-            this.getProfissional();
+            this.getProfissional(undefined);
         }
         
         const respostaFuma: RespostaFichaColeta = checkin.$respostas.find(r => r.$pergunta.$path === 'fuma');

@@ -61,8 +61,7 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
   }
 
   abrirFichaColeta(obj) {
-    this.fichaColetaValidator.getProfissional();
-    setTimeout(() => {
+    this.fichaColetaValidator.getProfissional(() => {
       if (this.fichaColetaValidator.profissional) {
         this.checkin = obj;
         this.util.config(this.checkin);
@@ -70,23 +69,29 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
       } else {
         this.servico.showMessage('O usuário logado não é um profissional de saúde.');
       }
-    }, 150);
+    });
   }
 
   abrirFichaTriagem(obj) {
-    let filter: AtendimentoFilter = this.atendimentoService.initializeFilter();
-    filter.$pageSize = 100000;
-    filter.$checkin.$id = obj['id'];
-    filter.$tarefa.$status = 'CONCLUÍDA';
-    this.atendimentoService.list(filter, (r) => {
-      const l = r.json().list;
-      if (l && l.length > 0) {
-        this.atendimentos = this.atendimentoService.toList(l);
+    this.fichaColetaValidator.getProfissional(() => {
+      if (this.fichaColetaValidator.profissional) {
+        let filter: AtendimentoFilter = this.atendimentoService.initializeFilter();
+        filter.$pageSize = 100000;
+        filter.$checkin.$id = obj['id'];
+        filter.$tarefa.$status = 'CONCLUÍDA';
+        this.atendimentoService.list(filter, (r) => {
+          const l = r.json().list;
+          if (l && l.length > 0) {
+            this.atendimentos = this.atendimentoService.toList(l);
+          } else {
+            this.atendimentos = undefined;
+          }
+        }, undefined);
+        this.modalFichaTriagem.open();
       } else {
-        this.atendimentos = undefined;
+        this.servico.showMessage('O usuário logado não é um profissional de saúde.');
       }
-    }, undefined);
-    this.modalFichaTriagem.open();
+    });
   }
 
   salvar(checkin: Checkin) {

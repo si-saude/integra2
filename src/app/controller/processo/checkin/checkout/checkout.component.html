@@ -100,12 +100,14 @@
     <fieldset>
       <b>{{at.tarefa.equipe.nome}}</b><br>
       <div *ngFor="let tr of at.triagens">
-        <div class="row" *ngIf="tr.indice >= 0 && tr.indice < 3" [ngSwitch]="tr.indice">
+        <div class="row" *ngIf="tr.indice >= 0" [ngSwitch]="tr.indice">
           <div class="col s3">{{tr.indicador.nome}}</div>
           <div class="col s1">{{tr.indice}}</div>
           <div class="col s8" *ngSwitchCase="0">{{tr.indicador.indice0}}</div>
           <div class="col s8" *ngSwitchCase="1">{{tr.indicador.indice1}}</div>
           <div class="col s8" *ngSwitchCase="2">{{tr.indicador.indice2}}</div>
+          <div class="col s8" *ngSwitchCase="3">{{tr.indicador.indice3}}</div>
+          <div class="col s8" *ngSwitchCase="4">{{tr.indicador.indice4}}</div>
         </div>
       </div>
     </fieldset>
