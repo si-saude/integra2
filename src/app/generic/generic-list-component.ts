@@ -11,12 +11,13 @@ export abstract class GenericListComponent<T, F extends GenericFilter> implement
     protected array: Array<T>;
     protected total: 0;
     protected _showFilterModal = false;
+    protected helper: Helper;
 
     constructor(protected service: GenericService<T, F>, protected r: Router, protected title: string,
         protected tableDef: Array<Array<string>>) {
         this.filter = service.initializeFilter();
         this.array = new Array<T>();
-
+        this.helper = new Helper();
         this.r.routerState.snapshot.url = title;
     }
 

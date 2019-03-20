@@ -1,0 +1,8 @@
+@media print {
+    .break-content {
+        page-break-inside: auto
+    }
+    .break-row {
+        page-break-inside: avoid; page-break-after: auto
+    }
+}

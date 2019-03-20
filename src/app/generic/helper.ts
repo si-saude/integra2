@@ -184,4 +184,21 @@ export class Helper {
         return self.indexOf(value) === index;
       });
     }
+
+    print(title: string, getBody: any, fThen: any) {
+      setTimeout(() => {
+        const body = getBody();
+        let print = window.open('','PRINT');
+        print.document.write('<html><head><title>'+title);
+        print.document.write('</title></head><body>' + body);
+        print.document.write('</body></html>');
+        print.document.close();
+        print.focus();
+        print.print();
+        print.close();
+        if (fThen) {
+          fThen();
+        }
+      }, 50);
+    }
 }

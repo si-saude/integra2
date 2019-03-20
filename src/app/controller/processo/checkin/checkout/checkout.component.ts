@@ -28,6 +28,8 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
   private checkin: Checkin;
   private atendimentos: Array<Atendimento>;
 
+  private printFichaColeta = false;
+
   @ViewChild( 'modalFichaColeta' ) modalFichaColeta;
   @ViewChild( 'modalFichaTriagem' ) modalFichaTriagem;
 
@@ -70,6 +72,17 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
         this.servico.showMessage('O usuário logado não é um profissional de saúde.');
       }
     });
+  }
+
+  imprimirFichaColeta() {
+    this.printFichaColeta = true;
+    this.helper.print('Ficha de Coleta do(a) Empregado(a): ' + this.checkin.$empregado.$pessoa.$nome,
+      () => {
+        return document.getElementById('divFichaColeta').innerHTML;
+      }, 
+      () => {
+        this.printFichaColeta = false;
+      });
   }
 
   abrirFichaTriagem(obj) {
