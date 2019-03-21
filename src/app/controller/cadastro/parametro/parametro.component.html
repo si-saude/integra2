@@ -6,6 +6,11 @@
             (changeValue)="t.regraPeriodico = $event">
         </app-generic-select>
       </app-generic-label>
+      <app-generic-label [width]="'4'">Equipe de Acolhimento
+        <app-generic-select [component]="this" [name]="'acolhimento'" [object]="t.acolhimento" [property]="'nome'" [array]="util.equipes"
+            (changeValue)="t.acolhimento = $event">
+        </app-generic-select>
+      </app-generic-label>
     </div>
   </app-form-component>
 </form>

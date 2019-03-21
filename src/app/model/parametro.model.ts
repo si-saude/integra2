@@ -1,8 +1,10 @@
+import { Equipe } from './equipe.model';
 import { RegraAtendimento } from './regra-atendimento.model';
 
 export class Parametro {
     private id: number;
     private regraPeriodico: RegraAtendimento;
+    private acolhimento: Equipe;
     private version: number;
 
     public get $id(): number {
@@ -11,6 +13,10 @@ export class Parametro {
 
     public get $regraPeriodico(): RegraAtendimento {
         return this.regraPeriodico;
+    }
+
+    public get $acolhimento(): Equipe {
+        return this.acolhimento;
     }
 
     public get $version(): number {
@@ -23,6 +29,10 @@ export class Parametro {
 
     public set $regraPeriodico(value: RegraAtendimento) {
         this.regraPeriodico = value;
+    }
+
+    public set $acolhimento(value: Equipe) {
+        this.acolhimento = value;
     }
 
     public set $version(value: number) {

@@ -11,6 +11,7 @@ import { FilaAtendimento } from '../model/fila-atendimento.model';
 import { FilaAtendimentoFilter } from '../filter/fila-atendimento.filter';
 import { LocalizacaoService } from './localizacao.service';
 import { ProfissionalService } from './profissional.service';
+import { Atendimento } from 'app/model/atendimento.model';
 
 @Injectable()
 export class FilaAtendimentoService extends GenericService<FilaAtendimento, FilaAtendimentoFilter> {
@@ -99,6 +100,16 @@ export class FilaAtendimentoService extends GenericService<FilaAtendimento, Fila
     getListNaoEncerrado(f: FilaAtendimentoFilter, fThen: any, fCatch: any) {
         this.showSpinner();
         this.toPromise(this.http.post(this.rootUrl + this.path + '/get-list-nao-encerrado', f, { headers: this.getHeaders()}) ,
+            (res) => {
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
+    getListDisponivel(atendimento: Atendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/get-list-disponivel', atendimento, { headers: this.getHeaders()}) ,
             (res) => {
                 if (fThen) {
                     fThen(res);

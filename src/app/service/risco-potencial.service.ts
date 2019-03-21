@@ -39,11 +39,13 @@ export class RiscoPotencialService extends GenericService<RiscoPotencial, RiscoP
     }
 
     toObject(obj: any): RiscoPotencial {
-        const riscoPotencial: RiscoPotencial = new RiscoPotencial();
+        let riscoPotencial: RiscoPotencial = new RiscoPotencial();
         riscoPotencial.$id = obj['id'];
         riscoPotencial.$status = obj['status'];
         riscoPotencial.$valor = obj['valor'];
         riscoPotencial.$version = obj['version'];
+
+        riscoPotencial = this.transformDate(obj, riscoPotencial, 'data');
 
         if (this.helper.isNotNull(obj['empregado'])) {
             riscoPotencial.$empregado = this.empregadoService.toObject(obj['empregado']);

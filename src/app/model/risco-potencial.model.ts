@@ -12,6 +12,9 @@ export class RiscoPotencial {
     private version: number;
     private ranking: number;
 
+    private data: number;
+    private dataFront: string;
+
     public get $id(): number {
         return this.id;
     }
@@ -38,6 +41,14 @@ export class RiscoPotencial {
 
     public get $version(): number {
         return this.version;
+    }
+
+    public get $data(): number {
+        return this.data;
+    }
+
+    public get $dataFront(): string {
+        return this.dataFront;
     }
 
     public get $ranking(): number {
@@ -70,6 +81,14 @@ export class RiscoPotencial {
 
     public set $version(value: number) {
         this.version = value;
+    }
+
+    public set $data(value: number) {
+        this.data = value;
+    }
+
+    public set $dataFront(value: string) {
+        this.dataFront = value;
     }
 
     public set $ranking(value: number) {

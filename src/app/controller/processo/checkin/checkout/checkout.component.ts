@@ -16,6 +16,10 @@ import { DetalheRespostaFichaColeta } from 'app/model/detalhe-resposta-ficha-col
 import { Atendimento } from 'app/model/atendimento.model';
 import { AtendimentoService } from 'app/service/atendimento.service';
 import { AtendimentoFilter } from 'app/filter/atendimento.filter';
+import { Usuario } from 'app/model/usuario.model';
+import { UsuarioService } from 'app/service/usuario.service';
+import { FilaAtendimento } from 'app/model/fila-atendimento.model';
+import { CriarAtendimentoValidator } from './criar-atendimento.validator';
 
 @Component({
   selector: 'app-checkout',
@@ -26,15 +30,19 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
 
   private util: CheckoutUtil;
   private checkin: Checkin;
+  private atendimento: Atendimento;
+  private filas: Array<FilaAtendimento>;
   private atendimentos: Array<Atendimento>;
 
   private printFichaColeta = false;
 
   @ViewChild( 'modalFichaColeta' ) modalFichaColeta;
   @ViewChild( 'modalFichaTriagem' ) modalFichaTriagem;
+  @ViewChild( 'modalCriarAtendimento' ) modalCriarAtendimento;
 
   constructor(private servico: CheckinService, private atendimentoService: AtendimentoService, private router: Router, 
-    private confirmService: ConfirmService, private fichaColetaValidator: FichaColetaValidator) {
+    private confirmService: ConfirmService, private fichaColetaValidator: FichaColetaValidator,
+    private usuarioService: UsuarioService, private criarAtendimentoValidator: CriarAtendimentoValidator) {
     super(servico, router, 'Check-out',
       [
         ['Empregado', 'empregado.pessoa.nome'], ['Localização', 'localizacao.nome'],
@@ -105,6 +113,41 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
         this.servico.showMessage('O usuário logado não é um profissional de saúde.');
       }
     });
+  }
+
+  criarAtendimento(obj) {
+    const usuario: Usuario = this.usuarioService.toObject(JSON.parse(localStorage.getItem('user')));
+    const temPermissao = usuario.$perfis.findIndex(p =>
+        p.$permissoes.findIndex(pp =>
+            pp.$funcionalidade === 'CHECKIN_CRIAR-ATENDIMENTO' &&
+            pp.$valor === true) >= 0) >= 0;
+            
+    if (temPermissao) {
+      this.checkin = obj;
+      this.atendimento = this.atendimentoService.initializeObject();
+      this.atendimento.$checkin = this.checkin;
+      this.atendimento.$fila = undefined;
+      this.filas = new Array<FilaAtendimento>();
+      this.modalCriarAtendimento.openObject(this.atendimento);
+    } else {
+      this.servico.showMessage('O usuário logado não tem permissão para criar atendimentos.');
+    }
+  }
+
+  getProfissionaisDisponiveis() {
+    this.atendimento.$fila = undefined;
+    this.atendimentoService.getFilaAtendimentoService().getListDisponivel(this.atendimento, (res) => {
+      const list = res.json();
+      if (list && list.length > 0) {
+        this.filas = this.atendimentoService.getFilaAtendimentoService().toList(list);
+      } else {
+        this.filas = new Array<FilaAtendimento>();
+      }
+    }, undefined);
+  }
+
+  encaminharParaAtendimento(atendimento: Atendimento) {
+    this.atendimentoService.encaminhar(atendimento, undefined, undefined);
   }
 
   salvar(checkin: Checkin) {
@@ -346,5 +389,9 @@ export class CheckoutUtil {
 
   detalheTemPath(resposta: RespostaFichaColeta, detalhe: DetalheRespostaFichaColeta) {
     return resposta.$pergunta.$itens.find(i => i.$path && i.$path.trim() !== '' && i.$ordem === detalhe.$ordem);
+  }
+
+  filterTarefasConcluidas(tarefas) {
+    return tarefas.filter(t => t.status !== 'CONCLUÍDA' && t.status !== 'EXECUÇÃO');
   }
 }

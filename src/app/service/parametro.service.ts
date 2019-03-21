@@ -8,12 +8,14 @@ import { DialogService } from './../util/dialog/dialog.service';
 import { SpinnerService } from './../util/spinner/spinner.service';
 
 import { Parametro } from '../model/parametro.model';
+import { EquipeService } from './equipe.service';
 import { RegraAtendimentoService } from './regra-atendimento.service';
 
 @Injectable()
 export class ParametroService extends GenericService<Parametro, GenericFilter> {
     constructor(http: Http, router: Router, private dialogService: DialogService,
-        private spinnerService: SpinnerService, private regraAtendimentoService: RegraAtendimentoService) {
+        private spinnerService: SpinnerService, private regraAtendimentoService: RegraAtendimentoService, 
+        private equipeService: EquipeService) {
         super(http, 'parametro', router, dialogService, spinnerService);
     }
 
@@ -34,10 +36,18 @@ export class ParametroService extends GenericService<Parametro, GenericFilter> {
             parametro.$regraPeriodico = this.regraAtendimentoService.toObject(obj['regraPeriodico']);
         }
 
+        if (this.helper.isNotNull(obj['acolhimento'])) {
+            parametro.$acolhimento = this.equipeService.toObject(obj['acolhimento']);
+        }
+
         return parametro;
     }
 
     getRegraAtendimentoService(): RegraAtendimentoService {
         return this.regraAtendimentoService;
+    }
+
+    getEquipeService(): EquipeService {
+        return this.equipeService;
     }
 }

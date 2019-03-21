@@ -1,4 +1,8 @@
-<app-list-component [component]="this" [functions]="[['remove_circle','checkOut'],['content_paste','abrirFichaColeta'],['equalizer','abrirFichaTriagem']]">
+<app-list-component [component]="this" 
+    [functions]="[['remove_circle','checkOut'],
+                  ['content_paste','abrirFichaColeta'],
+                  ['equalizer','abrirFichaTriagem'],
+                  ['note_add','criarAtendimento']]">
 </app-list-component>
 
 <app-generic-modal [title]="'Filtrar'" [component]="this">
@@ -143,5 +147,27 @@
         </div>
       </div>
     </fieldset>
+  </div>
+</app-generic-form-modal>
+
+<app-generic-form-modal #modalCriarAtendimento [title]="'Encaminhar para Atendimento'" [service]="servico" [component]="this"
+  [disabled] = 'true' [validator]="criarAtendimentoValidator" (confirm)="encaminharParaAtendimento($event);">
+  <div class="row">
+    <app-generic-label [width]="'3'">Empregado
+      <p>{{checkin?.empregado?.pessoa?.nome}}</p>
+    </app-generic-label>
+    <app-generic-label [width]="'3'">Equipe
+      <app-generic-select [component]="this" [name]="'equipe'" [property]="'equipe.nome'" 
+          [object]="atendimento ? atendimento.tarefa : undefined"
+          [array]="checkin ? util.filterTarefasConcluidas(checkin.tarefas) : undefined"
+          (changeValue)="atendimento.tarefa = $event; getProfissionaisDisponiveis();">
+      </app-generic-select>
+    </app-generic-label>
+    <app-generic-label [width]="'4'">Profissional
+      <app-generic-select [component]="this" [name]="'profissional'" [property]="'profissional.empregado.pessoa.nome'" 
+          [object]="atendimento ? atendimento.fila : undefined" [array]="filas"
+          (changeValue)="atendimento.fila = $event;">
+      </app-generic-select>
+    </app-generic-label>
   </div>
 </app-generic-form-modal>
