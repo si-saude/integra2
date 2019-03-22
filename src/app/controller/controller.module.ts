@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CalendarComponent } from 'angular2-fullcalendar/src/calendar/calendar';
 
 import { AlimentoComponentModule } from './cadastro/alimento/alimento.component.module';
 import { AtividadeFisicaComponentModule  } from './cadastro/atividade-fisica/atividade-fisica.component.module';
@@ -51,8 +52,12 @@ import { RiscoPotencialComponentModule } from './processo/risco-potencial/risco-
 import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.component.module';
 
 import { AgendaComponentModule } from './report/agenda/agenda.component.module';
+import { TempoAtendimentoComponentModule } from './report/tempo-atendimento/tempo-atendimento.component.module';
 
 @NgModule({
+    declarations: [
+        CalendarComponent,
+    ],
     imports: [
         AlimentoComponentModule,
         AtividadeFisicaComponentModule,
@@ -104,7 +109,8 @@ import { AgendaComponentModule } from './report/agenda/agenda.component.module';
         RiscoPotencialComponentModule,
         SolicitacaoComponentModule,
 
-        AgendaComponentModule
+        AgendaComponentModule,
+        TempoAtendimentoComponentModule
     ]
 })
 

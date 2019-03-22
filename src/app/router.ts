@@ -55,6 +55,7 @@ import * as riscoPotencial from './guard/processo/risco-potencial/risco-potencia
 import * as solicitacao from './guard/processo/solicitacao/solicitacao.guard';
 
 import * as agenda from './guard/report/agenda/agenda.guard';
+import * as tempoAtendimento from './guard/report/tempo-atendimento/tempo-atendimento.guard';
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -113,6 +114,7 @@ export const appRoutes: Routes = [
     solicitacao.Routing.route(HomeComponent),
 
     agenda.Routing.route(HomeComponent),
-
+    tempoAtendimento.Routing.route(HomeComponent),
+    
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
