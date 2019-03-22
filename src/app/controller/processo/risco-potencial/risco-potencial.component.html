@@ -2,6 +2,7 @@
     <app-generic-grid #gridRiscosPotenciais
         [id]="'riscosPotenciais'" [component]="this" [array]="riscos" [height]="'550px'" [rowClass]="'getClass'"
         [def]="[['Posição','ranking','',''],
+                ['Matrícula','empregado.matricula','',''],
                 ['Empregado','empregado.pessoa.nome','',''],
                 ['Responsável','responsavel.nome','',''],
                 ['Data','dataFront','','',1,'dateTime']]">

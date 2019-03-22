@@ -1,8 +1,8 @@
 <app-list-component [component]="this" 
-    [functions]="[['remove_circle','checkOut'],
-                  ['content_paste','abrirFichaColeta'],
-                  ['equalizer','abrirFichaTriagem'],
-                  ['note_add','criarAtendimento']]">
+    [functions]="[['remove_circle','checkOut','CHECK-OUT'],
+                  ['content_paste','abrirFichaColeta','FICHA DE COLETA'],
+                  ['equalizer','abrirFichaTriagem','FICHA DE TRIAGEM'],
+                  ['note_add','criarAtendimento','ENCAMINHAR']]">
 </app-list-component>
 
 <app-generic-modal [title]="'Filtrar'" [component]="this">
@@ -132,6 +132,12 @@
 
 <app-generic-form-modal #modalFichaTriagem [title]="'Ficha de Triagem'" [service]="servico" [component]="this"
   [disabled] = 'true' [btnConfirm]='false'>
+  <fieldset *ngIf="checkin">
+      <b>Conduta/Percepção</b><br>
+      <div class="row">
+        <div class="col s12">{{checkin.conduta}}</div>
+      </div>
+  </fieldset>
   <div *ngFor="let at of atendimentos">
     <fieldset>
       <b>{{at.tarefa.equipe.nome}}</b><br>

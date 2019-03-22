@@ -144,6 +144,14 @@
               </div>
               <div #acolhimentoTab>
                 <div *ngIf="tab.selected === 2">
+                  <div class="row">
+                    <app-generic-label [width]="'10'">Conduta/Percepção
+                      <textarea class="validate text-area" name="conduta" #conduta="ngModel" [(ngModel)]="t.checkin.conduta"
+                        maxlength="2048">
+                      </textarea>
+                      <span class="helper-text" [attr.data-error]="showErrorMessage(conduta.errors)"></span>
+                    </app-generic-label>
+                  </div>
                   <div *ngFor="let at of atendimentos">
                     <fieldset>
                       <b>{{at.tarefa.equipe.nome}}</b><br>

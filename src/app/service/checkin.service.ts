@@ -55,6 +55,7 @@ export class CheckinService extends GenericService<Checkin, CheckinFilter> {
         let checkin: Checkin = new Checkin();
         checkin.$id = obj['id'];
         checkin.$status = obj['status'];
+        checkin.$conduta = obj['conduta'];
         checkin.$version = obj['version'];
 
         checkin = this.transformDate(obj, checkin, 'atualizacao');

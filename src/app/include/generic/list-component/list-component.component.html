@@ -9,10 +9,18 @@
         <tr *ngFor="let a of component.array">
             <td *ngFor="let ar of component.tableDef">{{ getProperty(a,ar[1],ar[2]) | limitCharacter:128 }}</td>
             <td class="center">
-                <i class="material-icons" routerLink="{{'./detalhar/' + a.id }}" *ngIf="canDetalhar">details</i>
-                <i class="material-icons" routerLink="{{'./editar/' + a.id }}" *ngIf="canEditar">mode_edit</i>
-                <i class="material-icons" *ngIf="canRemover" (click)="remove(a.id)">delete</i>
-                <i *ngFor="let f of functions" class="material-icons"(click)="component[f[1]](a)">{{f[0]}}</i>
+                <i class="tooltip material-icons" routerLink="{{'./detalhar/' + a.id }}" *ngIf="canDetalhar">details
+                    <span class="tooltiptext">DETALHAR</span>
+                </i>
+                <i class="tooltip material-icons" routerLink="{{'./editar/' + a.id }}" *ngIf="canEditar">mode_edit
+                    <span class="tooltiptext">EDITAR</span>
+                </i>
+                <i class="tooltip material-icons" *ngIf="canRemover" (click)="remove(a.id)">delete
+                    <span class="tooltiptext">REMOVER</span>
+                </i>
+                <i *ngFor="let f of functions" class="tooltip material-icons"(click)="component[f[1]](a)">{{f[0]}}
+                    <span class="tooltiptext">{{f[2]}}</span>
+                </i>
             </td>
         </tr>
     </tbody>

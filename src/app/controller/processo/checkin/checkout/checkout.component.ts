@@ -63,11 +63,17 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
   }
 
   checkOut(obj) {
-    this.confirmService.show('Deseja realizar o check-out do empregado?', this, function (c) {
-      c.getService().checkOut(obj, function (res) {
-        c.callPage();
-      }, undefined);
-    }, undefined, undefined);
+    if (obj.status === 'FINALIZADO') {
+      this.servico.showMessage('O empregado já concluiu o atendimento.');
+    } else if (obj.status === 'AUSENTE') {
+      this.servico.showMessage('O empregado já realizou o check-out.');
+    } else {
+      this.confirmService.show('Deseja realizar o check-out do empregado?', this, function (c) {
+        c.getService().checkOut(obj, function (res) {
+          c.callPage();
+        }, undefined);
+      }, undefined, undefined);
+    }
   }
 
   abrirFichaColeta(obj) {
@@ -108,6 +114,7 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
             this.atendimentos = undefined;
           }
         }, undefined);
+        this.checkin = obj;
         this.modalFichaTriagem.open();
       } else {
         this.servico.showMessage('O usuário logado não é um profissional de saúde.');
@@ -123,12 +130,16 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
             pp.$valor === true) >= 0) >= 0;
             
     if (temPermissao) {
-      this.checkin = obj;
-      this.atendimento = this.atendimentoService.initializeObject();
-      this.atendimento.$checkin = this.checkin;
-      this.atendimento.$fila = undefined;
-      this.filas = new Array<FilaAtendimento>();
-      this.modalCriarAtendimento.openObject(this.atendimento);
+      if (obj.status === 'AGUARDANDO') {
+        this.checkin = obj;
+        this.atendimento = this.atendimentoService.initializeObject();
+        this.atendimento.$checkin = this.checkin;
+        this.atendimento.$fila = undefined;
+        this.filas = new Array<FilaAtendimento>();
+        this.modalCriarAtendimento.openObject(this.atendimento);
+      } else {
+        this.servico.showMessage('Não é possível encaminhar para atendimento. O status do(a) empregado(a) deve ser AGUARDANDO.');  
+      }
     } else {
       this.servico.showMessage('O usuário logado não tem permissão para criar atendimentos.');
     }
@@ -147,7 +158,9 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
   }
 
   encaminharParaAtendimento(atendimento: Atendimento) {
-    this.atendimentoService.encaminhar(atendimento, undefined, undefined);
+    this.atendimentoService.encaminhar(atendimento, () => {
+      this.callPage();
+    }, undefined);
   }
 
   salvar(checkin: Checkin) {

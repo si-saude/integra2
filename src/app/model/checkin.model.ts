@@ -10,6 +10,7 @@ export class Checkin {
     private localizacao: Localizacao;
     private servico: Servico;
     private status: string;
+    private conduta: string;
     private tarefas: Array<Tarefa>;
     private respostas: Array<RespostaFichaColeta>;
     private version: number;
@@ -38,6 +39,10 @@ export class Checkin {
 
     public get $status(): string {
         return this.status;
+    }
+
+    public get $conduta(): string {
+        return this.conduta;
     }
 
     public get $tarefas(): Array<Tarefa> {
@@ -86,6 +91,10 @@ export class Checkin {
 
     public set $status(value: string) {
         this.status = value;
+    }
+
+    public set $conduta(value: string) {
+        this.conduta = value;
     }
 
     public set $tarefas(value: Array<Tarefa>) {
