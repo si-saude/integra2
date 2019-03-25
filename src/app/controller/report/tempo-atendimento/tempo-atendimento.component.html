@@ -11,6 +11,7 @@
 <table class="zui-table highlight" *ngIf="tempoAtendimentos">
     <thead>
         <tr>
+            <td><b>Data</b></td>
             <td><b>Cliente</b></td>
             <td><b>Chegada</b></td>
             <td><b>Saída</b></td>
@@ -24,17 +25,18 @@
         </tr>
     </thead>
     <tbody *ngFor="let e of empregados">
-        <tr *ngFor="let a of getTempoAtendimentosByEmpregado(d); let i = index;">
+        <tr *ngFor="let a of getTempoAtendimentosByEmpregado(e); let i = index;">
+            <td>{{ i === 0 ? (a.chegadaFront | genericPipe : 'date') : '' }}</td>
             <td>{{ i === 0 ? e : ''}}</td>
-            <td>{{ i === 0 ? (a.chegadaFront | genericPipe : 'dateTime') : '' }}</td>
-            <td>{{ i === 0 ? (a.saidaFront | genericPipe : 'dateTime') : '' }}</td>
+            <td>{{ i === 0 ? (a.chegadaFront | genericPipe : 'time') : '' }}</td>
+            <td>{{ i === 0 ? (a.saidaFront | genericPipe : 'time') : '' }}</td>
             <td>{{ i === 0 ? a.status : '' }}</td>
-            <td>{{ i === 0 ? (a.tempoTotalFront | genericPipe : 'dateTime') : '' }}</td>
+            <td>{{ i === 0 ? (a.tempoTotalFront | genericPipe : 'time') : '' }}</td>
             <td>{{a.equipe}}</td>
             <td>{{a.profissional}}</td>
-            <td>{{(a.inicioFront | genericPipe : 'dateTime')}}</td>
-            <td>{{(a.fimFront | genericPipe : 'dateTime')}}</td>
-            <td>{{(a.duracaoFront | genericPipe : 'dateTime')}}</td>
+            <td>{{(a.inicioFront | genericPipe : 'time')}}</td>
+            <td>{{(a.fimFront | genericPipe : 'time')}}</td>
+            <td>{{(a.duracaoFront | genericPipe : 'time')}}</td>
         </tr>
     </tbody>
 </table>

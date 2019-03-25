@@ -49,9 +49,9 @@ export class TempoAtendimentoComponent implements OnInit {
   ngOnInit() {
   }
 
-  getTempoAtendimentosByEmpregado(d: string) {
+  getTempoAtendimentosByEmpregado(e: string) {
     if (this.tempoAtendimentos) {
-      return this.tempoAtendimentos.filter(a => a.$empregado === d);
+      return this.tempoAtendimentos.filter(a => a.$empregado === e);
     }
     return {};
   }

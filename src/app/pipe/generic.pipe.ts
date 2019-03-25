@@ -19,6 +19,18 @@ export class GenericPipe implements PipeTransform {
                         }
                     }
                 break;
+                case 'date':
+                    if (value) {
+                        const time = value.split(' ');
+                        value = time[0];
+                    }
+                break;
+                case 'time':
+                    if (value) {
+                        const time = value.split(' ');
+                        value = time[1];
+                    }
+                break;
             }
         }
         return value;
