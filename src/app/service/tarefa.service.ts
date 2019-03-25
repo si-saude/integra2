@@ -150,6 +150,18 @@ export class TarefaService extends GenericService<Tarefa, TarefaFilter> {
             }, fCatch, undefined);
     }
 
+    cancelar(t: Tarefa, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/cancelar', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                this.showMessage(res._body);
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
     reportAgenda(f: TarefaFilter, fThen: any, fCatch: any) {
         this.showSpinner();
         f = this.transformFilter(f);

@@ -5,6 +5,7 @@ import * as solicitacao from './solicitacao.guard';
 
 @NgModule({
     providers: [
+        solicitacao.CancelarSolicitacaoGuard,
         solicitacao.SolicitacaoGuard,
         SolicitacaoGuardService
     ]

@@ -7,7 +7,8 @@ import * as guard from './solicitacao.guard';
 @Injectable()
 export class SolicitacaoGuardService implements GenericGuardService {
 
-    constructor(private solicitar: guard.SolicitacaoGuard) {
+    constructor(private cancelar: guard.CancelarSolicitacaoGuard,
+                private solicitar: guard.SolicitacaoGuard) {
 
     }
 
@@ -16,6 +17,10 @@ export class SolicitacaoGuardService implements GenericGuardService {
         switch (funcionalidade) {
             case 'SOLICITACAO_SOLICITAR': {
                 guard = this.solicitar;
+                break;
+            }
+            case 'SOLICITACAO_CANCELAR': {
+                guard = this.cancelar;
                 break;
             }
         }
