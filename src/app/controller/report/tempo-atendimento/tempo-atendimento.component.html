@@ -1,0 +1,43 @@
+<div class="row">
+    <app-generic-date-filter [label]="'Período'" [property]="'inicio'" [defaultType]="true"
+        [dateFilter]="filter.inicio" (changeValue)="filter.inicio=$event">
+        <app-generic-label [width]="'2'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn-small btn-submit" 
+                type="button" (click)="filtrar()">Filtrar</button>
+        </app-generic-label>
+    </app-generic-date-filter>
+</div>
+<br>
+<table class="zui-table highlight" *ngIf="tempoAtendimentos">
+    <thead>
+        <tr>
+            <td><b>Data</b></td>
+            <td><b>Cliente</b></td>
+            <td><b>Chegada</b></td>
+            <td><b>Saída</b></td>
+            <td><b>Status</b></td>
+            <td><b>Tempo Total</b></td>
+            <td><b>Equipe</b></td>
+            <td><b>Profissional</b></td>
+            <td><b>Início</b></td>
+            <td><b>Fim</b></td>
+            <td><b>Duração</b></td>
+        </tr>
+    </thead>
+    <tbody *ngFor="let e of empregados">
+        <tr *ngFor="let a of getTempoAtendimentosByEmpregado(e); let i = index;">
+            <td>{{ i === 0 ? (a.chegadaFront | genericPipe : 'date') : '' }}</td>
+            <td>{{ i === 0 ? e : ''}}</td>
+            <td>{{ i === 0 ? (a.chegadaFront | genericPipe : 'time') : '' }}</td>
+            <td>{{ i === 0 ? (a.saidaFront | genericPipe : 'time') : '' }}</td>
+            <td>{{ i === 0 ? a.status : '' }}</td>
+            <td>{{ i === 0 ? (a.tempoTotalFront | genericPipe : 'time') : '' }}</td>
+            <td>{{a.equipe}}</td>
+            <td>{{a.profissional}}</td>
+            <td>{{(a.inicioFront | genericPipe : 'time')}}</td>
+            <td>{{(a.fimFront | genericPipe : 'time')}}</td>
+            <td>{{(a.duracaoFront | genericPipe : 'time')}}</td>
+        </tr>
+    </tbody>
+</table>
+<h6 class="center" *ngIf="!tempoAtendimentos">Nenhum resultado foi retornado</h6>

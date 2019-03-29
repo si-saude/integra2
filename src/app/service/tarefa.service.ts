@@ -9,6 +9,7 @@ import { SpinnerService } from './../util/spinner/spinner.service';
 
 import { Agenda } from '../dto/agenda.dto';
 import { Tarefa } from '../model/tarefa.model';
+import { TempoAtendimento } from '../dto/tempo-atendimento.dto';
 import { TarefaFilter } from '../filter/tarefa.filter';
 import { EquipeService } from './equipe.service';
 import { EmpregadoService } from './empregado.service';
@@ -93,6 +94,30 @@ export class TarefaService extends GenericService<Tarefa, TarefaFilter> {
         return array;
     }
 
+    toTempoAtendimento(obj: any): TempoAtendimento {
+        let tempoAtendimento: TempoAtendimento = new TempoAtendimento();
+        tempoAtendimento.$empregado = obj['empregado'];
+        tempoAtendimento.$profissional = obj['profissional'];
+        tempoAtendimento.$equipe = obj['equipe'];
+        tempoAtendimento.$status = obj['status'];
+
+        tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'inicio');
+        tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'fim');
+        tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'duracao');
+        tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'chegada');
+        tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'saida');
+        tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'tempoTotal');
+        return tempoAtendimento;
+    }
+
+    toTempoAtendimentos(objs: any): Array<TempoAtendimento> {
+        const array: Array<TempoAtendimento> = new Array<TempoAtendimento>();
+        for (let x = 0; x < objs.length; x++) {
+            array.push(this.toTempoAtendimento(objs[x]));
+        }
+        return array;
+    }
+
     public getEmpregadoService(): EmpregadoService {
         return this.empregadoService;
     }
@@ -125,10 +150,33 @@ export class TarefaService extends GenericService<Tarefa, TarefaFilter> {
             }, fCatch, undefined);
     }
 
+    cancelar(t: Tarefa, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/cancelar', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                this.showMessage(res._body);
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
     reportAgenda(f: TarefaFilter, fThen: any, fCatch: any) {
         this.showSpinner();
         f = this.transformFilter(f);
         this.toPromise(this.http.post(this.rootUrl + this.path + '/report-agenda', f, { headers: this.getHeaders()}) ,
+            (res) => {
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
+
+    reportTempoAtendimento(f: TarefaFilter, fThen: any, fCatch: any) {
+        this.showSpinner();
+        f = this.transformFilter(f);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/report-tempo-atendimento', f, { headers: this.getHeaders()}) ,
             (res) => {
                 if (fThen) {
                     fThen(res);

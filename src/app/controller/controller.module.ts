@@ -42,6 +42,8 @@ import { UsuarioComponentModule } from './cadastro/usuario/usuario.component.mod
 import { AtendimentoComponentModule } from './processo/atendimento/atendimento.component.module';
 import { AtendimentoOcupacionalComponentModule } from './processo/solicitacao/atendimento-ocupacional/atendimento-ocupacional.component.module';
 import { AvaliacaoAtendimentoComponentModule } from './processo/avaliacao-atendimento/avaliacao-atendimento.component.module';
+import { CancelarAtendimentoOcupacionalComponentModule } from './processo/solicitacao/cancelar/cancelar-atendimento-ocupacional/cancelar-atendimento-ocupacional.component.module';
+import { CancelarComponentModule } from './processo/solicitacao/cancelar/cancelar.component.module';
 import { CheckinComponentModule } from './processo/checkin/checkin.component.module';
 import { CheckoutComponentModule } from './processo/checkin/checkout/checkout.component.module';
 import { FilaComponentModule } from './processo/atendimento/fila/fila.component.module';
@@ -51,6 +53,7 @@ import { RiscoPotencialComponentModule } from './processo/risco-potencial/risco-
 import { SolicitacaoComponentModule } from './processo/solicitacao/solicitacao.component.module';
 
 import { AgendaComponentModule } from './report/agenda/agenda.component.module';
+import { TempoAtendimentoComponentModule } from './report/tempo-atendimento/tempo-atendimento.component.module';
 
 @NgModule({
     imports: [
@@ -96,6 +99,8 @@ import { AgendaComponentModule } from './report/agenda/agenda.component.module';
         AtendimentoComponentModule,
         AtendimentoOcupacionalComponentModule,
         AvaliacaoAtendimentoComponentModule,
+        CancelarAtendimentoOcupacionalComponentModule,
+        CancelarComponentModule,
         CheckinComponentModule,
         CheckoutComponentModule,
         FilaComponentModule,
@@ -104,7 +109,8 @@ import { AgendaComponentModule } from './report/agenda/agenda.component.module';
         RiscoPotencialComponentModule,
         SolicitacaoComponentModule,
 
-        AgendaComponentModule
+        AgendaComponentModule,
+        TempoAtendimentoComponentModule
     ]
 })
 

@@ -103,7 +103,7 @@
 
   <div id="divFichaColeta" *ngIf="printFichaColeta">
     <div *ngFor="let grupo of util.grupos">
-      <fieldset *ngIf="grupo !== 'TESTE DE FAGERSTRÖM' || 
+      <div style="border-style: ridge;" *ngIf="grupo !== 'TESTE DE FAGERSTRÖM' || 
           (util.respostaFuma && util.respostaFuma.conteudo && util.respostaFuma.conteudo.length > 0 && 
               (util.respostaFuma.conteudo === 'FUMANTE' || util.respostaFuma.conteudo === 'ABSTÊMIO'))">
         <b>{{grupo}}</b>
@@ -125,7 +125,7 @@
             </table>
           </fieldset>
         </div>
-      </fieldset>
+      </div>
     </div>
   </div>
 </app-generic-form-modal>

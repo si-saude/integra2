@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 
+
+
 import { SharedModule } from './../../shared.module';
-import * as agenda from './agenda.component';
+import * as tempoAtendimento from './tempo-atendimento.component';
 
 @NgModule({
     declarations: [
-        agenda.AgendaComponent
+        tempoAtendimento.TempoAtendimentoComponent
     ],
 imports: [
     SharedModule
 ]})
-export class AgendaComponentModule { }
+export class TempoAtendimentoComponentModule { }

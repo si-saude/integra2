@@ -54,6 +54,7 @@ import { RiscoPotencialGuardModule } from './processo/risco-potencial/risco-pote
 import { SolicitacaoGuardModule } from './processo/solicitacao/solicitacao.guard.module';
 
 import { AgendaGuardModule } from './report/agenda/agenda.guard.module';
+import { TempoAtendimentoGuardModule } from './report/tempo-atendimento/tempo-atendimento.guard.module';
 
 @NgModule({
     providers: [
@@ -111,7 +112,8 @@ import { AgendaGuardModule } from './report/agenda/agenda.guard.module';
         RiscoPotencialGuardModule,
         SolicitacaoGuardModule,
 
-        AgendaGuardModule
+        AgendaGuardModule,
+        TempoAtendimentoGuardModule
     ]
 })
 export class GuardModule { }
