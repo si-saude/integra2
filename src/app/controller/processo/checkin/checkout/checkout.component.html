@@ -107,7 +107,7 @@
           (util.respostaFuma && util.respostaFuma.conteudo && util.respostaFuma.conteudo.length > 0 && 
               (util.respostaFuma.conteudo === 'FUMANTE' || util.respostaFuma.conteudo === 'ABSTÊMIO'))">
         <b>{{grupo}}</b>
-        <div *ngFor="let resposta of checkin.respostas; let i = index">
+        <div *ngFor="let resposta of checkin.respostas; let i = index" style="page-break-after: auto; page-break-inside: avoid;">
           <fieldset *ngIf="resposta.pergunta.grupo.nome === grupo" [ngSwitch]="resposta.pergunta.tipo">
             <b>{{resposta.pergunta.descricao}}</b><br>
             <p>{{resposta.conteudo}}</p>
@@ -131,11 +131,16 @@
 </app-generic-form-modal>
 
 <app-generic-form-modal #modalFichaTriagem [title]="'Ficha de Triagem'" [service]="servico" [component]="this"
-  [disabled] = 'true' [btnConfirm]='false'>
+  [disabled] = 'true' [validator]="fichaColetaValidator" (confirm)="salvar($event)"
+  [btnConfirm]="acolhimento">
   <fieldset *ngIf="checkin">
       <b>Conduta/Percepção</b><br>
       <div class="row">
-        <div class="col s12">{{checkin.conduta}}</div>
+        <div class="col s12" *ngIf="!acolhimento">{{checkin.conduta}}</div>
+        <app-generic-label *ngIf="acolhimento" [width]="'12'">
+          <textarea class="validate text-area" name="conduta" [(ngModel)]="checkin.conduta" maxlength="2048">
+          </textarea>
+        </app-generic-label>
       </div>
   </fieldset>
   <div *ngFor="let at of atendimentos">

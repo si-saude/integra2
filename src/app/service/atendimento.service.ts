@@ -201,4 +201,16 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
                 }
             }, fCatch, undefined);
     }
+
+    encaminharAvulso(t: Atendimento, fThen: any, fCatch: any) {
+        this.showSpinner();
+        t = this.toObject(t);
+        this.toPromise(this.http.post(this.rootUrl + this.path + '/encaminhar-avulso', t, { headers: this.getHeaders()}) ,
+            (res) => {
+                this.showMessage(res._body);
+                if (fThen) {
+                    fThen(res);
+                }
+            }, fCatch, undefined);
+    }
 }

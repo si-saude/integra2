@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../shared.module';
+import { CriarAtendimentoAvulsoValidator } from './criar-atendimento-avulso.validator';
 import { FichaColetaValidator } from './ficha-coleta.validator';
 import * as atendimento from './atendimento.component';
 
@@ -11,5 +12,5 @@ import * as atendimento from './atendimento.component';
 imports: [
     SharedModule
 ],
-providers: [ FichaColetaValidator ]})
+providers: [ FichaColetaValidator, CriarAtendimentoAvulsoValidator ]})
 export class AtendimentoComponentModule { }
