@@ -19,6 +19,7 @@ import { PerguntaFichaColetaService } from './pergunta-ficha-coleta.service';
 import { ServicoService } from './servico.service';
 import { TarefaService } from './tarefa.service';
 import { UtilService } from './util.service';
+import { ParametroService } from './parametro.service';
 
 @Injectable()
 export class CheckinService extends GenericService<Checkin, CheckinFilter> {
@@ -26,7 +27,7 @@ export class CheckinService extends GenericService<Checkin, CheckinFilter> {
         private spinnerService: SpinnerService, private empregadoService: EmpregadoService,
         private servicoService: ServicoService, private localizacaoService: LocalizacaoService,
         private tarefaService: TarefaService, private perguntaService: PerguntaFichaColetaService,
-        private utilService: UtilService) {
+        private parametroService: ParametroService, private utilService: UtilService) {
         super(http, 'checkin', router, dialogService, spinnerService);
     }
 
@@ -161,6 +162,10 @@ export class CheckinService extends GenericService<Checkin, CheckinFilter> {
 
     getTarefaService() {
         return this.tarefaService;
+    }
+
+    getParametroService() {
+        return this.parametroService;
     }
 
     getUtilService() {

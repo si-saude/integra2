@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
@@ -23,6 +23,9 @@ import { UsuarioService } from './../../../service/usuario.service';
 import { RespostaFichaColeta } from 'app/model/resposta-ficha-coleta.model';
 import { ItemRespostaFichaColeta } from 'app/model/item-resposta-ficha-coleta.model';
 import { DetalheRespostaFichaColeta } from 'app/model/detalhe-resposta-ficha-coleta.model';
+import { Servico } from 'app/model/servico.model';
+import { ServicoFilter } from 'app/filter/servico.filter';
+import { CriarAtendimentoAvulsoValidator } from './criar-atendimento-avulso.validator';
 
 @Component({
   selector: 'app-atendimento',
@@ -39,9 +42,14 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   private beep: any;
   private respostaFuma: RespostaFichaColeta;
   private atendimentos: Array<Atendimento>;
+  private atendimentoAvulso: Atendimento;
+  
+  @ViewChild( 'modalCriarAtendimentoAvulso' ) modalCriarAtendimentoAvulso;
+  @ViewChild( 'autocompleteEmpregado' ) autocompleteEmpregado;
 
   constructor(private servico: AtendimentoService, router: Router, route: ActivatedRoute,
-    wizardService: WizardService<Atendimento>, private usuarioService: UsuarioService) {
+    wizardService: WizardService<Atendimento>, private usuarioService: UsuarioService, 
+    private criarAtendimentoAvulsoValidator: CriarAtendimentoAvulsoValidator) {
     super(servico, router, route, 'Atendimento', wizardService, undefined, '', '');
     this.first = 'atendimento';
     this.util = new AtendimentoUtil(servico);
@@ -311,6 +319,25 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
     this.timeout = Observable.timer(10000).subscribe(() => this.refresh());
   }
 
+  criarAtendimentoAvulso() {
+    this.atendimentoAvulso = this.servico.initializeObject();
+    this.atendimentoAvulso.$tarefa = this.servico.getTarefaService().initializeObject();
+    this.atendimentoAvulso.$fila = this.fila;
+
+    if (this.profissional.$equipes && this.profissional.$equipes.length === 1) {
+      this.atendimentoAvulso.$tarefa.$equipe = this.profissional.$equipes[0];
+    }
+
+    this.modalCriarAtendimentoAvulso.openObject(this.atendimentoAvulso);
+    this.autocompleteEmpregado.initializeObject();
+  }
+
+  encaminharParaAtendimentoAvulso(atendimento: Atendimento) {
+    this.servico.encaminharAvulso(atendimento, (res) => {
+      this.getAtendimento();
+    }, undefined);
+  }
+
   playBeep() {
     this.beep.load();
     this.beep.play();
@@ -339,19 +366,25 @@ export class AtendimentoUtil {
   fumaClassificacao: Array<string>;
   grupos: Array<string>;
   intensidade: Array<string>;
-  localizacoes: Array<Localizacao>;
-  localizacaoFilter: LocalizacaoFilter;
   nivelAtividadeFisica: Array<string>;
   partesCorpo: Array<string>;
   refereQualidadeAgua: Array<string>;
   simNao: Array<string>;
   tempoAnos: Array<string>;
   tempoMeses: Array<string>;
+  
+  localizacoes: Array<Localizacao>;
+  localizacaoFilter: LocalizacaoFilter;
+  servicos: Array<Servico>;
+  servicoFilter: ServicoFilter;
 
   constructor(private servico: AtendimentoService) {
     this.localizacaoFilter = servico.getFilaAtendimentoService().getLocalizacaoService()
       .initializeFilter();
     this.localizacaoFilter.$pageSize = 100000;
+
+    this.servicoFilter = servico.getCheckinService().getServicoService().initializeFilter();
+    this.servicoFilter.$pageSize = 100000;
   }
 
   onInit() {
@@ -359,6 +392,11 @@ export class AtendimentoUtil {
       .list(this.localizacaoFilter, (res) => {
         this.localizacoes = this.servico.getFilaAtendimentoService()
           .getLocalizacaoService().toList(res.json().list);
+      }, undefined);
+
+    this.servico.getCheckinService().getServicoService()
+      .list(this.servicoFilter, (res) => {
+        this.servicos = this.servico.getCheckinService().getServicoService().toList(res.json().list);
       }, undefined);
 
     this.servico.getUtilService().getAbrangencia('', (list) => {

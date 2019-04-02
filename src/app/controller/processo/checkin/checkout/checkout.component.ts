@@ -20,6 +20,8 @@ import { Usuario } from 'app/model/usuario.model';
 import { UsuarioService } from 'app/service/usuario.service';
 import { FilaAtendimento } from 'app/model/fila-atendimento.model';
 import { CriarAtendimentoValidator } from './criar-atendimento.validator';
+import { GenericFilter } from 'app/generic/generic-filter';
+import { Equipe } from 'app/model/equipe.model';
 
 @Component({
   selector: 'app-checkout',
@@ -35,6 +37,7 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
   private atendimentos: Array<Atendimento>;
 
   private printFichaColeta = false;
+  private acolhimento = false;
 
   @ViewChild( 'modalFichaColeta' ) modalFichaColeta;
   @ViewChild( 'modalFichaTriagem' ) modalFichaTriagem;
@@ -79,6 +82,10 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
   abrirFichaColeta(obj) {
     this.fichaColetaValidator.getProfissional(() => {
       if (this.fichaColetaValidator.profissional) {
+        if (obj.status !== 'FINALIZADO' && obj.status !== 'AUSENTE') {
+          this.servico.showMessage('Não é possível abrir a ficha de coleta enquanto o empregado estiver em atendimento.');
+          return;
+        }
         this.checkin = obj;
         this.util.config(this.checkin);
         this.modalFichaColeta.openObject(this.checkin);
@@ -102,6 +109,10 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
   abrirFichaTriagem(obj) {
     this.fichaColetaValidator.getProfissional(() => {
       if (this.fichaColetaValidator.profissional) {
+        if (obj.status !== 'FINALIZADO' && obj.status !== 'AUSENTE') {
+          this.servico.showMessage('Não é possível abrir a ficha de coleta enquanto o empregado estiver em atendimento.');
+          return;
+        }
         let filter: AtendimentoFilter = this.atendimentoService.initializeFilter();
         filter.$pageSize = 100000;
         filter.$checkin.$id = obj['id'];
@@ -116,6 +127,11 @@ export class CheckoutComponent extends GenericListComponent<Checkin, CheckinFilt
         }, undefined);
         this.checkin = obj;
         this.modalFichaTriagem.open();
+
+        this.acolhimento = this.fichaColetaValidator.profissional
+          .$equipes.find(e => {
+            return this.util.acolhimento && e.$id === this.util.acolhimento.$id;
+          }) !== undefined;
       } else {
         this.servico.showMessage('O usuário logado não é um profissional de saúde.');
       }
@@ -197,15 +213,26 @@ export class CheckoutUtil {
   forcaPreensaoManual: Array<string>;
   fuma: Array<string>;
   fumaClassificacao: Array<string>;
+  
+  public acolhimento: Equipe;
 
   constructor(private servico: CheckinService) {
     this.helper = new Helper();
+
+    let parametroFilter: GenericFilter = new GenericFilter();
+    parametroFilter.$pageSize = 1;
+    servico.getParametroService().list(parametroFilter, (res) => {
+      const p = res.json();
+      if (p && p.list && p.list.length > 0) {
+        this.acolhimento = servico.getTarefaService().getEquipeService().toObject(p.list[0].acolhimento);
+      }
+    }, undefined);
   }
 
   onInit() {
-    const component = this;
-    this.servico.getUtilService().getStatusCheckin('', function (list) {
-      component.statusCheckins = list;
+
+    this.servico.getUtilService().getStatusCheckin('', (list) => {
+      this.statusCheckins = list;
     }, undefined);
 
     this.servico.getUtilService().getAbrangencia('', (list) => {

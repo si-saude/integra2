@@ -14,7 +14,10 @@
           <i class="large material-icons" (click)="encerrar()">cancel</i>
           <span class="tooltiptext">Sair da fila</span>
         </div>
-        <!--  <i class="large material-icons">note_add</i> -->
+        <div class="tooltip" *ngIf="fila && fila.status === 'INDISPONÍVEL'" (click)="criarAtendimentoAvulso()">
+            <i class="large material-icons">note_add</i>
+            <span class="tooltiptext">Atendimento avulso</span>
+        </div>
       </div>
       <div class="col s1" *ngIf="t.id > 0">
         <div class="tooltip">
@@ -187,3 +190,30 @@
         </app-generic-label>
     </div>
 </app-generic-modal>
+
+<app-generic-form-modal #modalCriarAtendimentoAvulso [title]="'Registrar Atendimento Avulso'" [service]="servico" [component]="this"
+  [disabled] = 'true' [validator]="criarAtendimentoAvulsoValidator" (confirm)="encaminharParaAtendimentoAvulso($event);">
+  <div class="row">
+    <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'pessoa.nome'" [component]="this"
+      [service]="servico.getTarefaService().getEmpregadoService()" [maxLength]="400"
+      (responseChange)="atendimentoAvulso.tarefa.cliente = $event;" 
+      [object]="atendimentoAvulso ? atendimentoAvulso.tarefa.cliente : undefined" [width]="'5'"
+      [label]="'Empregado'">
+    </app-generic-autocomplete>
+    <app-generic-label [width]="'4'">Serviço
+      <app-generic-select [component]="this" [name]="'servico'" [property]="'nome'" 
+          [object]="atendimentoAvulso ? atendimentoAvulso.tarefa.servico : undefined"
+          [array]="util.servicos"
+          (changeValue)="atendimentoAvulso.tarefa.servico = $event;">
+      </app-generic-select>
+    </app-generic-label>
+    <app-generic-label [width]="'3'">Equipe
+      <app-generic-select [component]="this" [name]="'equipe'" [property]="'nome'" 
+          [object]="atendimentoAvulso ? atendimentoAvulso.tarefa.equipe : undefined"
+          [array]="profissional ? profissional.equipes : undefined" 
+          [disabled]="profissional && profissional.equipes ? profissional.equipes.length === 1 : false"
+          (changeValue)="atendimentoAvulso.tarefa.equipe = $event;">
+      </app-generic-select>
+    </app-generic-label>
+  </div>
+</app-generic-form-modal>
