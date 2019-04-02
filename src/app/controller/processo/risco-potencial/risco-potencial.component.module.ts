@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ChartsModule } from 'ng2-charts';
 
 import { SharedModule } from './../../shared.module';
 import * as riscoPotencial from './risco-potencial.component';
@@ -8,6 +9,7 @@ import * as riscoPotencial from './risco-potencial.component';
         riscoPotencial.RiscoPotencialComponent
     ],
 imports: [
-    SharedModule
+    SharedModule,
+    ChartsModule
 ]})
 export class RiscoPotencialComponentModule { }

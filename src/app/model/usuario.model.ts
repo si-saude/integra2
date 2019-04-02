@@ -4,7 +4,7 @@ export class Usuario {
     private id: number;
     private chave: string;
     private email: string;
-    private senha: string;
+    private password: string;
     private senhaConfirm: string;
     private perfis: Array<Perfil>;
     private gestorCss: boolean;
@@ -24,8 +24,8 @@ export class Usuario {
         return this.email;
     }
 
-    public get $senha(): string {
-        return this.senha;
+    public get $password(): string {
+        return this.password;
     }
 
     public get $senhaConfirm(): string {
@@ -64,8 +64,8 @@ export class Usuario {
         this.email = value;
     }
 
-    public set $senha(value: string) {
-        this.senha = value;
+    public set $password(value: string) {
+        this.password = value;
     }
 
     public set $senhaConfirm(value: string) {

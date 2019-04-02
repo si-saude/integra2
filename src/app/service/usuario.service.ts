@@ -34,7 +34,7 @@ export class UsuarioService extends GenericService<Usuario, UsuarioFilter> {
         usuario.$id = obj['id'];
         usuario.$email = obj['email'];
         usuario.$gestorCss = obj['gestorCss'];
-        usuario.$senha = obj['senha'];
+        usuario.$password = obj['password'];
         usuario.$chave = obj['chave'];
         usuario.$senhaConfirm = obj['senhaConfirm'];
         usuario.$sessionTime = obj['sessionTime'];

@@ -12,9 +12,9 @@
         </div>
         <div class="row">
           <app-generic-label [width]="'4'">Senha
-            <input class="validate" type="password" name="senha" #senha="ngModel" [(ngModel)]="t.senha" maxlength="30" [disabled]="_detailMode"
+            <input class="validate" type="password" name="password" #password="ngModel" [(ngModel)]="t.password" maxlength="30" [disabled]="_detailMode"
               required>
-            <span class="helper-text" [attr.data-error]="showErrorMessage(senha.errors)"></span>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(password.errors)"></span>
           </app-generic-label>
           <app-generic-label [width]="'1'">Gestor CSS
               <input type="checkbox" name="gestorCss" #gestorCss="ngModel" [(ngModel)]="t.gestorCss" [disabled]="_detailMode"  />

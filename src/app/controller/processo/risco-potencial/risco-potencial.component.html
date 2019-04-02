@@ -1,6 +1,7 @@
 <div class="row">
     <app-generic-grid #gridRiscosPotenciais
-        [id]="'riscosPotenciais'" [component]="this" [array]="riscos" [height]="'550px'" [rowClass]="'getClass'"
+        [id]="'riscosPotenciais'" [component]="this" [array]="riscos"
+        [height]="'550px'" [rowClass]="'getClass'" [rowClick]="'openDetalhes'"
         [def]="[['Posição','ranking','',''],
                 ['Matrícula','empregado.matricula','',''],
                 ['Empregado','empregado.pessoa.nome','',''],
@@ -8,3 +9,16 @@
                 ['Data','dataFront','','',1,'dateTime']]">
     </app-generic-grid>
 </div>
+
+<app-generic-form-modal #modalDetalhes [title]="'Detalhes'" [service]="servico" [component]="this"
+[disabled] = 'true' [btnConfirm]='false'>
+    <p><b>Empregado:  {{riscoPotencial.empregado.pessoa.nome}}</b></p>
+    <p><b>Equipe Responsável:  {{riscoPotencial.responsavel.nome}}</b>
+
+    <div style="display: block">
+        <canvas baseChart #baseChart="base-chart" [datasets]="graficoUtil.barChartData"
+            [labels]="graficoUtil.barChartLabels" [options]="graficoUtil.barChartOptions"
+            [colors]="graficoUtil.barChartColors" [legend]="graficoUtil.barChartLegend"
+            [chartType]="graficoUtil.barChartType"></canvas>
+    </div>
+</app-generic-form-modal>

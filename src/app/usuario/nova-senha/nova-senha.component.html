@@ -30,14 +30,14 @@
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input class="validate" type="password" name="senha" #senha="ngModel" [(ngModel)]="t.senha" 
+          <input class="validate" type="password" name="password" #password="ngModel" [(ngModel)]="t.password" 
                 minlength="6" maxlength="16" validateEqual="senhaConfirm" required>
           <label>Nova senha</label>
-          <span *ngIf="!senha.valid" style="color:red;font-size: small">{{showErrorMessage(senha.errors)}}</span>
+          <span *ngIf="!password.valid" style="color:red;font-size: small">{{showErrorMessage(password.errors)}}</span>
         </div>
         <div class="input-field col s6">
           <input class="validate" type="password" name="senhaConfirm" #senhaConfirm="ngModel" 
-              [(ngModel)]="t.senhaConfirm" minlength="6" maxlength="16" validateEqual="senha" 
+              [(ngModel)]="t.senhaConfirm" minlength="6" maxlength="16" validateEqual="password" 
               required>
           <label>Confirme a senha</label>
           <span *ngIf="!senhaConfirm.valid"  style="color:red;font-size: small">{{showErrorMessage(senhaConfirm.errors)}}</span>

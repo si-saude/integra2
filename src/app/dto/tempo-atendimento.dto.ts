@@ -4,20 +4,19 @@ export class TempoAtendimento {
     private profissional: string;
     private equipe: string;
     private status: string;
+    
+    private duracao: string;
+    private tempoTotal: string;
 
     private inicio: number;
     private inicioFront: string;
     private fim: number;
     private fimFront: string;
-    private duracao: number;
-    private duracaoFront: string;
 
     private chegada: number;
     private chegadaFront: string;
     private saida: number;
     private saidaFront: string;
-    private tempoTotal: number;
-    private tempoTotalFront: string;
 
     public get $inicio(): number {
         return this.inicio;
@@ -51,20 +50,12 @@ export class TempoAtendimento {
         this.fimFront = value;
     }
 
-    public get $duracao(): number {
+    public get $duracao(): string {
         return this.duracao;
     }
 
-    public set $duracao(value: number) {
+    public set $duracao(value: string) {
         this.duracao = value;
-    }
-
-    public get $duracaoFront(): string {
-        return this.duracaoFront;
-    }
-
-    public set $duracaoFront(value: string) {
-        this.duracaoFront = value;
     }
 
     public get $chegada(): number {
@@ -99,20 +90,12 @@ export class TempoAtendimento {
         this.saidaFront = value;
     }
 
-    public get $tempoTotal(): number {
+    public get $tempoTotal(): string {
         return this.tempoTotal;
     }
 
-    public set $tempoTotal(value: number) {
+    public set $tempoTotal(value: string) {
         this.tempoTotal = value;
-    }
-
-    public get $tempoTotalFront(): string {
-        return this.tempoTotalFront;
-    }
-
-    public set $tempoTotalFront(value: string) {
-        this.tempoTotalFront = value;
     }
 
     public get $empregado(): string {

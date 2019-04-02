@@ -26,9 +26,9 @@
     </tr>
   </thead>
   <tbody> 
-    <tr *ngFor="let a of (models | gridFilter : filter : this); let i = index"
+    <tr (click)="rowClick ? component[rowClick](a) : ''" *ngFor="let a of (models | gridFilter : filter : this); let i = index"
     [ngClass]="selection && checkSelected(a) ? 'generic-grid-selected' : 
-        (rowClass ? component[rowClass](a) : '')">
+        ((rowClass ? component[rowClass](a) : '') + (rowClick ? ' cursor-pointer' : ''))">
       <td [ngClass]="d[2]==='checkbox' ? 
                             'center' : 
                             d[2]==='' && selection ? 

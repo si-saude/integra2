@@ -31,12 +31,12 @@
             <td>{{ i === 0 ? (a.chegadaFront | genericPipe : 'time') : '' }}</td>
             <td>{{ i === 0 ? (a.saidaFront | genericPipe : 'time') : '' }}</td>
             <td>{{ i === 0 ? a.status : '' }}</td>
-            <td>{{ i === 0 ? (a.tempoTotalFront | genericPipe : 'time') : '' }}</td>
+            <td>{{ i === 0 ? a.tempoTotal : '' }}</td>
             <td>{{a.equipe}}</td>
             <td>{{a.profissional}}</td>
             <td>{{(a.inicioFront | genericPipe : 'time')}}</td>
             <td>{{(a.fimFront | genericPipe : 'time')}}</td>
-            <td>{{(a.duracaoFront | genericPipe : 'time')}}</td>
+            <td>{{a.duracao }}</td>
         </tr>
     </tbody>
 </table>

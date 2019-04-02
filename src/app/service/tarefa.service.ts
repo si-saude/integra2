@@ -100,13 +100,13 @@ export class TarefaService extends GenericService<Tarefa, TarefaFilter> {
         tempoAtendimento.$profissional = obj['profissional'];
         tempoAtendimento.$equipe = obj['equipe'];
         tempoAtendimento.$status = obj['status'];
+        tempoAtendimento.$duracao = obj['duracao'];
+        tempoAtendimento.$tempoTotal = obj['tempoTotal'];
 
         tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'inicio');
         tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'fim');
-        tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'duracao');
         tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'chegada');
         tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'saida');
-        tempoAtendimento = this.transformDate(obj, tempoAtendimento, 'tempoTotal');
         return tempoAtendimento;
     }
 
