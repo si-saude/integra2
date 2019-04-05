@@ -2,52 +2,55 @@
   <app-form-component [component]="this">
 
     <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],[equipesTab,'EQUIPES']]">
-        <div #dadosGeraisTab>
-          <div class="row">
-            <app-generic-label [width]="'1'">Código
-              <input class="validate" type="text" name="codigo" #codigo="ngModel" [(ngModel)]="t.codigo"
-                maxlength="4" [disabled]="_detailMode" required>
-              <span class="helper-text" [attr.data-error]="showErrorMessage(codigo.errors)"></span>
-            </app-generic-label>
-            <app-generic-label [width]="'4'">Nome
-              <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome"
-                (ngModelChange)="t.nome=$event.toUpperCase()" maxlength="128" [disabled]="_detailMode" required>
-              <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
-            </app-generic-label>
-            <app-generic-label [width]="'4'">Grupo
-                <app-generic-select [object]="t.grupo" [component]="this" [name]="'grupo'" [array]="util.grupos"
-                  (changeValue)="t.grupo = $event">
-                </app-generic-select>
-            </app-generic-label>
-          </div>
-          <div class="row">
-            <app-generic-label [width]="'4'">URL
-              <input class="validate" type="text" name="url" #url="ngModel" [(ngModel)]="t.url"
-                maxlength="256" [disabled]="_detailMode">
-              <span class="helper-text" [attr.data-error]="showErrorMessage(url.errors)"></span>
-            </app-generic-label>
-            <app-generic-label [width]="'1'">Inativo
-              <input type="checkbox" name="inativo" #inativo="ngModel" [(ngModel)]="t.inativo" [disabled]="_detailMode"  />
-              <span></span>
-            </app-generic-label>
-            <app-generic-label [width]="'1'">Público
-              <input type="checkbox" name="publico" #publico="ngModel" [(ngModel)]="t.publico" [disabled]="_detailMode"  />
-              <span></span>
-            </app-generic-label>
-          </div>
+      <div #dadosGeraisTab>
+        <div class="row">
+          <app-generic-label [width]="'1'">Código
+            <input class="validate" type="text" name="codigo" #codigo="ngModel" [(ngModel)]="t.codigo" maxlength="4" [disabled]="_detailMode"
+              required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(codigo.errors)"></span>
+          </app-generic-label>
+          <app-generic-label [width]="'4'">Nome
+            <input class="validate" type="text" name="nome" #nome="ngModel" [ngModel]="t.nome" (ngModelChange)="t.nome=$event.toUpperCase()"
+              maxlength="128" [disabled]="_detailMode" required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(nome.errors)"></span>
+          </app-generic-label>
+          <app-generic-label [width]="'4'">Grupo
+            <app-generic-select [object]="t.grupo" [component]="this" [name]="'grupo'" [array]="util.grupos" (changeValue)="t.grupo = $event">
+            </app-generic-select>
+          </app-generic-label>
         </div>
-        <div #equipesTab>
-          <div class="row">
-            <app-generic-grid #gridEquipe
-            [id]="'equipes'" [component]="this" [array]="t.equipes" [height]="'350px'" [delete]="true"
+        <div class="row">
+          <app-generic-label [width]="'4'">URL
+            <input class="validate" type="text" name="url" #url="ngModel" [(ngModel)]="t.url" maxlength="256" [disabled]="_detailMode">
+            <span class="helper-text" [attr.data-error]="showErrorMessage(url.errors)"></span>
+          </app-generic-label>
+          <app-generic-label [width]="'1'">Inativo
+            <input type="checkbox" name="inativo" #inativo="ngModel" [(ngModel)]="t.inativo" [disabled]="_detailMode" />
+            <span></span>
+          </app-generic-label>
+          <app-generic-label [width]="'1'">Público
+            <input type="checkbox" name="publico" #publico="ngModel" [(ngModel)]="t.publico" [disabled]="_detailMode" />
+            <span></span>
+          </app-generic-label>
+        </div>
+        <div class="row">
+          <app-generic-label [width]="'4'">Regra de Atendimento
+            <app-generic-select [object]="t.regraAtendimento" [component]="this" [name]="'regraAtendimento'" [array]="util.regras" [property]="'nome'"
+              (changeValue)="t.regraAtendimento = $event">
+            </app-generic-select>
+          </app-generic-label>
+        </div>
+      </div>
+      <div #equipesTab>
+        <div class="row">
+          <app-generic-grid #gridEquipe [id]="'equipes'" [component]="this" [array]="t.equipes" [height]="'350px'" [delete]="true"
             [def]="[['Nome','nome','','']]">
-              <app-generic-autocomplete #autocompleteEquipe
-                [name]="'equipe'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'4'" [label]="'Equipe'"
-                [service]="servico.getEquipeService()" [showAdd]="true" (responseAdd)="gridEquipe.add($event)">
-              </app-generic-autocomplete>
-            </app-generic-grid>
-          </div>
+            <app-generic-autocomplete #autocompleteEquipe [name]="'equipe'" [property]="'nome'" [component]="this" [maxLength]="50" [width]="'4'"
+              [label]="'Equipe'" [service]="servico.getEquipeService()" [showAdd]="true" (responseAdd)="gridEquipe.add($event)">
+            </app-generic-autocomplete>
+          </app-generic-grid>
         </div>
+      </div>
     </app-generic-tab>
   </app-form-component>
 </form>

@@ -1,4 +1,5 @@
 import { Equipe } from './equipe.model';
+import { RegraAtendimento } from './regra-atendimento.model';
 
 export class Servico {
     private id: number;
@@ -9,6 +10,7 @@ export class Servico {
     private publico: boolean;
     private inativo: boolean;
     private equipes: Array<Equipe>;
+    private regraAtendimento: RegraAtendimento;
     private version: number;
 
     public get $id(): number {
@@ -43,6 +45,10 @@ export class Servico {
         return this.equipes;
     }
 
+    public get $regraAtendimento(): RegraAtendimento {
+        return this.regraAtendimento;
+    }
+
     public get $version(): number {
         return this.version;
     }
@@ -73,6 +79,10 @@ export class Servico {
 
     public set $inativo(value: boolean) {
         this.inativo = value;
+    }
+
+    public set $regraAtendimento(value: RegraAtendimento) {
+        this.regraAtendimento = value;
     }
 
     public set $equipes(value: Array<Equipe>) {

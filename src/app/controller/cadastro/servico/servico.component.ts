@@ -4,7 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { GenericListComponent } from './../../../generic/generic-list-component';
 import { GenericComponent } from './../../../generic/generic-component';
 
+import { RegraAtendimento } from './../../../model/regra-atendimento.model';
 import { Servico } from './../../../model/servico.model';
+import { RegraAtendimentoFilter } from './../../../filter/regra-atendimento.filter';
 import { ServicoFilter } from './../../../filter/servico.filter';
 import { ServicoService } from './../../../service/servico.service';
 
@@ -95,13 +97,21 @@ export class ServicoDetalharComponent extends GenericComponent<Servico> implemen
 export class ServicoUtil {
   grupos: Array<string>;
 
-  constructor(private servico: ServicoService) {
+  regras: Array<RegraAtendimento>;
+  regraFilter: RegraAtendimentoFilter;
 
+  constructor(private servico: ServicoService) {
+    this.regraFilter = servico.getRegraAtendimentoService().initializeFilter();
+    this.regraFilter.$pageSize = 100000;
   }
 
   onInit() {
     this.servico.getUtilService().getGrupoServico('', (list) => {
       this.grupos = list;
+    }, undefined);
+
+    this.servico.getRegraAtendimentoService().list(this.regraFilter, (res) => {
+      this.regras = this.servico.getRegraAtendimentoService().toList(res.json().list);
     }, undefined);
   }
 }

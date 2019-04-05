@@ -9,6 +9,7 @@ import { DialogService } from './../util/dialog/dialog.service';
 import { SpinnerService } from './../util/spinner/spinner.service';
 
 import { EquipeService } from './equipe.service';
+import { RegraAtendimentoService } from './regra-atendimento.service';
 import { UtilService } from './util.service';
 import { Equipe } from '../model/equipe.model';
 import { Servico } from '../model/servico.model';
@@ -18,7 +19,7 @@ import { ServicoFilter } from '../filter/servico.filter';
 export class ServicoService extends GenericService<Servico, ServicoFilter> {
     constructor(http: Http, router: Router, private dialogService: DialogService,
         private spinnerService: SpinnerService, private equipeService: EquipeService,
-        private utilService: UtilService) {
+        private regraAtendimentoService: RegraAtendimentoService, private utilService: UtilService) {
         super(http, 'servico', router, dialogService, spinnerService);
     }
 
@@ -45,6 +46,11 @@ export class ServicoService extends GenericService<Servico, ServicoFilter> {
         servico.$inativo = obj['inativo'];
         servico.$publico = obj['publico'];
         servico.$version = obj['version'];
+
+        if (this.helper.isNotNull(obj['regraAtendimento'])) {
+            servico.$regraAtendimento = this.regraAtendimentoService.toObject(obj['regraAtendimento']);
+        }
+
         servico.$equipes = new Array<Equipe>();
         if (obj['equipes']) {
             for (let x = 0; x < obj['equipes'].length; x++) {
@@ -57,6 +63,10 @@ export class ServicoService extends GenericService<Servico, ServicoFilter> {
 
     getEquipeService() {
         return this.equipeService;
+    }
+
+    getRegraAtendimentoService() {
+        return this.regraAtendimentoService;
     }
 
     getUtilService() {
