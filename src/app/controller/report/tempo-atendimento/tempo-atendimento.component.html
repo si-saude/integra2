@@ -24,10 +24,10 @@
             <td><b>Duração</b></td>
         </tr>
     </thead>
-    <tbody *ngFor="let e of empregados">
-        <tr *ngFor="let a of getTempoAtendimentosByEmpregado(e); let i = index;">
+    <tbody *ngFor="let e of dataEmpregados">
+        <tr *ngFor="let a of getTempoAtendimentosByDataEmpregado(e); let i = index;">
             <td>{{ i === 0 ? (a.chegadaFront | genericPipe : 'date') : '' }}</td>
-            <td>{{ i === 0 ? e : ''}}</td>
+            <td>{{ i === 0 ? a.empregado : ''}}</td>
             <td>{{ i === 0 ? (a.chegadaFront | genericPipe : 'time') : '' }}</td>
             <td>{{ i === 0 ? (a.saidaFront | genericPipe : 'time') : '' }}</td>
             <td>{{ i === 0 ? a.status : '' }}</td>

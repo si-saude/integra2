@@ -18,7 +18,7 @@ export class TempoAtendimentoComponent implements OnInit {
   private helper: Helper;
   private filter: TarefaFilter;
   private tempoAtendimentos: Array<TempoAtendimento>;
-  private empregados: Array<string>;
+  private dataEmpregados: Array<string>;
 
   constructor(private servico: TarefaService, private router: Router) {
     this.router.routerState.snapshot.url = 'Tempo de Atendimento';
@@ -37,10 +37,10 @@ export class TempoAtendimentoComponent implements OnInit {
           const list = res.json();
           if (list && list.length > 0) {
             this.tempoAtendimentos = this.servico.toTempoAtendimentos(list);
-            this.empregados = this.helper.distinct(this.tempoAtendimentos.map(a => a.$empregado));
+            this.dataEmpregados = this.helper.distinct(this.tempoAtendimentos.map(a => a.$chegadaFront + ';' + a.$empregado));
           } else {
             this.tempoAtendimentos = undefined;
-            this.empregados = undefined;
+            this.dataEmpregados = undefined;
           }
         }, undefined );
       }
@@ -49,9 +49,9 @@ export class TempoAtendimentoComponent implements OnInit {
   ngOnInit() {
   }
 
-  getTempoAtendimentosByEmpregado(e: string) {
+  getTempoAtendimentosByDataEmpregado(e: string) {
     if (this.tempoAtendimentos) {
-      return this.tempoAtendimentos.filter(a => a.$empregado === e);
+      return this.tempoAtendimentos.filter(a => a.$chegadaFront + ';' + a.$empregado === e);
     }
     return {};
   }
