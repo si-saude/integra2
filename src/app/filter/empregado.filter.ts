@@ -16,6 +16,7 @@ export class EmpregadoFilter extends GenericFilter {
     private matricula: string;
     private status: string;
     private vinculo: string;
+    private matriculaNome: string;
     private inativo: BooleanFilter;
 
     private pessoa: PessoaFilter;
@@ -85,6 +86,10 @@ export class EmpregadoFilter extends GenericFilter {
         return this.ghee;
     }
 
+    public get $matriculaNome(): string {
+        return this.matriculaNome;
+    }
+
     public set $chave(value: string) {
         this.chave = value;
     }
@@ -139,5 +144,9 @@ export class EmpregadoFilter extends GenericFilter {
 
     public set $ghee(value: GheeFilter) {
         this.ghee = value;
+    }
+
+    public set $matriculaNome(value: string){
+        this.matriculaNome = value;
     }
 }

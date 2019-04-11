@@ -1,7 +1,7 @@
 <form class="col s12" #form="ngForm">
   <app-wizard-component [component]="this">
-    <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'pessoa.nome'" [component]="this" [maxLength]="400"
-      [service]="servico.getEmpregadoService()" (responseChange)="t.empregado = $event; checkSubmit();" [object]="t.empregado" [width]="'5'"
+    <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'matriculaNome'" [component]="this" [maxLength]="400"
+      [service]="servico.getEmpregadoService()" (responseChange)="t.empregado = $event; checkSubmit();" [object]="t.empregado" [width]="'6'"
       [label]="'Empregado'">
 
       <app-generic-label [width]="'3'">Localização

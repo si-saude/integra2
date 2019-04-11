@@ -83,6 +83,7 @@ export class EmpregadoService extends GenericService<Empregado, EmpregadoFilter>
         empregado.$pis = obj['pis'];
         empregado.$email = obj['email'];
         empregado.$vinculo = obj['vinculo'];
+        empregado.$matriculaNome = obj['matriculaNome'];
         empregado.$assinatura = obj['assinatura'];
         empregado.$foto = obj['foto'];
         empregado.$version = obj['version'];

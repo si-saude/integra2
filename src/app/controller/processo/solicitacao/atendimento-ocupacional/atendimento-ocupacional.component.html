@@ -5,7 +5,7 @@
     </div>
     <div class="row">
       <app-generic-autocomplete #autocompleteCliente
-        [name]="'cliente'" [property]="'pessoa.nome'" [component]="this" [maxLength]="400"
+        [name]="'cliente'" [property]="'matriculaNome'" [component]="this" [maxLength]="400"
         [service]="servico.getEmpregadoService()" (responseChange)="t.cliente = $event; checkSubmit();"
         [object]="t.cliente" [width]="'5'" [label]="'Cliente'">
 

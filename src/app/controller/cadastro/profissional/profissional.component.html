@@ -6,7 +6,7 @@
       [registroTab,'REGISTRO'],[equipesTab,'EQUIPES'],[servicosTab,'SERVIÇOS']]">
       <div #dadosGeraisTab>
         <div class="row">
-          <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'pessoa.nome'" [component]="this" [maxLength]="400"
+          <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'matriculaNome'" [component]="this" [maxLength]="400"
             [service]="servico.getEmpregadoService()" (responseChange)="t.empregado = $event" [object]="t.empregado" [width]="'11'"
             [method]="'initializeToAutocomplete'" [label]="'Empregado'">
           </app-generic-autocomplete>

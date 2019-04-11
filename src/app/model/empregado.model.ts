@@ -20,6 +20,7 @@ export class Empregado {
     private pis: string;
     private email: string;
     private vinculo: string;
+    private matriculaNome: string;
     private assinatura: string;
     private foto: string;
     private version: number;
@@ -76,6 +77,10 @@ export class Empregado {
 
     public get $vinculo(): string {
         return this.vinculo;
+    }
+
+    public get $matriculaNome(): string {
+        return this.matriculaNome;
     }
 
     public get $assinatura(): string {
@@ -176,6 +181,10 @@ export class Empregado {
 
     public set $vinculo(value: string){
         this.vinculo = value;
+    }
+
+    public set $matriculaNome(value: string){
+        this.matriculaNome = value;
     }
 
     public set $assinatura(value: string){

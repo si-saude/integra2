@@ -194,10 +194,10 @@
 <app-generic-form-modal #modalCriarAtendimentoAvulso [title]="'Registrar Atendimento Avulso'" [service]="servico" [component]="this"
   [disabled] = 'true' [validator]="criarAtendimentoAvulsoValidator" (confirm)="encaminharParaAtendimentoAvulso($event);">
   <div class="row">
-    <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'pessoa.nome'" [component]="this"
+    <app-generic-autocomplete #autocompleteEmpregado [name]="'empregado'" [property]="'matriculaNome'" [component]="this"
       [service]="servico.getTarefaService().getEmpregadoService()" [maxLength]="400"
       (responseChange)="atendimentoAvulso.tarefa.cliente = $event;" 
-      [object]="atendimentoAvulso ? atendimentoAvulso.tarefa.cliente : undefined" [width]="'5'"
+      [object]="atendimentoAvulso ? atendimentoAvulso.tarefa.cliente : undefined" [width]="'6'"
       [label]="'Empregado'">
     </app-generic-autocomplete>
     <app-generic-label [width]="'4'">Serviço
