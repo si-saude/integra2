@@ -672,6 +672,13 @@ export class AtendimentoUtil {
     atendimentoAtividadesFisicas.splice(atendimentoAtividadesFisicas.indexOf(a), 1);
   }
 
+  cloneAtendimentoAtividadeFisica(atendimentoAtividadesFisicas: Array<AtendimentoAtividadeFisica>, a: AtendimentoAtividadeFisica) {
+    const obj = this.servico.toAtendimentoAtividadeFisica(a);
+    obj.$tipo = 'ORIENTADA';
+
+    atendimentoAtividadesFisicas.push(obj);
+  }
+
   filterAtendimentoAtividadeFisica(atendimentoAtividadesFisicas: Array<AtendimentoAtividadeFisica>, tipo) {
     return atendimentoAtividadesFisicas.filter(i => i.$tipo === tipo);
   }
