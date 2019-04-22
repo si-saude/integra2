@@ -64,7 +64,8 @@
             <b>Empregado:</b>{{' '+ t.checkin.empregado.pessoa.nome}}<br>
             <app-generic-tab #tab [tabs]="[[fichaColetaTab,'FICHA DE COLETA'],
               [fichaTriagemTab,'FICHA DE TRIAGEM'],
-              [acolhimentoTab,'ACOLHIMENTO',!t.acolhimento]]" *ngIf="fila.status !== 'AGUARDANDO EMPREGADO' ">
+              [acolhimentoTab,'ACOLHIMENTO',!t.acolhimento],
+              [avaliacaoFisicaTab, 'AVALIAÇÃO FÍSICA', t.tarefa.equipe.abreviacao !== 'EDF']]" *ngIf="fila.status !== 'AGUARDANDO EMPREGADO' ">
               <div #fichaColetaTab>
                 <div *ngFor="let grupo of util.grupos">
                   <fieldset *ngIf="grupo !== 'TESTE DE FAGERSTRÖM' || 
@@ -173,6 +174,199 @@
                   </div>
                 </div>
               </div>
+              <div #avaliacaoFisicaTab>
+                <div *ngIf="tab.selected === 3">
+                  <fieldset>
+                    <b>NÍVEL DE ATIVIDADE FÍSICA</b><br>
+                    <fieldset>
+                      <b>REALIZADAS</b>
+                      <div>
+                          <div class="row tooltip">
+                            <button class="btn-floating waves-effect waves-light left"
+                              (click)="util.addAtendimentoAtividadeFisica(t.avaliacaoFisica.atendimentoAtividadesFisicas, 'REALIZADA')" 
+                              [disabled]="_detailMode"> 
+                              <i class="material-icons center-icon">add</i>
+                            </button>
+                            <span class="tooltiptext">Inserir Atividade Física Realizada</span>
+                          </div>
+                          <div class="row highlight">
+                            <div class="col s3"><b>Atividade</b></div>
+                            <div class="col s2"><b>Dias / Min / Total</b></div>
+                            <div class="col s2"><b>Classificação</b></div>
+                            <div class="col s4"><b>Observação</b></div>
+                          </div>
+                          <div class="row" *ngFor="let atendimentoAtividadeFisica of util.filterAtendimentoAtividadeFisica(t.avaliacaoFisica.atendimentoAtividadesFisicas, 'REALIZADA'); let i = index">
+                            <div class="col s3">
+                                <app-generic-autocomplete
+                                name="atendimentoAtividadeFisicaRealizada{{i}}.atividade" [property]="'descricao'" [component]="this" [maxLength]="512"
+                                [service]="servico.getAtividadeFisicaService()" (responseChange)="atendimentoAtividadeFisica.atividade = $event"
+                                [object]="atendimentoAtividadeFisica.atividade" [width]="'12'">
+                                </app-generic-autocomplete>
+                            </div>
+                            <div class="col s2">
+                              <div class="col s4">
+                                <div class="tooltip">
+                                  <i class="material-icons" (click)="openModalSelecionarDias(atendimentoAtividadeFisica)">add</i>
+                                  <span class="tooltiptext">Selecionar Dias</span>
+                                </div>
+                              </div>
+                              
+                              <div class="col s4">
+                                <input type="text" name="atendimentoAtividadeFisicaRealizada{{i}}.minutos" [ngModel]="atendimentoAtividadeFisica.minutos" maxlength="4"
+                                (changeValue)="atendimentoAtividadeFisica.minutos=$event; atendimentoAtividadeFisica.total = getTotalMinutos(atendimentoAtividadeFisica);"
+                                [disabled]="_detailMode" integerFormat>
+                              </div>
+
+                              <div class="col s4">
+                                <input type="text" name="atendimentoAtividadeFisicaRealizada{{i}}.total" [ngModel]="atendimentoAtividadeFisica.total" maxlength="5"
+                                [disabled]="true">
+                              </div>
+                            </div>
+                            <div class="col s2">
+                              <app-generic-select [object]="atendimentoAtividadeFisica.classificacao" [component]="this" 
+                              name="'atendimentoAtividadeFisicaRealizada{{i}}.classificacao'" [disabled]="_detailMode"
+                              [array]="util.getEnumArray('classificacao-atividade-fisica')"
+                              (changeValue)="atendimentoAtividadeFisica.classificacao=$event;">
+                              </app-generic-select>
+                            </div>
+                            <div class="col s4">
+                              <textarea class="text-area" name="atendimentoAtividadeFisicaRealizada{{i}}.observacao" [ngModel]="atendimentoAtividadeFisica.observacao"
+                              maxlength="2048" (ngModelChange)="atendimentoAtividadeFisica.observacao=$event;" [disabled]="_detailMode">
+                              </textarea>
+                            </div>
+                          </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <b>ORIENTADAS</b>
+                        <div>
+                          <div class="row tooltip">
+                            <button class="btn-floating waves-effect waves-light left"
+                              (click)="util.addAtendimentoAtividadeFisica(t.avaliacaoFisica.atendimentoAtividadesFisicas, 'ORIENTADA')" 
+                              [disabled]="_detailMode"> 
+                              <i class="material-icons center-icon">add</i>
+                            </button>
+                            <span class="tooltiptext">Inserir Atividade Física Orientada</span>
+                          </div>
+                          <div class="row highlight">
+                            <div class="col s3"><b>Atividade</b></div>
+                            <div class="col s1"><b>Dias</b></div>
+                            <div class="col s1"><b>Min</b></div>
+                            <div class="col s1"><b>Total</b></div>
+                            <div class="col s2"><b>Classificação</b></div>
+                            <div class="col s4"><b>Observação</b></div>
+                          </div>
+                          <div class="row" *ngFor="let atendimentoAtividadeFisica of util.filterAtendimentoAtividadeFisica(t.avaliacaoFisica.atendimentoAtividadesFisicas, 'ORIENTADA'); let i = index">
+                            <div class="col s3">
+                              <app-generic-autocomplete
+                              name="atendimentoAtividadeFisicaOrientada{{i}}.atividade" [property]="'descricao'" [component]="this" [maxLength]="512"
+                              [service]="servico.getAtividadeFisicaService()" (responseChange)="atendimentoAtividadeFisica.atividade = $event"
+                              [object]="atendimentoAtividadeFisica.atividade" [width]="'12'">
+                              </app-generic-autocomplete>
+                            </div>
+                            <div class="col s1">
+                              <button class="btn-floating waves-effect waves-light left"
+                              (click)="openModalSelecionarDias(atendimentoAtividadeFisica)" 
+                              [disabled]="_detailMode"> 
+                              <i class="material-icons center-icon">add</i>
+                              </button>
+                            </div>
+                            <div class="col s1">
+                              <input type="text" name="atendimentoAtividadeFisicaOrientada{{i}}.minutos" [ngModel]="atendimentoAtividadeFisica.minutos" maxlength="4"
+                              (changeValue)="atendimentoAtividadeFisica.minutos=$event; atendimentoAtividadeFisica.total = getTotalMinutos(atendimentoAtividadeFisica);"
+                              [disabled]="_detailMode" integerFormat>
+                            </div>
+                            <div class="col s1">
+                              <input type="text" name="atendimentoAtividadeFisicaOrientada{{i}}.total" [ngModel]="atendimentoAtividadeFisica.total" maxlength="5"
+                              [disabled]="true">
+                            </div>
+                            <div class="col s2">
+                              <app-generic-select [object]="atendimentoAtividadeFisica.classificacao" [component]="this" 
+                              name="'atendimentoAtividadeFisicaOrientada{{i}}.classificacao'" [disabled]="_detailMode"
+                              [array]="util.getEnumArray('classificacao-atividade-fisica')"
+                              (changeValue)="atendimentoAtividadeFisica.classificacao=$event;">
+                              </app-generic-select>
+                            </div>
+                            <div class="col s4">
+                              <textarea class="text-area" name="atendimentoAtividadeFisicaOrientada{{i}}.observacao" [ngModel]="atendimentoAtividadeFisica.observacao"
+                              maxlength="2048" (ngModelChange)="atendimentoAtividadeFisica.observacao=$event;" [disabled]="_detailMode">
+                              </textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                  </fieldset>
+                  <fieldset>
+                    <b>ESTÁGIO DE CONTEMPLAÇÃO</b><br /> 
+                    <div>
+                      <div class="row highlight">
+                        <div class="col s8"><b>Questão</b></div>
+                        <div class="col s2"><b>Sim</b></div>
+                        <div class="col s2"><b>Não</b></div>
+                      </div>
+                      <div class="row">
+                        <div class="col s8">Pratica algum exercício físico?</div>
+                        <div class="col s2">
+                          <label>
+                            <input type="radio" name="avaliacaoFisica.pratica" [(ngModel)]="t.avaliacaoFisica.pratica"
+                            [disabled]="_detailMode" [value]="true" class="with-gap">
+                            <span></span>
+                          </label>
+                        </div>
+                        <div class="col s2">
+                          <label>
+                            <input type="radio" name="avaliacaoFisica.pratica" [(ngModel)]="t.avaliacaoFisica.pratica"
+                            [disabled]="_detailMode" [value]="false" class="with-gap">
+                            <span></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col s8">Tem interesse em iniciar um programa de exercício físico?</div>
+                        <div class="col s2">
+                          <label>
+                            <input type="radio" name="avaliacaoFisica.interesse" [(ngModel)]="t.avaliacaoFisica.interesse"
+                            [disabled]="_detailMode" [value]="true" class="with-gap">
+                            <span></span>
+                          </label>
+                        </div>
+                        <div class="col s2">
+                          <label>
+                            <input type="radio" name="avaliacaoFisica.interesse" [(ngModel)]="t.avaliacaoFisica.interesse"
+                            [disabled]="_detailMode" [value]="false" class="with-gap">
+                            <span></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col s8">Já fez alguma ação para iniciar um programa de exercício físico?</div>
+                        <div class="col s2">
+                          <label>
+                            <input type="radio" name="avaliacaoFisica.acao" [(ngModel)]="t.avaliacaoFisica.acao"
+                            [disabled]="_detailMode" [value]="true" class="with-gap">
+                            <span></span>
+                          </label>
+                        </div>
+                        <div class="col s2">
+                          <label>
+                            <input type="radio" name="avaliacaoFisica.acao" [(ngModel)]="t.avaliacaoFisica.acao"
+                            [disabled]="_detailMode" [value]="false" class="with-gap">
+                            <span></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <app-generic-label [width]="'12'">Observações
+                          <textarea class="validate text-area" name="avaliacaoFisica.observacoes" #observacoes="ngModel" [(ngModel)]="t.avaliacaoFisica.observacoes"
+                            maxlength="2048" [disabled]="_detailMode">
+                          </textarea>
+                          <span class="helper-text" [attr.data-error]="showErrorMessage(observacoes.errors)"></span>
+                        </app-generic-label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
             </app-generic-tab>
           </div>
         </div>
@@ -216,4 +410,45 @@
       </app-generic-select>
     </app-generic-label>
   </div>
+</app-generic-form-modal>
+
+<app-generic-form-modal #modalSelecionarDias [title]="'Selecionar Dias'" [service]="servico" [component]="this"
+[disabled] = 'true' [validator]="atendimentoAtividadeFisicaValidator" (confirm)="closeModalSelecionarDias()">
+<div class="row">
+  <app-generic-label [width]="'1'">Domingo
+      <input type="checkbox" name="domingo" (change)="atendimentoAtividade.domingo = onChangeCheckbox($event); atendimentoAtividade.total = getTotalMinutos(atendimentoAtividade);"
+      [ngModel]="atendimentoAtividade ? atendimentoAtividade.domingo : undefined" />
+      <span></span>
+  </app-generic-label>
+  <app-generic-label [width]="'1'">Segunda 
+      <input type="checkbox" name="segunda" (change)="atendimentoAtividade.segunda = onChangeCheckbox($event); atendimentoAtividade.total = getTotalMinutos(atendimentoAtividade);"
+      [ngModel]="atendimentoAtividade ? atendimentoAtividade.segunda : undefined" />
+      <span></span>
+  </app-generic-label>
+  <app-generic-label [width]="'1'">Terça
+      <input type="checkbox" name="terca" (change)="atendimentoAtividade.terca = onChangeCheckbox($event); atendimentoAtividade.total = getTotalMinutos(atendimentoAtividade);"
+      [ngModel]="atendimentoAtividade ? atendimentoAtividade.terca : undefined"/>
+      <span></span>
+  </app-generic-label>
+  <app-generic-label [width]="'1'">Quarta
+      <input type="checkbox" name="quarta" (change)="atendimentoAtividade.quarta = onChangeCheckbox($event); atendimentoAtividade.total = getTotalMinutos(atendimentoAtividade);"
+      [ngModel]="atendimentoAtividade ? atendimentoAtividade.quarta : undefined"/>
+      <span></span>
+  </app-generic-label>
+  <app-generic-label [width]="'1'">Quinta
+      <input type="checkbox" name="quinta" (change)="atendimentoAtividade.quinta = onChangeCheckbox($event); atendimentoAtividade.total = getTotalMinutos(atendimentoAtividade);"
+      [ngModel]="atendimentoAtividade ? atendimentoAtividade.quinta : undefined"/>
+      <span></span>
+  </app-generic-label>
+  <app-generic-label [width]="'1'">Sexta
+      <input type="checkbox" name="sexta" (change)="atendimentoAtividade.sexta = onChangeCheckbox($event); atendimentoAtividade.total = getTotalMinutos(atendimentoAtividade);"
+      [ngModel]="atendimentoAtividade ? atendimentoAtividade.sexta : undefined"/>
+      <span></span>
+  </app-generic-label>
+  <app-generic-label [width]="'1'">Sábado
+      <input type="checkbox" name="sabado" (change)="atendimentoAtividade.sabado = onChangeCheckbox($event); atendimentoAtividade.total = getTotalMinutos(atendimentoAtividade);"
+      [ngModel]="atendimentoAtividade ? atendimentoAtividade.sabado : undefined"/>
+      <span></span>
+  </app-generic-label>
+</div>
 </app-generic-form-modal>

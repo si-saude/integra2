@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../shared.module';
+import { AtendimentoAtividadeFisicaValidator } from './atendimento-atividade-fisica.validator';
 import { CriarAtendimentoAvulsoValidator } from './criar-atendimento-avulso.validator';
 import { FichaColetaValidator } from './ficha-coleta.validator';
 import * as atendimento from './atendimento.component';
@@ -12,5 +13,5 @@ import * as atendimento from './atendimento.component';
 imports: [
     SharedModule
 ],
-providers: [ FichaColetaValidator, CriarAtendimentoAvulsoValidator ]})
+providers: [ AtendimentoAtividadeFisicaValidator, FichaColetaValidator, CriarAtendimentoAvulsoValidator ]})
 export class AtendimentoComponentModule { }

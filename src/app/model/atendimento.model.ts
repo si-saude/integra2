@@ -1,13 +1,16 @@
+import { AvaliacaoFisica } from './avaliacao-fisica.model';
 import { Checkin } from './checkin.model';
 import { FilaAtendimento } from './fila-atendimento.model';
 import { Tarefa } from './tarefa.model';
 import { Triagem } from './triagem.model';
+import { AtendimentoAtividadeFisica } from './atendimento-atividade-fisica.model';
 
 export class Atendimento {
     private id: number;
     private fila: FilaAtendimento;
     private tarefa: Tarefa;
     private checkin: Checkin;
+    private avaliacaoFisica: AvaliacaoFisica;
     private triagens: Array<Triagem>;
     private acolhimento: boolean;
     private version: number;
@@ -26,6 +29,10 @@ export class Atendimento {
 
     public get $checkin(): Checkin {
         return this.checkin;
+    }
+
+    public get $avaliacaoFisica(): AvaliacaoFisica {
+        return this.avaliacaoFisica;
     }
 
     public get $triagens(): Array<Triagem> {
@@ -54,6 +61,10 @@ export class Atendimento {
 
     public set $checkin(value: Checkin) {
         this.checkin = value;
+    }
+
+    public set $avaliacaoFisica(value: AvaliacaoFisica) {
+        this.avaliacaoFisica = value;
     }
 
     public set $triagens(value: Array<Triagem>) {

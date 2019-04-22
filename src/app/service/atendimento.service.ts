@@ -8,10 +8,15 @@ import { DialogService } from './../util/dialog/dialog.service';
 import { SpinnerService } from './../util/spinner/spinner.service';
 
 import { Atendimento } from '../model/atendimento.model';
+import { AtendimentoAtividadeFisica } from '../model/atendimento-atividade-fisica.model';
+import { Avaliacao } from '../model/avaliacao.model';
+import { AvaliacaoFisica } from '../model/avaliacao-fisica.model';
 import { Triagem } from '../model/triagem.model';
 import { AtendimentoFilter } from '../filter/atendimento.filter';
+import { AtividadeFisicaService } from './atividade-fisica.service';
 import { CheckinService } from './checkin.service';
 import { FilaAtendimentoService } from './fila-atendimento.service';
+import { GrupoMonitoramentoService } from './grupo-monitoramento.service';
 import { IndicadorSastService } from './indicador-sast.service';
 import { UtilService } from './util.service';
 import { TarefaService } from './tarefa.service';
@@ -21,7 +26,9 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
     constructor(http: Http, router: Router, private dialogService: DialogService,
         private spinnerService: SpinnerService, private tarefaService: TarefaService,
         private filaService: FilaAtendimentoService, private checkinService: CheckinService,
-        private indicadorService: IndicadorSastService, private utilService: UtilService) {
+        private indicadorService: IndicadorSastService, private utilService: UtilService,
+        private atividadeFisicaService: AtividadeFisicaService,
+        private grupoMonitoramentoService: GrupoMonitoramentoService) {
         super(http, 'atendimento', router, dialogService, spinnerService);
     }
 
@@ -29,6 +36,13 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
         const a = new Atendimento();
         a.$triagens = new Array<Triagem>();
         return a;
+    }
+
+    initializeAvaliacaoFisica() {
+        const av = new AvaliacaoFisica();
+        av.$atendimento = new Atendimento();
+        av.$atendimentoAtividadesFisicas = new Array<AtendimentoAtividadeFisica>();
+        return av;
     }
 
     initializeFilter() {
@@ -58,6 +72,12 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
         if (this.helper.isNotNull(obj['fila'])) {
             atendimento.$fila = this.filaService.toObject(obj['fila']);
         }
+        
+        if (this.helper.isNotNull(obj['avaliacaoFisica'])) {
+            atendimento.$avaliacaoFisica = this.toAvaliacaoFisica(obj['avaliacaoFisica']);
+            atendimento.$avaliacaoFisica.$atendimento = new Atendimento();
+            atendimento.$avaliacaoFisica.$atendimento.$id = atendimento.$id;
+        }
 
         atendimento.$triagens = new Array<Triagem>();
         if (obj['triagens']) {
@@ -70,6 +90,28 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
         }
 
         return atendimento;
+    }
+
+    toAvaliacaoFisica(obj: AvaliacaoFisica): AvaliacaoFisica {
+        const avaliacaoFisica: AvaliacaoFisica = new AvaliacaoFisica();
+        avaliacaoFisica.$id = obj['id'];
+        avaliacaoFisica.$pratica = obj['pratica'];
+        avaliacaoFisica.$interesse = obj['interesse'];
+        avaliacaoFisica.$acao = obj['acao'];
+        avaliacaoFisica.$observacoes = obj['observacoes'];
+        avaliacaoFisica.$version = obj['version'];
+
+        avaliacaoFisica.$atendimentoAtividadesFisicas = new Array<AtendimentoAtividadeFisica>();
+        if (obj['atendimentoAtividadesFisicas']) {
+            for (let x = 0; x < obj['atendimentoAtividadesFisicas'].length; x++) {
+                const atendimentoAtividadeFisica: AtendimentoAtividadeFisica
+                    = this.toAtendimentoAtividadeFisica(obj['atendimentoAtividadesFisicas'][x]);
+                atendimentoAtividadeFisica.$avaliacaoFisica.$id = avaliacaoFisica.$id;
+                avaliacaoFisica.$atendimentoAtividadesFisicas.push(atendimentoAtividadeFisica);
+            }
+        }
+
+        return avaliacaoFisica;
     }
 
     toTriagem(obj: Triagem): Triagem {
@@ -85,6 +127,47 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
         }
 
         return triagem;
+    }
+
+    toAtendimentoAtividadeFisica(obj: AtendimentoAtividadeFisica): AtendimentoAtividadeFisica {
+        const atendimentoAtividadeFisica: AtendimentoAtividadeFisica = new AtendimentoAtividadeFisica();
+        atendimentoAtividadeFisica.$id = obj['id'];
+        atendimentoAtividadeFisica.$avaliacaoFisica = new AvaliacaoFisica();
+
+        atendimentoAtividadeFisica.$domingo = obj['domingo'];
+        atendimentoAtividadeFisica.$segunda = obj['segunda'];
+        atendimentoAtividadeFisica.$terca = obj['terca'];
+        atendimentoAtividadeFisica.$quarta = obj['quarta'];
+        atendimentoAtividadeFisica.$quinta = obj['quinta'];
+        atendimentoAtividadeFisica.$sexta = obj['sexta'];
+        atendimentoAtividadeFisica.$sabado = obj['sabado'];
+        atendimentoAtividadeFisica.$minutos = obj['minutos'];
+        atendimentoAtividadeFisica.$total = obj['total'];
+        atendimentoAtividadeFisica.$classificacao = obj['classificacao'];
+        atendimentoAtividadeFisica.$tipo = obj['tipo'];
+        atendimentoAtividadeFisica.$observacao = obj['observacao'];
+        atendimentoAtividadeFisica.$version = obj['version'];
+
+        if (this.helper.isNotNull(obj['atividade'])) {
+            atendimentoAtividadeFisica.$atividade = this.atividadeFisicaService.toObject(obj['atividade']);
+        }
+
+        return atendimentoAtividadeFisica;
+    }
+
+    toAvaliacao(obj: any): Avaliacao {
+        const avaliacao: Avaliacao = new Avaliacao();
+        avaliacao.$id = obj['id'];
+        avaliacao.$nome = obj['nome'];
+        avaliacao.$auditoriaAso = obj['auditoriaAso'];
+        avaliacao.$auditoriaMedico = obj['auditoriaMedico'];
+        avaliacao.$version = obj['version'];
+
+        if (this.helper.isNotNull(obj['grupoMonitoramento'])) {
+            avaliacao.$grupoMonitoramento = this.grupoMonitoramentoService.toObject(obj['grupoMonitoramento']);
+        }
+
+        return avaliacao;
     }
 
     getListAtendimentosAguardandoEmpregadoByLocalizacao(t: Atendimento, fThen: any, fCatch: any) {
@@ -125,6 +208,10 @@ export class AtendimentoService extends GenericService<Atendimento, AtendimentoF
 
     public getIndicadorSastService(): IndicadorSastService {
         return this.indicadorService;
+    }
+
+    public getAtividadeFisicaService(): AtividadeFisicaService {
+        return this.atividadeFisicaService;
     }
 
     public getUtilService(): UtilService {

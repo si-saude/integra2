@@ -42,6 +42,10 @@ export class UtilService extends GenericService<Object, GenericFilter> {
         this.genericGet('autoavaliacao-habitos-alimentares', filter, fThen, fCatch);
     }
 
+    getClassificacaoAtividadeFisica(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('classificacao-atividade-fisica', filter, fThen, fCatch);
+    }
+
     getDireitoEsquerdo(filter: string, fThen: any, fCatch: any) {
         this.genericGet('direito-esquerdo', filter, fThen, fCatch);
     }
@@ -160,6 +164,10 @@ export class UtilService extends GenericService<Object, GenericFilter> {
 
     getTipoAlimento(filter: string, fThen: any, fCatch: any) {
         this.genericGet('tipo-alimento', filter, fThen, fCatch);
+    }
+
+    getTipoAtendimentoAvaliacaoFisica(filter: string, fThen: any, fCatch: any) {
+        this.genericGet('tipo-atendimento-avaliacao-fisica', filter, fThen, fCatch);
     }
 
     getTipoQuestao(filter: string, fThen: any, fCatch: any) {

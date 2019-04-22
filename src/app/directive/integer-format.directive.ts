@@ -65,6 +65,9 @@ export class IntegerFormatDirective implements ControlValueAccessor, OnChanges {
         if ( $event.target.value ) {
             this.input($event.target.value);
             this.dirtyForm();
+        } else {
+            $event.target.value = '';
+            this.changeValue.emit( '' );
         }
     }
 

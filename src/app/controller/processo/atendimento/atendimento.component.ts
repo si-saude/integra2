@@ -10,8 +10,11 @@ import { GenericWizardComponent } from './../../../generic/generic-wizard-compon
 import { WizardService } from './../../../util/wizard-service/wizard-service.service';
 
 import { Atendimento } from './../../../model/atendimento.model';
+import { AtendimentoAtividadeFisica } from './../../../model/atendimento-atividade-fisica.model';
 import { AtendimentoFilter } from './../../../filter/atendimento.filter';
 import { AtendimentoService } from './../../../service/atendimento.service';
+import { AtividadeFisica } from './../../../model/atividade-fisica.model';
+import { AvaliacaoFisica } from './../../../model/avaliacao-fisica.model';
 import { FilaAtendimento } from './../../../model/fila-atendimento.model';
 import { FilaAtendimentoFilter } from './../../../filter/fila-atendimento.filter';
 import { Localizacao } from './../../../model/localizacao.model';
@@ -25,6 +28,7 @@ import { ItemRespostaFichaColeta } from 'app/model/item-resposta-ficha-coleta.mo
 import { DetalheRespostaFichaColeta } from 'app/model/detalhe-resposta-ficha-coleta.model';
 import { Servico } from 'app/model/servico.model';
 import { ServicoFilter } from 'app/filter/servico.filter';
+import { AtendimentoAtividadeFisicaValidator } from './atendimento-atividade-fisica.validator';
 import { CriarAtendimentoAvulsoValidator } from './criar-atendimento-avulso.validator';
 
 @Component({
@@ -43,13 +47,16 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
   private respostaFuma: RespostaFichaColeta;
   private atendimentos: Array<Atendimento>;
   private atendimentoAvulso: Atendimento;
-  
+  private atendimentoAtividade: AtendimentoAtividadeFisica;
+
   @ViewChild( 'modalCriarAtendimentoAvulso' ) modalCriarAtendimentoAvulso;
+  @ViewChild( 'modalSelecionarDias' ) modalSelecionarDias;
   @ViewChild( 'autocompleteEmpregado' ) autocompleteEmpregado;
 
   constructor(private servico: AtendimentoService, router: Router, route: ActivatedRoute,
-    wizardService: WizardService<Atendimento>, private usuarioService: UsuarioService, 
-    private criarAtendimentoAvulsoValidator: CriarAtendimentoAvulsoValidator) {
+    wizardService: WizardService<Atendimento>, private usuarioService: UsuarioService,
+    private criarAtendimentoAvulsoValidator: CriarAtendimentoAvulsoValidator,
+    private atendimentoAtividadeFisicaValidator: AtendimentoAtividadeFisicaValidator) {
     super(servico, router, route, 'Atendimento', wizardService, undefined, '', '');
     this.first = 'atendimento';
     this.util = new AtendimentoUtil(servico);
@@ -57,6 +64,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
     this.modalEntrar = new Modal(this, 'entrar');
     this.beep = new Audio();
     this.beep.src = './../../../../assets/audio/beep.mp3';
+    this.atendimentoAtividade = new AtendimentoAtividadeFisica();
   }
 
   ngOnInit() {
@@ -75,6 +83,7 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
     } else {
       this.servico.showMessage('Operação desconhecida. Entre em contato com o administrador do sistema.');
     }
+    
   }
 
   iniciar() {
@@ -278,7 +287,12 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
         this.util.grupos = this.helper.distinct(this.t.$checkin.$respostas.map(r => r.$pergunta.$grupo.$nome));
         this._detailMode = (this.fila.$status === 'LANÇAMENTO DE INFORMAÇÕES');
         this.respostaFuma = this.t.$checkin.$respostas.find(r => r.$pergunta.$path === 'fuma');
-        
+
+        if ((!this.t.$avaliacaoFisica || this.t.$avaliacaoFisica.$id === 0) &&
+          this.t.$tarefa && this.t.$tarefa.$equipe.$abreviacao === 'EDF') {
+            this.t.$avaliacaoFisica = this.servico.initializeAvaliacaoFisica();
+        }
+
         if (this.fila.$status === 'AGUARDANDO EMPREGADO' ) {
           this.playBeep();
         }
@@ -348,6 +362,34 @@ export class AtendimentoComponent extends GenericWizardComponent<Atendimento> im
       this.timeout.unsubscribe();
     }
   }
+
+  openModalSelecionarDias(atendimentoAtividade: AtendimentoAtividadeFisica) {
+    this.atendimentoAtividade = atendimentoAtividade;
+    this.modalSelecionarDias.openObject(this.atendimentoAtividade);
+  }
+
+  closeModalSelecionarDias() {
+    this.modalSelecionarDias.close();
+  }
+
+  onChangeCheckbox(event) {
+    return event.currentTarget.checked;
+  }
+
+  getTotalMinutos(atendimentoAtividade: AtendimentoAtividadeFisica) {
+    let dias = 0;
+    if (atendimentoAtividade) {
+      if (atendimentoAtividade.$domingo) { dias++; }
+      if (atendimentoAtividade.$segunda) { dias++; }
+      if (atendimentoAtividade.$terca) { dias++; }
+      if (atendimentoAtividade.$quarta) { dias++; }
+      if (atendimentoAtividade.$quinta) { dias++; }
+      if (atendimentoAtividade.$sexta) { dias++; }
+      if (atendimentoAtividade.$sabado) { dias++; }
+    }
+
+    return atendimentoAtividade.$minutos * dias;
+  }
 }
 
 export class AtendimentoUtil {
@@ -356,6 +398,7 @@ export class AtendimentoUtil {
   aptidaoCardiorrespiratoria: Array<string>;
   aptidaoFisicaBrigadista: Array<string>;
   autoavaliacaoHabitosAlimentares: Array<string>;
+  classificacaoAtividadeFisica: Array<string>;
   direitoEsquerdo: Array<string>;
   doresCorporais: Array<string>;
   exposicaoRiscosAmbientais: Array<string>;
@@ -372,6 +415,7 @@ export class AtendimentoUtil {
   simNao: Array<string>;
   tempoAnos: Array<string>;
   tempoMeses: Array<string>;
+  tipoAtendimentoAvaliacaoFisica: Array<string>;
   
   localizacoes: Array<Localizacao>;
   localizacaoFilter: LocalizacaoFilter;
@@ -413,6 +457,10 @@ export class AtendimentoUtil {
 
     this.servico.getUtilService().getAutoavaliacaoHabitosAlimentares('', (list) => {
       this.autoavaliacaoHabitosAlimentares = list;
+    }, undefined);
+
+    this.servico.getUtilService().getClassificacaoAtividadeFisica('', (list) => {
+      this.classificacaoAtividadeFisica = list;
     }, undefined);
 
     this.servico.getUtilService().getDireitoEsquerdo('', (list) => {
@@ -474,6 +522,10 @@ export class AtendimentoUtil {
     this.servico.getUtilService().getTempoMeses('', (list) => {
       this.tempoMeses = list;
     }, undefined);
+
+    this.servico.getUtilService().getTipoAtendimentoAvaliacaoFisica('', (list) => {
+      this.tipoAtendimentoAvaliacaoFisica = list;
+    }, undefined);
   }
 
   getEnumArray(path: string) {
@@ -490,6 +542,9 @@ export class AtendimentoUtil {
 
       case 'autoavaliacao-habitos-alimentares':
         return this.autoavaliacaoHabitosAlimentares;
+
+      case 'classificacao-atividade-fisica':
+        return this.classificacaoAtividadeFisica;
 
       case 'direito-esquerdo':
         return this.direitoEsquerdo;
@@ -535,6 +590,9 @@ export class AtendimentoUtil {
 
       case 'tempo-meses':
         return this.tempoMeses;
+
+      case 'tipo-atendimento-avaliacao-fisica':
+        return this.tipoAtendimentoAvaliacaoFisica;
     }
 
     return undefined;
@@ -599,5 +657,22 @@ export class AtendimentoUtil {
 
   detalheTemPath(resposta: RespostaFichaColeta, detalhe: DetalheRespostaFichaColeta) {
     return resposta.$pergunta.$itens.find(i => i.$path && i.$path.trim() !== '' && i.$ordem === detalhe.$ordem);
+  }
+
+  addAtendimentoAtividadeFisica(atendimentoAtividadesFisicas: Array<AtendimentoAtividadeFisica>, tipo: string) {
+    const atendimentoAtividadeFisica = new AtendimentoAtividadeFisica();
+    atendimentoAtividadeFisica.$atividade = new AtividadeFisica();
+    atendimentoAtividadeFisica.$avaliacaoFisica = new AvaliacaoFisica();
+    atendimentoAtividadeFisica.$tipo = tipo;
+
+    atendimentoAtividadesFisicas.push(atendimentoAtividadeFisica);
+  }
+
+  removeAtendimentoAtividadeFisica(atendimentoAtividadesFisicas: Array<AtendimentoAtividadeFisica>, a: AtendimentoAtividadeFisica) {
+    atendimentoAtividadesFisicas.splice(atendimentoAtividadesFisicas.indexOf(a), 1);
+  }
+
+  filterAtendimentoAtividadeFisica(atendimentoAtividadesFisicas: Array<AtendimentoAtividadeFisica>, tipo) {
+    return atendimentoAtividadesFisicas.filter(i => i.$tipo === tipo);
   }
 }
